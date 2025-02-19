@@ -10,9 +10,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 let melding_tag = null;
 let body = document.getElementsByTagName("body")[0];
+let melding_tag_time = 0;
+const melding_decay = 3000;
 function get_melding_tag_structure() {
     let melding_tag_real = document.getElementsByClassName("geen_toegang")[0];
-    melding_tag = (melding_tag_real.cloneNode(true));
+    melding_tag = melding_tag_real.cloneNode(true);
     melding_tag_real.remove();
     // body.appendChild(melding_tag)
     // console.log(melding_tag);
@@ -20,7 +22,10 @@ function get_melding_tag_structure() {
 document.addEventListener('DOMContentLoaded', get_melding_tag_structure, false);
 function geen_toegang() {
     if (melding_tag !== null) {
+        melding_tag.className = '';
+        melding_tag.classList.add("geen_toegang");
         body.appendChild(melding_tag);
+        melding_tag_time = new Date().getTime();
         get_rid_of_tag(melding_tag);
     }
 }
@@ -29,18 +34,19 @@ function delete_melding(tag) {
     let parent = (_a = tag.parentElement) === null || _a === void 0 ? void 0 : _a.parentElement;
     parent === null || parent === void 0 ? void 0 : parent.remove();
 }
-function tes3t(tag) {
-    console.log(tag);
-    tag.remove();
-    if (tag !== null) {
+function del_old_tag(tag) {
+    if (melding_tag_time + melding_decay < new Date().getTime()) {
+        console.log("deleted");
         tag.remove();
+        if (tag !== null) {
+            tag.remove();
+        }
     }
 }
 function get_rid_of_tag(tag) {
     return __awaiter(this, void 0, void 0, function* () {
-        tag.classList.add("fade_out");
-        console.log(tag);
-        setTimeout(tes3t, 3000, tag);
+        setTimeout((tag) => { tag.classList.add("fade_out"); }, 1000, tag);
+        setTimeout(del_old_tag, melding_decay, tag);
     });
 }
 function test(tag) {
