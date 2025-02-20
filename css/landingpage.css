@@ -98,15 +98,15 @@ header {
     --width: 350px
 }
 
-@keyframes melding {
+@keyframes melding_text {
     0%{
         transform: translateY(-100px);
     }
 }
 
 
-.geen_toegang{
-    animation: melding 500ms ease-out;
+.melding{
+    animation: melding_text 500ms ease-out;
     cursor: default;
     /* position */
     width: var(--width);
@@ -135,7 +135,7 @@ header {
         scale: 1;
     }
 
-    & > .melding{
+    & > .melding_text{
         /* outline: 1px solid black; */
 
         line-height: 0.6;
@@ -188,7 +188,7 @@ header {
 }
 
 .fade_out{
-    animation: fade_out 3s ease-out forwards;
+    animation: fade_out 2s ease-out forwards;
 }
 
 
