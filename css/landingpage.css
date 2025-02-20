@@ -1,7 +1,9 @@
 
 
+
+
 body {
-    background-color: #111;
+    background-image: linear-gradient(45deg, rgb(33, 33, 33), rgb(202, 30, 30));
     color: white;
     font-family: Arial, sans-serif;
     margin: 0;
@@ -11,6 +13,9 @@ body {
 .logo {
     height: 50px; /* Pas de grootte van het logo aan */
     width: auto;
+    scale: 1.3;
+    margin-left: 50px;
+    border: 1px solid rgb(133, 0, 0);
 }
 
 
@@ -23,6 +28,8 @@ header {
     background-color: #222;
 }
 
+
+
 .auth-buttons button {
     background-color: white;
     color: black;
@@ -30,6 +37,15 @@ header {
     padding: 8px 16px;
     margin-left: 10px;
     cursor: pointer;
+
+    border-radius: 5px;
+
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.auth-buttons button:hover{
+    background-color: rgb(196, 196, 196);
 }
 
 
@@ -46,11 +62,26 @@ header {
     background-color: #222;
     padding: 15px;
     border-radius: 10px;
+    transition:  transform 500ms ease;
 }
 
 .game img {
     width: 100%;
     border-radius: 10px;
+}
+    
+
+.game:hover {
+    transition: background-color  150ms ease;
+    transition:  transform 500ms ease;
+    background-color: rgb(97, 16, 16);
+    transform: translate(5px, 5px);
+}
+
+.game:nth-child(1):hover {
+    transition: background-color 150ms ease;
+    transition:  transform 500ms ease;
+    background-color: #222;
 }
 
 .play-btn {
@@ -62,13 +93,104 @@ header {
     cursor: pointer;
 }
 
-.game:hover {
-    background-color: red;
+
+:root{
+    --width: 350px
 }
 
-.game:nth-child(1):hover {
-    background-color: green;
+@keyframes melding {
+    0%{
+        transform: translateY(-100px);
+    }
 }
+
+
+.geen_toegang{
+    animation: melding 500ms ease-out;
+    cursor: default;
+    /* position */
+    width: var(--width);
+    height: 70px;
+    position: fixed;
+    top: 20px;
+    right: calc(50% - (var(--width) / 2));
+    /* style */
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    box-shadow: 0px 0px 4px 4px rgb(118, 118, 118);
+
+    display: flex;    
+    & > .info{
+        height: 100%;
+        width: 30px;
+        /* background-color: #d9d9d9; */
+    } 
+
+    & > :first-child > svg{
+        fill: red;
+        position: absolute;
+        top: 20%;
+        left: 4%;
+
+        scale: 1;
+    }
+
+    & > .melding{
+        /* outline: 1px solid black; */
+
+        line-height: 0.6;
+        font-size: 1rem;
+        color: black;
+        padding-left: 20px;
+        text-align: left;
+
+        & > :first-child{
+            padding-top: 5%;
+            font-weight: bold;
+        }
+    }
+
+
+
+    & > :last-child{
+        height: 100%;
+        flex-grow: 1;
+        & button{
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            background: none;
+            border: none;
+        }
+
+        &  svg:hover{
+            background-color: rgba(102, 102, 102, 0.258);
+            border-radius: 10px;
+            cursor:pointer;
+        }
+
+    }
+
+}
+
+
+@keyframes fade_out {
+    0%{
+        opacity: 1;
+    }
+    80%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
+
+}
+
+.fade_out{
+    animation: fade_out 3s ease-out forwards;
+}
+
 
 
 /* Footer */
