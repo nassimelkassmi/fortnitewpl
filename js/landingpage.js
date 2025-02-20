@@ -20,13 +20,17 @@ function get_melding_tag_structure() {
     // console.log(melding_tag);
 }
 document.addEventListener('DOMContentLoaded', get_melding_tag_structure, false);
-function geen_toegang() {
+function melding(bericht) {
+    var _a;
     if (melding_tag !== null) {
-        melding_tag.className = '';
         melding_tag.classList.add("geen_toegang");
         body.appendChild(melding_tag);
         melding_tag_time = new Date().getTime();
         get_rid_of_tag(melding_tag);
+        let text_div = (_a = melding_tag === null || melding_tag === void 0 ? void 0 : melding_tag.getElementsByClassName("melding")[0]) === null || _a === void 0 ? void 0 : _a.children[1];
+        if (text_div != undefined) {
+            text_div.textContent = bericht;
+        }
     }
 }
 function delete_melding(tag) {
@@ -39,6 +43,7 @@ function del_old_tag(tag) {
         console.log("deleted");
         tag.remove();
         if (tag !== null) {
+            tag.classList.value = "";
             tag.remove();
         }
     }
@@ -47,10 +52,5 @@ function get_rid_of_tag(tag) {
     return __awaiter(this, void 0, void 0, function* () {
         setTimeout((tag) => { tag.classList.add("fade_out"); }, 1000, tag);
         setTimeout(del_old_tag, melding_decay, tag);
-    });
-}
-function test(tag) {
-    return __awaiter(this, void 0, void 0, function* () {
-        tag.classList.add("fade_out");
     });
 }

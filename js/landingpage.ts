@@ -18,13 +18,20 @@ function get_melding_tag_structure() {
 
 document.addEventListener('DOMContentLoaded', get_melding_tag_structure, false);
 
-function geen_toegang() {
+function melding(bericht:string) {
+    
     if (melding_tag !== null) {
-        melding_tag.className = ''
         melding_tag.classList.add("geen_toegang")
         body.appendChild(melding_tag)
         melding_tag_time = new Date().getTime()
         get_rid_of_tag((melding_tag as HTMLDivElement))
+
+        let text_div = melding_tag?.getElementsByClassName("melding")[0]?.children[1]
+
+        if (text_div != undefined) {
+            text_div.textContent = bericht
+        }
+    
     }
 }
 
@@ -37,7 +44,8 @@ function del_old_tag(tag:HTMLDivElement) {
     if (melding_tag_time + melding_decay < new Date().getTime()) {   
         console.log("deleted");
         tag.remove()
-        if (tag !== null) {
+        if (tag !== null) {      
+            tag.classList.value = ""
             tag.remove()
         }
     }
@@ -50,6 +58,3 @@ async function get_rid_of_tag(tag:HTMLDivElement) {
 
   }
 
-async function test(tag:HTMLDivElement) {
-    tag.classList.add("fade_out")
-  }
