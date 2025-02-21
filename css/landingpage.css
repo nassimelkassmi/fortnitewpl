@@ -199,3 +199,65 @@ footer {
     padding: 10px;
     margin-top: 20px;
 }
+
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+        text-align: left;
+    }
+
+    .logo {
+        height: 40px;
+        scale: 1.1;
+        margin-left: 20px;
+    }
+
+    header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .auth-buttons {
+        margin-top: 10px;
+    }
+
+    .auth-buttons button {
+        font-size: 1rem;
+        padding: 6px 12px;
+    }
+
+    .grid-container {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 15px;
+        padding: 10px;
+    }
+
+    .melding {
+        width: 90%;
+        right: 5%;
+        height: auto;
+    }
+
+    .melding_text {
+        font-size: 0.9rem;
+    }
+}
+
+/* Brede desktops (schermen groter dan 1200px) */
+@media (min-width: 1200px) {
+    .logo {
+        height: 60px;
+        scale: 1.5;
+        margin-left: 80px;
+    }
+
+    .grid-container {
+        max-width: 1400px;
+    }
+
+    .auth-buttons button {
+        font-size: 1.4rem;
+        padding: 10px 20px;
+    }
+}
