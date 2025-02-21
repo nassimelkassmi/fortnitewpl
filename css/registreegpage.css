@@ -65,4 +65,39 @@ footer {
     margin-top: 20px;
 }
 
+@media (max-width: 600px) {
+    body {
+        padding: 20px;
+        height: auto;
+    }
 
+    .register-container {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .logo {
+        height: 40px;
+    }
+
+    input, button {
+        font-size: 14px;
+        padding: 8px;
+    }
+}
+
+/* Brede desktops (schermen groter dan 1200px) */
+@media (min-width: 1200px) {
+    .register-container {
+        width: 500px;
+    }
+
+    .logo {
+        height: 60px;
+    }
+
+    input, button {
+        font-size: 18px;
+        padding: 12px;
+    }
+}

@@ -62,3 +62,48 @@ footer {
     font-size: 0.9rem;
     color: #ccc;
 }
+
+@media (max-width: 600px) {
+    body {
+        height: auto;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .logo {
+        height: 40px;
+    }
+
+    h1 {
+        font-size: 2.2rem;
+    }
+
+    .username {
+        font-size: 1.6rem;
+    }
+
+    button {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+    }
+}
+
+/* Brede desktops (schermen groter dan 1200px) */
+@media (min-width: 1200px) {
+    .logo {
+        height: 60px;
+    }
+
+    h1 {
+        font-size: 3.5rem;
+    }
+
+    .username {
+        font-size: 2.5rem;
+    }
+
+    button {
+        font-size: 1.2rem;
+        padding: 12px 24px;
+    }
+}
