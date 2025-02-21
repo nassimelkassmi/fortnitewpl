@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"name": "fortnitewpl",
+			"path": "."
+		},
+		{
+			"name": "figma photos",
+			"path": "../../Downloads/figma photos"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "fortnitewpl"
+	}
+}

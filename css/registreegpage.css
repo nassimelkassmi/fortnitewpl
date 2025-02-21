@@ -1,6 +1,6 @@
 
 .logo {
-    height: 50px; /* Pas de grootte van het logo aan */
+    height: 50px; 
     width: auto;
 }
 
@@ -22,7 +22,7 @@ body {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
-    background-color: rgba(0, 0, 0, 0.5); /* Subtle overlay effect */
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 h1 {
