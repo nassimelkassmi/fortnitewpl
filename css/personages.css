@@ -33,7 +33,7 @@ body {
 }
 
 .logo {
-    background-image: url('/assets/logoFn.jpeg');
+    background-image: url('/assets/logoFN.png');
     background-size: contain;
     background-repeat: no-repeat;
     width: 150px;
