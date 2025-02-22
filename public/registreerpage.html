@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registreren - Code Ninjas</title>
+    <link rel="stylesheet" href="./css/registreegpage.css">
+    <script src="js/registreer.js" defer></script>
+</head>
+<body>
+    <header>
+        <img src="./assets/LogoFn.jpeg" alt="Code Ninjas Logo" class="logo">
+    </header>
+
+    <main class="register-container">
+        
+        <form >
+            <input id="username" type="text" placeholder="GEBRUIKERSNAAM" required>
+            <input id="email" type="email" placeholder="EMAIL" required>
+            <input id="password" type="password" placeholder="WACHTWOORD" required>
+            <button type="button" class="login-btn" onclick="window.location.href='loginpage.html';">INLOGGEN</button>
+            <button type="submit" class="register-btn" onclick="registreer()">REGISTREREN</button>
+        </form>
+    </main>
+
+    <footer>
+        <p>&copy; Code Ninjas | AP Hogeschool</p>
+    </footer>
+</body>
+</html>
