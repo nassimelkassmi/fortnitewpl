@@ -1,102 +1,119 @@
-body {
-    background: linear-gradient(to bottom, #007BFF, #00BFFF);
-    color: white;
-    font-family: Arial, sans-serif;
-    margin: 0;
+
+
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Inconsolata:wght@200..900&display=swap');
+
+*,*::before,*::after{
     padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    margin: 0;
+}
+
+
+
+body{
     height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-weight: 100;
 }
 
-.logo {
-    height: 50px; 
-    width: auto;
+.background{
+    position: absolute;
+    z-index: -1;
+    display: block;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
 }
 
-.login-container {
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.5); 
-}
-
-h1 {
-    margin-bottom: 20px;
-}
-
-form {
+.login_form{
     display: flex;
     flex-direction: column;
+    height: 50%;
 }
 
-input {
+
+.logo{
+    width: 150px;
+    align-self: center;
+    margin-bottom:10px;
+    justify-content: center;
+    filter: invert(1);
+}
+
+
+
+
+input{
+    outline: none;
+    border: none;
+    margin: 10px;
+    padding: 5px;
+    font-family: "anton";
+    font-weight: 300;
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+    background-color: rgb(203, 222, 255);
+    width: 400px;
+    height: 30px;
+}
+input::placeholder{
+    letter-spacing: 0px;
+    font-size: 1.5rem;
+    font-family:monospace;
+    color: rgba(128, 128, 128, 0.73);
+}
+
+
+a,a:visited{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.2rem;
+    text-align: center;
+    color: white;
+    font-weight: 100;
+    margin: 5px;
     margin-bottom: 10px;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-}
-
-button {
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
+    text-decoration: none;
     cursor: pointer;
 }
-
-.register-btn {
-    background-color: #444;
-    color: white;
-    margin-bottom: 10px;
+a:hover{
+    color: lightblue;
 }
 
-.login-btn {
-    background-color: #007BFF;
-    color: white;
+button{
+    width: 50%;
+    align-self: center;
+    height: 50px;
+    font-size: 1.8rem;
+    font-family: "anton";
+    background-color: rgb(175, 201, 255);
+    border: 6px solid rgb(199, 217, 255);
+    color: rgba(9, 27, 67, 0.781);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-footer {
-    margin-top: 20px;
+button:hover{
+    background-color: rgb(140, 184, 232);
+    border: 6px solid #a2c1ff;
+    cursor: pointer;
+    color: rgba(32, 54, 103, 0.781);
 }
 
-@media (max-width: 600px) {
-    body {
-        padding: 20px;
-        height: auto;
-    }
 
-    .login-container {
-        width: 90%;
-        padding: 20px;
-    }
-
-    .logo {
-        height: 40px;
-    }
-
-    input, button {
-        font-size: 14px;
-        padding: 8px;
-    }
+footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    color: white; 
+    justify-content: center;
+    margin-bottom: 5px;
 }
 
-/* Brede desktops (schermen groter dan 1200px) */
-@media (min-width: 1200px) {
-    .login-container {
-        width: 500px;
-    }
-
-    .logo {
-        height: 60px;
-    }
-
-    input, button {
-        font-size: 18px;
-        padding: 12px;
-    }
+footer > p{
+    font-family: Arial, sans-serif;
 }
