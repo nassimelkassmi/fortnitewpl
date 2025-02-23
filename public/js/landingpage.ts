@@ -15,11 +15,48 @@ const melding_decay = 3000
 const fade_out_timer = 1000
 
 //haalt de melding structuur van de html
-function get_melding_tag_structure() {
+
+
+async function refresh_access_token() {
+    let response =  await request("http://localhost:5000/refresh", "", "GET", "")
+    if (response.ok) {
+        let body = await response.json()
+        accesstoken = body["accesstoken"]
+    }
+    
+    
+    if (!accesstoken) {
+        return false
+    }else{
+        return true
+    }
+}
+
+async function get_melding_tag_structure() {
     let melding_tag_real = document.getElementsByClassName("melding")[0]
     melding_tag = (melding_tag_real.cloneNode(true) as HTMLDivElement)
     melding_tag_real.remove()
+    let if_logged = await refresh_access_token()
+    
+    if(if_logged){
+        document.getElementById("login_register")?.classList.add("invis")
+        let span_naam:HTMLSpanElement  = document.getElementById("profiel_name") as HTMLSpanElement
+        let div_naam:HTMLDivElement= document.getElementById("profiel") as HTMLDivElement
+        let dict_uis = await (await request("http://localhost:5000/username", "", "GET",accesstoken)).json()
+        let username = dict_uis["username"]
+        if (username) {
+            console.log(username);
+            div_naam.classList.remove("invis")
+            span_naam.innerText = username
+
+        }
+            
+        
+        
+    }
 }
+
+let accesstoken:string = ""
 
 //gaat de get_melding_tag_structure() functie bellen wanner de website is geladen
 document.addEventListener('DOMContentLoaded', get_melding_tag_structure, false);
@@ -81,3 +118,70 @@ async function start_fadeout(tag:HTMLDivElement) {
     }
   }
 
+
+function if_logged(text:string) {if_logged2(text)}
+
+async function if_logged2(text:string) {
+    let if_logged = false
+    if_logged = await refresh_access_token()
+
+    console.log(if_logged);
+    
+    if (if_logged) {
+        window.location.href = "personages.html"
+    }
+    else{
+        melding(text)
+    }
+}
+
+function logout() {
+    console.log("some");
+    
+    yoma()
+    
+}
+
+async function yoma() {
+    console.log("wad");
+    
+    
+    let some = await request("http://localhost:5000/logout", "", "GET", accesstoken)
+    console.log("wad2");
+    accesstoken = ""
+    // try
+    // let dict_uis = await (await request("http://localhost:5000/username", "", "GET",accesstoken)).json()
+    // let username = dict_uis["username"]
+    // console.log(some.status);
+    // console.log(username);
+    
+    window.location.reload();
+}
+
+
+
+  async function request(url:string, data:string, mode:string, token:string) {
+    
+    let response = undefined
+    if ("GET" == mode) {
+        response = await fetch(url, {
+            method: mode, // HTTP method
+            headers: {
+                'Authorization': `Bearer ${token}`, 
+                'Content-Type': 'application/json', 
+            },
+            credentials: 'include' 
+        });
+    }
+    else{
+        response = await fetch(url, {
+            method: mode, // HTTP method
+            headers: {
+                'Content-Type': 'application/json', 
+            },
+            body: JSON.stringify(data), 
+            credentials: 'include' 
+        });
+    }
+    return response
+}

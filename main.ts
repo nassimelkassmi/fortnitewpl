@@ -19,9 +19,10 @@ import crypto from "crypto"
 import { log } from "console";
 import jwt from 'jsonwebtoken';
 import bcrypt from "bcryptjs";
-
+import cookieParser from "cookie-parser"
 const rawdata = fs.readFileSync('token_secrets.json', "utf8"); 
 const tokens = JSON.parse(rawdata);
+
 
 const ACCESS_TOKEN_SECRET = tokens.ACCESS_TOKEN_SECRET;
 const REFRESH_TOKEN_SECRET = tokens.REFRESH_TOKEN_SECRET;
@@ -29,20 +30,18 @@ const REFRESH_TOKEN_SECRET = tokens.REFRESH_TOKEN_SECRET;
 
 
 
-declare global {
-    namespace Express {
-      interface Request {
-        extra?: any; // Define the type of the 'user' property
-      }
-    }
-  }
-
 const app = express()
-
 app.use(cors())
 app.use(express.static("./public"))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+
+app.use(cookieParser());
+
+
+
+
+
 
 
 app.get("/",(req, res) => {
@@ -60,7 +59,7 @@ function get_secret() {
 
 
 function handleNewUser(req, res) {
-    const {user, pwd} = req.body
+    const {user, pwd, email} = req.body
     if (!user || !pwd)
         {return res.status(400).json({"message":"username and password are required"})}
      
@@ -75,7 +74,7 @@ function handleNewUser(req, res) {
     console.log(check);
     
     
-    const newUser = {"username":user, "password":hashedpwd, "refreshtoken":"", "secret": get_secret()}
+    const newUser = {"username":user, "password":hashedpwd, "refreshtoken":"", "secret": get_secret(),"email":email}
     users.push(newUser)
     console.log(users);
     
@@ -94,6 +93,62 @@ app.post("/login", (req,res) => {
 
 app.post("/secret", verifyJWT, secret)
 
+app.get("/username", verifyJWT, getusername)
+
+app.get("/logout", (res,req) =>{
+    console.log("user ;logging out");
+    
+    logoutuser(res,req)
+    req.end()
+})
+
+
+app.get("/refresh", (req,res) =>{
+    console.log("bob");
+    
+    handlerefreshtoken(req,res)
+    res.end()
+})
+
+
+function logoutuser(req: Request, res: Response) {
+    console.log("logging out user ");
+    
+    const cookies = req.cookies
+    if (!cookies?.jwt){        
+        console.log("invalid cookie for logging out");
+        console.log(req.cookies);
+        
+        return res.status(401)
+    }
+    const refreshtoken = cookies.jwt
+    const foundUser = users.find(person => person.refreshtoken === refreshtoken)
+    console.log(foundUser);
+    
+    if (!foundUser) { 
+        console.log("did not find user");
+        return res.status(403)
+    } 
+    function somew(err, decoded) {
+        if (err || foundUser.username != decoded.username) {
+            console.log("user not found");
+            return res.status(403)
+        }
+
+        foundUser.refreshtoken = ""
+    }
+    jwt.verify(refreshtoken, REFRESH_TOKEN_SECRET, somew)
+}
+
+
+function getusername(req: Request, res: Response) {
+    let user = res.locals.username 
+    if (user) {
+        res.json(res.locals.username)
+    }else{res.status(409)}
+    res.end()
+}
+
 
 function secret(req: Request, res: Response, next:NextFunction) {
     let user = res.locals.username 
@@ -111,14 +166,17 @@ let users = []
 
 function loginuser(req: Request, res: Response) {
     const {user, pwd} = req.body
-    if (!user || !pwd)  res.status(400)
-        .json({"message":"username and password are required"})
+    if (!user || !pwd) { 
+        res.status(400).json({"message":"username and password are required"})
+        return 0
+    }
 
     const foundUser = users.find(person => person.username === user)
     if (!foundUser) { 
         console.log("did not find user");
-        
-        res.sendStatus(401)}
+        res.status(401)
+        return 0
+    }
     const match = bcrypt.compareSync(pwd,foundUser.password)
     if (match) {
         const accesstoken = jwt.sign({"username":foundUser.username}
@@ -128,7 +186,7 @@ function loginuser(req: Request, res: Response) {
             ,REFRESH_TOKEN_SECRET, {expiresIn: "1d"}
         )
         foundUser.refreshtoken = refreshstoken
-        res.cookie("jwt", refreshstoken, {httpOnly:true, maxAge:ms("1d")})
+        res.cookie("jwt", refreshstoken, {httpOnly:true, maxAge:ms("1d")  })
         res.json({accesstoken})
     }else{
         console.log("the password and thing dont match");
@@ -136,22 +194,24 @@ function loginuser(req: Request, res: Response) {
         res.sendStatus(401)
     }
 
-
-
-
 }
 
 function verifyJWT(req: Request, res: Response,next:NextFunction) {
     
-    const authHeader = req.headers["authorization"]
+    const authHeader = req.headers["authorization"] 
     if (!authHeader) {
         res.sendStatus(401)
     }
-    console.log(authHeader);
+    console.log(" ");
+    
+    console.log(authHeader.split(" "));
+    
     const token = authHeader.split(" ")[1]
+    //console.log("token is ", token);
+    
     jwt.verify(token, ACCESS_TOKEN_SECRET,
         (err, decoded) => {
-            if (err) { res.sendStatus(403)}
+            if (err) { console.log("jwt does not match"); res.sendStatus(403)}
             res.locals.username = decoded 
             next()
             
@@ -160,11 +220,47 @@ function verifyJWT(req: Request, res: Response,next:NextFunction) {
 }
 
 
+
+
+
+
+function handlerefreshtoken(req: Request, res: Response) {
+    
+    
+    const cookies = req.cookies
+    if (!cookies?.jwt){        
+        console.log("geen cookies");
+        console.log(req.cookies);
+        
+        return res.status(401)
+        
+    }
+    const refreshtoken = cookies.jwt
+    const foundUser = users.find(person => person.refreshtoken === refreshtoken)
+    if (!foundUser) { 
+        console.log("did not find user");
+        return res.status(403)} 
+
+    
+    function somew(err, decoded) {
+        if (err || foundUser.username != decoded.username) {
+            return res.status(403)
+        }
+        const accesstoken = jwt.sign({"username": decoded.username},
+             ACCESS_TOKEN_SECRET, {expiresIn:"60s"})
+        console.log("refreshed the token", decoded.username);
+        res.json({accesstoken})
+    }
+    jwt.verify(
+        refreshtoken, REFRESH_TOKEN_SECRET, somew
+    )
+
+}
+
+
 //order mathers
 app.all("*", (req, res) =>{
     res.status(404).send("not found")
 })
-
-
 
 app.listen(5000, start_server_msg)

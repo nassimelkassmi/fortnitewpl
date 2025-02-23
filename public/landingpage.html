@@ -5,16 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Landing Page</title>
     <link rel="stylesheet" href="./css/landingpage.css">
+    <link rel="stylesheet" href="css/melding.css">
     <script src="/js/landingpage.js" defer></script>
 </head>
 <body>
     <header>
         <img src="./assets/LogoFn.jpeg" alt="Code Ninjas Logo" class="logo">
-        <div class="auth-buttons">
-            <button onclick="window.location.href='loginpage.html'">Inloggen</button>
-            <button onclick="window.location.href='registreerpage.html'">Registreren</button>
-
+        <div id="login_register" class="auth-buttons">
+            <button onclick="window.location.href='login.html'">Inloggen</button>
+            <button onclick="window.location.href='registreren.html'">Registreren</button>
+            
         </div>
+        <div class="invis" id="profiel">
+            <span  id="profiel_name"></span>
+            <button id="log_out" type="button" onclick="logout()">Log uit</button>
+        </div>
+        
+        
     </header>
 
     <div class="melding">
@@ -36,7 +43,7 @@
         <div class="game">
             <img src="./assets/fortoepic.jpg" alt="Fortnite">
             <h2>Fortnite</h2>
-            <button class="play-btn" onclick="melding('Niet ingelogd')">▶ Speel</button>
+            <button class="play-btn" onclick="if_logged('Niet ingelogd')">▶ Speel</button>
         </div>
         <div class="game">
             <img src="./assets/eafc25pic.jpg" alt="FIFA">
