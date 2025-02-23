@@ -1,12 +1,14 @@
-
-.logo {
-    height: 50px; /* Pas de grootte van het logo aan */
-    width: auto;
+@font-face {
+    font-family: Fortnite;
+    src: url(../fonts/Fortnite.ttf);
 }
 
 body {
-    background: linear-gradient(to bottom, #007BFF, #00BFFF);
-    color: white;
+    background-image: url(../assets/background/background.png);
+    background-position: center; 
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    background-attachment: fixed; 
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
@@ -17,16 +19,15 @@ body {
     height: 100vh;
 }
 
-.register-container {
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.5); /* Subtle overlay effect */
+.logo {
+    height: 100px; 
+    width: auto;
 }
 
-h1 {
-    margin-bottom: 20px;
+.register-container {
+    padding: 40px;
+    text-align: center;
+    background-color: transparent;
 }
 
 form {
@@ -36,33 +37,70 @@ form {
 
 input {
     margin-bottom: 10px;
-    padding: 10px;
+    color: rgb(81, 91, 102);
     border: none;
-    border-radius: 5px;
-    font-size: 16px;
+    font-size: 18px;
+    background-color: #dee4f5;
+    width: 400px; 
+    height: 42px; 
+    padding-left: 10px;
+    font-family: "Roboto mono", serif;
+}
+
+input::placeholder {
+    color: #a5a5a5;
+}
+
+input:focus {
+    outline: none;
+    border: none;
+    box-shadow: none;
 }
 
 button {
     padding: 10px;
     border: none;
-    border-radius: 5px;
-    font-size: 16px;
     cursor: pointer;
 }
 
 .login-btn {
-    background-color: #444;
     color: white;
-    margin-bottom: 10px;
+    font-size: 14px;
+    margin-bottom: 25px;
+    margin-top: 5px;
+    padding: 0;
+    background-color: #00000000;
+    font-family:  "Roboto Mono", serif;
+    transition: color 0.2s ease;
+}
+
+.login-btn:hover {
+    color: rgb(174, 193, 209);
 }
 
 .register-btn {
-    background-color: #007BFF;
-    color: white;
+    background-color: #B3C9FA;
+    border: 5px solid #CEDBF9;
+    color: #292A49;
+    margin: 0 100px;
+    padding: 6px 5px 5px 5px;
+    font-size: 30px;
+    font-family: Fortnite;
+    transition: 0.08s ease-in-out;
+}
+
+.register-btn:hover {
+    background-color: #FFF457;
+    border: 5px solid #EDE56A;
 }
 
 footer {
-    margin-top: 20px;
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%); 
+    margin: 0 auto;
+    color: white;
+    font-size: 12px;
+    opacity: 0.4;
 }
-
-
