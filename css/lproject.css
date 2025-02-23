@@ -47,12 +47,12 @@ body {
 }
 
 .profile-pic {
-    width: 85px;
+    width: 90px;
     height: auto;
     border-radius: 50%;
     object-fit: cover;
-    outline: 3px solid rgba(255, 255, 255, 0.5);
-    outline-offset: -3px;
+    outline: 5px solid rgba(255, 255, 255, .6);
+    outline-offset: -px;
 }
 
 .buttons {
@@ -80,7 +80,7 @@ button {
     background-color: #FFF457;
     border-color: #EDE56A;
     color: #292A49;
-    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, width 0.3s ease;
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, width 0.3s ease, letter-spacing 0.3s ease;
   }
   
   .play-btn::before {
@@ -109,10 +109,9 @@ button {
     border-color: rgb(227, 227, 45);
     color: #02021f;
     width: 260px !important;
+    letter-spacing: 0.5px;
   }
   
-
-
 
   .logout-btn {
     background-color: #B3C9FA;
@@ -120,8 +119,8 @@ button {
   }
   
   .logout-btn:hover {
-    background-color: #ff4949;
-    border: 6px solid hsl(0, 100%, 73%);
+    background-color: #ff4545;
+    border: 6px solid rgb(255, 106, 106);
     color: rgb(255, 242, 242);
   }
   
