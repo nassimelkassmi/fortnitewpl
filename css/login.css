@@ -14,6 +14,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     font-weight: 100;
 }
 
@@ -100,4 +101,19 @@ button:hover{
     border: 6px solid #a2c1ff;
     cursor: pointer;
     color: rgba(32, 54, 103, 0.781);
+}
+
+
+footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    color: white; 
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+footer > p{
+    font-family: Arial, sans-serif;
 }
