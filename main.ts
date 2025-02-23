@@ -20,6 +20,7 @@ import { log } from "console";
 import jwt from 'jsonwebtoken';
 import bcrypt from "bcryptjs";
 import cookieParser from "cookie-parser"
+import { decode } from "punycode";
 const rawdata = fs.readFileSync('token_secrets.json', "utf8"); 
 const tokens = JSON.parse(rawdata);
 
@@ -74,7 +75,7 @@ function handleNewUser(req, res) {
     console.log(check);
     
     
-    const newUser = {"username":user, "password":hashedpwd, "refreshtoken":"", "secret": get_secret(),"email":email}
+    const newUser:User = {"username":user, "password":hashedpwd, "refreshtoken":"", "secret": get_secret(),"email":email}
     users.push(newUser)
     console.log(users);
     
@@ -106,7 +107,7 @@ app.get("/logout", (res,req) =>{
 app.get("/refresh", (req,res) =>{
     console.log("bob");
     
-    handlerefreshtoken(req,res)
+ createNewAccessToken(req,res)
     res.end()
 })
 
@@ -220,41 +221,49 @@ function verifyJWT(req: Request, res: Response,next:NextFunction) {
 }
 
 
+type User = {
+    "username":string,
+    "password":string,
+    "refreshtoken":string,
+    "secret": string,
+    "email":string
+}
+
+
+type checkjwt = {"if_match":boolean, "username":string}
+
+function checkjwt(refreshtoken:string, secret_key:string):checkjwt {
+    let match:checkjwt = {"if_match":false, "username":""}
+    function set_token_user(err, decoded) { 
+        if (err){ 
+            match.if_match = true 
+            match.username = decoded.username   }  
+    }
+    jwt.verify(refreshtoken, secret_key, set_token_user)
+    return match
+}
 
 
 
-
-function handlerefreshtoken(req: Request, res: Response) {
-    
-    
+function createNewAccessToken(req: Request, res: Response) {
     const cookies = req.cookies
     if (!cookies?.jwt){        
-        console.log("geen cookies");
-        console.log(req.cookies);
-        
         return res.status(401)
-        
     }
-    const refreshtoken = cookies.jwt
-    const foundUser = users.find(person => person.refreshtoken === refreshtoken)
-    if (!foundUser) { 
-        console.log("did not find user");
+    const refreshtoken:string = cookies.jwt
+    const Usermatch:User = users.find(person => person.refreshtoken === refreshtoken)
+    const if_token_valid:checkjwt = checkjwt(refreshtoken, REFRESH_TOKEN_SECRET)
+
+    if (!Usermatch || !if_token_valid.if_match || Usermatch.username !== if_token_valid.username) { 
+        let log_responds = if_token_valid ? "did not find user" : "token is invalid"
+        log_responds = Usermatch ? log_responds : "the user the token is signed by and the matching user are not the same"
+        console.log(log_responds);
         return res.status(403)} 
-
     
-    function somew(err, decoded) {
-        if (err || foundUser.username != decoded.username) {
-            return res.status(403)
-        }
-        const accesstoken = jwt.sign({"username": decoded.username},
-             ACCESS_TOKEN_SECRET, {expiresIn:"60s"})
-        console.log("refreshed the token", decoded.username);
-        res.json({accesstoken})
-    }
-    jwt.verify(
-        refreshtoken, REFRESH_TOKEN_SECRET, somew
-    )
-
+    //create new access token
+    const accesstoken = jwt.sign({"username": Usermatch.username}, ACCESS_TOKEN_SECRET, {expiresIn:"60s"})
+    
+    res.json({accesstoken})
 }
 
 
