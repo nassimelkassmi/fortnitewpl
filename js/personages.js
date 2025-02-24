@@ -83,6 +83,10 @@ function filterCharacters() {
 
     displayCharacters(filtered);
 }
+// ℹ️ **Info-knop popup**
+infoBtn.addEventListener('click', () => {
+    showPopup('Klik op een personage voor meer opties! Alleen bij favorieten kan je items en notities toevoegen!');
+});
 
 // ✅ **Event Listeners for Search and Filter**
 searchInput.addEventListener('input', filterCharacters);
@@ -90,3 +94,14 @@ filterSelect.addEventListener('change', filterCharacters);
 
 // ✅ **Fetch Characters on Load**
 fetchOutfits();
+// ✅ Functie om een popup te tonen
+function showPopup(message) {
+    const popupMessage = document.getElementById('popup-message');
+    popupMessage.textContent = message;
+    popupMessage.classList.add('show');
+
+    // Verwijder de popup na 3 seconden
+    setTimeout(() => {
+        popupMessage.classList.remove('show');
+    }, 3000);
+}

@@ -226,3 +226,172 @@ body {
 .remove-favorite:hover {
     background-color: #b30000;
 }
+/* ✅ Popup-styling */
+.popup-message {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 122, 193, 0.95);
+    padding: 15px 25px;
+    border-radius: 10px;
+    color: white;
+    font-size: 1.5rem;
+    text-align: center;
+    display: none;
+    box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.3);
+    z-index: 1000;
+}
+.info-btn {
+    font-size: 3rem;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: white;
+    transition: color 0.2s ease-in-out;
+}
+
+.info-btn:hover {
+    color: #f4d03f;
+}
+
+.popup-message.show {
+    display: block !important;
+}
+
+/* ✅ Zorg dat de items naast elkaar staan */
+.selected-items {
+    display: flex; /* Gebruik Flexbox */
+    justify-content: center; /* Centreer items */
+    align-items: center; /* Zorg dat ze mooi uitgelijnd zijn */
+    gap: 20px; /* Ruimte tussen de items */
+    margin-top: 15px;
+}
+
+/* ✅ Zorg dat de item slots netjes blijven */
+.item-slot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* ✅ Stijl de afbeeldingen zodat ze even groot blijven */
+.item-slot img {
+    width: 150px; /* Pas dit aan als het te klein/groot is */
+    height: auto;
+    border-radius: 8px;
+    border: 2px solid white;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* ✅ Stijl de knoppen */
+.item-slot button {
+    margin-top: 8px;
+    padding: 10px;
+    font-size: 1rem;
+    background-color: #1bace4;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+
+.item-slot button:hover {
+    background-color: #f4d03f;
+    color: black;
+}
+/* ✅ Notities styling */
+.notes {
+    margin-top: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 12px;
+    border: 2px solid white;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.notes h2 {
+    font-size: 2rem;
+    color: #f4d03f;
+}
+
+/* ✅ Mooie styling voor de notities-lijst */
+#notes-list {
+    margin-top: 15px;
+    max-height: 200px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #f4d03f rgba(255, 255, 255, 0.1);
+}
+
+/* ✅ Individuele notitie stijl */
+.saved-note {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 122, 193, 0.8);
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid white;
+    margin-bottom: 8px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* ✅ Notitie tekst */
+.saved-note p {
+    font-size: 1.5rem;
+    color: white;
+    margin: 0;
+    flex: 1;
+    text-align: left;
+}
+
+/* ✅ Verwijderknop voor notities */
+.delete-note {
+    font-size: 1.2rem;
+    padding: 6px 10px;
+    background-color: #ff4c4c;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+
+.delete-note:hover {
+    background-color: #b30000;
+}
+
+/* ✅ Stijl voor tekstveld */
+#notes {
+    width: 100%;
+    height: 100px;
+    border-radius: 8px;
+    border: 2px solid white;
+    padding: 10px;
+    font-size: 1.5rem;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    outline: none;
+    text-align: center;
+}
+
+/* ✅ Opslaan-knop styling */
+#save-notes {
+    font-size: 1.5rem;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #1bace4;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+
+#save-notes:hover {
+    background-color: #f4d03f;
+    color: black;
+}

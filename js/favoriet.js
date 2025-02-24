@@ -35,7 +35,7 @@ function displayFavorites() {
 
                 outfitCard.addEventListener('click', () => {
                     localStorage.setItem('selectedCharacter', outfit.id);
-                    window.location.href = 'personalized-karakter.html';
+                    window.location.href = 'favokarak.html';
                 });
 
                 favoritesGrid.appendChild(outfitCard);

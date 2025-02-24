@@ -1,18 +1,154 @@
-.no-favorites {
-    font-size: 1.5rem;
+/* Algemene reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Bangers', cursive;
+    background-image: url('/assets/background/background.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: #fff;
+    padding: 120px 20px 20px;
+    overflow-x: hidden; /* Geen horizontale scrollbar */
+}
+
+/* Navigatiebalk */
+.navbar {
+    font-family: 'Bangers', cursive;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(0, 122, 193, 0.95);
+    padding: 20px 40px;
+    z-index: 1000;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.logo {
+    background-image: url('/assets/logoFn.jpeg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 150px;
+    height: 50px;
+    display: block;
+}
+
+nav {
+    font-family: 'Bangers', cursive;
+    display: flex;
+    gap: 15px;
+}
+
+.nav-btn {
+    background-color: #1bace4;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 15px;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 2rem;
+    font-family: 'Bangers', cursive;
+    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.nav-btn:hover {
+    background-color: #f4d03f;
+    color: #000;
+    transform: scale(1.1);
+}
+
+.nav-btn.active {
+    background-color: #f4d03f;
+    color: #000;
+}
+
+/* Hoofdcontainer */
+.characters-section {
+    background: rgba(0, 10, 50, 0.9);
+    padding: 40px;
+    border-radius: 20px;
+    margin: auto;
+    width: 85%;
+    box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.3);
+}
+
+/* Titel met Fortnite-stijl */
+h1 {
+    font-family: 'Bangers', cursive;
+    font-size: 4rem; /* Groter gemaakt */
+    text-align: left;
     color: #f4d03f;
+    text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.8);
+    margin-bottom: 10px;
+}
+
+/* Zoekbalk en filter rechts uitgelijnd */
+.title-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.search-container {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+#search {
+    padding: 12px;
+    width: 280px;
+    border-radius: 12px;
+    border: none;
+    font-family: 'Bangers', cursive;
+    font-size: 1rem;
+    text-transform: uppercase;
     text-align: center;
-    margin-top: 20px;
+    background-color: #222;
+    color: white;
+    outline: none;
 }
 
-.favorite-star {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    font-size: 1.5rem;
-    color: gold;
+#search::placeholder {
+    color: #f4d03f;
+    opacity: 0.8;
 }
 
+#filter-rarity {
+    padding: 10px;
+    border-radius: 12px;
+    border: none;
+    font-family: 'Bangers', cursive;
+    font-size: 1rem;
+    background-color: #222;
+    color: white;
+    outline: none;
+}
+
+/* Personage-grid met coole scrollbar */
+.characters-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 20px;
+    justify-content: center;
+    padding: 15px;
+    max-height: 700px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #f4d03f rgba(255, 255, 255, 0.1);
+}
+
+/* Personagekaarten */
 .character-card {
     border-radius: 15px;
     padding: 12px;
@@ -27,7 +163,17 @@
     box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     cursor: pointer;
-    position: relative;
+}
+
+
+
+/* Fix afbeelding schaal */
+.character-card img {
+    width: 100%;
+    height: auto;
+    max-height: 140px;
+    object-fit: contain;
+    border-radius: 8px;
 }
 
 /* Hover effect */
@@ -35,16 +181,16 @@
     transform: scale(1.1);
     box-shadow: 0px 6px 12px rgba(255, 255, 255, 0.5);
 }
+/* Kleurcodes voor zeldzaamheid (aangepast voor Fortnite-stijl) */
+/* ✅ Fortnite officiële kleurcodes voor zeldzaamheid ✅ */
+.rarity-common { background-color: #B9B9B9 !important; } /* Lichtgrijs */
+.rarity-uncommon { background-color: #4AAE4F !important; } /* Fel groen */
+.rarity-rare { background-color: #3399FF !important; } /* Fel blauw */
+.rarity-epic { background-color: #A24EC2 !important; } /* Paars */
+.rarity-legendary { background-color: #D98A29 !important; } /* Goud / Oranje */
+.rarity-other { background-color: #6D6D6D !important; } /* Neutrale Grijs */
 
-/* Kleurcodes voor zeldzaamheid */
-.rarity-common { background-color: #B9B9B9 !important; }
-.rarity-uncommon { background-color: #4AAE4F !important; }
-.rarity-rare { background-color: #3399FF !important; }
-.rarity-epic { background-color: #A24EC2 !important; }
-.rarity-legendary { background-color: #D98A29 !important; }
-.rarity-other { background-color: #6D6D6D !important; }
-
-/* Label voor zeldzaamheid */
+/* 🎨 Stijl van de zeldzaamheids-label */
 .rarity-label {
     font-size: 1rem;
     font-weight: bold;
@@ -58,6 +204,31 @@
     letter-spacing: 1px;
     text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
 }
+
+.character-card h3 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: white;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+    letter-spacing: 1px;
+    font-family: 'Bangers', cursive;
+    margin-top: 8px; /* Extra ruimte tussen de naam en de afbeelding */
+}
+
+.info-btn {
+    font-size: 3rem;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: white;
+    transition: color 0.2s ease-in-out;
+}
+
+.info-btn:hover {
+    color: #f4d03f;
+}
+/* Pop-up meldingen */
 .popup-message {
     position: fixed;
     top: 20%;
@@ -74,4 +245,32 @@
 }
 .show {
     display: block !important;
+}
+.favorite-star {
+    margin-left: 100px;
+    top: 10px;
+    right: 100px;
+    font-size: 2rem;
+    color: gold;
+    
+}
+.user-profile {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid white;
+    margin-left: 10px;
+}
+
+.set-profile img {
+    width: 40px;
+    height: 40px;
+}
+
+.set-profile img:hover {
+    transform: scale(1.1);
+}
+.user-info {
+font-size: 25px;
+
 }
