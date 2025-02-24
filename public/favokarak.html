@@ -14,39 +14,53 @@
     <div class="user-info">
         <img id="user-profile-img" src="./assets/question-mark.svg" alt="User" class="user-profile">
         <span class="username">Gebruiker</span>
+        <button class="info-btn">ℹ️</button>
     </div>
 </header>
 
 <main class="karakter-container">
     <div class="karakter-info">
         <span class="favorite-star">⭐</span>
-        <img id="karakter-img" src="" alt="">
+        <img id="karakter-img" src="" alt="Karakter Afbeelding">
         <h1 id="karakter-naam"></h1>
         <p id="karakter-beschrijving"></p>
 
         <div class="stats">
             <p>🏆 Wins: <span id="wins">0</span></p>
             <p>💀 Losses: <span id="losses">0</span></p>
-            <button id="add-win">+ Win</button>
-            <button id="add-loss">+ Loss</button>
+            <button id="add-win">+</button>
+            <button id="add-loss">-</button>
         </div>
 
+        <!-- 🎁 Eerst de items tonen -->
+        <div class="item-shop">
+            <h2>🎁 Geselecteerde Items (max. 2)</h2>
+            <div class="selected-items">
+                <div class="item-slot">
+                    <img id="item1-img" src="./assets/placeholder.png" alt="Item 1">
+                    <button onclick="selectItem(1)">+</button>
+                </div>
+                <div class="item-slot">
+                    <img id="item2-img" src="./assets/placeholder.png" alt="Item 2">
+                    <button onclick="selectItem(2)">+</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 📝 Daarna de notities tonen -->
         <div class="notes">
             <h2>📝 Notities</h2>
+            <div id="notes-list"></div> <!-- Hier worden de opgeslagen notities weergegeven -->
             <textarea id="notes" placeholder="Schrijf hier je notities..."></textarea>
             <button id="save-notes">💾 Opslaan</button>
-        </div>
-
-        <div class="item-shop">
-            <h2>🎁 Kies 2 Items</h2>
-            <input type="text" id="item1" placeholder="Item 1">
-            <input type="text" id="item2" placeholder="Item 2">
-            <button id="save-items">💾 Opslaan</button>
         </div>
 
         <button class="remove-favorite">💔 Verwijder uit favorieten</button>
     </div>
 </main>
+
+<!-- ℹ️ Popup voor informatie -->
+<div id="popup-message" class="popup-message"></div>
 
 <script src="js/favokarak.js"></script>
 </body>

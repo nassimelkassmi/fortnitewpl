@@ -67,9 +67,10 @@ function getRarityClass(rarity) {
 // ⭐ **Favoriet functie**
 let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
+// Check of dit karakter al favoriet is
 if (favorites.includes(karakterID)) {
     favoriteStar.style.display = 'block';
-    favoriteBtn.textContent = '💔';
+    favoriteBtn.textContent = '💔'; // Verander hart icoon om te verwijderen uit favorieten
 }
 
 // Add/Remove favorite
@@ -107,10 +108,29 @@ blacklistBtn.addEventListener('click', () => {
     blacklistReason.classList.add('show');
 });
 
-// 🚀 **Bevestig blacklist**
+// 🚀 **Bevestig blacklist (Toevoegen aan zwarte lijst)**
 submitBlacklist.addEventListener('click', () => {
-    showPopup('Karakter op de zwarte lijst gezet!');
-    blacklistReason.classList.remove('show');
+    const reason = blacklistInput.value.trim();
+    if (!reason) {
+        showPopup("Voer een reden in!");
+        return;
+    }
+
+    let blacklist = JSON.parse(localStorage.getItem('blacklistCharacters')) || [];
+    blacklist.push({
+        id: karakterID,
+        name: karakterNaam.innerText,
+        image: karakterImg.src,
+        reason: reason
+    });
+
+    localStorage.setItem('blacklistCharacters', JSON.stringify(blacklist));
+
+    showPopup("Karakter toegevoegd aan de zwarte lijst!");
+    
+    setTimeout(() => {
+        window.location.href = 'blacklist.html'; // 🚀 Automatische redirect
+    }, 1500);
 });
 
 // ℹ️ **Info-knop popup**
@@ -125,5 +145,27 @@ function showPopup(message) {
     setTimeout(() => popupMessage.classList.remove('show'), 3000);
 }
 
-// 📥 **Laad karaktergegevens**
+// ✅ **Laad karaktergegevens**
 fetchKarakter();
+
+// ✅ **Verwijder personage van de zwarte lijst en keer terug naar `karakter.html`**
+function removeFromBlacklist(id) {
+    let blacklist = JSON.parse(localStorage.getItem('blacklistCharacters')) || [];
+    blacklist = blacklist.filter(outfit => outfit.id !== id);
+    localStorage.setItem('blacklistCharacters', JSON.stringify(blacklist));
+
+    showPopup("Karakter uit de zwarte lijst verwijderd!");
+
+    setTimeout(() => {
+        localStorage.setItem('selectedCharacter', id); // Zet het verwijderde personage weer als geselecteerd
+        window.location.href = 'karakter.html'; // 🚀 Automatische redirect naar karakterpagina
+    }, 1500);
+}
+
+// ✅ **Event Listener toevoegen aan verwijderknoppen op blacklist.html**
+document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('remove-blacklist')) {
+        const id = e.target.dataset.id;
+        removeFromBlacklist(id);
+    }
+});
