@@ -274,3 +274,79 @@ h1 {
 font-size: 25px;
 
 }
+
+@media (max-width: 768px) {
+    body {
+        padding: 100px 10px 10px;
+    }
+
+    .navbar {
+        padding: 15px 20px;
+    }
+
+    .logo {
+        width: 120px;
+        height: 40px;
+    }
+
+    h1 {
+        font-size: 3rem;
+        text-align: center;
+    }
+
+    .characters-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .character-card {
+        width: 140px;
+        height: 220px;
+    }
+
+    .character-card img {
+        max-height: 120px;
+    }
+
+    .nav-btn {
+        font-size: 1.5rem;
+        padding: 8px 16px;
+    }
+
+    #search, #filter-rarity {
+        width: 100%;
+        font-size: 0.9rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    .navbar {
+        padding: 25px 50px;
+    }
+
+    .logo {
+        width: 180px;
+        height: 60px;
+    }
+
+    h1 {
+        font-size: 4.5rem;
+    }
+
+    .characters-grid {
+        grid-template-columns: repeat(6, 1fr);
+    }
+
+    .character-card {
+        width: 200px;
+        height: 280px;
+    }
+
+    .character-card img {
+        max-height: 160px;
+    }
+
+    .nav-btn {
+        font-size: 2rem;
+        padding: 14px 28px;
+    }
+}
