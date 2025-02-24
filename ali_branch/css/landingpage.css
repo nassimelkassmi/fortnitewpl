@@ -1,0 +1,250 @@
+body {
+    background-color: #111;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.logo {
+    height: 50px; /* Pas de grootte van het logo aan */
+    width: auto;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px 20px 40px 20px;
+    max-width: 1100px;
+    margin: auto; /* Centers the header */
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.logo {
+    height: 60px;
+    width: auto;
+    padding-left: 15px;
+}
+
+.auth-buttons {
+    display: flex;
+    gap: 5px;
+}
+
+.auth-buttons button {
+    background-color: white;
+    border-radius: 8px;
+    border: solid 1px rgb(202, 202, 202);
+    color: black;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    font-family: Roboto;
+    font-weight: bold;
+}
+
+.auth-buttons button:hover {
+    background-color: rgb(218, 218, 218);
+}
+
+.nav-register-btn {
+    background-color: transparent !important;
+    color: white !important;
+    border: none !important;
+}
+
+.nav-register-btn:hover {
+    color: rgb(175, 175, 175) !important;
+}
+
+
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 20px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+.game {
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.game img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.game-text-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.game-text-container h2 {
+    font-size: 20px;
+    font-family: Roboto;
+}
+
+.play-btn {
+    background-color: #1c1c1d;
+    color: white;
+    letter-spacing: 0px;
+    border: none;
+    font-size: 12px;
+    border-radius: 10px;
+    padding: 8px 10px;
+    cursor: pointer;
+    font-family: Roboto;
+    font-weight: 400;
+}
+
+.game img {
+    border: 1px solid rgb(173, 173, 173);
+    transition: border 0.5s ease, opacity 0.5s;
+}
+
+.game:nth-of-type(1) img:hover {
+    border: 1px solid rgb(41, 255, 41);
+    opacity: 0.8;
+}
+
+.game:not(:nth-of-type(1)) img:hover {
+    border: 1px solid rgb(143, 143, 143);
+    opacity: 0.2;
+}
+
+.game:not(:nth-of-type(1)) img {
+    opacity: 0.3;
+    border: 1px solid rgb(255, 255, 255);
+}
+
+
+
+
+:root{
+    --width: 350px
+}
+
+@keyframes melding {
+    0%{
+        transform: translateY(-100px);
+    }
+}
+
+
+.geen_toegang{
+    animation: melding 500ms ease-out;
+    cursor: default;
+    /* position */
+    width: var(--width);
+    height: 70px;
+    position: fixed;
+    top: 20px;
+    right: calc(50% - (var(--width) / 2));
+    /* style */
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+
+    display: flex;    
+    & > .info{
+        height: 100%;
+        width: 30px;
+        /* background-color: #d9d9d9; */
+    } 
+
+    & > :first-child > svg{
+        fill: red;
+        position: absolute;
+        top: 20%;
+        left: 4%;
+
+        scale: 1;
+    }
+
+    & > .melding{
+        /* outline: 1px solid black; */
+
+        line-height: 0.6;
+        font-size: 1rem;
+        color: black;
+        padding-left: 20px;
+        text-align: left;
+
+        & > :first-child{
+            padding-top: 5%;
+            font-weight: bold;
+        }
+    }
+
+
+
+    & > :last-child{
+        height: 100%;
+        flex-grow: 1;
+        & button{
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            background: none;
+            border: none;
+        }
+
+        &  svg:hover{
+            background-color: rgba(102, 102, 102, 0.258);
+            border-radius: 10px;
+            cursor:pointer;
+        }
+
+    }
+
+}
+
+
+@keyframes fade_out {
+    0%{
+        opacity: 1;
+    }
+    80%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
+
+}
+
+.fade_out{
+    animation: fade_out 3s ease-out forwards;
+}
+
+
+
+/* Footer */
+footer {
+    color: white;
+    font-size: 12px;
+    opacity: 40%;
+    padding: 20px;
+    margin-top: 20px;
+}
+

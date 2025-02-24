@@ -18,7 +18,7 @@ const fade_out_timer = 1000
 
 
 async function refresh_access_token() {
-    let response =  await request("http://localhost:5000/refresh", "", "GET", "")
+    let response =  await request("/refresh", "", "GET", "")
     if (response.ok) {
         let body = await response.json()
         accesstoken = body["accesstoken"]
@@ -42,7 +42,7 @@ async function get_melding_tag_structure() {
         document.getElementById("login_register")?.classList.add("invis")
         let span_naam:HTMLSpanElement  = document.getElementById("profiel_name") as HTMLSpanElement
         let div_naam:HTMLDivElement= document.getElementById("profiel") as HTMLDivElement
-        let dict_uis = await (await request("http://localhost:5000/username", "", "GET",accesstoken)).json()
+        let dict_uis = await (await request("/username", "", "GET",accesstoken)).json()
         let username = dict_uis["username"]
         if (username) {
             console.log(username);
@@ -146,11 +146,11 @@ async function yoma() {
     console.log("wad");
     
     
-    let some = await request("http://localhost:5000/logout", "", "GET", accesstoken)
+    let some = await request("/logout", "", "GET", accesstoken)
     console.log("wad2");
     accesstoken = ""
     // try
-    // let dict_uis = await (await request("http://localhost:5000/username", "", "GET",accesstoken)).json()
+    // let dict_uis = await (await request("/username", "", "GET",accesstoken)).json()
     // let username = dict_uis["username"]
     // console.log(some.status);
     // console.log(username);

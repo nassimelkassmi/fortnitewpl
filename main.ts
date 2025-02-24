@@ -1,8 +1,9 @@
 
 function start_server_msg() {
-    console.log("server listening to port 5000");
+    console.log("server listening to port", port);
 }
 
+const port:number = 5500
 
 
 
@@ -124,10 +125,11 @@ function logoutuser(req: Request, res: Response) {
     }
     const refreshtoken = cookies.jwt
     const foundUser = users.find(person => person.refreshtoken === refreshtoken)
-    console.log(foundUser);
+    
+
     
     if (!foundUser) { 
-        console.log("did not find user");
+        console.log("did not find user4");
         return res.status(403)
     } 
     function somew(err, decoded) {
@@ -173,8 +175,12 @@ function loginuser(req: Request, res: Response) {
     }
 
     const foundUser = users.find(person => person.username === user)
+    console.log("user is", user);
+    console.log(foundUser);
+    
+    
     if (!foundUser) { 
-        console.log("did not find user");
+        console.log("did not find use2r");
         res.status(401)
         return 0
     }
@@ -236,8 +242,9 @@ function checkjwt(refreshtoken:string, secret_key:string):checkjwt {
     let match:checkjwt = {"if_match":false, "username":""}
     function set_token_user(err, decoded) { 
         if (err){ 
-            match.if_match = true 
-            match.username = decoded.username   }  
+              }  
+              match.if_match = true 
+              match.username = decoded.username 
     }
     jwt.verify(refreshtoken, secret_key, set_token_user)
     return match
@@ -253,9 +260,14 @@ function createNewAccessToken(req: Request, res: Response) {
     const refreshtoken:string = cookies.jwt
     const Usermatch:User = users.find(person => person.refreshtoken === refreshtoken)
     const if_token_valid:checkjwt = checkjwt(refreshtoken, REFRESH_TOKEN_SECRET)
-
+    
+    console.log("usermatch is ", Usermatch);
+    console.log(if_token_valid);
+    console.log(refreshtoken);
+    
+    
     if (!Usermatch || !if_token_valid.if_match || Usermatch.username !== if_token_valid.username) { 
-        let log_responds = if_token_valid ? "did not find user" : "token is invalid"
+        let log_responds = if_token_valid ? "did not find user1" : "token is invalid"
         log_responds = Usermatch ? log_responds : "the user the token is signed by and the matching user are not the same"
         console.log(log_responds);
         return res.status(403)} 
@@ -272,4 +284,4 @@ app.all("*", (req, res) =>{
     res.status(404).send("not found")
 })
 
-app.listen(5000, start_server_msg)
+app.listen(port, start_server_msg)

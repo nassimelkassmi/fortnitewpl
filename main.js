@@ -1,6 +1,7 @@
 function start_server_msg() {
-    console.log("server listening to port 5000");
+    console.log("server listening to port", port);
 }
+const port = 5500;
 const __dirname = import.meta.dirname;
 import ms from "ms";
 import * as fs from 'fs';
@@ -63,7 +64,7 @@ app.get("/logout", (res, req) => {
 });
 app.get("/refresh", (req, res) => {
     console.log("bob");
-    handlerefreshtoken(req, res);
+    createNewAccessToken(req, res);
     res.end();
 });
 function logoutuser(req, res) {
@@ -76,9 +77,8 @@ function logoutuser(req, res) {
     }
     const refreshtoken = cookies.jwt;
     const foundUser = users.find(person => person.refreshtoken === refreshtoken);
-    console.log(foundUser);
     if (!foundUser) {
-        console.log("did not find user");
+        console.log("did not find user4");
         return res.status(403);
     }
     function somew(err, decoded) {
@@ -120,8 +120,10 @@ function loginuser(req, res) {
         return 0;
     }
     const foundUser = users.find(person => person.username === user);
+    console.log("user is", user);
+    console.log(foundUser);
     if (!foundUser) {
-        console.log("did not find user");
+        console.log("did not find use2r");
         res.status(401);
         return 0;
     }
@@ -156,31 +158,40 @@ function verifyJWT(req, res, next) {
         next();
     });
 }
-function handlerefreshtoken(req, res) {
+function checkjwt(refreshtoken, secret_key) {
+    let match = { "if_match": false, "username": "" };
+    function set_token_user(err, decoded) {
+        if (err) {
+        }
+        match.if_match = true;
+        match.username = decoded.username;
+    }
+    jwt.verify(refreshtoken, secret_key, set_token_user);
+    return match;
+}
+function createNewAccessToken(req, res) {
     const cookies = req.cookies;
     if (!cookies?.jwt) {
-        console.log("geen cookies");
-        console.log(req.cookies);
         return res.status(401);
     }
     const refreshtoken = cookies.jwt;
-    const foundUser = users.find(person => person.refreshtoken === refreshtoken);
-    if (!foundUser) {
-        console.log("did not find user");
+    const Usermatch = users.find(person => person.refreshtoken === refreshtoken);
+    const if_token_valid = checkjwt(refreshtoken, REFRESH_TOKEN_SECRET);
+    console.log("usermatch is ", Usermatch);
+    console.log(if_token_valid);
+    console.log(refreshtoken);
+    if (!Usermatch || !if_token_valid.if_match || Usermatch.username !== if_token_valid.username) {
+        let log_responds = if_token_valid ? "did not find user1" : "token is invalid";
+        log_responds = Usermatch ? log_responds : "the user the token is signed by and the matching user are not the same";
+        console.log(log_responds);
         return res.status(403);
     }
-    function somew(err, decoded) {
-        if (err || foundUser.username != decoded.username) {
-            return res.status(403);
-        }
-        const accesstoken = jwt.sign({ "username": decoded.username }, ACCESS_TOKEN_SECRET, { expiresIn: "60s" });
-        console.log("refreshed the token", decoded.username);
-        res.json({ accesstoken });
-    }
-    jwt.verify(refreshtoken, REFRESH_TOKEN_SECRET, somew);
+    //create new access token
+    const accesstoken = jwt.sign({ "username": Usermatch.username }, ACCESS_TOKEN_SECRET, { expiresIn: "60s" });
+    res.json({ accesstoken });
 }
 //order mathers
 app.all("*", (req, res) => {
     res.status(404).send("not found");
 });
-app.listen(5000, start_server_msg);
+app.listen(port, start_server_msg);

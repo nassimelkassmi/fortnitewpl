@@ -13,7 +13,7 @@ async function login2() {
     const username = document.getElementById("username").value
     const password = document.getElementById("password").value
     const email    = document.getElementById("email")
-    // let response = await request("http://localhost:5000/register",{"user":username,"pwd":password}, "POST")
+    // let response = await request("/register",{"user":username,"pwd":password}, "POST")
     // console.log(status);
     
     if (!username || !password) {
@@ -36,14 +36,14 @@ async function login2() {
     // console.log(access_token.accesstoken);
     // console.log(typeof(access_token.accesstoken));
     
-    // let response =  await request("http://localhost:5000/username",
+    // let response =  await request("/username",
     // {"user":username,"pwd":password}, "GET", token)
     // console.log(new_username);
 }
 
 
 async function register_user(username, password, email) {
-    let response = await request("http://localhost:5000/register",{"user":username,"pwd":password, "email":email}, "POST")
+    let response = await request("/register",{"user":username,"pwd":password, "email":email}, "POST")
     if (!response) {
         melding("Server is momenteel niet berijkbaar")
         return 0
@@ -57,7 +57,7 @@ async function register_user(username, password, email) {
 
 
 async function login_user(username, password) {
-    let response = await request("http://localhost:5000/login",{"user":username,"pwd":password}, "POST")
+    let response = await request("/login",{"user":username,"pwd":password}, "POST")
     if (!response) {
 
         melding("Server is momenteel niet berijkbaar")

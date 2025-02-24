@@ -22,7 +22,7 @@ const fade_out_timer = 1000;
 //haalt de melding structuur van de html
 function refresh_access_token() {
     return __awaiter(this, void 0, void 0, function* () {
-        let response = yield request("http://localhost:5000/refresh", "", "GET", "");
+        let response = yield request("/refresh", "", "GET", "");
         if (response.ok) {
             let body = yield response.json();
             accesstoken = body["accesstoken"];
@@ -46,7 +46,7 @@ function get_melding_tag_structure() {
             (_a = document.getElementById("login_register")) === null || _a === void 0 ? void 0 : _a.classList.add("invis");
             let span_naam = document.getElementById("profiel_name");
             let div_naam = document.getElementById("profiel");
-            let dict_uis = yield (yield request("http://localhost:5000/username", "", "GET", accesstoken)).json();
+            let dict_uis = yield (yield request("/username", "", "GET", accesstoken)).json();
             let username = dict_uis["username"];
             if (username) {
                 console.log(username);
@@ -136,11 +136,11 @@ function logout() {
 function yoma() {
     return __awaiter(this, void 0, void 0, function* () {
         console.log("wad");
-        let some = yield request("http://localhost:5000/logout", "", "GET", accesstoken);
+        let some = yield request("/logout", "", "GET", accesstoken);
         console.log("wad2");
         accesstoken = "";
         // try
-        // let dict_uis = await (await request("http://localhost:5000/username", "", "GET",accesstoken)).json()
+        // let dict_uis = await (await request("/username", "", "GET",accesstoken)).json()
         // let username = dict_uis["username"]
         // console.log(some.status);
         // console.log(username);
