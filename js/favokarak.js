@@ -54,11 +54,14 @@ function loadUserData() {
 // ✅ **Opslaan en tonen van notities**
 function saveAndDisplayNote() {
     const noteText = notesInput.value.trim();
-    if (noteText === '') return; // Stop als er niets is ingevuld
+    if (noteText === '') return;
 
-    // Notitie opslaan in localStorage
     let savedNotes = JSON.parse(localStorage.getItem(`notes-${karakterID}`)) || [];
-    savedNotes.unshift(noteText); // Nieuwste notitie bovenaan zetten
+    savedNotes.unshift(noteText); // Nieuwste notitie bovenaan
+
+    console.log("💾 Nieuwe notitie toegevoegd:", noteText);
+    console.log("📋 Nieuwe array met notities:", savedNotes);
+
     localStorage.setItem(`notes-${karakterID}`, JSON.stringify(savedNotes));
 
     // 🚀 **Directe UI-update**
@@ -66,11 +69,29 @@ function saveAndDisplayNote() {
     notesInput.value = ''; // Leegmaken na opslaan
 }
 
+
+
 // ✅ **Toon opgeslagen notities**
 function displayNotes() {
-    let savedNotes = JSON.parse(localStorage.getItem(`notes-${karakterID}`)) || [];
+    let savedNotesRaw = localStorage.getItem(`notes-${karakterID}`);
 
-    // Oude notities verwijderen om dubbele weergave te voorkomen
+    let savedNotes;
+    try {
+        savedNotes = JSON.parse(savedNotesRaw);
+
+        // 🔍 Controleer of het een array is
+        if (!Array.isArray(savedNotes)) {
+            console.warn("⚠️ Geen array gevonden, reset naar lege array.");
+            savedNotes = [];
+        }
+    } catch (error) {
+        console.error("❌ JSON.parse() error: foute data gevonden in localStorage.", error);
+        savedNotes = [];
+    }
+
+    console.log("✅ Notities geladen:", savedNotes);
+
+    // Oude notities verwijderen
     notesList.innerHTML = '';
 
     savedNotes.forEach((note, index) => {
@@ -81,15 +102,19 @@ function displayNotes() {
             <button class="delete-note" data-index="${index}">🗑️</button>
         `;
 
-        // **Nieuwste notitie komt BOVEN in de lijst**
         notesList.prepend(noteElement);
     });
 
-    // ✅ **EventListener geven aan verwijderknoppen**
+    // EventListeners opnieuw toevoegen
     document.querySelectorAll('.delete-note').forEach(button => {
         button.addEventListener('click', deleteNote);
     });
+
+    console.log("✅ Notities succesvol weergegeven.");
 }
+
+
+
 
 // ✅ **Verwijderen van een notitie**
 function deleteNote(event) {
@@ -143,5 +168,9 @@ infoBtn.addEventListener('click', () => {
     setTimeout(() => popupMessage.classList.remove('show'), 3000);
 });
 // ✅ **Laad Karakter en Data bij Pagina-laden**
+console.log("📌 Notes list ID:", notesList);
+console.log("📌 Notes input ID:", notesInput);
+console.log("📌 Save button ID:", saveNotes);
+
 fetchKarakter();
 loadUserData();
