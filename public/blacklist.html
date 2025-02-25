@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zwarte Lijst</title>
+    <link rel="stylesheet" href="css/blacklist.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bangers&display=swap">
+    <script src="js/get_username.js" defer></script>
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo"></div>
+        <nav>
+            <a href="personages.html"><button class="nav-btn">Personages</button></a>
+            <a href="favoriet.html"><button class="nav-btn">Favorieten</button></a>
+            <button class="nav-btn active">Zwarte Lijst</button>
+        </nav>
+        <div class="user-info">
+            <img id="user-profile-img" src="./assets/question-mark.svg" alt="User" class="user-profile">
+            <span class="username" id="username_display">Gebruikersnaam</span>
+            <button class="info-btn">ℹ️</button>
+        </div>
+    </header>
+
+    <main>
+        <section class="characters-section">
+            <div class="title-container">
+                <h1>Zwarte Lijst</h1>
+            </div>
+            <div class="characters-grid" id="blacklist-grid">
+                <!-- Hier worden de personages op de zwarte lijst geladen -->
+            </div>
+        </section>
+        <div id="popup-message" class="popup-message"></div>
+    </main>
+
+    <script src="./js/blacklist.js"></script>
+</body>
+</html>
