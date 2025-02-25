@@ -105,3 +105,81 @@ function showPopup(message) {
         popupMessage.classList.remove('show');
     }, 3000);
 }
+
+
+
+
+
+
+let accesstoken = ""
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', set_name, false);
+
+
+async function set_name() {
+    let if_logged = await refresh_access_token()
+    
+    if(if_logged){
+        let span_naam  = document.getElementById("username_display")
+        let dict_uis = await (await request("/username", "", "GET",accesstoken)).json()
+        let username = dict_uis["username"]
+        if (username) {
+            span_naam.innerText = username
+
+        }
+            
+        
+        
+    }
+}
+
+
+
+async function refresh_access_token() {
+    let response =  await request("/refresh", "", "GET", "")
+    if (response.ok) {
+        let body = await response.json()
+        accesstoken = body["accesstoken"]
+    }
+    
+    
+    if (!accesstoken) {
+        return false
+    }else{
+        return true
+    }
+}
+
+
+
+async function request(url, data, mode, token) {
+    
+    let response = null
+    if ("GET" == mode) {
+        response = await fetch(url, {
+            method: mode, // HTTP method
+            headers: {
+                'Authorization': `Bearer ${token}`, 
+                'Content-Type': 'application/json', 
+            },
+            credentials: 'include' 
+        });
+    }
+    else{
+        response = await fetch(url, {
+            method: mode, // HTTP method
+            headers: {
+                'Content-Type': 'application/json', 
+            },
+            body: JSON.stringify(data), 
+            credentials: 'include' 
+        });
+    }
+    return response
+}
+
+

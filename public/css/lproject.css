@@ -35,6 +35,11 @@ body {
     color: white;
 }
 
+
+#username_display{
+  text-transform: capitalize;
+}
+
 .username {
     font-family: Fortnite;
     font-size: 80px;

@@ -149,11 +149,6 @@ async function yoma() {
     let some = await request("/logout", "", "GET", accesstoken)
     console.log("wad2");
     accesstoken = ""
-    // try
-    // let dict_uis = await (await request("/username", "", "GET",accesstoken)).json()
-    // let username = dict_uis["username"]
-    // console.log(some.status);
-    // console.log(username);
     
     window.location.reload();
 }

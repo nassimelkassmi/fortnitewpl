@@ -47,6 +47,11 @@ nav {
     gap: 15px;
 }
 
+.username{
+    font-size: 2.5rem;
+    letter-spacing: 0.2rem;
+}
+
 .nav-btn {
     background-color: #1bace4;
     border: none;
