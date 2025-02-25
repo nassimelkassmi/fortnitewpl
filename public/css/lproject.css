@@ -75,6 +75,12 @@ button {
     transition: all 0.1s ease-in-out;
   }
 
+
+  a:visited,a{
+    text-decoration: none;
+    color: #292A49;
+  }
+
   
   .play-btn {
     background-color: #FFF457;

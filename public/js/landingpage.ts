@@ -128,7 +128,7 @@ async function if_logged2(text:string) {
     console.log(if_logged);
     
     if (if_logged) {
-        window.location.href = "personages.html"
+        window.location.href = "lproject.html"
     }
     else{
         melding(text)
@@ -160,9 +160,9 @@ async function yoma() {
 
 
 
-  async function request(url:string, data:string, mode:string, token:string) {
+  async function request(url:string, data:string, mode:string, token:string):Promise<Response> {
     
-    let response = undefined
+    let response:Response | null = null
     if ("GET" == mode) {
         response = await fetch(url, {
             method: mode, // HTTP method
