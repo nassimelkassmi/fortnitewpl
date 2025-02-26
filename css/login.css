@@ -1,123 +1,120 @@
-
-
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=Inconsolata:wght@200..900&display=swap');
-
-*,*::before,*::after{
-    padding: 0;
-    margin: 0;
+@font-face {
+    font-family: Fortnite;
+    src: url(../fonts/Fortnite.ttf);
 }
 
-
-
-body{
-    height: 100vh;
+body {
+    background-image: url(../assets/background/background.png);
+    background-position: center; 
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    background-attachment: fixed; 
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    flex-direction: column;
-    font-weight: 100;
+    justify-content: center;
+    height: 100vh;
 }
 
-.background{
-    position: absolute;
-    z-index: -1;
-    display: block;
-    padding: 0;
-    margin: 0;
-    width: 100%;
-    height: 100%;
+.logo {
+    height: 100px; 
+    width: auto;
 }
 
-.login_form{
+.login-container {
+    padding: 40px;
+    text-align: center;
+    background-color: transparent;
+}
+
+
+h1 {
+    margin-bottom: 20px;
+}
+
+form {
     display: flex;
     flex-direction: column;
-    height: 50%;
 }
 
-
-.logo{
-    width: 150px;
-    align-self: center;
-    margin-bottom:10px;
-    justify-content: center;
-    filter: invert(1);
+input {
+    margin-bottom: 6px;
+    color: rgb(81, 91, 102);
+    border: none;
+    font-size: 18px;
+    background-color: #dee4f5;
+    width: 400px; 
+    height: 42px; 
+    padding-left: 10px;
+    font-family: "Roboto mono", serif;
 }
 
+input::placeholder {
+    color: #a5a5a5;
+}
 
-
-
-input{
+input:focus {
     outline: none;
     border: none;
-    margin: 10px;
-    padding: 5px;
-    font-family: "anton";
-    font-weight: 300;
-    font-size: 1.3rem;
-    letter-spacing: 1px;
-    background-color: rgb(203, 222, 255);
-    width: 400px;
-    height: 30px;
-}
-input::placeholder{
-    letter-spacing: 0px;
-    font-size: 1.5rem;
-    font-family:monospace;
-    color: rgba(128, 128, 128, 0.73);
+    box-shadow: none;
+    
 }
 
 
-a,a:visited{
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 1.2rem;
-    text-align: center;
+.input-text {
+    display: flex;
+    flex-direction: column;
+    gap: 10px
+}
+
+button {
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.register-btn {
     color: white;
-    font-weight: 100;
-    margin: 5px;
-    margin-bottom: 10px;
-    text-decoration: none;
-    cursor: pointer;
-}
-a:hover{
-    color: lightblue;
-}
-
-.login_button{
-    width: 50%;
-    align-self: center;
-    height: 50px;
-    font-size: 1.8rem;
-    font-family: "anton";
-    background-color: rgb(175, 201, 255);
-    border: 6px solid rgb(199, 217, 255);
-    color: rgba(9, 27, 67, 0.781);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    font-size: 14px;
+    margin-bottom: 25px;
+    margin-top: 5px;
+    padding: 0;
+    background-color: #00000000;
+    font-family:  "Roboto Mono", serif;
+    transition: color 0.2s ease;
 }
 
-.login_button:hover{
-    background-color: rgb(140, 184, 232);
-    border: 6px solid #a2c1ff;
-    cursor: pointer;
-    color: rgba(32, 54, 103, 0.781);
+.register-btn:hover {
+    color: rgb(174, 193, 209);
 }
 
-.login_button:active{
-    background-color: rgb(182, 188, 255);
+.login-btn {
+    background-color: #B3C9FA;
+    border: 5px solid #CEDBF9;
+    color: #292A49;
+    margin: 0 100px;
+    padding: 6px 5px 5px 5px;
+    font-size: 30px;
+    font-family: Fortnite;
+    transition: 0.08s ease-in-out;
+}
+
+.login-btn:hover {
+    background-color: #FFF457;
+    border: 5px solid #EDE56A;
 }
 
 
-footer{
+footer {
     position: absolute;
-    bottom: 0;
-    width: 100%;
-    display: flex;
-    color: white; 
-    justify-content: center;
-    margin-bottom: 5px;
-}
-
-footer > p{
-    font-family: Arial, sans-serif;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%); 
+    margin: 0 auto;
+    color: white;
+    font-size: 12px;
+    opacity: 0.4;
 }

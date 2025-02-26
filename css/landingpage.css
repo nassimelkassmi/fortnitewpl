@@ -115,13 +115,15 @@ nav {
 }
 
 .game {
-    padding: 15px;
+    position: relative;
+    overflow: hidden; /* Prevents the image from overflowing */
     border-radius: 10px;
 }
 
 .game img {
     width: 100%;
     border-radius: 10px;
+    transition: transform 0.3s ease-in-out; /* Smooth transition */
 }
 
 .game-text-container {
@@ -136,6 +138,8 @@ nav {
     font-family: Roboto;
 }
 
+
+
 .play-btn {
     background-color: #1c1c1d;
     color: white;
@@ -144,32 +148,37 @@ nav {
     font-size: 12px;
     border-radius: 10px;
     padding: 8px 10px;
-    cursor: pointer;
+    cursor: not-allowed;
     font-family: Roboto;
-    font-weight: 400;
+    font-weight: 600;
 }
+
+.game:nth-of-type(1) .play-btn {
+    cursor: pointer;
+}
+
 
 .game img {
     border: 1px solid rgb(173, 173, 173);
-    transition: border 0.5s ease, opacity 0.5s;
+    transition: border 0.5s ease, opacity 0.5s, box-shadow 0.3s ease-in-out;
+    object-fit: cover;
 }
 
 .game:nth-of-type(1) img:hover {
     border: 1px solid rgb(41, 255, 41);
+    box-shadow: 0px 0px 45px 0px rgba(41, 255, 41, 0.22);
     opacity: 0.8;
 }
 
 .game:not(:nth-of-type(1)) img:hover {
     border: 1px solid rgb(143, 143, 143);
-    opacity: 0.2;
+    opacity: 0.1;
 }
 
 .game:not(:nth-of-type(1)) img {
     opacity: 0.3;
     border: 1px solid rgb(255, 255, 255);
 }
-
-
 
 
 :root{
