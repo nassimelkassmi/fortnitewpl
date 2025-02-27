@@ -8,7 +8,7 @@ body {
 }
 
 .logo {
-    height: 50px; /* Pas de grootte van het logo aan */
+    height: 50px; 
     width: auto;
 }
 
@@ -22,9 +22,9 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 50px 20px 40px 20px;
+    padding: 50px 0px 40px 0px;
     max-width: 1100px;
-    margin: auto; /* Centers the header */
+    margin: auto; 
 }
 
 nav {
@@ -38,7 +38,6 @@ nav {
 .logo {
     height: 60px;
     width: auto;
-    padding-left: 15px;
 }
 
 .auth-buttons {
@@ -51,7 +50,7 @@ nav {
     border-radius: 8px;
     border: solid 1px rgb(202, 202, 202);
     color: black;
-    padding: 8px 16px;
+    padding: 8px 20px;
     cursor: pointer;
     transition: background-color 0.2s ease, color 0.2s ease;
     font-family: Roboto;
@@ -108,7 +107,7 @@ nav {
 .grid-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    gap: 50px;
     padding: 20px;
     max-width: 1100px;
     margin: auto;
@@ -116,14 +115,13 @@ nav {
 
 .game {
     position: relative;
-    overflow: hidden; /* Prevents the image from overflowing */
     border-radius: 10px;
 }
 
 .game img {
     width: 100%;
     border-radius: 10px;
-    transition: transform 0.3s ease-in-out; /* Smooth transition */
+    transition: transform 0.3s ease-in-out;
 }
 
 .game-text-container {
@@ -146,12 +144,34 @@ nav {
     letter-spacing: 0px;
     border: none;
     font-size: 12px;
-    border-radius: 10px;
-    padding: 8px 10px;
+    border-radius: 8px;
+    padding: 7px 12px;
     cursor: not-allowed;
     font-family: Roboto;
     font-weight: 600;
 }
+
+
+.game:nth-of-type(1) .play-btn {
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.game:nth-of-type(1) .play-btn:hover {
+    background-color: white;
+    color: black;
+}
+
+
+.game:not(:nth-of-type(1)) .play-btn {
+    cursor: not-allowed;
+    transition: opacity 0.2s ease;
+}
+
+.game:not(:nth-of-type(1)) .play-btn:hover {
+    opacity: 0.5;
+}
+
 
 .game:nth-of-type(1) .play-btn {
     cursor: pointer;
@@ -160,11 +180,13 @@ nav {
 
 .game img {
     border: 1px solid rgb(173, 173, 173);
-    transition: border 0.5s ease, opacity 0.5s, box-shadow 0.3s ease-in-out;
+    opacity: 0.9;
+    transition: border 0.5s ease, opacity 0.5s, box-shadow 0.3s ease-in-out, filter 0.5s ease;
     object-fit: cover;
 }
 
 .game:nth-of-type(1) img:hover {
+    filter: brightness(1.2);
     border: 1px solid rgb(41, 255, 41);
     box-shadow: 0px 0px 45px 0px rgba(41, 255, 41, 0.22);
     opacity: 0.8;
@@ -285,6 +307,6 @@ footer {
     font-size: 12px;
     opacity: 40%;
     padding: 20px;
-    margin-top: 20px;
+    margin-top: 50px;
 }
 
