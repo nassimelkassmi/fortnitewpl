@@ -76,22 +76,29 @@ button {
     cursor: pointer;
 }
 
-.register-btn {
+.under-buttons {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 25px;
+    margin-top: 5px;
+}
+
+.under-buttons a {
     color: white;
     font-size: 14px;
-    margin-bottom: 25px;
     margin-top: 5px;
     padding: 0;
     background-color: #00000000;
     font-family:  "Roboto Mono", serif;
     transition: color 0.2s ease;
+    text-decoration: none;
 }
 
-.register-btn:hover {
+.under-buttons a:hover {
     color: rgb(174, 193, 209);
 }
 
-.login-btn {
+.login_button {
     background-color: #B3C9FA;
     border: 5px solid #CEDBF9;
     color: #292A49;
@@ -102,7 +109,7 @@ button {
     transition: 0.08s ease-in-out;
 }
 
-.login-btn:hover {
+.login_button:hover {
     background-color: #FFF457;
     border: 5px solid #EDE56A;
 }
