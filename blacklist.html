@@ -10,8 +10,9 @@
 </head>
 <body>
     <header class="navbar">
+        <button class="hamburger-menu" onclick="toggleMenu()">☰</button>
         <div class="logo"></div>
-        <nav>
+        <nav class="nav-menu">
             <a href="personages.html"><button class="nav-btn">Personages</button></a>
             <a href="favoriet.html"><button class="nav-btn">Favorieten</button></a>
             <button class="nav-btn active">Zwarte Lijst</button>
@@ -29,7 +30,6 @@
                 <h1>Zwarte Lijst</h1>
             </div>
             <div class="characters-grid" id="blacklist-grid">
-                <!-- Hier worden de personages op de zwarte lijst geladen -->
             </div>
         </section>
         <div id="popup-message" class="popup-message"></div>

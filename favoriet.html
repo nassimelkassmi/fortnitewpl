@@ -11,10 +11,11 @@
 <body>
     <header class="navbar">
         <div class="logo"></div>
-        <nav>
-           <a href="personages.html"> <button class="nav-btn">Personages</button></a>
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button> <!-- Hamburger menu knop -->
+        <nav class="nav-menu">
+            <a href="personages.html"><button class="nav-btn">Personages</button></a>
             <button class="nav-btn active">Favorieten</button>
-            <a href="blacklist.html"> <button class="nav-btn">Zwarte Lijst</button></a>
+            <a href="blacklist.html"><button class="nav-btn">Zwarte Lijst</button></a>
         </nav>
         <div class="user-info">
             <img id="user-profile-img" src="./assets/question-mark.svg" alt="User" class="user-profile">
@@ -22,6 +23,7 @@
             <button class="info-btn">ℹ️</button>
         </div>
     </header>
+    
 
     <main>
         <section class="characters-section">
@@ -41,7 +43,6 @@
                 </div>
             </div>
             <div class="characters-grid" id="favorites-grid">
-                <!-- Favorieten worden hier geladen -->
             </div>
         </section>
         <div id="popup-message" class="popup-message"></div>

@@ -144,3 +144,69 @@ footer {
     font-size: 12px;
     opacity: 0.4;
 }
+
+@media screen and (max-width: 720px) {
+  .logo {
+      height: 70px;
+      margin-top: 30px;
+  }
+
+  .username {
+      font-size: 60px;
+      gap: 15px;
+  }
+
+  .profile-pic {
+      width: 75px;
+  }
+
+  button {
+      height: 55px;
+      width: 200px;
+      font-size: 28px;
+  }
+
+  .play-btn:hover {
+      width: 210px !important;
+  }
+
+  footer {
+      font-size: 10px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .logo {
+      height: 50px;
+      margin-top: 20px;
+  }
+
+  .username {
+      font-size: 40px;
+      flex-direction: column;
+      gap: 10px;
+  }
+
+  .profile-pic {
+      width: 60px;
+  }
+
+  .buttons {
+      flex-direction: column;
+      gap: 15px;
+  }
+
+  button {
+      height: 50px;
+      width: 180px;
+      font-size: 24px;
+  }
+
+  .play-btn:hover {
+      width: 190px !important;
+  }
+
+  footer {
+      font-size: 9px;
+  }
+}

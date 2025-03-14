@@ -279,3 +279,57 @@ footer {
     margin-top: 20px;
 }
 
+@media (max-width: 760px) {
+    .grid-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    header {
+        flex-direction: row;  
+        justify-content: space-between; 
+        align-items: center;
+        text-align: left;
+    }
+
+    .auth-buttons {
+        display: flex;
+        gap: 5px;
+        margin-top: 0; 
+    }
+}
+
+@media (max-width: 480px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+    }
+
+    .game img {
+        width: 100%;
+        border-radius: 10px;
+    }
+
+    header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        text-align: left;
+        padding: 10px;
+    }
+
+    .auth-buttons {
+        display: flex;
+        flex-direction: row; 
+        gap: 5px;
+    }
+
+    .auth-buttons button {
+        width: auto; 
+    }
+
+    .game-text-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+}
