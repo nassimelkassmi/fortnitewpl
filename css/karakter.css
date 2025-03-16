@@ -134,7 +134,7 @@ body {
     box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.3);
 }
 
-/* Melding voor blacklist */
+
 .blacklist-reason {
     display: none;
     position: fixed;
@@ -148,7 +148,6 @@ body {
     box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.3);
 }
 
-/* Zichtbaar maken */
 .show {
     display: block !important;
 }

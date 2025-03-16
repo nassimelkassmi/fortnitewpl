@@ -379,11 +379,170 @@ nav a {
         background: none;
         border: none;
         color: white;
-        cursor: pointer;
-        transition: color 0.3s ease-in-out;
     }
     
-    .info-btn:hover {
-        color: #f4d03f;
+    .hamburger-menu {
+        display: none;
+    }
+    
+    @media screen and (max-width: 720px) {
+        .navbar {
+            padding: 10px 15px;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+      
+    
+        .logo {
+            display: none; 
+        }
+    
+        .nav-menu {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: rgba(0, 122, 193, 0.95);
+            padding: 10px 0;
+        }
+    
+        .nav-menu.show {
+            display: flex;
+        }
+    
+        .hamburger-menu {
+            display: block;
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            cursor: pointer;
+            font-size: 2rem;
+            background: none;
+            border: none;
+            color: white;
+        }
+    
+        .nav-btn {
+            font-size: 1.2rem;
+            padding: 10px 20px;
+            text-align: center;
+            width: 90%;
+        }
+    
+        .characters-section {
+            padding: 15px;
+            width: 100%;
+        }
+    
+        .characters-grid {
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+    
+        .character-card {
+            width: 100%;
+            flex-direction: column;
+            text-align: center;
+            padding: 15px;
+        }
+    
+        .character-card img {
+            width: 90px;
+            height: 90px;
+        }
+    
+        .info-btn {
+            font-size: 2rem;
+        }
+    
+        .popup-message {
+            width: 90%;
+            font-size: 1rem;
+            top: 10%;
+        }
+    }
+    
+    @media screen and (max-width: 480px) {
+        .navbar {
+            padding: 10px 15px;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+    
+        .logo {
+            display: none; 
+        }
+    
+        .nav-menu {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: rgba(0, 122, 193, 0.95);
+            padding: 10px 0;
+        }
+    
+        .nav-menu.show {
+            display: flex;
+        }
+    
+        .hamburger-menu {
+            display: block;
+            position: absolute;
+            top: 10px;
+            right: 15px; /* Rechtsboven in de hoek */
+            cursor: pointer;
+            font-size: 2rem;
+            background: none;
+            border: none;
+            color: white;
+        }
+    
+        .nav-btn {
+            font-size: 1rem;
+            padding: 8px 12px;
+            width: 90%;
+            text-align: center;
+        }
+    
+        .characters-section {
+            padding: 15px;
+            width: 100%;
+        }
+    
+        .characters-grid {
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+    
+        .character-card {
+            width: 100%;
+            flex-direction: column;
+            text-align: center;
+            padding: 12px;
+        }
+    
+        .character-card img {
+            width: 80px;
+            height: 80px;
+        }
+    
+        .info-btn {
+            font-size: 1.8rem;
+        }
+    
+        .popup-message {
+            width: 90%;
+            font-size: 1rem;
+            top: 10%;
+        }
     }
     

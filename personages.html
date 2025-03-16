@@ -10,17 +10,22 @@
 <body>
     <header class="navbar">
         <div class="logo"></div>
-        <nav>
+        
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    
+        <nav class="nav-menu">
             <button class="nav-btn active">Personages</button>
             <a href="favoriet.html"><button class="nav-btn">Favorieten</button></a>
-            <a href="blacklist.html"> <button class="nav-btn">Zwarte Lijst</button></a>
+            <a href="blacklist.html"><button class="nav-btn">Zwarte Lijst</button></a>
         </nav>
+    
         <div class="user-info">
             <img id="user-profile-img" src="./assets/question-mark.svg" alt="User" class="user-profile">
             <span class="username" id="username_display">Gebruikersnaam</span>
             <button class="info-btn">ℹ️</button>
         </div>
     </header>
+  
 
     <main>
         <section class="characters-section">
@@ -40,7 +45,6 @@
                 </div>
             </div>
             <div class="characters-grid" id="characters-grid">
-                <!-- Personages worden hier geladen -->
             </div>
         </section>
         <div id="popup-message" class="popup-message"></div>
