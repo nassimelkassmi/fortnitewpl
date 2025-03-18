@@ -21,6 +21,7 @@ body {
     font-family: Fortnite;
 }
 
+
 /* Navigatiebalk */
 .navbar {
     font-family: Fortnite;
@@ -96,6 +97,14 @@ body {
     height: 40px;
     object-fit: cover;
     border-radius: 50%;
+}
+
+.user-profile {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid white;
+    margin-left: 10px;
 }
 
 .info-btn {
@@ -223,7 +232,6 @@ body {
 /* ====== Blacklist Card Layout ====== */
 .character-card {
     background: rgba(255, 255, 255, 0.1);
-    border-radius: 15px;
     width: 600px;
     display: flex;
     align-items: center;
@@ -257,6 +265,7 @@ body {
 .character-info h3 {
     font-size: 2rem;
     margin-bottom: 5px;
+    font-weight: 200;
 }
 .blacklist-reason {
     font-size: 1.5rem;

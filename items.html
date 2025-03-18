@@ -1,72 +1,83 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Item Winkel</title>
-    <link rel="stylesheet" href="css/items.css">
-    <script src="js/get_username.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Item Winkel</title>
+  <link rel="stylesheet" href="css/items.css">
+  <script src="js/get_username.js" defer></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bangers&display=swap">
 </head>
 <body>
 
-    <header class="navbar">
-        <a href="favokarak.html" class="back-btn">←</a>
-        <div class="user-info">
-            <img id="user-profile-img" src="./assets/question-mark.svg" alt="User" class="user-profile">
-            <span class="username" id="username_display">Gebruikersnaam</span>
-            <button class="info-btn">ℹ️</button>
-        </div>
-    </header>
-    
+  <!-- Navbar met left/center/right structuur -->
+  <header class="navbar">
+    <div class="left">
+      <a href="favokarak.html" class="back-btn">←</a>
+    </div>
+    <div class="center">
+      <nav>
+        <span class="navbar-title">ITEM WINKEL</span>
+      </nav>
+    </div>
+    <div class="right">
+      <div class="user-info">
+        <img id="user-profile-img" src="./assets/question-mark.svg" alt="User" class="user-profile" />
+        <span class="username" id="username_display">Gebruikersnaam</span>
+        <button class="info-btn">ℹ️</button>
+      </div>
+    </div>
+  </header>
 
-<main class="items-section">
-    <h1> Kies een item </h1>
+  <!-- Main container met vergelijkbare styling als de personages-page -->
+  <main class="items-section">
+    <h1>Kies een item</h1>
     <div class="items-grid">
-        <div class="item-category">
-            <h2>Wapens</h2>
-            <select id="filter-weapons">
-                <option value="">Alle rarities</option>
-                <option value="common">Common</option>
-                <option value="uncommon">Uncommon</option>
-                <option value="rare">Rare</option>
-                <option value="epic">Epic</option>
-                <option value="legendary">Legendary</option>
-                <option value="other">Overige</option>
-            </select>
-            <div id="weapons-grid" class="grid-column"></div>
-        </div>
+      <div class="item-category">
+        <h2>Wapens</h2>
+        <select id="filter-weapons">
+          <option value="">Alle rarities</option>
+          <option value="common">Common</option>
+          <option value="uncommon">Uncommon</option>
+          <option value="rare">Rare</option>
+          <option value="epic">Epic</option>
+          <option value="legendary">Legendary</option>
+          <option value="other">Overige</option>
+        </select>
+        <div id="weapons-grid" class="grid-column"></div>
+      </div>
 
-        <div class="item-category">
-            <h2>Emotes</h2>
-            <select id="filter-emotes">
-                <option value="">Alle rarities</option>
-                <option value="common">Common</option>
-                <option value="uncommon">Uncommon</option>
-                <option value="rare">Rare</option>
-                <option value="epic">Epic</option>
-                <option value="legendary">Legendary</option>
-                <option value="other">Overige</option>
-            </select>
-            <div id="emotes-grid" class="grid-column"></div>
-        </div>
+      <div class="item-category">
+        <h2>Emotes</h2>
+        <select id="filter-emotes">
+          <option value="">Alle rarities</option>
+          <option value="common">Common</option>
+          <option value="uncommon">Uncommon</option>
+          <option value="rare">Rare</option>
+          <option value="epic">Epic</option>
+          <option value="legendary">Legendary</option>
+          <option value="other">Overige</option>
+        </select>
+        <div id="emotes-grid" class="grid-column"></div>
+      </div>
 
-        <div class="item-category">
-            <h2>Back Blings</h2>
-            <select id="filter-backblings">
-                <option value="">Alle rarities</option>
-                <option value="common">Common</option>
-                <option value="uncommon">Uncommon</option>
-                <option value="rare">Rare</option>
-                <option value="epic">Epic</option>
-                <option value="legendary">Legendary</option>
-                <option value="other">Overige</option>
-            </select>
-            <div id="backblings-grid" class="grid-column"></div>
-        </div>
+      <div class="item-category">
+        <h2>Back Blings</h2>
+        <select id="filter-backblings">
+          <option value="">Alle rarities</option>
+          <option value="common">Common</option>
+          <option value="uncommon">Uncommon</option>
+          <option value="rare">Rare</option>
+          <option value="epic">Epic</option>
+          <option value="legendary">Legendary</option>
+          <option value="other">Overige</option>
+        </select>
+        <div id="backblings-grid" class="grid-column"></div>
+      </div>
     </div>
     <div id="popup-message" class="popup-message"></div>
-</main>
+  </main>
 
-<script src="js/items.js"></script>
+  <script src="js/items.js"></script>
 </body>
 </html>

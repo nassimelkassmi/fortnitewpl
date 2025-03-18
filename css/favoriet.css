@@ -19,7 +19,9 @@ body {
     padding: 120px 20px 20px;
     overflow-x: hidden;
     font-family: Fortnite;
+    font-weight: 200;
 }
+
 
 /* Navigatiebalk */
 .navbar {
@@ -232,14 +234,19 @@ body {
     display: block;
     transition: all 0.3s ease;
 }
+
+.character-card:hover {
+    box-shadow: inset 0 0 0 6px rgba(255, 255, 255, 0.608);
+}
   
 .character-card img {
     width: 230px !important;
     height: 230px !important;
-}
+    transition: all 0.3s ease-in-out;
+  }
   
-.character-card:hover {
-    border-color: #FFF457;
+.character-card img:hover {
+    transform: scale(1.1);
 }
   
 .character-card h3 {

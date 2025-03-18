@@ -278,16 +278,22 @@ body {
     display: block; /* of flex, maar hier niet meer nodig */
     transition: all 0.3s ease;
   }
+
+.character-card:hover {
+    box-shadow: inset 0 0 0 6px rgba(255, 255, 255, 0.623);
+}
   
   /* Verberg de img-tag als je die nog in je HTML hebt staan */
   .character-card img {
     width: 230px !important;
     height: 230px !important;
+    transition: all 0.3s ease-in-out;
   }
   
   /* Hover-effect voor de borderkleur */
-  .character-card:hover {
+  .character-card img:hover {
     border-color: #FFF457;
+    transform: scale(1.1);
   }
 
   
