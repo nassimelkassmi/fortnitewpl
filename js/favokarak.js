@@ -1,4 +1,4 @@
-// ✅ Selecteer alle HTML-elementen
+
 const karakterImg = document.getElementById('karakter-img');
 const karakterNaam = document.getElementById('karakter-naam');
 const karakterBeschrijving = document.getElementById('karakter-beschrijving');
@@ -8,7 +8,7 @@ const addWin = document.getElementById('add-win');
 const addLoss = document.getElementById('add-loss');
 const notesInput = document.getElementById('notes');
 const saveNotes = document.getElementById('save-notes');
-const notesList = document.getElementById('notes-list'); // Correcte container voor notities
+const notesList = document.getElementById('notes-list'); 
 const item1Img = document.getElementById('item1-img');
 const item2Img = document.getElementById('item2-img');
 const removeFavorite = document.querySelector('.remove-favorite');
@@ -22,7 +22,7 @@ if (!karakterID) {
     window.location.href = 'personages.html';
 }
 
-// ✅ **Laad Karakter Data**
+
 async function fetchKarakter() {
     try {
         const response = await fetch(`https://fortnite-api.com/v2/cosmetics/br/${karakterID}`);
@@ -38,40 +38,39 @@ async function fetchKarakter() {
     }
 }
 
-// ✅ **Laad Wins, Losses, Notities en Items**
+
 function loadUserData() {
     wins.innerText = localStorage.getItem(`wins-${karakterID}`) || 0;
     losses.innerText = localStorage.getItem(`losses-${karakterID}`) || 0;
 
-    // Notities laden
+    
     displayNotes();
 
-    // Geselecteerde items laden of placeholder tonen
+    
     item1Img.src = localStorage.getItem(`item1-img-${karakterID}`) || './assets/placeholder.png';
     item2Img.src = localStorage.getItem(`item2-img-${karakterID}`) || './assets/placeholder.png';
 }
 
-// ✅ **Opslaan en tonen van notities**
+
 function saveAndDisplayNote() {
     const noteText = notesInput.value.trim();
     if (noteText === '') return;
 
     let savedNotes = JSON.parse(localStorage.getItem(`notes-${karakterID}`)) || [];
-    savedNotes.unshift(noteText); // Nieuwste notitie bovenaan
+    savedNotes.unshift(noteText); 
 
     console.log("💾 Nieuwe notitie toegevoegd:", noteText);
     console.log("📋 Nieuwe array met notities:", savedNotes);
 
     localStorage.setItem(`notes-${karakterID}`, JSON.stringify(savedNotes));
 
-    // 🚀 **Directe UI-update**
+
     displayNotes();
-    notesInput.value = ''; // Leegmaken na opslaan
+    notesInput.value = ''; 
 }
 
 
 
-// ✅ **Toon opgeslagen notities**
 function displayNotes() {
     let savedNotesRaw = localStorage.getItem(`notes-${karakterID}`);
 
@@ -79,7 +78,7 @@ function displayNotes() {
     try {
         savedNotes = JSON.parse(savedNotesRaw);
 
-        // 🔍 Controleer of het een array is
+        
         if (!Array.isArray(savedNotes)) {
             console.warn("⚠️ Geen array gevonden, reset naar lege array.");
             savedNotes = [];
@@ -91,7 +90,7 @@ function displayNotes() {
 
     console.log("✅ Notities geladen:", savedNotes);
 
-    // Oude notities verwijderen
+    
     notesList.innerHTML = '';
 
     savedNotes.forEach((note, index) => {
@@ -105,7 +104,7 @@ function displayNotes() {
         notesList.prepend(noteElement);
     });
 
-    // EventListeners opnieuw toevoegen
+    
     document.querySelectorAll('.delete-note').forEach(button => {
         button.addEventListener('click', deleteNote);
     });

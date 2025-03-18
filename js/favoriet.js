@@ -64,3 +64,7 @@ function showPopup(message) {
 // ✅ **Laad favorieten**
 displayFavorites();
 ;
+
+function toggleMenu() {
+    document.querySelector(".nav-menu").classList.toggle("show");
+}

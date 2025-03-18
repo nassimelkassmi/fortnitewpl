@@ -244,3 +244,149 @@ h2 {
     transform: scale(1.1);
     box-shadow: 0px 6px 12px rgba(255, 255, 255, 0.5);
 }
+
+/* 📱 Media Query voor schermen tot 720px */
+@media (max-width: 720px) {
+    .navbar {
+        padding: 15px 20px;
+    }
+    
+    .back-btn {
+        font-size: 2.5rem;
+    }
+    
+    .user-profile {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .items-section {
+        width: 95%;
+        padding: 30px;
+    }
+
+    h1 {
+        font-size: 3rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+
+    /* 🔥 Categorieën horizontaal scrollbaar maken */
+    .items-grid {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 15px;
+        padding: 10px;
+        white-space: nowrap;
+    }
+
+    .item-category {
+        flex: 0 0 80%;
+        scroll-snap-align: center;
+        text-align: center;
+        background: rgba(0, 10, 50, 0.9);
+        padding: 20px;
+        border-radius: 15px;
+        min-width: 80%;
+    }
+
+    .grid-column {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .item-card {
+        max-width: 160px;
+        height: 220px;
+    }
+
+    .item-card h3 {
+        font-size: 1.2rem;
+    }
+
+    .select-item {
+        font-size: 1rem;
+        top: 55%;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar {
+        flex-direction: column;
+        text-align: center;
+        padding: 10px;
+    }
+
+    .back-btn {
+        font-size: 2rem;
+    }
+
+    .user-info {
+        gap: 10px;
+    }
+
+    .user-profile {
+        width: 40px;
+        height: 40px;
+    }
+
+    .items-section {
+        width: 100%;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    .items-grid {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 10px;
+        padding: 10px;
+        white-space: nowrap;
+    }
+
+    .item-category {
+        flex: 0 0 85%;
+        scroll-snap-align: start;
+        text-align: center;
+        background: rgba(0, 10, 50, 0.9);
+        padding: 15px;
+        border-radius: 12px;
+        min-width: 85%;
+    }
+
+    .grid-column {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .item-card {
+        max-width: 140px;
+        height: auto;
+    }
+
+    .item-card h3 {
+        font-size: 1.3rem;
+    }
+
+    .select-item {
+        font-size: 1rem;
+        right: 5px;
+    }
+}

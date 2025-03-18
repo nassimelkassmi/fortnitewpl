@@ -116,6 +116,52 @@ button {
     border: 5px solid #EDE56A;
 }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+footer > p{
+    font-family: Arial, sans-serif;
+}
+
+@media (max-width: 768px) {
+    input {
+        width: 80%;
+        font-size: 1.2rem;
+    }
+
+    .login_button {
+        width: 70%;
+        font-size: 1.5rem;
+        height: 45px;
+    }
+
+    .logo {
+        width: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    input {
+        width: 90%;
+        font-size: 1rem;
+    }
+
+    .login_button {
+        width: 80%;
+        font-size: 1.3rem;
+        height: 40px;
+    }
+
+    .logo {
+        width: 100px;
+    }
+
+    a, a:visited {
+        font-size: 1rem;
+    }
+}
+=======
+=======
+>>>>>>> Nassim1
 
 
 
@@ -129,3 +175,50 @@ footer {
     font-size: 12px;
     opacity: 0.4;
 }
+<<<<<<< HEAD
+>>>>>>> 3fc23205f6bcdc421958cf419af274651b6b1a3e
+=======
+=======
+footer > p{
+    font-family: Arial, sans-serif;
+}
+
+@media (max-width: 768px) {
+    input {
+        width: 80%;
+        font-size: 1.2rem;
+    }
+
+    .login_button {
+        width: 70%;
+        font-size: 1.5rem;
+        height: 45px;
+    }
+
+    .logo {
+        width: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    input {
+        width: 90%;
+        font-size: 1rem;
+    }
+
+    .login_button {
+        width: 80%;
+        font-size: 1.3rem;
+        height: 40px;
+    }
+
+    .logo {
+        width: 100px;
+    }
+
+    a, a:visited {
+        font-size: 1rem;
+    }
+}
+>>>>>>> Media queries toegevoegt aan elke page °_°.
+>>>>>>> Nassim1
