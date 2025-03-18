@@ -67,7 +67,7 @@ button {
     color: white;
     font-size: 14px;
     margin-bottom: 25px;
-    margin-top: 5px;
+    margin-top: 10px;
     padding: 0;
     background-color: #00000000;
     font-family:  "Roboto Mono", serif;
@@ -83,11 +83,12 @@ button {
     background-color: #B3C9FA;
     border: 5px solid #CEDBF9;
     color: #292A49;
-    margin: 0 60px;
+    margin: 0 80px;
     padding: 6px 5px 5px 5px;
     font-size: 30px;
     font-family: Fortnite;
     transition: 0.08s ease-in-out;
+    margin-top: 15px;
 }
 
 .login_button:hover {

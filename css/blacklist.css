@@ -1,4 +1,8 @@
-/* Algemene styling */
+@font-face {
+    font-family: Fortnite;
+    src: url(../fonts/Fortnite.ttf);
+}
+
 /* Algemene reset */
 * {
     box-sizing: border-box;
@@ -7,250 +11,219 @@
 }
 
 body {
-    font-family: 'Bangers', cursive;
     background-image: url('/assets/background/background.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
     color: #fff;
     padding: 120px 20px 20px;
-    overflow-x: hidden; /* Geen horizontale scrollbar */
+    overflow-x: hidden;
+    font-family: Fortnite;
 }
 
 /* Navigatiebalk */
 .navbar {
-    font-family: 'Bangers', cursive;
+    font-family: Fortnite;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: rgba(0, 122, 193, 0.95);
-    padding: 20px 40px;
+    display: flex;               
+    align-items: center;         
+    background-color: #4382CE;
+    padding: 15px 100px !important;
     z-index: 1000;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.left, .center, .right {
+    flex: 1; 
 }
 
 .logo {
-    background-image: url('/assets/logoFn.jpeg');
-    background-size: contain;
-    background-repeat: no-repeat;
-    width: 150px;
-    height: 50px;
-    display: block;
+    width: 90px !important;
+    height: auto !important;
 }
 
-nav {
-    font-family: 'Bangers', cursive;
-    display: flex;
+.center {
+    text-align: center;
+}
+
+.center nav {
+    display: inline-flex;
     gap: 15px;
+    white-space: nowrap;
+}
+
+.right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 }
 
 .nav-btn {
-    background-color: #1bace4;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 15px;
+    display: inline-block;           
+    background-color: #7d97d0ce;
+    padding: 11px 35px 10px 35px !important;
     color: #fff;
-    font-weight: bold;
     cursor: pointer;
-    font-size: 2rem;
-    font-family: 'Bangers', cursive;
-    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+    font-size: 1.2rem !important;
+    font-family: Fortnite;
+    text-transform: uppercase;
+    transition: all ease 0.3s;
+    text-decoration: none;           
+    border: none;                   
+    outline: none;                  
 }
 
 .nav-btn:hover {
-    background-color: #f4d03f;
-    color: #000;
-    transform: scale(1.1);
+    background-color: #FFF457;
+    color: #292A49;
 }
 
 .nav-btn.active {
-    background-color: #f4d03f;
-    color: #000;
+    background-color: #FFF457;
+    color: #292A49;
 }
 
-/* Hoofdcontainer */
-.characters-section {
-    background: rgba(0, 10, 50, 0.9);
-    padding: 40px;
-    border-radius: 20px;
-    margin: auto;
-    width: 85%;
-    box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.3);
-}
-
-/* Titel met Fortnite-stijl */
-h1 {
-    font-family: 'Bangers', cursive;
-    font-size: 4rem; /* Groter gemaakt */
-    text-align: left;
-    color: #f4d03f;
-    text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.8);
-    margin-bottom: 10px;
-}
-
-/* Zoekbalk en filter rechts uitgelijnd */
-.title-container {
+.user-info {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
-}
-
-.search-container {
-    display: flex;
     gap: 10px;
-    align-items: center;
 }
 
-#search {
-    padding: 12px;
-    width: 280px;
-    border-radius: 12px;
-    border: none;
-    font-family: 'Bangers', cursive;
-    font-size: 1rem;
-    text-transform: uppercase;
-    text-align: center;
-    background-color: #222;
-    color: white;
-    outline: none;
-}
-
-#search::placeholder {
-    color: #f4d03f;
-    opacity: 0.8;
-}
-
-#filter-rarity {
-    padding: 10px;
-    border-radius: 12px;
-    border: none;
-    font-family: 'Bangers', cursive;
-    font-size: 1rem;
-    background-color: #222;
-    color: white;
-    outline: none;
-}
-
-/* Personage-grid met coole scrollbar */
-.characters-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    justify-content: center;
-    padding: 15px;
-    max-height: 700px;
-    overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: #f4d03f rgba(255, 255, 255, 0.1);
-}
-
-.hidden {
-    display: none !important;
-}
-
-
-
-
-
-
-/* Kleurcodes voor zeldzaamheid (aangepast voor Fortnite-stijl) */
-/* ✅ Fortnite officiële kleurcodes voor zeldzaamheid ✅ */
-.rarity-common { background-color: #B9B9B9 !important; } /* Lichtgrijs */
-.rarity-uncommon { background-color: #4AAE4F !important; } /* Fel groen */
-.rarity-rare { background-color: #3399FF !important; } /* Fel blauw */
-.rarity-epic { background-color: #A24EC2 !important; } /* Paars */
-.rarity-legendary { background-color: #D98A29 !important; } /* Goud / Oranje */
-.rarity-other { background-color: #6D6D6D !important; } /* Neutrale Grijs */
-
-/* 🎨 Stijl van de zeldzaamheids-label */
-.rarity-label {
-    font-size: 1rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    color: white;
-    position: relative;
-    top: -15px;
-    padding: 6px 12px;
-    border-radius: 10px;
-    display: inline-block;
-    letter-spacing: 1px;
-    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
-}
-
-.character-card h3 {
-    font-size: 1.2rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    color: white;
-    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
-    letter-spacing: 1px;
-    font-family: 'Bangers', cursive;
-    margin-top: 8px; /* Extra ruimte tussen de naam en de afbeelding */
+.user-info img.user-profile {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
 }
 
 .info-btn {
-    font-size: 3rem;
-    cursor: pointer;
-    background: none;
+    background: transparent;
     border: none;
-    color: white;
-    transition: color 0.2s ease-in-out;
+    font-size: 1.8rem !important;
+    cursor: pointer;
+    color: inherit;
+    text-transform: uppercase;
+    font-weight: 200;
 }
 
-.info-btn:hover {
-    color: #f4d03f;
-}
-/* Pop-up meldingen */
-.popup-message {
-    position: fixed;
-    top: 20%;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0, 122, 193, 0.95);
-    padding: 15px;
-    border-radius: 10px;
-    color: white;
-    font-size: 1.5rem;
-    text-align: center;
-    display: none;
-    box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.3);
-}
-.show {
-    display: block !important;
+/* Gebruikersnaam */
+.username {
+    font-size: 1.8rem;
+    font-family: Fortnite;
+    text-transform: uppercase;
 }
 
-.user-profile {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    border: 2px solid white;
-    margin-left: 10px;
+/* ====== Bovenste section ====== */
+.top-section {
+    background: #4360aa8a; 
+    padding: 32px 60px;
+    margin: auto;
+    width: 75%;
+}
+  
+.top-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; 
 }
 
-.set-profile img {
-    width: 40px;
-    height: 40px;
+.top-container h1 {
+    font-family: Fortnite;
+    font-size: 4rem;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-weight: 100;
+    letter-spacing: -1px;
 }
 
-.set-profile img:hover {
-    transform: scale(1.1);
+/* Zoekveld + knoppen */
+.search-container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap; 
 }
-.user-info {
-font-size: 25px;
-
+  
+#search {
+    padding: 10px;
+    width: 200px;
+    border: none;
+    font-family: Fortnite;
+    font-size: 1rem;
+    text-transform: uppercase;
+    text-align: left;
+    background-color: #eef2f7;
+    color: #353439;
+    outline: none;
+    font-weight: 200;
+}
+  
+#search::placeholder {
+    text-align: left;
+    color: #9f9ea3;
+    opacity: 0.8;
+}
+  
+/* Filter dropdown */
+#filter-rarity {
+    padding: 10px;
+    border: none;
+    font-family: Fortnite;
+    font-size: 1rem;
+    background-color: #7d97d0ce;
+    color: #ffffff;
+    outline: none;
+    text-transform: uppercase;
+    font-weight: 200;
+}
+  
+/* Play-knop */
+.play-btn {
+    padding: 10px 35px;
+    border: none;
+    font-family: Fortnite;
+    font-size: 1rem;
+    text-transform: uppercase;
+    background-color: #FFF457;
+    color: #292A49;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    margin-right: 20px;
+    font-weight: 200;
+    border-radius: 0;
+}
+  
+.play-btn:hover {
+    background-color: #ffe16b;
+}
+  
+/* ====== Onderste section (grid) ====== */
+.characters-section {
+    background: #0b13388f;
+    padding: 40px 50px;
+    margin: auto;
+    width: 75%;
 }
 
+/* Grid aangepast voor blacklist cards (grotere card breedte) */
+.characters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+    gap: 20px;
+    justify-content: center;
+    padding: 15px 40px;
+    max-height: 700px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #FFF457 rgba(255, 255, 255, 0.1);
+}
 
-
-/* 🎨 Strakke nieuwe Card Layout */
+/* ====== Blacklist Card Layout ====== */
 .character-card {
     background: rgba(255, 255, 255, 0.1);
-    border-radius: 15px;
+    border-radius: 0;
     width: 600px;
     display: flex;
     align-items: center;
@@ -260,12 +233,12 @@ font-size: 25px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s;
 }
-
+  
 .character-card:hover {
     transform: scale(1.02);
 }
 
-/* 📷 Karakterafbeelding */
+/* Karakterafbeelding */
 .character-card img {
     width: 120px;
     height: 120px;
@@ -273,7 +246,7 @@ font-size: 25px;
     border: 3px solid white;
 }
 
-/* 📌 Tekst layout */
+/* Tekst layout in de card */
 .character-info {
     flex: 1;
     display: flex;
@@ -281,23 +254,23 @@ font-size: 25px;
     justify-content: center;
 }
 
-/* 🎨 Naam en reden */
 .character-info h3 {
     font-size: 2rem;
     margin-bottom: 5px;
+    font-weight: 200;
 }
-
 .blacklist-reason {
     font-size: 1.5rem;
-    font-weight: bold;
+    font-weight: 200;
 }
 
-/* ✏️ Edit-reason container */
+.blacklist-reason p {}
+
+/* Edit-reason container */
 .edit-reason-container {
     margin-top: 10px;
     display: none;
 }
-
 .edit-reason {
     width: 100%;
     padding: 8px;
@@ -306,11 +279,26 @@ font-size: 25px;
     border: none;
 }
 
-/* 🟢 Knoppen */
+/* Knoppen in de card */
+.card-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.edit-reason-btn {
+    background-color: #ff8c00;
+}
+.save-reason {
+    background-color: #00c800;
+}
+.remove-blacklist {
+    background: #ff0000;
+}
+
 button {
     padding: 10px 15px;
     font-size: 1.2rem;
-    border-radius: 5px;
     border: none;
     color: white;
     cursor: pointer;
@@ -318,32 +306,13 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 5px;
+    margin-bottom: 10px;
 }
-
-/* ✏️ Bewerkknop */
-.edit-reason-btn {
-    background-color: #ff8c00;
-}
-
-/* ✅ Opslaan-knop */
-.save-reason {
-    background-color: #00c800;
-}
-
-/* ❌ Verwijderknop */
-.remove-blacklist {
-    background: #ff0000;
-}
-
 button:hover {
     opacity: 0.8;
 }
-nav a {
-    text-decoration: none; /* Verwijdert onderstreping van links */
-}
 
-/* 🔔 Pop-up bericht */
+/* Popup melding */
 .popup-message {
     position: fixed;
     top: 20%;
@@ -356,34 +325,71 @@ nav a {
     font-size: 1.5rem;
     text-align: center;
     display: none;
-    box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.3);
+    text-transform: uppercase;
+    font-weight: 200;
 }
-
 .show {
     display: block !important;
 }
-.user-info {
-    font-size: 25px;
-    
+
+footer { 
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-family: "Roboto", serif;
+    font-size: 12px;
+    opacity: 0.4;
+    margin: 2rem 0;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+    body {
+        padding: 100px 10px 10px;
     }
-    .user-info {
-        display: flex;
-        align-items: center; /* Zorgt ervoor dat alles op één lijn staat */
-        gap: 10px; /* Ruimte tussen gebruikersnaam en de info-knop */
-        font-size: 25px;
+    .navbar {
+        padding: 15px 20px;
     }
-    
-    /* Stijl de info-knop */
-    .info-btn {
+    .logo {
+        width: 120px;
+        height: 40px;
+    }
+    h1 {
+        font-size: 3rem;
+        text-align: center;
+    }
+    .characters-grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .character-card {
+        width: 100%;
+    }
+    .nav-btn {
         font-size: 1.5rem;
-        background: none;
-        border: none;
-        color: white;
-        cursor: pointer;
-        transition: color 0.3s ease-in-out;
+        padding: 8px 16px;
     }
-    
-    .info-btn:hover {
-        color: #f4d03f;
+    #search, #filter-rarity {
+        width: 100%;
+        font-size: 0.9rem;
     }
-    
+}
+
+@media (min-width: 1200px) {
+    .navbar {
+        padding: 25px 50px;
+    }
+    .logo {
+        width: 180px;
+        height: 60px;
+    }
+    h1 {
+        font-size: 4.5rem;
+    }
+    .characters-grid {
+        grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+    }
+    .nav-btn {
+        font-size: 2rem;
+        padding: 14px 28px;
+    }
+}

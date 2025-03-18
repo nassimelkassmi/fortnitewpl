@@ -79,7 +79,8 @@ button {
 .under-buttons {
     display: flex;
     flex-direction: column;
-    margin-bottom: 25px;
+    justify-content: flex-end;
+    margin-bottom: 20px;
     margin-top: 5px;
 }
 
@@ -107,12 +108,15 @@ button {
     font-size: 30px;
     font-family: Fortnite;
     transition: 0.08s ease-in-out;
+    margin-bottom: 0px;
 }
 
 .login_button:hover {
     background-color: #FFF457;
     border: 5px solid #EDE56A;
 }
+
+
 
 
 footer {
