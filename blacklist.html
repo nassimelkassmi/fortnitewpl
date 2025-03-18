@@ -12,19 +12,25 @@
     rel="stylesheet">
 </head>
 <body>
-    <header class="navbar">
-        <div class="logo"></div>
-        <nav>
-            <a href="personages.html"><button class="nav-btn">Personages</button></a>
-            <a href="favoriet.html"><button class="nav-btn">Favorieten</button></a>
-            <button class="nav-btn active">Zwarte Lijst</button>
-        </nav>
-        <div class="user-info">
-            <img id="user-profile-img" src="./assets/question-mark.svg" alt="User" class="user-profile">
-            <span class="username" id="username_display">Gebruikersnaam</span>
-            <button class="info-btn">ℹ️</button>
-        </div>
-    </header>
+  <div class="navbar">
+    <div class="left">
+      <img src="./assets/logoFN.png" class="logo" alt="Logo" />
+    </div>
+    <div class="center">
+      <nav>
+        <a href="personages.html" class="nav-btn">Personages</a>
+        <a href="favoriet.html" class="nav-btn">Favorieten</a>
+        <a href="#" class="nav-btn active">Zwarte Lijst</a>
+      </nav>
+    </div>
+    <div class="right">
+      <div class="user-info">
+        <img id="user-profile-img" src="./assets/question-mark.svg" alt="User" class="user-profile" />
+        <span class="username" id="username_display">Gebruikersnaam</span>
+        <button class="info-btn">ℹ️</button>
+      </div>
+    </div>
+  </div>
 
   <main>
     <!-- Bovenste section: titel, zoekveld, play-knop en filter dropdown -->
@@ -60,12 +66,23 @@
               <input type="text" class="edit-reason" placeholder="Bewerk reden">
               <button class="save-reason">Opslaan</button>
             </div>
-            <div class="characters-grid" id="blacklist-grid">
-                <!-- Hier worden de personages op de zwarte lijst geladen -->
+            <div class="card-buttons">
+              <button class="edit-reason-btn">Bewerk reden</button>
+              <button class="remove-blacklist">Verwijder</button>
             </div>
-        </section>
-        <div id="popup-message" class="popup-message"></div>
-    </main>
+          </div>
+        </div>
+        <!-- Meer blacklist cards worden dynamisch geladen -->
+      </div>
+    </section>
+
+    <!-- Popup voor meldingen -->
+    <div id="popup-message" class="popup-message"></div>
+  </main>
+
+  <footer>
+    &copy; Code Ninjas | AP Hogeschool
+  </footer>
 
   <script src="./js/blacklist.js"></script>
 </body>

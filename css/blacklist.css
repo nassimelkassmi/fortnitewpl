@@ -192,6 +192,7 @@ body {
     transition: background-color 0.2s ease-in-out;
     margin-right: 20px;
     font-weight: 200;
+    border-radius: 0;
 }
   
 .play-btn:hover {
@@ -363,14 +364,30 @@ footer {
     }
     .nav-btn {
         font-size: 1.5rem;
-        background: none;
-        border: none;
-        color: white;
-        cursor: pointer;
-        transition: color 0.3s ease-in-out;
+        padding: 8px 16px;
     }
-    
-    .info-btn:hover {
-        color: #f4d03f;
+    #search, #filter-rarity {
+        width: 100%;
+        font-size: 0.9rem;
     }
-    
+}
+
+@media (min-width: 1200px) {
+    .navbar {
+        padding: 25px 50px;
+    }
+    .logo {
+        width: 180px;
+        height: 60px;
+    }
+    h1 {
+        font-size: 4.5rem;
+    }
+    .characters-grid {
+        grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+    }
+    .nav-btn {
+        font-size: 2rem;
+        padding: 14px 28px;
+    }
+}

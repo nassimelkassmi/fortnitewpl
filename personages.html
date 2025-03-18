@@ -14,19 +14,28 @@
 </head>
 
 <body>
-    <header class="navbar">
-        <div class="logo"></div>
-        <nav>
-            <button class="nav-btn active">Personages</button>
-            <a href="favoriet.html"><button class="nav-btn">Favorieten</button></a>
-            <a href="blacklist.html"> <button class="nav-btn">Zwarte Lijst</button></a>
-        </nav>
-        <div class="user-info">
-            <img id="user-profile-img" src="./assets/question-mark.svg" alt="User" class="user-profile">
-            <span class="username" id="username_display">Gebruikersnaam</span>
-            <button class="info-btn">ℹ️</button>
+
+    <div class="navbar">
+        <div class="left">
+            <img src="./assets/logoFN.png" class="logo" alt="Logo" />
         </div>
-    </header>
+
+        <div class="center">
+            <nav>
+                <a href="#" class="nav-btn active">Personages</a>
+                <a href="favoriet.html" class="nav-btn">Favorieten</a>
+                <a href="blacklist.html" class="nav-btn">Zwarte Lijst</a>
+            </nav>
+        </div>
+
+        <div class="right">
+            <div class="user-info">
+                <img id="user-profile-img" src="./assets/question-mark.svg" alt="User" class="user-profile" />
+                <span class="username" id="username_display">Gebruikersnaam</span>
+                <button class="info-btn">ℹ️</button>
+            </div>
+        </div>
+    </div>
 
     <main>
         <!-- Bovenste section: titel, zoekveld, knoppen, filter -->
@@ -52,7 +61,20 @@
         <!-- Onderste section: grid met personages -->
         <section class="characters-section">
             <div class="characters-grid" id="characters-grid">
-                <!-- Personages worden hier geladen -->
+                <!-- Voorbeeld van een character card 
+           met achtergrondafbeelding inline -->
+                <div class="character-card rarity-common"
+                    style="background-image: url('images/character-example.jpg');">
+
+                    <!-- Zeldzaamheid-label -->
+                    <span class="rarity-label">Common</span>
+
+                    <!-- Naam van het personage -->
+
+                </div>
+
+                <!-- Voeg meer kaarten toe op dezelfde manier 
+           of genereer ze dynamisch met JavaScript -->
             </div>
         </section>
 
