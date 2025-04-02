@@ -1,397 +1,493 @@
+@font-face {
+    font-family: Fortnite;
+    src: url(../fonts/Fortnite.ttf);
+}
+
 /* Algemene reset */
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Bangers', cursive;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Fortnite;
+  font-weight: 200;
 }
 
-/* Achtergrond */
 body {
-    background-image: url('/assets/background/background.png');
-    background-size: cover;
-    background-position: center;
-    color: #fff;
-    padding: 80px 20px 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+  background-image: url('/assets/background/background.png');
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+  padding: 80px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
+}
 /* Navigatiebalk */
 .navbar {
+    font-family: Fortnite;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: rgba(0, 122, 193, 0.95);
-    padding: 15px 25px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    display: flex;               
+    align-items: center;         
+    background-color: #4382CE;
+    padding: 15px 100px !important;
     z-index: 1000;
 }
 
-.back-btn {
+.left, .center, .right {
+    flex: 1; 
+}
+
+.logo {
+    width: 90px !important;
+    height: auto !important;
+}
+
+.center {
+    text-align: center;
+}
+
+.center nav {
+    display: inline-flex;
+    gap: 15px;
+    white-space: nowrap;
     font-size: 3rem;
+}
+
+.right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.back-btn {
+    font-family: Fortnite;
+    font-weight: bold;
     color: white;
     text-decoration: none;
-    transition: color 0.2s ease-in-out;
+    font-size: 3rem;
 }
 
-.back-btn:hover {
-    color: #f4d03f;
+.nav-btn {
+    display: inline-block;           
+    background-color: #7d97d0ce;
+    padding: 11px 35px 10px 35px !important;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1.2rem !important;
+    font-family: Fortnite;
+    text-transform: uppercase;
+    transition: all ease 0.3s;
+    text-decoration: none;           
+    border: none;                   
+    outline: none;                  
 }
 
-/* Gebruikersinfo */
+.nav-btn:hover {
+    background-color: #FFF457;
+    color: #292A49;
+}
+
+.nav-btn.active {
+    background-color: #FFF457;
+    color: #292A49;
+}
+
 .user-info {
     display: flex;
     align-items: center;
-    font-size: 1.5rem;
+    gap: 10px;
 }
 
-.user-profile {
-    width: 50px;
-    height: 50px;
+.user-info img.user-profile {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
     border-radius: 50%;
-    border: 2px solid white;
-    margin-right: 10px;
 }
 
-/* Karaktercontainer */
+.info-btn {
+    background: transparent;
+    border: none;
+    font-size: 1.8rem !important;
+    cursor: pointer;
+    color: inherit;
+    text-transform: uppercase;
+    font-weight: 200;
+}
+
+.username {
+    font-size: 1.8rem;
+    font-family: Fortnite;
+    text-transform: uppercase;
+}
+
+
+/* Karaktercontainer – stijl aangepast zoals het voorbeeld */
 .karakter-container {
-    background: rgba(0, 10, 50, 0.9);
-    padding: 40px;
-    border-radius: 15px;
-    margin-top: 100px;
-    width: 60%;
-    text-align: center;
-    box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.2);
-    position: relative;
+  background: #0b13388f;
+  padding: 40px 50px;
+  margin: 120px auto 20px;
+  width: 75%;
+  border-radius: 15px;
+  box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.2);
+  text-align: center;
+  position: relative;
 }
 
 /* Favoriet ster */
 .favorite-star {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 3rem;
-    color: gold;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 3rem;
+  color: gold;
 }
 
 /* Karakter afbeelding */
 .karakter-info img {
-    width: 200px;
-    height: auto;
-    border-radius: 12px;
-    border: 4px solid white;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  width: 250px;
+  height: auto;
+  border-radius: 12px;
+  border: 4px solid white;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  margin: 20px 0;
 }
 
 /* Karakternaam */
 .karakter-info h1 {
-    font-size: 3rem;
-    color: #f4d03f;
-    margin-top: 10px;
+  font-size: 4rem;
+  color: #f4d03f;
+  margin-top: 10px;
+  text-transform: uppercase;
 }
 
-/* Statistieken (Wins & Losses) */
+/* Karakter beschrijving */
+.karakter-info p {
+  font-size: 1.5rem;
+  margin: 20px 0;
+}
+
+/* Statistieken */
 .stats {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 20px;
 }
 
 .stats p {
-    font-size: 2rem;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 10px 20px;
-    border-radius: 8px;
-    border: 2px solid white;
-    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+  font-size: 2rem;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: 2px solid white;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
 }
 
 .stats button {
-    font-size: 2rem;
-    padding: 10px;
-    background-color: #1bace4;
-    border: none;
-    border-radius: 8px;
-    color: white;
-    cursor: pointer;
-    transition: 0.2s ease-in-out;
+  font-size: 2rem;
+  padding: 10px 20px;
+  background-color: #1bace4;
+  border: none;
+  border-radius: 2px;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
 }
 
 .stats button:hover {
-    background-color: #f4d03f;
-    color: black;
-}
-
-/* Notities */
-.notes {
-    margin-top: 20px;
-}
-
-.notes h2 {
-    font-size: 2rem;
-    color: #f4d03f;
-}
-
-#notes {
-    width: 100%;
-    height: 100px;
-    border-radius: 8px;
-    border: 2px solid white;
-    padding: 10px;
-    font-size: 1.5rem;
-    background: rgba(0, 0, 0, 0.8);
-    color: white;
-    outline: none;
-    text-align: center;
-}
-
-#save-notes {
-    font-size: 1.5rem;
-    margin-top: 10px;
-    padding: 10px 20px;
-    background-color: #1bace4;
-    border: none;
-    border-radius: 8px;
-    color: white;
-    cursor: pointer;
-    transition: 0.2s ease-in-out;
-}
-
-#save-notes:hover {
-    background-color: #f4d03f;
-    color: black;
+  background-color: #f4d03f;
+  color: black;
 }
 
 /* Item Shop */
 .item-shop {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 .item-shop h2 {
-    font-size: 2rem;
-    color: #f4d03f;
+  font-size: 2.5rem;
+  color: #f4d03f;
+  margin-bottom: 10px;
 }
 
-.item-shop input {
-    width: 80%;
-    padding: 10px;
-    font-size: 1.5rem;
-    border-radius: 8px;
-    border: 2px solid white;
-    background: rgba(0, 0, 0, 0.8);
-    color: white;
-    outline: none;
-    text-align: center;
-    margin-top: 5px;
-}
-
-#save-items {
-    font-size: 1.5rem;
-    margin-top: 10px;
-    padding: 10px 20px;
-    background-color: #1bace4;
-    border: none;
-    border-radius: 8px;
-    color: white;
-    cursor: pointer;
-    transition: 0.2s ease-in-out;
-}
-
-#save-items:hover {
-    background-color: #f4d03f;
-    color: black;
-}
-
-/* Verwijderen uit favorieten */
-.remove-favorite {
-    font-size: 1.5rem;
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #ff4c4c;
-    border: none;
-    border-radius: 8px;
-    color: white;
-    cursor: pointer;
-    transition: 0.2s ease-in-out;
-}
-
-.remove-favorite:hover {
-    background-color: #b30000;
-}
-/* ✅ Popup-styling */
-.popup-message {
-    position: fixed;
-    top: 20%;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0, 122, 193, 0.95);
-    padding: 15px 25px;
-    border-radius: 10px;
-    color: white;
-    font-size: 1.5rem;
-    text-align: center;
-    display: none;
-    box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.3);
-    z-index: 1000;
-}
-.info-btn {
-    font-size: 3rem;
-    cursor: pointer;
-    background: none;
-    border: none;
-    color: white;
-    transition: color 0.2s ease-in-out;
-}
-
-.info-btn:hover {
-    color: #f4d03f;
-}
-
-.popup-message.show {
-    display: block !important;
-}
-
-/* ✅ Zorg dat de items naast elkaar staan */
 .selected-items {
-    display: flex; /* Gebruik Flexbox */
-    justify-content: center; /* Centreer items */
-    align-items: center; /* Zorg dat ze mooi uitgelijnd zijn */
-    gap: 20px; /* Ruimte tussen de items */
-    margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 15px;
 }
 
-/* ✅ Zorg dat de item slots netjes blijven */
 .item-slot {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
-/* ✅ Stijl de afbeeldingen zodat ze even groot blijven */
 .item-slot img {
-    width: 150px; /* Pas dit aan als het te klein/groot is */
-    height: auto;
-    border-radius: 8px;
-    border: 2px solid white;
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.5);
+  width: 150px;
+  height: auto;
+  border-radius: 8px;
+  border: 2px solid white;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.5);
 }
 
-/* ✅ Stijl de knoppen */
 .item-slot button {
-    margin-top: 8px;
-    padding: 10px;
-    font-size: 1rem;
-    background-color: #1bace4;
-    border: none;
-    border-radius: 8px;
-    color: white;
-    cursor: pointer;
-    transition: 0.2s ease-in-out;
+  margin-top: 8px;
+  padding: 10px;
+  font-size: 1rem;
+  background-color: #1bace4;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
 }
 
 .item-slot button:hover {
-    background-color: #f4d03f;
-    color: black;
+  background-color: #f4d03f;
+  color: black;
 }
-/* ✅ Notities styling */
+
+/* Notities */
 .notes {
-    margin-top: 20px;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 20px;
-    border-radius: 12px;
-    border: 2px solid white;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  margin-top: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 12px;
+  border: 2px solid white;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .notes h2 {
-    font-size: 2rem;
-    color: #f4d03f;
+  font-size: 2rem;
+  color: #f4d03f;
+  margin-bottom: 10px;
 }
 
-/* ✅ Mooie styling voor de notities-lijst */
 #notes-list {
-    margin-top: 15px;
-    max-height: 200px;
-    overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: #f4d03f rgba(255, 255, 255, 0.1);
+  margin-top: 15px;
+  max-height: 200px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #f4d03f rgba(255, 255, 255, 0.1);
 }
 
-/* ✅ Individuele notitie stijl */
 .saved-note {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: rgba(0, 122, 193, 0.8);
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid white;
-    margin-bottom: 8px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(0, 122, 193, 0.8);
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid white;
+  margin-bottom: 8px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
 }
 
-/* ✅ Notitie tekst */
 .saved-note p {
-    font-size: 1.5rem;
-    color: white;
-    margin: 0;
-    flex: 1;
-    text-align: left;
+  font-size: 1.5rem;
+  color: white;
+  margin: 0;
+  flex: 1;
+  text-align: left;
 }
 
-/* ✅ Verwijderknop voor notities */
 .delete-note {
-    font-size: 1.2rem;
-    padding: 6px 10px;
-    background-color: #ff4c4c;
-    border: none;
-    border-radius: 6px;
-    color: white;
-    cursor: pointer;
-    transition: 0.2s ease-in-out;
+  font-size: 1.2rem;
+  padding: 6px 10px;
+  background-color: #ff4c4c;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
 }
 
 .delete-note:hover {
-    background-color: #b30000;
+  background-color: #b30000;
 }
 
-/* ✅ Stijl voor tekstveld */
 #notes {
-    width: 100%;
-    height: 100px;
-    border-radius: 8px;
-    border: 2px solid white;
-    padding: 10px;
-    font-size: 1.5rem;
-    background: rgba(0, 0, 0, 0.8);
-    color: white;
-    outline: none;
-    text-align: center;
+  width: 100%;
+  height: 100px;
+  border-radius: 8px;
+  border: 2px solid white;
+  padding: 10px;
+  font-size: 1.5rem;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  outline: none;
+  text-align: center;
 }
 
-/* ✅ Opslaan-knop styling */
 #save-notes {
-    font-size: 1.5rem;
-    margin-top: 10px;
-    padding: 10px 20px;
-    background-color: #1bace4;
-    border: none;
-    border-radius: 8px;
-    color: white;
-    cursor: pointer;
-    transition: 0.2s ease-in-out;
+  font-size: 1.5rem;
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #1bace4;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
 }
 
 #save-notes:hover {
-    background-color: #f4d03f;
-    color: black;
+  background-color: #f4d03f;
+  color: black;
+}
+
+/* Verwijder uit favorieten */
+.remove-favorite {
+  font-size: 1.5rem;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #ff4c4c;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+
+.remove-favorite:hover {
+  background-color: #b30000;
+}
+
+/* Popup */
+.popup-message {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 122, 193, 0.95);
+  padding: 15px 25px;
+  border-radius: 10px;
+  color: white;
+  font-size: 1.5rem;
+  text-align: center;
+  display: none;
+  box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.3);
+  z-index: 1000;
+}
+
+.popup-message.show {
+  display: block !important;
+}
+
+.info-btn {
+  font-size: 3rem;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: white;
+  transition: color 0.2s ease-in-out;
+}
+
+.info-btn:hover {
+  color: #f4d03f;
+}
+
+/* Responsive styling */
+@media (max-width: 720px) {
+  .navbar {
+    padding: 10px 15px;
+  }
+  .back-btn {
+    font-size: 2.5rem;
+  }
+  .user-profile {
+    width: 45px;
+    height: 45px;
+  }
+  .karakter-container {
+    width: 90%;
+    padding: 30px;
+  }
+  .karakter-info img {
+    width: 180px;
+  }
+  h1 {
+    font-size: 2.5rem;
+  }
+  .stats {
+    flex-direction: column;
+  }
+  .selected-items {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .item-slot img {
+    width: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    flex-direction: column;
+    text-align: center;
+    padding: 10px;
+  }
+  .back-btn {
+    font-size: 2rem;
+  }
+  .user-profile {
+    width: 40px;
+    height: 40px;
+  }
+  .karakter-container {
+    width: 100%;
+    padding: 20px;
+  }
+  .karakter-info img {
+    width: 150px;
+  }
+  h1 {
+    font-size: 2rem;
+  }
+  h2 {
+    font-size: 1.5rem;
+  }
+  .stats {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .stats p {
+    font-size: 1.5rem;
+  }
+  .stats button {
+    font-size: 1.5rem;
+    padding: 8px;
+  }
+  .selected-items {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .item-slot img {
+    width: 100px;
+  }
+  .item-slot button {
+    font-size: 0.9rem;
+    padding: 6px;
+  }
+  #notes {
+    font-size: 1.2rem;
+    height: 80px;
+  }
+  #save-notes {
+    font-size: 1.2rem;
+    padding: 8px 15px;
+  }
+  .remove-favorite {
+    font-size: 1.2rem;
+    padding: 8px 15px;
+  }
 }
