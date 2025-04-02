@@ -183,3 +183,7 @@ async function request(url, data, mode, token) {
 }
 
 
+function toggleMenu() {
+    document.querySelector(".nav-menu").classList.toggle("show");
+}
+
