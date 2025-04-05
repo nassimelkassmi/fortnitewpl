@@ -1,27 +1,22 @@
 
 function start_server_msg() {
-    console.log("server listening to port", port);
+    console.log("server listening to port", port, `and available ate http://localhost:${port}`, );
 }
 
-const port:number = 5500
+const port:number = 5600
 
 
 
-const __dirname = import.meta.dirname
 
+import { RequestHandler } from 'express';
 import ms from "ms";
-import * as http    from 'http';
 import * as fs      from 'fs';
 import express , { Request, Response, NextFunction } from "express";
 import * as path from "path"
 import cors from 'cors'
-import { v4 as uuidv4, v6 as uuidv6 } from 'uuid';
-import crypto from "crypto"
-import { log } from "console";
 import jwt from 'jsonwebtoken';
 import bcrypt from "bcryptjs";
 import cookieParser from "cookie-parser"
-import { decode } from "punycode";
 const rawdata = fs.readFileSync('token_secrets.json', "utf8"); 
 const tokens = JSON.parse(rawdata);
 
@@ -46,7 +41,7 @@ app.use(cookieParser());
 
 
 
-app.get("/",(req, res) => {
+app.get("/",(req:any, res:any) => {
     res.sendFile(path.resolve(__dirname, "./public/landingpage.html"))
 })
 
@@ -60,7 +55,9 @@ function get_secret() {
 }
 
 
-function handleNewUser(req, res) {
+
+
+function handleNewUser(req:Request, res:Response):any {
     const {user, pwd, email} = req.body
     if (!user || !pwd)
         {return res.status(400).json({"message":"username and password are required"})}
@@ -86,26 +83,30 @@ function handleNewUser(req, res) {
 }
 
 
+
 app.post("/register",handleNewUser)
 
-app.post("/login", (req,res) => {
+
+app.post("/login", (req: Request, res: Response) => {
     loginuser(req,res)
     res.end()
 })
 
 app.post("/secret", verifyJWT, secret)
 
+
+
 app.get("/username", verifyJWT, getusername)
 
-app.get("/logout", (res,req) =>{
+app.get("/logout", (req: Request, res: Response) =>{
     console.log("user ;logging out");
     
-    logoutuser(res,req)
-    req.end()
+    logoutuser(req,res)
+    res.end()
 })
 
 
-app.get("/refresh", (req,res) =>{
+app.get("/refresh", (req: Request, res: Response) =>{
     console.log("bob");
     
  createNewAccessToken(req,res)
@@ -132,15 +133,14 @@ function logoutuser(req: Request, res: Response) {
         console.log("did not find user4");
         return res.status(403)
     } 
-    function somew(err, decoded) {
+
+    jwt.verify(refreshtoken, REFRESH_TOKEN_SECRET, (err:any, decoded:any) => {
         if (err || foundUser.username != decoded.username) {
             console.log("user not found");
             return res.status(403)
         }
-
         foundUser.refreshtoken = ""
-    }
-    jwt.verify(refreshtoken, REFRESH_TOKEN_SECRET, somew)
+    })
 }
 
 
@@ -159,13 +159,17 @@ function secret(req: Request, res: Response, next:NextFunction) {
     let match = users.find(person => person.username = user)
     if (!match) {next()}
 
-    res.json(match.secret)
+    if (match != undefined) {
+        res.json(match.secret) //possibly incorrect
+    }
+    
     res.end()
 }
 
 
 
-let users = []
+let users:[User] = [{"username":"", "password":"", "refreshtoken":"", "secret": "","email":""}]
+users.pop()
 
 function loginuser(req: Request, res: Response) {
     const {user, pwd} = req.body
@@ -203,11 +207,12 @@ function loginuser(req: Request, res: Response) {
 
 }
 
-function verifyJWT(req: Request, res: Response,next:NextFunction) {
+function verifyJWT(req: Request, res: Response, next: NextFunction):any {
     
     const authHeader = req.headers["authorization"] 
     if (!authHeader) {
         res.sendStatus(401)
+        return 1
     }
     console.log(" ");
     
@@ -217,7 +222,7 @@ function verifyJWT(req: Request, res: Response,next:NextFunction) {
     //console.log("token is ", token);
     
     jwt.verify(token, ACCESS_TOKEN_SECRET,
-        (err, decoded) => {
+        (err: any, decoded: any) => {
             if (err) { console.log("jwt does not match"); res.sendStatus(403)}
             res.locals.username = decoded 
             next()
@@ -240,7 +245,7 @@ type checkjwt = {"if_match":boolean, "username":string}
 
 function checkjwt(refreshtoken:string, secret_key:string):checkjwt {
     let match:checkjwt = {"if_match":false, "username":""}
-    function set_token_user(err, decoded) { 
+    function set_token_user(err:any, decoded:any) { 
         if (err){ 
               }  
               match.if_match = true 
@@ -258,7 +263,7 @@ function createNewAccessToken(req: Request, res: Response) {
         return res.status(401)
     }
     const refreshtoken:string = cookies.jwt
-    const Usermatch:User = users.find(person => person.refreshtoken === refreshtoken)
+    const Usermatch:User | undefined = users.find(person => person.refreshtoken === refreshtoken)
     const if_token_valid:checkjwt = checkjwt(refreshtoken, REFRESH_TOKEN_SECRET)
     
     console.log("usermatch is ", Usermatch);
@@ -280,7 +285,7 @@ function createNewAccessToken(req: Request, res: Response) {
 
 
 //order mathers
-app.all("*", (req, res) =>{
+app.all("/*splat", (req: Request, res: Response) =>{
     res.status(404).send("not found")
 })
 

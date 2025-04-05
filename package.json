@@ -1,16 +1,14 @@
 {
   "name": "fortnitewpl-1",
   "version": "1.0.0",
-  "main": "index.js",
-  "type": "module",
+  "main": "main.js",
   "scripts": {
-    "start": "tsc && node main.js"
+    "start": "nodemon  ./main.ts"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nassimelkassmi/fortnitewpl.git"
   },
-  "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
@@ -19,18 +17,19 @@
   "homepage": "https://github.com/nassimelkassmi/fortnitewpl#readme",
   "description": "",
   "dependencies": {
-    "@types/jsonwebtoken": "^9.0.9",
     "bcryptjs": "^3.0.2",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
-    "dotenv": "^16.4.7",
-    "express": "^4.21.2",
+    "express": "^5.1.0",
+    "fs": "^0.0.1-security",
     "jsonwebtoken": "^9.0.2",
-    "typescript": "^5.7.3",
-    "uuid": "^11.1.0"
+    "path": "^0.12.7"
   },
   "devDependencies": {
-    "@types/express": "^5.0.0",
-    "@types/node": "^22.13.5"
+    "@types/cookie-parser": "^1.4.8",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.1",
+    "@types/jsonwebtoken": "^9.0.9",
+    "@types/ms": "^2.1.0"
   }
 }
