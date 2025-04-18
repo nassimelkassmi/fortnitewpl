@@ -1,0 +1,35 @@
+{
+  "name": "fortnitewpl-1",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "start": "nodemon  ./main.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nassimelkassmi/fortnitewpl.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nassimelkassmi/fortnitewpl/issues"
+  },
+  "homepage": "https://github.com/nassimelkassmi/fortnitewpl#readme",
+  "description": "",
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "fs": "^0.0.1-security",
+    "jsonwebtoken": "^9.0.2",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "@types/cookie-parser": "^1.4.8",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.1",
+    "@types/jsonwebtoken": "^9.0.9",
+    "@types/ms": "^2.1.0"
+  }
+}

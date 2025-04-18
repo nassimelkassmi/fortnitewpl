@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fortnite Personages</title>
+    <link rel="stylesheet" href="css/personages.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <script src="./js/personages.js" defer></script>
+</head>
+
+<body>
+
+    <div class="navbar">
+        <div class="left">
+            <img src="./assets/logoFN.png" class="logo" alt="Logo" />
+        </div>
+
+        <div class="center">
+            <nav>
+                <a href="#" class="nav-btn active">Personages</a>
+                <a href="favoriet.html" class="nav-btn">Favorieten</a>
+                <a href="blacklist.html" class="nav-btn">Zwarte Lijst</a>
+            </nav>
+        </div>
+
+        <div class="right">
+            <div class="user-info">
+                <img id="user-profile-img" src="./assets/question-mark.svg" alt="User" class="user-profile" />
+                <span class="username" id="username_display">Gebruikersnaam</span>
+                <button class="info-btn">ℹ️</button>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <!-- Bovenste section: titel, zoekveld, knoppen, filter -->
+        <section class="top-section">
+            <div class="top-container">
+                <h1>Personages</h1>
+                <div class="search-container">
+                    <input type="text" id="search" placeholder="Zoek">
+                    <button class="play-btn">Play</button>
+                    <select id="filter-rarity">
+                        <option value="">Alle Zeldzaamheden</option>
+                        <option value="common">Common</option>
+                        <option value="uncommon">Uncommon</option>
+                        <option value="rare">Rare</option>
+                        <option value="epic">Epic</option>
+                        <option value="legendary">Legendary</option>
+                        <option value="other">Overige</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <!-- Onderste section: grid met personages -->
+        <section class="characters-section">
+            <div class="characters-grid" id="characters-grid">
+                <!-- Voorbeeld van een character card 
+           met achtergrondafbeelding inline -->
+                <div class="character-card rarity-common"
+                    style="background-image: url('images/character-example.jpg');">
+
+                    <!-- Zeldzaamheid-label -->
+                    <span class="rarity-label">Common</span>
+
+                    <!-- Naam van het personage -->
+
+                </div>
+
+                <!-- Voeg meer kaarten toe op dezelfde manier 
+           of genereer ze dynamisch met JavaScript -->
+            </div>
+        </section>
+
+        <!-- Popup voor meldingen -->
+        <div id="popup-message" class="popup-message">Popup bericht!</div>
+    </main>
+    <footer>
+        &copy; Code Ninjas | AP Hogeschool
+    </footer>
+
+    
+</body>
+
+</html>

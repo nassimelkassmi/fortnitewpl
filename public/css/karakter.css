@@ -1,0 +1,300 @@
+@font-face {
+    font-family: Fortnite;
+    src: url(../fonts/Fortnite.ttf);
+}
+
+/* Algemene reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Fortnite;
+  font-weight: 200;
+  background-image: url('/assets/background/background.png');
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+  padding: 80px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Navigatiebalk */
+.navbar {
+    font-family: Fortnite;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;               
+    align-items: center;         
+    background-color: #4382CE;
+    padding: 15px 100px !important;
+    z-index: 1000;
+}
+
+.left, .center, .right {
+    flex: 1; 
+}
+
+.logo {
+    width: 90px !important;
+    height: auto !important;
+}
+
+.center {
+    text-align: center;
+}
+
+.center nav {
+    display: inline-flex;
+    gap: 15px;
+    white-space: nowrap;
+    font-size: 3rem;
+}
+
+.right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.back-btn {
+    font-family: Fortnite;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    font-size: 3rem;
+}
+
+.nav-btn {
+    display: inline-block;           
+    background-color: #7d97d0ce;
+    padding: 11px 35px 10px 35px !important;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1.2rem !important;
+    font-family: Fortnite;
+    text-transform: uppercase;
+    transition: all ease 0.3s;
+    text-decoration: none;           
+    border: none;                   
+    outline: none;                  
+}
+
+.nav-btn:hover {
+    background-color: #FFF457;
+    color: #292A49;
+}
+
+.nav-btn.active {
+    background-color: #FFF457;
+    color: #292A49;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-info img.user-profile {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.info-btn {
+    background: transparent;
+    border: none;
+    font-size: 1.8rem !important;
+    cursor: pointer;
+    color: inherit;
+    text-transform: uppercase;
+    font-weight: 200;
+}
+
+/* Gebruikersnaam */
+.username {
+    font-size: 1.8rem;
+    font-family: Fortnite;
+    text-transform: uppercase;
+}
+
+/* Karakter Container (aangepast volgens de voorbeeldstijl) */
+.karakter-container {
+  background: #0b13388f; /* Overlay zoals de personages page */
+  padding: 40px 50px;
+  margin: 120px auto 20px; /* Centraal en met voldoende marge voor de fixed navbar */
+  width: 75%;
+  box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.2);
+  text-align: center;
+  position: relative;
+}
+
+/* Favorieten ster */
+.favorite-star {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 2rem;
+  color: gold;
+  display: none;
+}
+
+/* Karakter Afbeelding Styling */
+#karakter-img {
+    box-shadow: inset 0 0 0 6px rgba(255, 255, 255, 0.448);
+    /* Eventuele extra margin of padding toevoegen als je de rarity kleur wilt zien */
+}
+
+/* Toepassen van rarity achtergrondkleuren op de karakter-afbeelding */
+/* Voeg deze klassen toe aan #karakter-img als je de kleur wilt tonen */
+#karakter-img.rarity-common    { background-color: #B9B9B9; }
+#karakter-img.rarity-uncommon  { background-color: #4AAE4F; }
+#karakter-img.rarity-rare      { background-color: #3399FF; }
+#karakter-img.rarity-epic      { background-color: #A24EC2; }
+#karakter-img.rarity-legendary { background-color: #D98A29; }
+#karakter-img.rarity-other     { background-color: #6D6D6D; }
+
+
+#karakter-naam {
+    font-weight: 200 !important;
+    margin: 0;
+}
+
+#karakter-beschrijving {
+    margin-bottom: 40px;
+    text-transform: uppercase;
+}
+
+/* Karakter Informatie Styling */
+.karakter-info img {
+  max-width: 100%;
+  height: auto;
+  margin: 20px 0;
+}
+
+.karakter-info h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+.karakter-info p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+/* Extra Info (details) */
+.extra-info {
+  margin: 20px 0;
+  font-size: 1.2rem;
+  text-align: left;
+  font-family: Roboto;
+}
+
+.extra-info p {
+  margin: 10px 0;
+}
+
+/* Karakter Acties */
+.karakter-actions {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.blacklist-btn, .favorite-btn, .set-profile {
+  font-size: 2.5rem;
+  cursor: pointer;
+  border: none;
+  background: none;
+  transition: transform 0.2s ease-in-out;
+}
+
+.blacklist-btn:hover, .favorite-btn:hover, .set-profile:hover {
+  transform: scale(1.2);
+}
+
+/* Popup en Blacklist Reden */
+.popup-message {
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 122, 193, 0.95);
+  padding: 15px;
+  border-radius: 10px;
+  color: white;
+  font-size: 1.5rem;
+  text-align: center;
+  display: none;
+  box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.3);
+}
+
+.blacklist-reason {
+  display: none;
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 0, 0, 0.9);
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.3);
+}
+
+.show {
+  display: block !important;
+}
+
+/* Extra styling voor set-profile knop */
+.set-profile img {
+  width: 40px;
+  height: 40px;
+}
+
+.set-profile img:hover {
+  transform: scale(1.1);
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+  body {
+    padding: 100px 10px 10px;
+  }
+  .navbar {
+    padding: 10px 15px;
+  }
+  .back-btn, .info-btn {
+    font-size: 2rem;
+  }
+  .karakter-container {
+    width: 90%;
+    padding: 20px;
+    margin-top: 100px;
+  }
+  .karakter-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .blacklist-btn, .favorite-btn, .set-profile {
+    font-size: 2rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .navbar {
+    padding: 10px 35px;
+  }
+  .karakter-container {
+    width: 40%;
+  }
+}
