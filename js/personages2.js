@@ -1,0 +1,252 @@
+const charactersGrid = document.getElementById('characters-grid');
+const searchInput = document.getElementById('search');
+const filterSelect = document.getElementById('filter-rarity');
+const infoBtn = document.querySelector('.info-btn');
+const popupMessage = document.getElementById('popup-message');
+
+async function fetchOutfits() {
+    try {
+        const response = await fetch('https://fortnite-api.com/v2/cosmetics/br');
+        const data = await response.json();
+        if (!data.data) return;
+
+        
+        let outfits = data.data.filter(item => item.type.value === 'outfit' && item.introduction != undefined );
+        
+
+        outfits = await removeDuplicatesByImageHash(outfits)
+
+
+        // Save original list for filtering
+        window.allOutfits = outfits;
+
+        
+
+        displayCharacters(outfits);
+    } catch (error) {
+        console.error('Fout bij het ophalen van outfits:', error);
+    }
+}
+
+
+async function removeDuplicatesByImageHash(objects) {
+    const seenHashes = new Set(); // To track hashes of images we've seen
+    const uniqueObjects = [];    // To store objects with unique images
+
+    // Helper function to fetch an image and compute its hash
+    async function fetchAndHash(obj) {
+        try {
+            // Ensure the object has a valid 'images.icon' property
+            if (obj.images && obj.images.icon) {
+                const iconUrl = obj.images.icon;
+
+                // Fetch the image as an ArrayBuffer
+                const response = await fetch(iconUrl);
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch image: ${response.statusText}`);
+                }
+                const imageData = await response.arrayBuffer();
+
+                // Generate a SHA-256 hash of the image data
+                const hashBuffer = await crypto.subtle.digest('SHA-256', imageData);
+                const hashArray = Array.from(new Uint8Array(hashBuffer)); // Convert buffer to byte array
+                const hashHex = hashArray.map(byte => byte.toString(16).padStart(2, '0')).join(''); // Convert to hex string
+
+                return { obj, hashHex }; // Return the object and its hash
+            }
+        } catch (error) {
+            console.error(`Error processing object with icon ${obj.images?.icon}:`, error.message);
+        }
+        return null; // Return null for invalid or errored objects
+    }
+
+    // Fetch and hash all images concurrently
+    const results = await Promise.all(objects.map(obj => fetchAndHash(obj)));
+
+    // Process the results to filter out duplicates
+    for (const result of results) {
+        if (result && !seenHashes.has(result.hashHex)) {
+            seenHashes.add(result.hashHex); // Add the hash to the set
+            uniqueObjects.push(result.obj); // Keep the object in the result list
+        }
+    }
+
+    return uniqueObjects;
+}
+
+
+function displayCharacters(outfits) {
+    charactersGrid.innerHTML = '';
+
+    // Get favorites from localStorage
+    let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    console.log(typeof outfits);
+    
+    outfits.forEach(outfit => {
+        if (!outfit.images?.icon) return; // Skip missing images
+
+        let rarityClass = outfit.rarity.value.toLowerCase();
+        const validRarities = ['common', 'uncommon', 'rare', 'epic', 'legendary'];
+        if (!validRarities.includes(rarityClass)) {
+            rarityClass = 'other'; // Default to "other" if not in the known rarities
+        }
+
+        const outfitCard = document.createElement('div');
+        outfitCard.className = `character-card rarity-${rarityClass}`;
+        
+        const isFavorite = favorites.includes(outfit.id);
+        const starVisibility = isFavorite ? 'block' : 'none';
+
+        outfitCard.innerHTML = `
+            <span class="favorite-star" style="display: ${starVisibility};">⭐</span>
+            <p class="rarity-label">${outfit.rarity.displayValue || 'Overige'}</p>
+            <img src="${outfit.images.icon}" alt="${outfit.name}">
+            <h3>${outfit.name}</h3>
+        `;
+
+        outfitCard.addEventListener('click', async () => {
+            
+            localStorage.setItem('selectedCharacter', outfit.id);
+            const karakterID = localStorage.getItem('selectedCharacter');
+            console.log(karakterID);
+            
+            if (isFavorite) {
+                window.location.href = 'favokarak.html'; // Personalized character page
+            } else {
+                window.location.href = 'karakter.html'; // Normal character page
+            }
+        });
+
+        charactersGrid.appendChild(outfitCard);
+    });
+}
+
+// ✅ **Filter Function**
+function filterCharacters() {
+    const searchText = searchInput.value.toLowerCase();
+    const selectedRarity = filterSelect.value;
+
+    const filtered = window.allOutfits.filter(outfit => {
+        const matchesSearch = outfit.name.toLowerCase().includes(searchText);
+
+        let rarityClass = outfit.rarity.value.toLowerCase();
+        const validRarities = ['common', 'uncommon', 'rare', 'epic', 'legendary'];
+        if (!validRarities.includes(rarityClass)) {
+            rarityClass = 'other';
+        }
+
+        const matchesRarity = selectedRarity ? rarityClass === selectedRarity : true;
+        return matchesSearch && matchesRarity;
+    });
+
+    displayCharacters(filtered);
+}
+// ℹ️ **Info-knop popup**
+infoBtn.addEventListener('click', () => {
+    showPopup('Klik op een personage voor meer opties! Alleen bij favorieten kan je items en notities toevoegen!');
+});
+
+// ✅ **Event Listeners for Search and Filter**
+searchInput.addEventListener('input', filterCharacters);
+filterSelect.addEventListener('change', filterCharacters);
+
+// ✅ **Fetch Characters on Load**
+fetchOutfits();
+// ✅ Functie om een popup te tonen
+function showPopup(message) {
+    const popupMessage = document.getElementById('popup-message');
+    popupMessage.textContent = message;
+    popupMessage.classList.add('show');
+
+    // Verwijder de popup na 3 seconden
+    setTimeout(() => {
+        popupMessage.classList.remove('show');
+    }, 3000);
+}
+
+
+
+
+
+
+let accesstoken = ""
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', set_name, false);
+
+
+async function set_name() {
+    let if_logged = await refresh_access_token()
+    
+    if(if_logged){
+        let span_naam  = document.getElementById("username_display")
+        let dict_uis = await (await request("/username", "", "GET",accesstoken)).json()
+        let username = dict_uis["username"]
+        if (username) {
+            span_naam.innerText = username
+
+        }
+            
+        
+        
+    }
+}
+
+
+
+async function refresh_access_token() {
+    let response =  await request("/refresh", "", "GET", "")
+    if (response.ok) {
+        let body = await response.json()
+        accesstoken = body["accesstoken"]
+    }
+    
+    
+    if (!accesstoken) {
+        return false
+    }else{
+        return true
+    }
+}
+
+
+
+async function request(url, data, mode, token) {
+    
+    let response = null
+    if ("GET" == mode) {
+        response = await fetch(url, {
+            method: mode, // HTTP method
+            headers: {
+                'Authorization': `Bearer ${token}`, 
+                'Content-Type': 'application/json', 
+            },
+            credentials: 'include' 
+        });
+    }
+    else{
+        response = await fetch(url, {
+            method: mode, // HTTP method
+            headers: {
+                'Content-Type': 'application/json', 
+            },
+            body: JSON.stringify(data), 
+            credentials: 'include' 
+        });
+    }
+    return response
+}
+
+
+async function req_data(url, data, mode) {
+    return await ((await request(url, data, mode,"")).json())
+}
+
+
+function toggleMenu() {
+    document.querySelector(".nav-menu").classList.toggle("show");
+}
+

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fortnite Personages</title>
+    <link rel="stylesheet" href="components/header/header.css">
+    <link rel="stylesheet" href="personages2.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+   <script src="js/personages.js" defer></script>
+</head>
+
+<body>
+
+    <!-- navigatie balk -->
+    <div class="navbar">
+        <div class="logo_div">
+            <a href="lproject.html"><img src="./assets/logoFN.png" class="logo" alt="Logo" /></a>
+        </div>
+
+        <nav class="nav_buttons hidden">
+            <a href="" class="nav_btn active">Personages</a>
+            <a href="favoriet.html" class="nav_btn">Favorieten</a>
+            <a href="blacklist.html" class="nav_btn">Zwarte Lijst</a>
+        </nav>
+
+        <nav class="nav_buttons_small  hidden_small">
+            <a href="" class="nav_btn_small active">Personages</a>
+            <a href="favoriet.html" class="nav_btn_small">Favorieten</a>
+            <a href="blacklist.html" class="nav_btn_small">Zwarte Lijst</a>
+        </nav>
+
+        <div class="user_info hidden ">
+            <img   class="user_profiel" id="user_profile_img" src="./assets/question-mark.svg" alt="User" />
+            <span  class="username" id="username_display">Gebruikersnaam</span>
+            <button class="info_btn">ℹ️</button>
+        </div>
+
+        <div class="user_info_small hidden_small">
+            <span  class="username" id="username_display">Gebruikersnaam</span>
+            <div class="info_container">
+                <img   class="user_profiel" id="user_profile_img" src="./assets/question-mark.svg" style="width: 40px; height: 40px;" alt="User" />
+                <button class="info_btn">ℹ️</button>
+            </div>
+            
+            
+        </div>
+
+    </div>
+    
+
+    <main>  
+
+        <!-- Zoek en filter sectie-->
+        <section class="top_section">
+            <div class="top-container">
+                <h1>Personages</h1>
+                
+                <div class="page_buttons">
+                    <button class="arrow" id="back_arrow">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="50px" viewBox="0 -960 960 960" width="50px" fill="#5f6368"><path d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z"/></svg>
+                    </button>
+                    <!-- <input type="number" name="" class="page_number" placeholder=""> -->
+                    <button class="arrow" id="forward_arrow">
+                        <svg  xmlns="http://www.w3.org/2000/svg" height="50px" viewBox="0 -960 960 960" width="50px" fill="#5f6368"><path d="M647-440H160v-80h487L423-744l57-56 320 320-320 320-57-56 224-224Z"/></svg>
+                    </button>
+                  
+                </div>
+
+
+
+                <div class="search-container">
+                    <div class="search_bar">
+                        <input type="text" id="search" placeholder="Zoek" >
+                        <button class="play-btn">Play</button>
+                    </div>
+
+                    <select id="filter_rarity">
+                        <option value="">Alle Zeldzaamheden</option>
+                        <option value="common">Common</option>
+                        <option value="uncommon">Uncommon</option>
+                        <option value="rare">Rare</option>
+                        <option value="epic">Epic</option>
+                        <option value="legendary">Legendary</option>
+                        <option value="other">Overige</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+        <!-- https://fortnite-api.com/images/cosmetics/br/backpack_abstractmirror/icon.png -->
+
+
+        <!-- Character grid -->
+        <section class="characters_grid" id="characters_grid">
+
+<!-- 
+            <div class="character-card rarity-common">
+                <span class="favorite-star">⭐</span>
+                <p class="rarity-label">Common</p>
+                <img src="https://fortnite-api.com/images/cosmetics/br/backpack_abstractmirror/icon.png"alt="naam">
+                <h3>ROBOT</h3>
+            </div>
+
+
+            <div class="character-card rarity-rare">
+                <span class="favorite-star">⭐</span>
+                <p class="rarity-label">rarity</p>
+                <img src="https://fortnite-api.com/images/cosmetics/br/character_akimboenvoy/icon.png" alt="naam">
+                <h3>bob</h3>
+            </div> -->
+
+        </section>
+
+    </main>
+
+
+
+
+</body>
+</html>
