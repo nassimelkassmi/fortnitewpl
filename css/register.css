@@ -24,15 +24,10 @@ body {
     width: auto;
 }
 
-.login-container {
+.register-container {
     padding: 40px;
     text-align: center;
     background-color: transparent;
-}
-
-
-h1 {
-    margin-bottom: 20px;
 }
 
 form {
@@ -41,7 +36,7 @@ form {
 }
 
 input {
-    margin-bottom: 6px;
+    margin-bottom: 14px;
     color: rgb(81, 91, 102);
     border: none;
     font-size: 18px;
@@ -60,14 +55,6 @@ input:focus {
     outline: none;
     border: none;
     box-shadow: none;
-    
-}
-
-
-.input-text {
-    display: flex;
-    flex-direction: column;
-    gap: 10px
 }
 
 button {
@@ -76,18 +63,11 @@ button {
     cursor: pointer;
 }
 
-.under-buttons {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    margin-bottom: 20px;
-    margin-top: 5px;
-}
-
-.under-buttons a {
+.login-btn {
     color: white;
     font-size: 14px;
-    margin-top: 5px;
+    margin-bottom: 25px;
+    margin-top: 10px;
     padding: 0;
     background-color: #00000000;
     font-family:  "Roboto Mono", serif;
@@ -95,7 +75,7 @@ button {
     text-decoration: none;
 }
 
-.under-buttons a:hover {
+.login-btn:hover {
     color: rgb(174, 193, 209);
 }
 
@@ -103,21 +83,18 @@ button {
     background-color: #B3C9FA;
     border: 5px solid #CEDBF9;
     color: #292A49;
-    margin: 0 100px;
+    margin: 0 80px;
     padding: 6px 5px 5px 5px;
     font-size: 30px;
     font-family: Fortnite;
     transition: 0.08s ease-in-out;
-    margin-bottom: 0px;
+    margin-top: 15px;
 }
 
 .login_button:hover {
     background-color: #FFF457;
     border: 5px solid #EDE56A;
 }
-
-
-
 
 footer {
     position: absolute;

@@ -1,0 +1,352 @@
+@font-face {
+    font-family: Fortnite;
+    src: url(../fonts/Fortnite.ttf);
+}
+
+/* Algemene reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Fortnite;
+    font-weight: 200;
+  }
+  
+  body {
+    background-image: url('/assets/background/background.png');
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    padding: 120px 20px 20px;
+    overflow-x: hidden;
+  }
+  
+  /* Navbar – gebruik dezelfde styling als bij favokarak */
+  .navbar {
+      font-family: Fortnite;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;               
+      align-items: center;         
+      background-color: #4382CE;
+      padding: 15px 100px !important;
+      z-index: 1000;
+  }
+  
+  .left, .center, .right {
+      flex: 1;
+  }
+  
+  .center {
+      text-align: center;
+  }
+  
+  .center nav {
+      display: inline-flex;
+      gap: 15px;
+      white-space: nowrap;
+      font-size: 3rem;
+  }
+  
+  .back-btn {
+      font-family: Fortnite;
+      font-weight: bold;
+      color: white;
+      text-decoration: none;
+      font-size: 3rem;
+      transition: color 0.2s ease-in-out;
+  }
+  
+  .back-btn:hover {
+      color: #f4d03f;
+  }
+  
+  .user-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+  }
+  
+  .user-info img.user-profile {
+      width: 40px;
+      height: 40px;
+      object-fit: cover;
+      border-radius: 50%;
+  }
+  
+  .info-btn {
+      background: transparent;
+      border: none;
+      font-size: 1.8rem !important;
+      cursor: pointer;
+      color: inherit;
+      text-transform: uppercase;
+      font-weight: 200;
+  }
+  
+  .username {
+      font-size: 1.8rem;
+      font-family: Fortnite;
+      text-transform: uppercase;
+  }
+  
+  /* Main container styling – vergelijkbaar met de personages-page */
+  .items-section {
+      background: #0b13388f;
+      padding: 40px 50px;
+      margin: 120px auto 20px;
+      width: 75%;
+      border-radius: 15px;
+      box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.2);
+      text-align: center;
+  }
+  
+  /* Titel styling */
+  .items-section h1 {
+      font-family: Fortnite;
+      font-size: 4rem;
+      color: #ffffff;
+      text-transform: uppercase;
+      font-weight: 100;
+      letter-spacing: -1px;
+      margin-bottom: 20px;
+  }
+  
+  /* Items grid layout */
+  .items-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      justify-content: center;
+      align-items: start;
+      padding: 20px;
+  }
+  
+  /* Item category styling */
+  .item-category {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+  }
+  
+  /* Grid-column voor de items binnen een categorie */
+  .grid-column {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+  }
+  
+  /* Filter dropdown styling */
+  .item-category select {
+      font-size: 1.5rem;
+      font-family: 'Bangers', cursive;
+      padding: 10px 15px;
+      border-radius: 12px;
+      border: none;
+      color: white;
+      text-align: center;
+      cursor: pointer;
+      transition: 0.3s ease-in-out;
+      outline: none;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+      background-color: #222;
+  }
+  
+  /* Vooraf ingestelde kleuren per filter (optioneel als visuele hint) */
+  #filter-weapons { background-color: #3399FF; }
+  #filter-emotes { background-color: #A24EC2; }
+  #filter-backblings { background-color: #D98A29; }
+  
+  /* Item kaart styling */
+  .item-card {
+      border-radius: 15px;
+      padding: 12px;
+      text-align: center;
+      width: 100%;
+      max-width: 180px;
+      height: 250px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 4px solid white;
+      box-shadow: inset 0 0 0 6px rgba(255, 255, 255, 0.3);
+      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.1);
+      position: relative;
+  }
+  
+  /* Afbeeldingen binnen de item kaart */
+  .item-card img {
+      width: 100%;
+      height: auto;
+      max-height: 120px;
+      object-fit: contain;
+      border-radius: 8px;
+  }
+  
+  /* Rarity-label */
+  .rarity-label {
+      font-size: 1.2rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+  }
+  
+  /* Item naam */
+  .item-card h3 {
+      font-size: 1.4rem;
+      margin-top: 10px;
+      color: white;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+  }
+  
+  /* Plus-knop voor selectie */
+  .select-item {
+      font-size: 1.2rem;
+      background-color: #f4d03f;
+      border: none;
+      padding: 6px 10px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: 0.2s ease-in-out;
+      font-weight: bold;
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+  }
+  
+  .select-item:hover {
+      background-color: #ffcc00;
+  }
+  
+  /* Popup meldingen */
+  .popup-message {
+      position: fixed;
+      top: 20%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 122, 193, 0.95);
+      padding: 15px;
+      border-radius: 10px;
+      color: white;
+      font-size: 1.5rem;
+      text-align: center;
+      display: none;
+      box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.3);
+  }
+  .popup-message.show {
+      display: block !important;
+  }
+  
+  /* Responsive styling voor schermen tot 720px */
+  @media (max-width: 720px) {
+    .navbar {
+      padding: 15px 20px;
+    }
+    
+    .back-btn {
+      font-size: 2.5rem;
+    }
+    
+    .user-profile {
+      width: 45px;
+      height: 45px;
+    }
+    
+    .items-section {
+      width: 95%;
+      padding: 30px;
+    }
+    
+    h1 {
+      font-size: 3rem;
+    }
+    
+    h2 {
+      font-size: 2rem;
+    }
+    
+    .items-grid {
+      grid-template-columns: repeat(1, 1fr);
+      gap: 20px;
+      padding: 10px;
+    }
+    
+    .item-card {
+      max-width: 160px;
+      height: 220px;
+    }
+    
+    .item-card h3 {
+      font-size: 1.2rem;
+    }
+    
+    .select-item {
+      font-size: 1rem;
+      top: 55%;
+    }
+  }
+  
+  /* Responsive styling voor schermen tot 480px */
+  @media (max-width: 480px) {
+    .navbar {
+      flex-direction: column;
+      text-align: center;
+      padding: 10px;
+    }
+    
+    .back-btn {
+      font-size: 2rem;
+    }
+    
+    .user-info {
+      gap: 10px;
+    }
+    
+    .user-profile {
+      width: 40px;
+      height: 40px;
+    }
+    
+    .items-section {
+      width: 100%;
+      padding: 20px;
+    }
+    
+    h1 {
+      font-size: 2.5rem;
+    }
+    
+    h2 {
+      font-size: 1.8rem;
+    }
+    
+    .items-grid {
+      grid-template-columns: repeat(1, 1fr);
+      gap: 10px;
+      padding: 10px;
+    }
+    
+    .item-card {
+      max-width: 140px;
+      height: auto;
+    }
+    
+    .item-card h3 {
+      font-size: 1.3rem;
+    }
+    
+    .select-item {
+      font-size: 1rem;
+      right: 5px;
+    }
+  }
+  

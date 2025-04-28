@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="nl">
+<<<<<<< HEAD
 <head> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,6 +16,33 @@
             <button onclick="window.location.href='registreren.html'">Registreren</button>
 
         </div>
+=======
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page</title>
+    <link rel="stylesheet" href="css/melding.css">
+    <link rel="stylesheet" href="./css/landingpage.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
+        rel="stylesheet">
+    <script src="/js/landingpage.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <img src="./assets/logoFN.png" alt="Code Ninjas Logo" class="logo">
+        <div id="login_register" class="auth-buttons">
+            <button onclick="window.location.href='login.html'">Inloggen</button>
+            <button class="nav-register-btn" onclick="window.location.href='registreren.html'">Registreren</button>
+
+        </div>
+        <div class="invis" id="profiel">
+            <span id="profiel_name"></span>
+            <button id="log_out" type="button" onclick="logout()">Log uit</button>
+        </div>
+
+>>>>>>> origin/ahmed
     </header>
 
     <div class="melding">
@@ -26,11 +54,16 @@
             <p>Geen Toegang!</p>
         </div>
         <div>
+<<<<<<< HEAD
             <button onclick="delete_melding(this)">
+=======
+            <button class="delete_melding">
+>>>>>>> origin/ahmed
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
             </div>
             </button>
     </div>
+<<<<<<< HEAD
 
     <main class="grid-container">
         <div class="game">
@@ -64,6 +97,59 @@
             <img src="./assets/magic the gathering.jpg" alt="Magic The Gathering">
             <h2>Magic The Gathering</h2>
             <button class="play-btn" onclick="melding('Geen Toegang')">▶ Speel</button>
+=======
+   
+
+    <main class="grid-container">
+        <div class="game">
+            <div class="game-image-container">
+                <a href="./lproject.html"><img src="./assets/fortoepic.jpg" alt="Fortnite"></a>
+            </div>
+            <div class="game-text-container">
+                <a href="./lproject.html">
+                    <h2>Fortnite</h2>
+                </a>
+                <a><button class="play-btn"  onclick="if_logged('Niet ingelogd')">▶ &nbsp;Start</button></a>
+            </div>
+        </div>
+        <div class="game">
+            <img src="./assets/eafc25pic.jpg" alt="FIFA">
+            <div class="game-text-container">
+                <h2>FIFA</h2>
+                <button class="play-btn"  onclick="melding('Geen Toegang')" >▶ &nbsp;Start</button>
+            </div>
+
+        </div>
+        <div class="game">
+            <img src="./assets/lord-of-the-rings.jpg" alt="Lord of the Rings">
+            <div class="game-text-container">
+                <h2>Lord of The Rings</h2>
+                <button class="play-btn"  onclick="melding('Geen Toegang')" >▶ &nbsp;Start</button>
+            </div>
+        </div>
+        <div class="game">
+            <img src="./assets/pokemon.jpg" alt="Pokemon">
+            <div class="game-text-container">
+                <h2>Pokemon</h2>
+                <button class="play-btn" onclick="melding('Geen Toegang')" >▶ &nbsp;Start</button>
+            </div>
+
+        </div>
+        </div>
+        <div class="game">
+            <img src="./assets/lego-masters.jpg" alt="Lego Masters">
+            <div class="game-text-container">
+                <h2>Lego Masters</h2>
+                <button class="play-btn"  onclick="melding('Geen Toegang')">▶ &nbsp;Start</button>
+            </div>
+        </div>
+        <div class="game">
+            <img src="./assets/magic the gathering.jpg" alt="Magic The Gathering">
+            <div class="game-text-container">
+                <h2>Magic The Gathering</h2>
+                <button class="play-btn"  onclick="melding('Geen Toegang')">▶ &nbsp;Start</button>
+            </div>
+>>>>>>> origin/ahmed
         </div>
     </main>
 
@@ -71,5 +157,10 @@
         <p>© Code Ninjas | AP Hogeschool</p>
     </footer>
 </body>
+<<<<<<< HEAD
 </html>
 
+=======
+
+</html>
+>>>>>>> origin/ahmed

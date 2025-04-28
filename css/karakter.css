@@ -1,162 +1,210 @@
+@font-face {
+    font-family: Fortnite;
+    src: url(../fonts/Fortnite.ttf);
+}
+
 /* Algemene reset */
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-    font-family: 'Bangers', cursive;
-    background-image: url('/assets/background/background.png');
-    background-size: cover;
-    background-position: center;
-    color: #fff;
-    padding: 80px 20px 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  font-family: Fortnite;
+  font-weight: 200;
+  background-image: url('/assets/background/background.png');
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+  padding: 80px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  height: 100vh;
 }
 
-/* NAVBAR */
-.navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: rgba(0, 122, 193, 0.95);
-    padding: 15px 25px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-    z-index: 1000;
-}
 
-/* Back-knop links */
-.back-btn {
-    font-size: 3rem;
-    color: white;
-    text-decoration: none;
-    transition: color 0.2s ease-in-out;
-}
 
-.back-btn:hover {
-    color: #f4d03f;
-}
-
-/* Info-knop rechts */
-.info-btn {
-    font-size: 3rem;
-    cursor: pointer;
-    background: none;
-    border: none;
-    color: white;
-    transition: color 0.2s ease-in-out;
-}
-
-.info-btn:hover {
-    color: #f4d03f;
-}
-
-/* User profiel afbeelding */
-.user-profile {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: 2px solid white;
-    margin-right: 10px;
-}
-
-/* Karakter Container */
+/* Karakter Container (aangepast volgens de voorbeeldstijl) */
 .karakter-container {
-    background: rgba(0, 10, 50, 0.9);
-    padding: 30px;
-    border-radius: 15px;
-    margin-top: 80px;
-    width: 50%;
-    text-align: center;
-    box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.2);
-    position: relative;
+  background: #0b13388f; /* Overlay zoals de personages page */
+  padding: 40px 50px;
+  width: 40%;
+  box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.2);
+  text-align: center;
+  position: relative;
+  margin: 20px;
 }
 
 /* Favorieten ster */
 .favorite-star {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 2rem;
-    color: gold;
-    display: none;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 2rem;
+  color: gold;
+  display: none;
 }
 
-/* Karakter acties */
+/* Karakter Afbeelding Styling */
+#karakter-img {
+    box-shadow: inset 0 0 0 6px rgba(255, 255, 255, 0.448);
+    /* Eventuele extra margin of padding toevoegen als je de rarity kleur wilt zien */
+}
+
+
+
+/* Toepassen van rarity achtergrondkleuren op de karakter-afbeelding */
+/* Voeg deze klassen toe aan #karakter-img als je de kleur wilt tonen */
+#karakter-img.rarity-common    { background-color: #B9B9B9; }
+#karakter-img.rarity-uncommon  { background-color: #4AAE4F; }
+#karakter-img.rarity-rare      { background-color: #3399FF; }
+#karakter-img.rarity-epic      { background-color: #A24EC2; }
+#karakter-img.rarity-legendary { background-color: #D98A29; }
+#karakter-img.rarity-other     { background-color: #6D6D6D; }
+
+
+#karakter-naam {
+    font-weight: 200 !important;
+    margin: 0;
+}
+
+#karakter-beschrijving {
+    margin-bottom: 40px;
+    text-transform: uppercase;
+}
+
+/* Karakter Informatie Styling */
+.karakter-info img {
+  max-width: 100%;
+  height: auto;
+  margin: 20px 0;
+}
+
+.karakter-info h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+.karakter-info p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+/* Extra Info (details) */
+.extra-info {
+  margin: 20px 0;
+  font-size: 1.2rem;
+  text-align: left;
+  font-family: Roboto;
+}
+
+.extra-info p {
+  margin: 10px 0;
+}
+
+/* Karakter Acties */
 .karakter-actions {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-    margin-top: 10px;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
 }
 
 .blacklist-btn, .favorite-btn, .set-profile {
-    font-size: 2.5rem;
-    cursor: pointer;
-    border: none;
-    background: none;
-    transition: transform 0.2s ease-in-out;
+  font-size: 2.5rem;
+  cursor: pointer;
+  border: none;
+  background: none;
+  transition: transform 0.2s ease-in-out;
 }
 
 .blacklist-btn:hover, .favorite-btn:hover, .set-profile:hover {
-    transform: scale(1.2);
+  transform: scale(1.2);
 }
 
-/* Pop-up meldingen */
+/* Popup en Blacklist Reden */
 .popup-message {
-    position: fixed;
-    top: 10%;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0, 122, 193, 0.95);
-    padding: 15px;
-    border-radius: 10px;
-    color: white;
-    font-size: 1.5rem;
-    text-align: center;
-    display: none;
-    box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.3);
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 122, 193, 0.95);
+  padding: 15px;
+  border-radius: 10px;
+  color: white;
+  font-size: 1.5rem;
+  text-align: center;
+  display: none;
+  box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.3);
 }
 
-/* Melding voor blacklist */
 .blacklist-reason {
-    display: none;
-    position: fixed;
-    top: 20%;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(255, 0, 0, 0.9);
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.3);
+  display: none;
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(4, 0, 255, 0.1);
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.3);
+
+  font-size: 1.5rem;
+  text-shadow: 2px 2px black;
+  
 }
 
-/* Zichtbaar maken */
+
+
+
 .show {
-    display: block !important;
-}
-.user-profile {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    border: 2px solid white;
-    margin-left: 10px;
+  display: block !important;
 }
 
+/* Extra styling voor set-profile knop */
 .set-profile img {
-    width: 40px;
-    height: 40px;
+  width: 40px;
+  height: 40px;
 }
 
 .set-profile img:hover {
-    transform: scale(1.1);
+  transform: scale(1.1);
 }
 
+
+
+@media (max-width: 1100px) {
+  .navbar {
+    padding: 10px 35px;
+  }
+  .karakter-container {
+    width: 60%;
+  }
+}
+
+
+/* Responsive styling */
+@media (max-width: 768px) {
+  body {
+    padding: 100px 10px 10px;
+  }
+  .navbar {
+    padding: 10px 15px;
+  }
+  .back-btn, .info-btn {
+    font-size: 2rem;
+  }
+  .karakter-container {
+    width: 90%;
+    padding: 20px;
+  }
+  .karakter-actions {
+    gap: 10px;
+  }
+  .blacklist-btn, .favorite-btn, .set-profile {
+    font-size: 2rem;
+  }
+}

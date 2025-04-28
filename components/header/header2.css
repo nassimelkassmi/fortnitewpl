@@ -1,0 +1,116 @@
+
+/* Navigatiebalk */
+.navbar {
+    font-family: Fortnite;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;               
+    align-items: center;         
+    background-color: #4382CE;
+    padding: 15px 100px !important;
+    z-index: 1000;
+}
+
+
+.left, .center, .right {
+  flex: 1; 
+}
+
+
+.logo {
+    width: 90px !important;
+    height: auto !important;
+}
+
+
+.center {
+  text-align: center;
+}
+
+
+.center nav {
+  display: inline-flex;
+  gap: 15px;
+  white-space: nowrap;
+}
+
+
+.right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+
+.nav-btn {
+    display: inline-block;           
+    background-color: #7d97d0ce;
+    padding: 11px 35px 10px 35px !important;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1.2rem !important;
+    font-family: Fortnite;
+    text-transform: uppercase;
+    transition: all ease 0.3s;
+    text-decoration: none;           
+    border: none;                   
+    outline: none;                  
+}
+
+.nav-btn:hover {
+    background-color: #FFF457;
+    color: #292A49;
+}
+
+.nav-btn.active {
+    background-color: #FFF457;
+    color: #292A49;
+}
+
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.user-info img.user-profile {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+
+.info-btn {
+    background: transparent;
+    border: none;
+    font-size: 1.8rem !important;
+    cursor: pointer;
+    color: inherit;
+    text-transform: uppercase;
+    font-weight: 200;
+}
+
+/* Gebruikersnaam */
+.username {
+    font-size: 1.8rem;
+    font-family: Fortnite;
+    text-transform: uppercase;
+}
+
+footer { 
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-family: "Roboto", serif;
+    font-size: 12px;
+    opacity: 0.4;
+    margin-bottom: 5px;
+    position: absolute;
+    bottom: 0%;
+    width: 100%;
+}
