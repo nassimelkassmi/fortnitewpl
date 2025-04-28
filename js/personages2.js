@@ -189,9 +189,7 @@ async function set_name() {
             span_naam.innerText = username
 
         }
-            
-        
-        
+
     }
 }
 

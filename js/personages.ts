@@ -221,6 +221,44 @@ const forward_arrow = select_by_id_and_Tag("button", "forward_arrow")
 const menu          = select_by_id_and_Tag("menu", "menu")
 const menu_button   = select_by_id_and_Tag("button", "menu_button") 
 
+const popupdiv      = select_by_id_and_Tag("div", "popup-message") 
+
+const infoBtn       = select_by_id_and_Tag("button", "info_btn")
+
+
+
+
+
+function showPopup(message:string) {
+    console.log(popupdiv);
+    
+    popupdiv.textContent = message;
+    popupdiv.classList.add('show');
+
+    // Verwijder de popup na 3 seconden
+    setTimeout(() => {
+        popupdiv.classList.remove('show');
+    }, 3000);
+}
+
+
+function popup(){
+    showPopup('Klik op een personage voor meer opties! Alleen bij favorieten kan je items en notities toevoegen!');
+}
+
+infoBtn.addEventListener('click', popup);
+    
+
+
+
+
+
+
+
+
+
+
+
 
 menu_button.addEventListener("click", toggle_menu)
 

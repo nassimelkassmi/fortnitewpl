@@ -47,7 +47,6 @@
 
 
 .nav_buttons{
-    
 
     column-gap: 10px;
     display: flex;
@@ -76,14 +75,6 @@
     white-space: nowrap;
 }
 
-
-.nav_btn a{
-
-}
-
-span{
-    
-}
 
 
 
@@ -139,9 +130,6 @@ span{
 
 
 
-.hidden_small{
-    display: none;
-}
 
 @media screen and (max-width: 1000px){
 
@@ -150,86 +138,7 @@ span{
     }
 
 }
-/* 
 
-@media screen and (max-width: 800px) {
-    .hidden{
-        display: none;
-    }
-
-    .hidden_small{
-        display: block;
-    }
-
-
-
-    .nav_buttons_small{
-        display: flex;
-        flex-direction: column;
-        row-gap: 5px;
-    
-    }
-    
-    
-    .nav_btn_small{
-        display: inline-block;           
-        background-color: #7d97d0ce;
-        padding: 2px  10px;
-        color: #fff;
-        cursor: pointer;
-        font-size: clamp(1.1rem, 2vw, 2rem) ;
-        font-family: Fortnite;
-        text-transform: uppercase;
-        transition: all ease 0.3s;
-        text-decoration: none;  
-        text-align: center;         
-        border: none;                   
-        outline: none;  
-    }
-    
-    .nav_btn_small:hover {
-        background-color: #FFF457;
-        color: #292A49;
-    }
-    
-    .nav_btn_small.active {
-        background-color: #FFF457;
-        color: #292A49;
-    }
-    
-    .user_info_small{
-        display: flex;
-        flex-direction: column;
-        row-gap: 10px;
-    }
-    
-    
-    .info_container{
-        display: flex;
-        flex-direction: row;
-        flex-grow: 1;
-        row-gap: 10px;
-        justify-content: space-around;
-    }
-    .user_info_small .info_btn{
-        background: transparent;
-        border: none;
-        font-size: 1.8rem !important;
-        cursor: pointer;
-        color: inherit;
-        text-transform: uppercase;
-        font-weight: 200;
-    }
-    
-    .user_info_small .user_profiel{
-        width: 40px;
-        height: 40px;
-        object-fit: cover;
-        border-radius: 50%;
-    }
-    
-
-} */
 
 .small{
     display:none;

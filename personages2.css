@@ -1,6 +1,26 @@
 
 
 
+.popup-message {
+  display: none;
+  z-index: 10;
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgb(0, 122, 193);
+  padding: 15px;
+  border-radius: 10px;
+  color: white;
+  font-size: 1.5rem;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 200;
+}
+.show {
+  display: block !important;
+}
+
 
 @font-face {
     font-family: Fortnite;
