@@ -1,6 +1,8 @@
 
 
-
+function clamp(min:number, num:number, max:number) {
+    return Math.min(Math.max(num, min), max)
+}
 
 
 
@@ -181,18 +183,51 @@ function select_by_id_and_Tag<Tag extends keyof HTMLElementTagNameMap>(tagname:T
     }
 }
 
+function select_by_class_and_Tag<Tag extends keyof HTMLElementTagNameMap>(tagname:Tag, class_name:string): HTMLElementTagNameMap[Tag][] {
 
+    const elements:HTMLCollectionOf<HTMLElementTagNameMap[Tag]> =  document.getElementsByTagName(tagname)
+
+    let results:HTMLElementTagNameMap[Tag][] = []; 
+
+    
+    for (let i = 0; i < elements.length; i++) {
+
+        if (elements.item(i)?.classList.contains(class_name) ) {
+            results.push(elements.item(i) as HTMLElementTagNameMap[Tag])
+        }
+    }
+
+    if (!results) {
+        console.log("tagname is ", tagname, " class is ", class_name);
+        throw new Error("this did not work");
+        
+    }else{
+        console.log(results);
+        return results
+    }
+}
+
+
+const characters_grid = select_by_id_and_Tag("section", "characters_grid")
 
 const searchInput    =  select_by_id_and_Tag("input", "search")
 const filterSelect   =  select_by_id_and_Tag("select", "filter_rarity")
 //const infoBtn        =  select_by_id_and_Tag("button", "info_btn")
 //const popupMessage   =  select_by_id_and_Tag("div", "popup-message")
-const characters_grid = select_by_id_and_Tag("section", "characters_grid")
 
 const back_arrow    = select_by_id_and_Tag("button", "back_arrow")
 const forward_arrow = select_by_id_and_Tag("button", "forward_arrow")
 
+const menu          = select_by_id_and_Tag("menu", "menu")
+const menu_button   = select_by_id_and_Tag("button", "menu_button") 
 
+
+menu_button.addEventListener("click", toggle_menu)
+
+
+function toggle_menu() {
+    menu.classList.toggle("menu_on")
+}
 
 let allOutfits:FortniteCosmetic[] = []
 
@@ -244,12 +279,23 @@ let char_index = 0
 
 
 
-function recalc_char_amount() {
-    let column_length = Math.floor( (characters_grid.clientHeight - 40  )  / 210 ) 
-    let row_length    = Math.floor( (characters_grid.clientWidth - 90 ) / 210  )
+function recalc_char_amount():string {
+    //inner width might be incorrect?
+    let char_card_size:number =   clamp(110, window.innerWidth * 0.12, 200)
+
+    let prefix = char_card_size * 0.4
+
+
+    console.log("char_card_size",char_card_size);
+    //how many cards fit in a column
+    let column_length = Math.floor( (characters_grid.clientHeight - prefix  )  / char_card_size * 1) 
+    //how many cards fit in a row
+    let row_length    = Math.floor( (characters_grid.clientWidth - prefix * 0.9 )    / char_card_size * 0.98)
     char_amount = row_length * column_length // total amount of characters to display
-    console.log("column_length", column_length, "row_length", row_length);
+    console.log("characters_grid.clientHeight", characters_grid.clientHeight,  "characters_grid.clientWidth", characters_grid.clientWidth  );
     
+    console.log("column_length", column_length, "row_length", row_length);
+    return String(char_card_size)
 }
 
 async function displayCharacters(outfits:FortniteCosmetic[], index:number = 0) {
@@ -259,11 +305,10 @@ async function displayCharacters(outfits:FortniteCosmetic[], index:number = 0) {
     let favoriet:favorite[] = []
 
      // char_amount = total amount of characters to display
-    recalc_char_amount()
+    let char_card_size = recalc_char_amount() + "px"
 
     let display_outfits = outfits.slice(index, index + char_amount)
-
-    
+        
     display_outfits.forEach(displayCharacter)
 
     function displayCharacter(outfit:FortniteCosmetic) {
@@ -275,7 +320,11 @@ async function displayCharacters(outfits:FortniteCosmetic[], index:number = 0) {
         outfitCard.className = `character-card ${rarityClass}`;
 
         const isFavorite = favoriet.filter( favorit => {return favorit.id == outfit.id });
-        const starVisibility = isFavorite ? 'block' : 'none';
+        const starVisibility = !isFavorite ? 'block' : 'none';
+
+
+        // outfitCard.style.height = char_card_size
+        // outfitCard.style.width  = char_card_size
 
         outfitCard.innerHTML  = `
             <span class="favorite-star" style="display: ${starVisibility};">⭐</span>
@@ -301,8 +350,8 @@ async function displayCharacters(outfits:FortniteCosmetic[], index:number = 0) {
 }
 
 function filter_characters() {
-    const searchText = searchInput.value.toLowerCase();
-    const selectedRarity = filterSelect.value;
+    const searchText     = searchInput.value.toLowerCase();
+    const selectedRarity = filterSelect.value
 
     function filter_by_rarity(outfit:FortniteCosmetic) {
         //check if the current outfit contains search term from user search
@@ -342,15 +391,12 @@ async function previous_page() {
     console.log(" next index is ", char_index, " current amount ", total_characters, "char amount", char_amount);
     display_filterd()
 }
-
 back_arrow.addEventListener("click", previous_page)
 
 async function next_page() {
     char_index = clamp_index_by_char_list(char_index, char_amount)
 
-
     console.log("next page next index is ", char_index, " current amount ", total_characters, "char amount", char_amount);
-    
     display_filterd()
 
 }
@@ -361,18 +407,23 @@ function clamp_index_by_char_list(index:number, offset:number) {
     console.log("index is ", index, "offset is ", offset);
     
     //if the rarity filter changed start ate 0
-    let new_rarity = searchInput.value.toLowerCase()
+    let new_rarity = filterSelect.value
+    console.log("current rarity is ", current_rarity, " rarity is ", new_rarity);
 
     if (current_rarity != new_rarity) {
+       
+        
         current_rarity = new_rarity
+        
         return 0
     }
     total_characters = filter_characters().length
-
+    
     recalc_char_amount()
     
-    let last_possible_index = total_characters - char_amount
+    let last_possible_index = Math.max(0, total_characters - char_amount)
 
+    
     if (index + offset < 0) {
         return 0
     }
@@ -386,14 +437,17 @@ function clamp_index_by_char_list(index:number, offset:number) {
 }
 
 
-let current_rarity = searchInput.value.toLowerCase();
+let current_rarity = filterSelect.value
 let total_characters = 0
 
 
 
 function display_filterd() {
+    char_index = clamp_index_by_char_list(char_index, 0)
     displayCharacters(filter_characters(), char_index)
 }
+
+
 
 
 searchInput.addEventListener('input', display_filterd);

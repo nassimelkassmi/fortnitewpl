@@ -1,5 +1,7 @@
 
 
+
+
 @font-face {
     font-family: Fortnite;
     src: url(../fonts/Fortnite.ttf);
@@ -46,8 +48,9 @@ body {
   
 
   .top-container h1 {
+    cursor: default;
     font-family: Fortnite;
-    font-size: 3rem;
+    font-size: clamp(1rem, 6vw, 3rem);
 
     color: #ffffff;
     text-transform: uppercase;
@@ -58,7 +61,8 @@ body {
 
 
 .page_buttons{
-  width: 130px;
+  width: 140px;
+  padding: 0px 10px 0px 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -67,13 +71,15 @@ body {
 
 
 .arrow{
+  width: 50px;
+  height: 50px;
   border: none;
   background-color: transparent;
   
   border-radius: 50px;
   transition: background-color 200ms ;
 }
-.arrow:hover{
+.arrow:active{
   background-color: rgba(255, 255, 255, 0.384);
   
   transition: background-color 100ms ;
@@ -240,8 +246,9 @@ main{
 
 .character-card {
   position: relative;
-  width: 200px;
-  height: 200px;
+  width: clamp(110px,12vw,200px);
+  height: clamp(110px,12vw,200px);
+
   cursor: pointer;
   display: flex;
   justify-content: center;
@@ -285,18 +292,6 @@ main{
 }
 
 
-/* .character-card  > span{
-  color: rgb(255, 255, 255);
-  text-shadow: 4px 4px 6px rgb(0, 0, 0);
-  font-size: 1.4rem;
-  display: inline-block;
-  position: absolute;
-  bottom: 0%;
-  text-align: center;
-  z-index: 1;
-  background-color: #3534398e;
-} */
-
 
 
 /* Hover-effect voor de borderkleur */
@@ -314,12 +309,14 @@ main{
   background-color: rgba(0,0,0,0.6); 
   padding: 4px 8px;
   border-radius: 6px;
-  font-size: 1.1rem;
+  font-size: clamp(0.6rem, 1.2vw, 1.1rem);
   text-transform: uppercase;
   color: white;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
   text-transform: uppercase;
   font-weight: 200;
+
+  text-wrap: nowrap;
 }
 
 .favorite-star {
@@ -336,7 +333,7 @@ main{
   bottom: 8px;
 
   text-align: center;
-  font-size: 1.3rem;
+  font-size: clamp(1rem, 1vw, 1.3rem);
   text-transform: uppercase;
   color: white;
   text-shadow: 2px 2px 4px rgb(0, 0, 0);
@@ -356,6 +353,206 @@ main{
 .rarity-epic      { background-color: #A24EC2; }
 .rarity-legendary { background-color: #D98A29; }
 .rarity-other     { background-color: #6D6D6D; }
+
+
+
+
+
+
+@media screen and (max-width: 1420px) {
+  .top-container > h1{
+    font-size: 2rem;
+  }
+
+  .page_buttons{
+    width: clamp(90px, 8vw,140px);
+  }
+  .arrow{
+    width: clamp(20px, 2.5vw, 40px);
+  }
+
+  #search{
+    width: 180px;
+    padding: 8px;
+    font-size: 1rem;
+    height: 2.3rem;
+  }
+
+  .play-btn{
+    height: 2.3rem;
+    padding: 3px 20px 3px 20px;
+  }
+
+  #filter_rarity{
+    height: 2.3rem;
+    padding: 0px 5px 0px 5px;
+    font-size: 1.4rem;
+  }
+
+
+}
+
+
+@media screen and (max-width: 1070px){
+  .top_section{
+    padding: 10px;
+  }
+
+.top-container{
+  margin: 0;
+  justify-content: space-around;
+  row-gap: 10px;
+}
+
+  .top-container > h1{
+    margin: 0 clamp(0rem, 9vw, 8rem) 0 clamp(0rem, 9vw, 8rem);
+  }
+
+  .page_buttons{
+    padding: 0;
+    margin: 0 clamp(0rem, 9vw, 8rem) 0 clamp(0rem, 9vw, 8rem);
+    width: clamp(60px, 10vw, 100px);
+  }
+  .arrow{
+    width: clamp(20px, 5vw, 30px);
+    height: clamp(20px, 5vw, 30px);
+  }
+
+  .play-btn{
+    margin-right: 6px;
+  }
+
+}
+
+
+
+@media screen and (max-width: 570px){
+  .top-container > h1{
+    margin: 0;
+  }
+
+  .page_buttons{
+    padding: 0;
+    margin:0 ;
+    width: clamp(60px, 10vw, 100px);
+    
+  }
+
+  .arrow{
+    width: clamp(25px, 5vw, 30px);
+    height: clamp(25px, 5vw, 30px);
+  }
+
+}
+
+
+
+/* 
+.top_section_small{
+  display: none;
+} */
+
+
+
+
+
+/* 
+
+@media screen and (max-width: 940px) {
+  .large_top{
+    display: none;
+  }
+
+  .top_section_small{
+    height: 100px;
+    background-color:#4360aa8a;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+  
+  .top_section_small > h1{
+    padding: 0px  6px 0px 6px;
+    letter-spacing: 2px;
+    transform: scaleY(1.1);
+    font-weight: 100;
+  }
+  
+  .search_bar{
+    height: 2.5rem;
+    padding: 4px;
+  }
+  
+  
+  #search_small{
+    padding: 8px;
+    width: 200px;
+    border: none;
+    font-family: Fortnite;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+  
+    text-transform: uppercase;
+    text-align: left;
+    background-color: #eef2f7;
+    color: #353439;
+    outline: none;
+    text-transform: uppercase;
+    font-weight: 200;
+  }
+  
+  
+  .play-btn_small {
+    padding: 5px 15px;
+    
+    border: none;
+    font-family: Fortnite;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    background-color: #FFF457;
+    color: #292A49;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    text-transform: uppercase;
+    font-weight: 200;
+  }
+  
+  #filter_rarity_small {
+    padding: 5px 5px 5px 5px;
+    border: none;
+    font-family: Fortnite;
+    font-size: 1.1rem;
+    background-color: #4e74c5ce;
+    color: #ffffff;
+    outline: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 200;
+  }
+  
+  
+  .page_buttons{
+    width: 60px;
+  }
+  
+  
+  .arrow{
+    height: 20px;
+    width: 20px;
+  }
+}
+@media screen and (max-width: 610px) {
+  .top_section_small{
+    height: 150px;
+  }
+  .top_section_small > h1{
+    padding-top: 5px;
+  }
+} */
+
+
 
 
 /* .character-card::before{
