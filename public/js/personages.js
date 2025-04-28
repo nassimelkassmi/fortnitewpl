@@ -184,6 +184,7 @@ async function request(url, data, mode, token) {
 
 
 function toggleMenu() {
-    document.querySelector(".nav-menu").classList.toggle("show");
+    console.log("Menu toggle clicked");
+    const menu = document.querySelector('.center nav');
+    menu.classList.toggle('show');
 }
-

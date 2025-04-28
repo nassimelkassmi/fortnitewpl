@@ -117,3 +117,95 @@ footer{
 footer > p{
     font-family: Arial, sans-serif;
 }
+
+@media (max-width: 480px) {
+    body {
+        justify-content: flex-start;
+        padding-top: 40px;
+    }
+
+    .login_form {
+        height: auto;
+        width: 90%;
+        align-items: center;
+    }
+
+    .logo {
+        width: 100px;
+        margin-bottom: 20px;
+    }
+
+    input {
+        width: 90%;
+        font-size: 1.1rem;
+        height: 35px;
+        margin: 8px 0;
+    }
+
+    input::placeholder {
+        font-size: 1.2rem;
+    }
+
+    a, a:visited {
+        font-size: 1rem;
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+
+    button {
+        width: 80%;
+        font-size: 1.5rem;
+        height: 45px;
+    }
+
+    footer {
+        font-size: 0.75rem;
+        padding-bottom: 10px;
+    }
+}
+
+@media (max-width: 760px) {
+    body {
+        justify-content: center;
+        padding-top: 20px;
+    }
+
+    .login_form {
+        height: auto;
+        width: 80%;
+        align-items: center;
+    }
+
+    .logo {
+        width: 120px;
+        margin-bottom: 20px;
+    }
+
+    input {
+        width: 80%;
+        font-size: 1.2rem;
+        height: 35px;
+        margin: 10px 0;
+    }
+
+    input::placeholder {
+        font-size: 1.3rem;
+    }
+
+    a, a:visited {
+        font-size: 1.1rem;
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+
+    button {
+        width: 60%;
+        font-size: 1.6rem;
+        height: 48px;
+    }
+
+    footer {
+        font-size: 0.85rem;
+        padding-bottom: 10px;
+    }
+}

@@ -226,37 +226,3 @@ body {
 .remove-favorite:hover {
     background-color: #b30000;
 }
-@media screen and (max-width: 1200px) {
-    .navbar {
-        padding: 8px 15px;
-    }
-    .karakter-container {
-        width: 70%;
-        padding: 25px;
-    }
-    .stats p, .stats button {
-        font-size: 1.8rem;
-        padding: 10px;
-    }
-    .karakter-info img {
-        width: 180px;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    .navbar {
-        padding: 8px 15px;
-    }
-    .karakter-container {
-        width: 80%;
-        padding: 20px;
-    }
-    .stats p, .stats button {
-        font-size: 1.5rem;
-        padding: 8px;
-    }
-    .karakter-info img {
-        width: 150px;
-    }
-}
-
