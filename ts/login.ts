@@ -90,3 +90,4 @@ async function request(url: string, data: object, mode: string, token: string = 
 
 // 🧠 Meldingsfunctie (extern gedefinieerd)
 declare function melding(message: string): void;
+(window as any).login = login;

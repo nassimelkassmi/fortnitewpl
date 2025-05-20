@@ -1,103 +1,76 @@
-
-
+"use strict";
 function login() {
-    login2()
-    
+    login2();
 }
-
-
-
 async function login2() {
     console.log("bob");
-    
-    const username = document.getElementById("username").value
-    const password = document.getElementById("password").value
-    const email    = document.getElementById("email")
-    // let response = await request("/register",{"user":username,"pwd":password}, "POST")
-    // console.log(status);
-    
+    const usernameInput = document.getElementById("username");
+    const passwordInput = document.getElementById("password");
+    const emailInput = document.getElementById("email");
+    const username = usernameInput.value.trim();
+    const password = passwordInput.value.trim();
     if (!username || !password) {
-        melding("Vul in gebruikersnaam en passwoord")
-        return 1
+        melding("Vul in gebruikersnaam en passwoord");
+        return;
     }
-
-    if (password.length < 1 ) {
-        melding("Password moet minstens 7 characters hebben ")
-        return 1
+    if (password.length < 7) {
+        melding("Password moet minstens 7 characters hebben");
+        return;
     }
-
-    if (!email) {
-        login_user(username, password)
+    if (!emailInput) {
+        await login_user(username, password);
     }
-    else{
-        register_user(username, password, email.value)
+    else {
+        await register_user(username, password, emailInput.value.trim());
     }
-    // let token = (access_token.accesstoken)
-    // console.log(access_token.accesstoken);
-    // console.log(typeof(access_token.accesstoken));
-    
-    // let response =  await request("/username",
-    // {"user":username,"pwd":password}, "GET", token)
-    // console.log(new_username);
 }
-
-
 async function register_user(username, password, email) {
-    let response = await request("/register",{"user":username,"pwd":password, "email":email}, "POST")
+    const response = await request("/register", { user: username, pwd: password, email: email }, "POST");
     if (!response) {
-        melding("Server is momenteel niet berijkbaar")
-        return 0
+        melding("Server is momenteel niet bereikbaar");
+        return;
     }
-    if (response.status == 409) {
-        melding("Gebruikersnaam al gebruikt")
-        return 0
+    if (response.status === 409) {
+        melding("Gebruikersnaam al gebruikt");
+        return;
     }
-    window.location.href = "login.html"
+    window.location.href = "login.html";
 }
-
-
 async function login_user(username, password) {
-    let response = await request("/login",{"user":username,"pwd":password}, "POST")
+    const response = await request("/login", { user: username, pwd: password }, "POST");
     if (!response) {
-
-        melding("Server is momenteel niet berijkbaar")
-        return 1
+        melding("Server is momenteel niet bereikbaar");
+        return;
     }
-    if (response.status == 401) {
-        melding("Gebruikersnaam of passwoord is incorrect")
-        return 1
+    if (response.status === 401) {
+        melding("Gebruikersnaam of passwoord is incorrect");
+        return;
     }
     console.log("change page");
-    
-    window.location.href = "landingpage.html"
-
+    window.location.href = "landingpage.html";
 }
-
-
-
-async function request(url, data, mode, token) {
-    let response = undefined
-    if ("GET" == mode) {
+async function request(url, data, mode, token = "") {
+    let response;
+    if (mode === "GET") {
         response = await fetch(url, {
-            method: mode, // HTTP method
+            method: mode,
             headers: {
-                'Authorization': `Bearer ${token}`, 
-                'Content-Type': 'application/json', 
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
             },
-            credentials: 'include' 
+            credentials: 'include',
         });
     }
-    else{
+    else {
         response = await fetch(url, {
-            method: mode, // HTTP method
+            method: mode,
             headers: {
-                'Content-Type': 'application/json', 
+                'Content-Type': 'application/json',
             },
-            body: JSON.stringify(data), 
-            credentials: 'include' 
+            body: JSON.stringify(data),
+            credentials: 'include',
         });
     }
-    return response
+    return response;
 }
-
-
+window.login = login;
