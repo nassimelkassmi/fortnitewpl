@@ -1,6 +1,12 @@
 "use strict";
-let accesstoken = "";
-document.addEventListener('DOMContentLoaded', set_name);
+console.log("✅ get_username geladen");
+var accesstoken = "";
+// Wacht tot de DOM geladen is
+document.addEventListener('DOMContentLoaded', () => {
+    set_name();
+    set_avatar();
+});
+// Haal en toon gebruikersnaam
 async function set_name() {
     const if_logged = await refresh_access_token();
     if (!if_logged)
@@ -17,6 +23,7 @@ async function set_name() {
         span_naam.innerText = username;
     }
 }
+// Haal access token op via refresh endpoint
 async function refresh_access_token() {
     const response = await request("/refresh", {}, "GET", "");
     if (!response?.ok)
@@ -25,9 +32,10 @@ async function refresh_access_token() {
     accesstoken = body["accesstoken"];
     return !!accesstoken;
 }
-async function request(url, data, mode, token = "") {
+// Algemeen request helper
+async function request(url, data, method, token = "") {
     try {
-        if (mode === "GET") {
+        if (method === "GET") {
             return await fetch(url, {
                 method: "GET",
                 headers: {
@@ -53,5 +61,11 @@ async function request(url, data, mode, token = "") {
         return undefined;
     }
 }
-// 👇 Zodat functies uit dit bestand beschikbaar zijn in HTML zoals onclick="..."
-window.set_name = set_name;
+// ✅ Profielfoto instellen vanuit localStorage
+function set_avatar() {
+    const userProfileImg = document.getElementById('user-profile-img');
+    const userImage = localStorage.getItem('userCharacterImg');
+    if (userProfileImg) {
+        userProfileImg.src = userImage ?? './assets/question-mark.svg';
+    }
+}

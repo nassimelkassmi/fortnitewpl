@@ -1,7 +1,6 @@
 "use strict";
-// Type voor de favorietenlijst (id's als string)
+// Interfaces
 let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
-// DOM-elementen met expliciete types
 const karakterImg = document.getElementById('karakter-img');
 const karakterNaam = document.getElementById('karakter-naam');
 const karakterBeschrijving = document.getElementById('karakter-beschrijving');
@@ -17,12 +16,19 @@ const item2Img = document.getElementById('item2-img');
 const removeFavorite = document.querySelector('.remove-favorite');
 const infoBtn = document.querySelector('.info-btn');
 const popupMessage = document.getElementById('popup-message');
+const userProfileImg = document.getElementById('user-profile-img');
 const karakterID = localStorage.getItem('selectedCharacter');
 if (!karakterID) {
     alert('Geen karakter geselecteerd!');
     window.location.href = 'personages.html';
 }
-// ✅ Haal karakterdata op via API
+// ✅ Profielfoto instellen
+function set_avatar() {
+    const userImage = localStorage.getItem('userCharacterImg');
+    if (userProfileImg) {
+        userProfileImg.src = userImage ?? './assets/question-mark.svg';
+    }
+}
 async function fetchKarakter() {
     try {
         const response = await fetch(`https://fortnite-api.com/v2/cosmetics/br/${karakterID}`);
@@ -38,7 +44,6 @@ async function fetchKarakter() {
         console.error('Fout bij het ophalen van het karakter:', error);
     }
 }
-// ✅ Laad lokale data (wins, losses, items, notities)
 function loadUserData() {
     wins.innerText = localStorage.getItem(`wins-${karakterID}`) || '0';
     losses.innerText = localStorage.getItem(`losses-${karakterID}`) || '0';
@@ -46,7 +51,6 @@ function loadUserData() {
     item1Img.src = localStorage.getItem(`item1-img-${karakterID}`) || './assets/placeholder.png';
     item2Img.src = localStorage.getItem(`item2-img-${karakterID}`) || './assets/placeholder.png';
 }
-// ✅ Notitie toevoegen
 function saveAndDisplayNote() {
     const noteText = notesInput.value.trim();
     if (noteText === '')
@@ -59,7 +63,6 @@ function saveAndDisplayNote() {
     displayNotes();
     notesInput.value = '';
 }
-// ✅ Notities tonen
 function displayNotes() {
     const savedNotesRaw = localStorage.getItem(`notes-${karakterID}`);
     let savedNotes;
@@ -80,16 +83,15 @@ function displayNotes() {
         const noteElement = document.createElement('div');
         noteElement.classList.add('saved-note');
         noteElement.innerHTML = `
-            <p>${note}</p>
-            <button class="delete-note" data-index="${index}">🗑️</button>
-        `;
+      <p>${note}</p>
+      <button class="delete-note" data-index="${index}">🗑️</button>
+    `;
         notesList.prepend(noteElement);
     });
     document.querySelectorAll('.delete-note').forEach(button => {
         button.addEventListener('click', deleteNote);
     });
 }
-// ✅ Notitie verwijderen
 function deleteNote(event) {
     const target = event.target;
     const noteIndex = parseInt(target.getAttribute('data-index') || '0');
@@ -98,7 +100,6 @@ function deleteNote(event) {
     localStorage.setItem(`notes-${karakterID}`, JSON.stringify(savedNotes));
     displayNotes();
 }
-// ✅ Wins en losses bijhouden
 addWin.addEventListener('click', () => {
     const winCount = parseInt(wins.innerText) + 1;
     wins.innerText = winCount.toString();
@@ -109,33 +110,25 @@ addLoss.addEventListener('click', () => {
     losses.innerText = lossCount.toString();
     localStorage.setItem(`losses-${karakterID}`, lossCount.toString());
 });
-// ✅ Notitie opslaan
 saveNotes.addEventListener('click', saveAndDisplayNote);
-// ✅ Item selecteren
 function selectItem(slot) {
     localStorage.setItem('selectedItemSlot', slot);
     window.location.href = 'items.html';
 }
-// ✅ Laad item-afbeeldingen meteen
-document.addEventListener("DOMContentLoaded", () => {
-    item1Img.src = localStorage.getItem(`item1-img-${karakterID}`) || './assets/placeholder.png';
-    item2Img.src = localStorage.getItem(`item2-img-${karakterID}`) || './assets/placeholder.png';
-});
-// ✅ Favoriet verwijderen
 removeFavorite.addEventListener('click', () => {
     favorites = favorites.filter(id => id !== karakterID);
     localStorage.setItem('favorites', JSON.stringify(favorites));
     window.location.href = 'personages.html';
 });
-// ✅ Info-popup
 infoBtn.addEventListener('click', () => {
     popupMessage.textContent = "Hier kan je notities en items toevoegen en je wins en losses bijhouden!";
     popupMessage.classList.add('show');
     setTimeout(() => popupMessage.classList.remove('show'), 3000);
 });
-// ✅ Pagina initialisatie
-console.log("📌 Notes list ID:", notesList);
-console.log("📌 Notes input ID:", notesInput);
-console.log("📌 Save button ID:", saveNotes);
+document.addEventListener("DOMContentLoaded", () => {
+    item1Img.src = localStorage.getItem(`item1-img-${karakterID}`) || './assets/placeholder.png';
+    item2Img.src = localStorage.getItem(`item2-img-${karakterID}`) || './assets/placeholder.png';
+    set_avatar();
+});
 fetchKarakter();
 loadUserData();

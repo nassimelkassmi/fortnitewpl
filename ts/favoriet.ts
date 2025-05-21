@@ -17,11 +17,13 @@ const filterSelect = document.getElementById('filter-rarity') as HTMLSelectEleme
 const infoBtn = document.querySelector('.info-btn') as HTMLButtonElement;
 const popupMessage = document.getElementById('popup-message') as HTMLElement;
 
+// Favorieten ophalen
 function getFavorites(): string[] {
   const data = localStorage.getItem('favorites');
   return data ? JSON.parse(data) : [];
 }
 
+// Favorieten tonen
 function displayFavorites(): void {
   const favorites = getFavorites();
   favoritesGrid.innerHTML = '';
@@ -68,16 +70,34 @@ function displayFavorites(): void {
     });
 }
 
+// Filteren
 function filterFavorites(): void {
   displayFavorites();
 }
 
+// Popup tonen
 function showPopup(message: string): void {
   popupMessage.textContent = message;
   popupMessage.classList.add('show');
   setTimeout(() => popupMessage.classList.remove('show'), 3000);
 }
 
+// Profielfoto instellen vanuit localStorage
+function set_avatar(): void {
+  const userProfileImg = document.getElementById('user-profile-img') as HTMLImageElement | null;
+  const userImage = localStorage.getItem('userCharacterImg');
+  if (userProfileImg) {
+    userProfileImg.src = userImage ?? './assets/question-mark.svg';
+  }
+}
+
+// Menu toggle (optioneel)
+function toggleMenu(): void {
+  const navMenu = document.querySelector(".nav-menu") as HTMLElement;
+  navMenu?.classList.toggle("show");
+}
+
+// Event Listeners
 infoBtn?.addEventListener('click', () => {
   showPopup('Klik op een favoriet voor meer opties!');
 });
@@ -85,10 +105,8 @@ infoBtn?.addEventListener('click', () => {
 searchInput?.addEventListener('input', filterFavorites);
 filterSelect?.addEventListener('change', filterFavorites);
 
-function toggleMenu(): void {
-  const navMenu = document.querySelector(".nav-menu") as HTMLElement;
-  navMenu?.classList.toggle("show");
-}
-
 // Init
-displayFavorites();
+document.addEventListener('DOMContentLoaded', () => {
+  displayFavorites();
+  set_avatar();
+});

@@ -10,15 +10,27 @@ const blacklistGrid = document.getElementById('blacklist-grid') as HTMLElement;
 const popupMessage = document.getElementById('popup-message') as HTMLElement;
 const infoBtn = document.querySelector('.info-btn') as HTMLButtonElement;
 
+// ✅ Profielfoto instellen vanuit localStorage
+function set_avatar(): void {
+  const userProfileImg = document.getElementById('user-profile-img') as HTMLImageElement | null;
+  const userImage = localStorage.getItem('userCharacterImg');
+  if (userProfileImg) {
+    userProfileImg.src = userImage ?? './assets/question-mark.svg';
+  }
+}
+
+// Zwarte lijst ophalen
 function getBlacklisted(): BlacklistedCharacter[] {
   const data = localStorage.getItem('blacklistCharacters');
   return data ? JSON.parse(data) : [];
 }
 
+// Zwarte lijst opslaan
 function saveBlacklisted(blacklist: BlacklistedCharacter[]): void {
   localStorage.setItem('blacklistCharacters', JSON.stringify(blacklist));
 }
 
+// Zwarte lijst weergeven
 function displayBlacklisted(): void {
   const blacklisted = getBlacklisted();
   blacklistGrid.innerHTML = '';
@@ -56,6 +68,7 @@ function displayBlacklisted(): void {
   });
 }
 
+// Reden bewerken
 function editReason(id: string): void {
   const blacklist = getBlacklisted();
   const character = blacklist.find(outfit => outfit.id === id);
@@ -79,6 +92,7 @@ function editReason(id: string): void {
   });
 }
 
+// Reden opslaan
 function updateReason(id: string, newReason: string): void {
   const blacklist = getBlacklisted();
   const character = blacklist.find(outfit => outfit.id === id);
@@ -90,6 +104,7 @@ function updateReason(id: string, newReason: string): void {
   }
 }
 
+// Verwijderen
 function removeFromBlacklist(id: string): void {
   let blacklist = getBlacklisted();
   blacklist = blacklist.filter(outfit => outfit.id !== id);
@@ -98,12 +113,14 @@ function removeFromBlacklist(id: string): void {
   showPopup("Karakter verwijderd uit de zwarte lijst!");
 }
 
+// Popup tonen
 function showPopup(message: string): void {
   popupMessage.textContent = message;
   popupMessage.classList.add('show');
   setTimeout(() => popupMessage.classList.remove('show'), 4000);
 }
 
+// Tooltip
 infoBtn.addEventListener('click', () => {
   showPopup(`Hier kun je personages beheren die op je zwarte lijst staan.
 
@@ -112,10 +129,14 @@ infoBtn.addEventListener('click', () => {
 - Klik op 🗑 om een personage te verwijderen.`);
 });
 
+// Menu toggle (optioneel)
 function toggleMenu(): void {
   const navMenu = document.querySelector(".nav-menu") as HTMLElement;
   navMenu?.classList.toggle("show");
 }
 
 // Init
-displayBlacklisted();
+document.addEventListener('DOMContentLoaded', () => {
+  displayBlacklisted();
+  set_avatar();
+});

@@ -1,6 +1,3 @@
-
-
-
 type Outfit = {
     id: string;
     name: string;
@@ -9,16 +6,20 @@ type Outfit = {
     images: { icon: string };
 };
 
-
 const charactersGrid = document.getElementById('characters-grid') as HTMLElement;
 const searchInput = document.getElementById('search') as HTMLInputElement;
 const filterSelect = document.getElementById('filter-rarity') as HTMLSelectElement;
 const infoBtn = document.querySelector('.info-btn') as HTMLButtonElement;
 const popupMessage = document.getElementById('popup-message') as HTMLElement;
 
-
 let allOutfits: Outfit[] = [];
+let accesstoken: string = '';
 
+// ✅ DOM geladen
+document.addEventListener('DOMContentLoaded', () => {
+    set_name();
+    set_avatar();
+});
 
 async function fetchOutfits(): Promise<void> {
     try {
@@ -34,10 +35,8 @@ async function fetchOutfits(): Promise<void> {
     }
 }
 
-
 function displayCharacters(outfits: Outfit[]): void {
     charactersGrid.innerHTML = '';
-
     const favorites: string[] = JSON.parse(localStorage.getItem('favorites') || '[]');
 
     outfits.forEach(outfit => {
@@ -91,7 +90,6 @@ function filterCharacters(): void {
     displayCharacters(filtered);
 }
 
-
 function showPopup(message: string): void {
     popupMessage.textContent = message;
     popupMessage.classList.add('show');
@@ -103,11 +101,6 @@ infoBtn.addEventListener('click', () => {
 });
 searchInput.addEventListener('input', filterCharacters);
 filterSelect.addEventListener('change', filterCharacters);
-
-
-let accesstoken: string = '';
-
-document.addEventListener('DOMContentLoaded', set_name, false);
 
 async function set_name(): Promise<void> {
     const if_logged = await refresh_access_token();
@@ -129,7 +122,6 @@ async function refresh_access_token(): Promise<boolean> {
     }
     return !!accesstoken;
 }
-
 
 async function request(url: string, data: any, method: string, token: string): Promise<Response> {
     let response: Response;
@@ -157,11 +149,19 @@ async function request(url: string, data: any, method: string, token: string): P
     return response;
 }
 
+// ✅ Profielfoto instellen vanuit localStorage
+function set_avatar(): void {
+    const userProfileImg = document.getElementById('user-profile-img') as HTMLImageElement | null;
+    const userImage = localStorage.getItem('userCharacterImg');
+
+    if (userProfileImg) {
+        userProfileImg.src = userImage ?? './assets/question-mark.svg';
+    }
+}
 
 function toggleMenu(): void {
     const menu = document.querySelector(".nav-menu") as HTMLElement;
     menu.classList.toggle("show");
 }
-
 
 fetchOutfits();

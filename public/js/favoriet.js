@@ -5,10 +5,12 @@ const searchInput = document.getElementById('search');
 const filterSelect = document.getElementById('filter-rarity');
 const infoBtn = document.querySelector('.info-btn');
 const popupMessage = document.getElementById('popup-message');
+// Favorieten ophalen
 function getFavorites() {
     const data = localStorage.getItem('favorites');
     return data ? JSON.parse(data) : [];
 }
+// Favorieten tonen
 function displayFavorites() {
     const favorites = getFavorites();
     favoritesGrid.innerHTML = '';
@@ -45,22 +47,37 @@ function displayFavorites() {
         });
     });
 }
+// Filteren
 function filterFavorites() {
     displayFavorites();
 }
+// Popup tonen
 function showPopup(message) {
     popupMessage.textContent = message;
     popupMessage.classList.add('show');
     setTimeout(() => popupMessage.classList.remove('show'), 3000);
 }
+// Profielfoto instellen vanuit localStorage
+function set_avatar() {
+    const userProfileImg = document.getElementById('user-profile-img');
+    const userImage = localStorage.getItem('userCharacterImg');
+    if (userProfileImg) {
+        userProfileImg.src = userImage ?? './assets/question-mark.svg';
+    }
+}
+// Menu toggle (optioneel)
+function toggleMenu() {
+    const navMenu = document.querySelector(".nav-menu");
+    navMenu?.classList.toggle("show");
+}
+// Event Listeners
 infoBtn?.addEventListener('click', () => {
     showPopup('Klik op een favoriet voor meer opties!');
 });
 searchInput?.addEventListener('input', filterFavorites);
 filterSelect?.addEventListener('change', filterFavorites);
-function toggleMenu() {
-    const navMenu = document.querySelector(".nav-menu");
-    navMenu?.classList.toggle("show");
-}
 // Init
-displayFavorites();
+document.addEventListener('DOMContentLoaded', () => {
+    displayFavorites();
+    set_avatar();
+});

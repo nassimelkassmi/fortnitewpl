@@ -1,12 +1,10 @@
 "use strict";
-// ❗️ Haal karakter ID op en controleer op null
 const karakterID = localStorage.getItem('selectedCharacter');
 if (!karakterID) {
     alert('Geen karakter geselecteerd!');
     window.location.href = 'personages.html';
     throw new Error("Geen karakter geselecteerd");
 }
-// ❗️ DOM elementen veilig casten
 const karakterImg = document.getElementById('karakter-img');
 const karakterNaam = document.getElementById('karakter-naam');
 const karakterBeschrijving = document.getElementById('karakter-beschrijving');
@@ -23,7 +21,6 @@ const blacklistReason = document.getElementById('blacklist-reason');
 const blacklistInput = document.getElementById('blacklist-input');
 const submitBlacklist = document.getElementById('submit-blacklist');
 const userProfileImg = document.getElementById('user-profile-img');
-// ✅ Haal data van API
 async function fetchKarakter() {
     try {
         const response = await fetch(`https://fortnite-api.com/v2/cosmetics/br/${karakterID}`);
@@ -56,7 +53,6 @@ function getRarityClass(rarity) {
     }
 }
 let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
-// ✅ Favorieten logica
 if (favorites.includes(karakterID)) {
     favoriteStar.style.display = 'block';
     favoriteBtn.textContent = '💔';
@@ -76,18 +72,23 @@ favoriteBtn.addEventListener('click', () => {
     }
     localStorage.setItem('favorites', JSON.stringify(favorites));
 });
-// ✅ Gebruiker instellen
 let isUserCharacter = localStorage.getItem('userCharacter') === karakterID;
 setProfileBtn.src = isUserCharacter ? './assets/delete.png' : './assets/add-user.png';
 userProfileImg.src = isUserCharacter ? karakterImg.src : './assets/question-mark.svg';
 setProfileBtn.addEventListener('click', () => {
     isUserCharacter = !isUserCharacter;
-    localStorage.setItem('userCharacter', isUserCharacter ? karakterID : '');
+    if (isUserCharacter) {
+        localStorage.setItem('userCharacter', karakterID);
+        localStorage.setItem('userCharacterImg', karakterImg.src);
+    }
+    else {
+        localStorage.removeItem('userCharacter');
+        localStorage.removeItem('userCharacterImg');
+    }
     setProfileBtn.src = isUserCharacter ? './assets/delete.png' : './assets/add-user.png';
     userProfileImg.src = isUserCharacter ? karakterImg.src : './assets/question-mark.svg';
     showPopup(isUserCharacter ? 'Je hebt dit karakter als gebruiker gekozen!' : 'Niet langer je gebruiker!');
 });
-// ✅ Blacklist toevoegen
 blacklistBtn.addEventListener('click', () => {
     blacklistReason.classList.add('show');
 });
@@ -118,5 +119,4 @@ function showPopup(message) {
     popupMessage.classList.add('show');
     setTimeout(() => popupMessage.classList.remove('show'), 3000);
 }
-// ✅ Initialiseer
 fetchKarakter();

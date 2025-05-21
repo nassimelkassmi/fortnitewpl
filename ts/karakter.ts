@@ -103,7 +103,14 @@ interface BlacklistCharacter {
   
   setProfileBtn.addEventListener('click', () => {
     isUserCharacter = !isUserCharacter;
-    localStorage.setItem('userCharacter', isUserCharacter ? karakterID : '');
+   if (isUserCharacter) {
+  localStorage.setItem('userCharacter', karakterID);
+  localStorage.setItem('userCharacterImg', karakterImg.src);
+} else {
+  localStorage.removeItem('userCharacter');
+  localStorage.removeItem('userCharacterImg');
+}
+
     setProfileBtn.src = isUserCharacter ? './assets/delete.png' : './assets/add-user.png';
     userProfileImg.src = isUserCharacter ? karakterImg.src : './assets/question-mark.svg';
     showPopup(isUserCharacter ? 'Je hebt dit karakter als gebruiker gekozen!' : 'Niet langer je gebruiker!');

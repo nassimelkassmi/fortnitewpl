@@ -1,5 +1,4 @@
 "use strict";
-// 🧩 DOM-elementen
 const weaponsGrid = document.getElementById('weapons-grid');
 const emotesGrid = document.getElementById('emotes-grid');
 const backblingsGrid = document.getElementById('backblings-grid');
@@ -8,7 +7,14 @@ const emoteFilter = document.getElementById('filter-emotes');
 const backblingFilter = document.getElementById('filter-backblings');
 const selectedItemSlot = localStorage.getItem('selectedItemSlot');
 const karakterID = localStorage.getItem('selectedCharacter');
-// ✅ Items ophalen van Fortnite API
+const infoBtn = document.querySelector('.info-btn');
+const userProfileImg = document.getElementById('user-profile-img');
+function set_avatar() {
+    const userImage = localStorage.getItem('userCharacterImg');
+    if (userProfileImg) {
+        userProfileImg.src = userImage ?? './assets/question-mark.svg';
+    }
+}
 async function fetchItems() {
     try {
         const response = await fetch('https://fortnite-api.com/v2/cosmetics/br');
@@ -26,7 +32,6 @@ async function fetchItems() {
         console.error('Fout bij het ophalen van items:', error);
     }
 }
-// ✅ Filter enkel geldige rarities (geen "mythic")
 function filterValidRarities(items) {
     const validRarities = ["common", "uncommon", "rare", "epic", "legendary"];
     return items.map(item => {
@@ -37,7 +42,6 @@ function filterValidRarities(items) {
         return item;
     });
 }
-// ✅ Haal kleur op basis van rarity
 function getRarityColor(rarity) {
     const rarityColors = {
         "common": "#B9B9B9",
@@ -49,7 +53,6 @@ function getRarityColor(rarity) {
     };
     return rarityColors[rarity] || "#6D6D6D";
 }
-// ✅ Toon items in de juiste grid
 function displayItems(items, grid, filter) {
     grid.innerHTML = '';
     const selectedRarity = filter ? filter.value : '';
@@ -62,31 +65,28 @@ function displayItems(items, grid, filter) {
         itemCard.className = 'item-card';
         itemCard.style.backgroundColor = rarityColor;
         itemCard.innerHTML = `
-            <span class="rarity-label">${rarityName}</span>
-            <img src="${item.images.icon}" alt="${item.name}">
-            <h3>${item.name}</h3>
-            <button class="select-item" onclick="selectItem('${item.images.icon}')">+</button>
-        `;
+      <span class="rarity-label">${rarityName}</span>
+      <img src="${item.images.icon}" alt="${item.name}">
+      <h3>${item.name}</h3>
+      <button class="select-item" onclick="selectItem('${item.images.icon}')">+</button>
+    `;
         grid.appendChild(itemCard);
     });
     grid.style.display = "flex";
     grid.style.flexDirection = "column";
     grid.style.alignItems = "center";
 }
-// ✅ Selecteer item
 function selectItem(imageUrl) {
     if (selectedItemSlot && karakterID) {
         localStorage.setItem(`item${selectedItemSlot}-img-${karakterID}`, imageUrl);
         window.location.href = 'favokarak.html';
     }
 }
-window.selectItem = selectItem; // Zorg dat onclick werkt
-// ✅ Pas kleur aan van filter bij selectie
+window.selectItem = selectItem;
 function updateFilterColor(filter) {
     const selectedRarity = filter.value;
     filter.style.backgroundColor = getRarityColor(selectedRarity);
 }
-// ✅ Event listeners voor filters
 if (weaponFilter) {
     weaponFilter.addEventListener('change', () => {
         updateFilterColor(weaponFilter);
@@ -105,7 +105,6 @@ if (backblingFilter) {
         fetchItems();
     });
 }
-// ✅ Popup weergeven
 function showPopup(message) {
     let popupMessage = document.getElementById('popup-message');
     if (!popupMessage) {
@@ -120,17 +119,17 @@ function showPopup(message) {
         popupMessage?.classList.remove('show');
     }, 3000);
 }
-// ✅ Info-knop (popup)
-const infoBtn = document.querySelector('.info-btn');
 if (infoBtn) {
     infoBtn.addEventListener('click', () => {
         showPopup("Klik op een item om het toe te voegen aan je favorieten!");
     });
 }
-// ✅ Laad items bij opstart
-fetchItems();
-// ✅ Menu toggle
 function toggleMenu() {
     const navMenu = document.querySelector(".nav-menu");
     navMenu.classList.toggle("show");
 }
+// ✅ Init
+document.addEventListener('DOMContentLoaded', () => {
+    set_avatar();
+    fetchItems();
+});

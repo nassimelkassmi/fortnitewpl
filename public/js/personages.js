@@ -1,13 +1,16 @@
 "use strict";
-// 🧩 DOM-elementen
 const charactersGrid = document.getElementById('characters-grid');
 const searchInput = document.getElementById('search');
 const filterSelect = document.getElementById('filter-rarity');
 const infoBtn = document.querySelector('.info-btn');
 const popupMessage = document.getElementById('popup-message');
-// ⛳ Globale outfitslijst (voor filtering)
 let allOutfits = [];
-// ✅ Haal outfits van Fortnite API
+let accesstoken = '';
+// ✅ DOM geladen
+document.addEventListener('DOMContentLoaded', () => {
+    set_name();
+    set_avatar();
+});
 async function fetchOutfits() {
     try {
         const response = await fetch('https://fortnite-api.com/v2/cosmetics/br');
@@ -22,7 +25,6 @@ async function fetchOutfits() {
         console.error('Fout bij het ophalen van outfits:', error);
     }
 }
-// ✅ Toon de outfits
 function displayCharacters(outfits) {
     charactersGrid.innerHTML = '';
     const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
@@ -51,7 +53,6 @@ function displayCharacters(outfits) {
         charactersGrid.appendChild(outfitCard);
     });
 }
-// ✅ Filteren op naam + zeldzaamheid
 function filterCharacters() {
     const searchText = searchInput.value.toLowerCase();
     const selectedRarity = filterSelect.value;
@@ -67,21 +68,16 @@ function filterCharacters() {
     });
     displayCharacters(filtered);
 }
-// ✅ Toon melding
 function showPopup(message) {
     popupMessage.textContent = message;
     popupMessage.classList.add('show');
     setTimeout(() => popupMessage.classList.remove('show'), 3000);
 }
-// ✅ Event listeners
 infoBtn.addEventListener('click', () => {
     showPopup('Klik op een personage voor meer opties! Alleen bij favorieten kan je items en notities toevoegen!');
 });
 searchInput.addEventListener('input', filterCharacters);
 filterSelect.addEventListener('change', filterCharacters);
-// ✅ Access token logic
-let accesstoken = '';
-document.addEventListener('DOMContentLoaded', set_name, false);
 async function set_name() {
     const if_logged = await refresh_access_token();
     if (if_logged) {
@@ -101,7 +97,6 @@ async function refresh_access_token() {
     }
     return !!accesstoken;
 }
-// ✅ Standaard fetch-functie
 async function request(url, data, method, token) {
     let response;
     if (method === "GET") {
@@ -126,10 +121,16 @@ async function request(url, data, method, token) {
     }
     return response;
 }
-// ✅ Navigatiemenu openen/sluiten
+// ✅ Profielfoto instellen vanuit localStorage
+function set_avatar() {
+    const userProfileImg = document.getElementById('user-profile-img');
+    const userImage = localStorage.getItem('userCharacterImg');
+    if (userProfileImg) {
+        userProfileImg.src = userImage ?? './assets/question-mark.svg';
+    }
+}
 function toggleMenu() {
     const menu = document.querySelector(".nav-menu");
     menu.classList.toggle("show");
 }
-// ✅ Start de applicatie
 fetchOutfits();

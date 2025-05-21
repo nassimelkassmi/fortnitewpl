@@ -3,13 +3,24 @@
 const blacklistGrid = document.getElementById('blacklist-grid');
 const popupMessage = document.getElementById('popup-message');
 const infoBtn = document.querySelector('.info-btn');
+// ✅ Profielfoto instellen vanuit localStorage
+function set_avatar() {
+    const userProfileImg = document.getElementById('user-profile-img');
+    const userImage = localStorage.getItem('userCharacterImg');
+    if (userProfileImg) {
+        userProfileImg.src = userImage ?? './assets/question-mark.svg';
+    }
+}
+// Zwarte lijst ophalen
 function getBlacklisted() {
     const data = localStorage.getItem('blacklistCharacters');
     return data ? JSON.parse(data) : [];
 }
+// Zwarte lijst opslaan
 function saveBlacklisted(blacklist) {
     localStorage.setItem('blacklistCharacters', JSON.stringify(blacklist));
 }
+// Zwarte lijst weergeven
 function displayBlacklisted() {
     const blacklisted = getBlacklisted();
     blacklistGrid.innerHTML = '';
@@ -40,6 +51,7 @@ function displayBlacklisted() {
         removeBtn.addEventListener('click', () => removeFromBlacklist(outfit.id));
     });
 }
+// Reden bewerken
 function editReason(id) {
     const blacklist = getBlacklisted();
     const character = blacklist.find(outfit => outfit.id === id);
@@ -59,6 +71,7 @@ function editReason(id) {
         updateReason(id, newReason);
     });
 }
+// Reden opslaan
 function updateReason(id, newReason) {
     const blacklist = getBlacklisted();
     const character = blacklist.find(outfit => outfit.id === id);
@@ -69,6 +82,7 @@ function updateReason(id, newReason) {
         showPopup("Reden bijgewerkt!");
     }
 }
+// Verwijderen
 function removeFromBlacklist(id) {
     let blacklist = getBlacklisted();
     blacklist = blacklist.filter(outfit => outfit.id !== id);
@@ -76,11 +90,13 @@ function removeFromBlacklist(id) {
     displayBlacklisted();
     showPopup("Karakter verwijderd uit de zwarte lijst!");
 }
+// Popup tonen
 function showPopup(message) {
     popupMessage.textContent = message;
     popupMessage.classList.add('show');
     setTimeout(() => popupMessage.classList.remove('show'), 4000);
 }
+// Tooltip
 infoBtn.addEventListener('click', () => {
     showPopup(`Hier kun je personages beheren die op je zwarte lijst staan.
 
@@ -88,9 +104,13 @@ infoBtn.addEventListener('click', () => {
 - Klik op ✔ om de reden op te slaan.
 - Klik op 🗑 om een personage te verwijderen.`);
 });
+// Menu toggle (optioneel)
 function toggleMenu() {
     const navMenu = document.querySelector(".nav-menu");
     navMenu?.classList.toggle("show");
 }
 // Init
-displayBlacklisted();
+document.addEventListener('DOMContentLoaded', () => {
+    displayBlacklisted();
+    set_avatar();
+});
