@@ -1,4 +1,4 @@
-// 🔰 Types voor API-items
+
 type Rarity = {
     value: string;
     displayValue?: string;
@@ -12,7 +12,7 @@ type Item = {
     images: { icon: string };
 };
 
-// 🧩 DOM-elementen
+
 const weaponsGrid = document.getElementById('weapons-grid') as HTMLElement;
 const emotesGrid = document.getElementById('emotes-grid') as HTMLElement;
 const backblingsGrid = document.getElementById('backblings-grid') as HTMLElement;
@@ -24,7 +24,7 @@ const backblingFilter = document.getElementById('filter-backblings') as HTMLSele
 const selectedItemSlot = localStorage.getItem('selectedItemSlot');
 const karakterID = localStorage.getItem('selectedCharacter');
 
-// ✅ Items ophalen van Fortnite API
+
 async function fetchItems(): Promise<void> {
     try {
         const response = await fetch('https://fortnite-api.com/v2/cosmetics/br');
@@ -43,7 +43,7 @@ async function fetchItems(): Promise<void> {
     }
 }
 
-// ✅ Filter enkel geldige rarities (geen "mythic")
+
 function filterValidRarities(items: Item[]): Item[] {
     const validRarities = ["common", "uncommon", "rare", "epic", "legendary"];
     return items.map(item => {
@@ -55,7 +55,7 @@ function filterValidRarities(items: Item[]): Item[] {
     });
 }
 
-// ✅ Haal kleur op basis van rarity
+
 function getRarityColor(rarity: string): string {
     const rarityColors: Record<string, string> = {
         "common": "#B9B9B9",
@@ -68,7 +68,7 @@ function getRarityColor(rarity: string): string {
     return rarityColors[rarity] || "#6D6D6D";
 }
 
-// ✅ Toon items in de juiste grid
+
 function displayItems(items: Item[], grid: HTMLElement, filter: HTMLSelectElement): void {
     grid.innerHTML = '';
     const selectedRarity = filter ? filter.value : '';
@@ -98,22 +98,22 @@ function displayItems(items: Item[], grid: HTMLElement, filter: HTMLSelectElemen
     grid.style.alignItems = "center";
 }
 
-// ✅ Selecteer item
+
 function selectItem(imageUrl: string): void {
     if (selectedItemSlot && karakterID) {
         localStorage.setItem(`item${selectedItemSlot}-img-${karakterID}`, imageUrl);
         window.location.href = 'favokarak.html';
     }
 }
-(window as any).selectItem = selectItem; // Zorg dat onclick werkt
+(window as any).selectItem = selectItem; 
 
-// ✅ Pas kleur aan van filter bij selectie
+
 function updateFilterColor(filter: HTMLSelectElement): void {
     const selectedRarity = filter.value;
     filter.style.backgroundColor = getRarityColor(selectedRarity);
 }
 
-// ✅ Event listeners voor filters
+
 if (weaponFilter) {
     weaponFilter.addEventListener('change', () => {
         updateFilterColor(weaponFilter);
@@ -133,7 +133,7 @@ if (backblingFilter) {
     });
 }
 
-// ✅ Popup weergeven
+
 function showPopup(message: string): void {
     let popupMessage = document.getElementById('popup-message') as HTMLElement | null;
 
@@ -152,7 +152,7 @@ function showPopup(message: string): void {
     }, 3000);
 }
 
-// ✅ Info-knop (popup)
+
 const infoBtn = document.querySelector('.info-btn') as HTMLButtonElement | null;
 if (infoBtn) {
     infoBtn.addEventListener('click', () => {
@@ -160,10 +160,10 @@ if (infoBtn) {
     });
 }
 
-// ✅ Laad items bij opstart
+
 fetchItems();
 
-// ✅ Menu toggle
+
 function toggleMenu(): void {
     const navMenu = document.querySelector(".nav-menu") as HTMLElement;
     navMenu.classList.toggle("show");
