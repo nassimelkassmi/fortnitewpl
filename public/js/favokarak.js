@@ -138,4 +138,4 @@ console.log("📌 Notes input ID:", notesInput);
 console.log("📌 Save button ID:", saveNotes);
 fetchKarakter();
 loadUserData();
-export {};
+

@@ -44,4 +44,4 @@ async function start_fadeout(tag) {
         tag.classList.add("fade_out");
     }
 }
-export {};
+

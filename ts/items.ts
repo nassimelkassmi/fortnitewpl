@@ -1,5 +1,3 @@
-export {};
-
 // 🔰 Types voor API-items
 type Rarity = {
     value: string;

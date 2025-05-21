@@ -119,4 +119,4 @@ function showPopup(message) {
 }
 // ✅ Initialiseer
 fetchKarakter();
-export {};
+

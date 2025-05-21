@@ -40,4 +40,4 @@ async function request(url, data, mode, token) {
         });
     }
 }
-export {};
+

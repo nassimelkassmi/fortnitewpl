@@ -1,4 +1,3 @@
-export {};
 
 
 // 🔰 Type voor outfit uit API

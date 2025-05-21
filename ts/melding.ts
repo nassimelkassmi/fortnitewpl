@@ -1,4 +1,4 @@
-export {};
+
 
 
 let melding_tag: HTMLElement | null = null;

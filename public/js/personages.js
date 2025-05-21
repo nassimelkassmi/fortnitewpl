@@ -132,4 +132,4 @@ function toggleMenu() {
 }
 // ✅ Start de applicatie
 fetchOutfits();
-export {};
+
