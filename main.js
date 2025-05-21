@@ -1,7 +1,7 @@
 function start_server_msg() {
     console.log("server listening to port", port);
 }
-const port = 5500;
+const port = 3000;
 const __dirname = import.meta.dirname;
 import ms from "ms";
 import * as fs from 'fs';

@@ -107,7 +107,7 @@ body {
   padding: 40px 50px;
   margin: 120px auto 20px;
   width: 75%;
-  box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.2);
+
   display: flex;
   flex-direction: column;
   gap: 30px;
@@ -134,7 +134,7 @@ body {
 .karakter-img-wrapper img {
   width: 250px;
   border: 4px solid white;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+
 }
 
 .karakter-details {
@@ -210,7 +210,7 @@ body {
 .item-slot img {
   width: 150px;
   border: 2px solid white;
-  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.5);
+
 }
 
 .item-slot button {
@@ -256,7 +256,7 @@ body {
   padding: 10px;
   border: 1px solid white;
   margin-bottom: 8px;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+
 }
 
 .saved-note p {
@@ -318,6 +318,7 @@ body {
   color: white;
   cursor: pointer;
   transition: 0.2s ease-in-out;
+  margin-left: 10px;
 }
 
 .remove-favorite:hover {
@@ -336,7 +337,7 @@ body {
   font-size: 1.5rem;
   text-align: center;
   display: none;
-  box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.3);
+ 
   z-index: 1000;
 }
 
