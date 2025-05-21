@@ -1,3 +1,4 @@
+export {};
 // Type voor de favorietenlijst (id's als string)
 let favorites: string[] = JSON.parse(localStorage.getItem('favorites') || '[]');
 

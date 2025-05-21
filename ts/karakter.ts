@@ -1,3 +1,6 @@
+export {};
+
+
 interface BlacklistCharacter {
     id: string;
     name: string;

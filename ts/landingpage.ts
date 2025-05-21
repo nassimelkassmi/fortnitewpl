@@ -1,3 +1,4 @@
+export {};
 
 
 //de melding tag variable houdt en kopie van de html div met melding class

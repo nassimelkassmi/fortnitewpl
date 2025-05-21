@@ -1,3 +1,6 @@
+export {};
+
+
 let melding_tag: HTMLElement | null = null;
 const body: HTMLElement = document.getElementsByTagName("body")[0];
 let melding_tag_time: number = 0;

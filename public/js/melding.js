@@ -1,4 +1,3 @@
-"use strict";
 let melding_tag = null;
 const body = document.getElementsByTagName("body")[0];
 let melding_tag_time = 0;
@@ -45,3 +44,4 @@ async function start_fadeout(tag) {
         tag.classList.add("fade_out");
     }
 }
+export {};

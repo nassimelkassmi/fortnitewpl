@@ -1,3 +1,6 @@
+export {};
+
+
 // 🔰 Type voor outfit uit API
 type Outfit = {
     id: string;

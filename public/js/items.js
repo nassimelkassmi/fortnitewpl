@@ -1,4 +1,3 @@
-"use strict";
 // 🧩 DOM-elementen
 const weaponsGrid = document.getElementById('weapons-grid');
 const emotesGrid = document.getElementById('emotes-grid');
@@ -134,3 +133,4 @@ function toggleMenu() {
     const navMenu = document.querySelector(".nav-menu");
     navMenu.classList.toggle("show");
 }
+export {};

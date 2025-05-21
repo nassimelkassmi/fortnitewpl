@@ -1,3 +1,6 @@
+export {};
+
+
 let accesstoken = "";
 
 document.addEventListener('DOMContentLoaded', set_name);
