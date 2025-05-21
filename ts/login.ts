@@ -1,3 +1,6 @@
+export {};
+
+
 function login(): void {
     login2();
 }

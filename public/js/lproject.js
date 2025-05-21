@@ -1,4 +1,3 @@
-"use strict";
 let accesstoken = "";
 document.addEventListener('DOMContentLoaded', set_name);
 async function set_name() {
@@ -41,3 +40,4 @@ async function request(url, data, mode, token) {
         });
     }
 }
+export {};
