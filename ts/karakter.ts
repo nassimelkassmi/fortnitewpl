@@ -8,7 +8,7 @@ interface BlacklistCharacter {
     reason?: string;
   }
   
-  // ❗️ Haal karakter ID op en controleer op null
+
   const karakterID = localStorage.getItem('selectedCharacter');
   if (!karakterID) {
     alert('Geen karakter geselecteerd!');
@@ -16,7 +16,7 @@ interface BlacklistCharacter {
     throw new Error("Geen karakter geselecteerd");
   }
   
-  // ❗️ DOM elementen veilig casten
+
   const karakterImg = document.getElementById('karakter-img') as HTMLImageElement;
   const karakterNaam = document.getElementById('karakter-naam') as HTMLElement;
   const karakterBeschrijving = document.getElementById('karakter-beschrijving') as HTMLElement;
@@ -35,7 +35,7 @@ interface BlacklistCharacter {
   const submitBlacklist = document.getElementById('submit-blacklist') as HTMLElement;
   const userProfileImg = document.getElementById('user-profile-img') as HTMLImageElement;
   
-  // ✅ Haal data van API
+ 
   async function fetchKarakter() {
     try {
       const response = await fetch(`https://fortnite-api.com/v2/cosmetics/br/${karakterID}`);
@@ -74,7 +74,7 @@ interface BlacklistCharacter {
   
   let favorites: string[] = JSON.parse(localStorage.getItem('favorites') || '[]');
   
-  // ✅ Favorieten logica
+
   if (favorites.includes(karakterID)) {
     favoriteStar.style.display = 'block';
     favoriteBtn.textContent = '💔';
@@ -96,7 +96,7 @@ interface BlacklistCharacter {
     localStorage.setItem('favorites', JSON.stringify(favorites));
   });
   
-  // ✅ Gebruiker instellen
+
   let isUserCharacter = localStorage.getItem('userCharacter') === karakterID;
   setProfileBtn.src = isUserCharacter ? './assets/delete.png' : './assets/add-user.png';
   userProfileImg.src = isUserCharacter ? karakterImg.src : './assets/question-mark.svg';
@@ -109,7 +109,7 @@ interface BlacklistCharacter {
     showPopup(isUserCharacter ? 'Je hebt dit karakter als gebruiker gekozen!' : 'Niet langer je gebruiker!');
   });
   
-  // ✅ Blacklist toevoegen
+
   blacklistBtn.addEventListener('click', () => {
     blacklistReason.classList.add('show');
   });
@@ -147,6 +147,6 @@ interface BlacklistCharacter {
     setTimeout(() => popupMessage.classList.remove('show'), 3000);
   }
   
-  // ✅ Initialiseer
+
   fetchKarakter();
   

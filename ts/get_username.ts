@@ -62,5 +62,5 @@ async function request(
     }
 }
 
-// 👇 Zodat functies uit dit bestand beschikbaar zijn in HTML zoals onclick="..."
+
 (window as any).set_name = set_name;

@@ -1,6 +1,6 @@
 
 
-// 🔰 Type voor outfit uit API
+
 type Outfit = {
     id: string;
     name: string;
@@ -9,17 +9,17 @@ type Outfit = {
     images: { icon: string };
 };
 
-// 🧩 DOM-elementen
+
 const charactersGrid = document.getElementById('characters-grid') as HTMLElement;
 const searchInput = document.getElementById('search') as HTMLInputElement;
 const filterSelect = document.getElementById('filter-rarity') as HTMLSelectElement;
 const infoBtn = document.querySelector('.info-btn') as HTMLButtonElement;
 const popupMessage = document.getElementById('popup-message') as HTMLElement;
 
-// ⛳ Globale outfitslijst (voor filtering)
+
 let allOutfits: Outfit[] = [];
 
-// ✅ Haal outfits van Fortnite API
+
 async function fetchOutfits(): Promise<void> {
     try {
         const response = await fetch('https://fortnite-api.com/v2/cosmetics/br');
@@ -34,7 +34,7 @@ async function fetchOutfits(): Promise<void> {
     }
 }
 
-// ✅ Toon de outfits
+
 function displayCharacters(outfits: Outfit[]): void {
     charactersGrid.innerHTML = '';
 
@@ -71,7 +71,6 @@ function displayCharacters(outfits: Outfit[]): void {
     });
 }
 
-// ✅ Filteren op naam + zeldzaamheid
 function filterCharacters(): void {
     const searchText = searchInput.value.toLowerCase();
     const selectedRarity = filterSelect.value;
@@ -92,21 +91,20 @@ function filterCharacters(): void {
     displayCharacters(filtered);
 }
 
-// ✅ Toon melding
+
 function showPopup(message: string): void {
     popupMessage.textContent = message;
     popupMessage.classList.add('show');
     setTimeout(() => popupMessage.classList.remove('show'), 3000);
 }
 
-// ✅ Event listeners
 infoBtn.addEventListener('click', () => {
     showPopup('Klik op een personage voor meer opties! Alleen bij favorieten kan je items en notities toevoegen!');
 });
 searchInput.addEventListener('input', filterCharacters);
 filterSelect.addEventListener('change', filterCharacters);
 
-// ✅ Access token logic
+
 let accesstoken: string = '';
 
 document.addEventListener('DOMContentLoaded', set_name, false);
@@ -132,7 +130,7 @@ async function refresh_access_token(): Promise<boolean> {
     return !!accesstoken;
 }
 
-// ✅ Standaard fetch-functie
+
 async function request(url: string, data: any, method: string, token: string): Promise<Response> {
     let response: Response;
 
@@ -159,11 +157,11 @@ async function request(url: string, data: any, method: string, token: string): P
     return response;
 }
 
-// ✅ Navigatiemenu openen/sluiten
+
 function toggleMenu(): void {
     const menu = document.querySelector(".nav-menu") as HTMLElement;
     menu.classList.toggle("show");
 }
 
-// ✅ Start de applicatie
+
 fetchOutfits();

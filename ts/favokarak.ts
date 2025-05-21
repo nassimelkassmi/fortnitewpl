@@ -1,7 +1,7 @@
-// Type voor de favorietenlijst (id's als string)
+
 let favorites: string[] = JSON.parse(localStorage.getItem('favorites') || '[]');
 
-// DOM-elementen met expliciete types
+
 const karakterImg = document.getElementById('karakter-img') as HTMLImageElement;
 const karakterNaam = document.getElementById('karakter-naam') as HTMLElement;
 const karakterBeschrijving = document.getElementById('karakter-beschrijving') as HTMLElement;
@@ -25,7 +25,7 @@ if (!karakterID) {
     window.location.href = 'personages.html';
 }
 
-// ✅ Haal karakterdata op via API
+
 async function fetchKarakter(): Promise<void> {
     try {
         const response = await fetch(`https://fortnite-api.com/v2/cosmetics/br/${karakterID}`);
@@ -42,7 +42,7 @@ async function fetchKarakter(): Promise<void> {
     }
 }
 
-// ✅ Laad lokale data (wins, losses, items, notities)
+
 function loadUserData(): void {
     wins.innerText = localStorage.getItem(`wins-${karakterID}`) || '0';
     losses.innerText = localStorage.getItem(`losses-${karakterID}`) || '0';
@@ -53,7 +53,6 @@ function loadUserData(): void {
     item2Img.src = localStorage.getItem(`item2-img-${karakterID}`) || './assets/placeholder.png';
 }
 
-// ✅ Notitie toevoegen
 function saveAndDisplayNote(): void {
     const noteText: string = notesInput.value.trim();
     if (noteText === '') return;
@@ -70,7 +69,6 @@ function saveAndDisplayNote(): void {
     notesInput.value = '';
 }
 
-// ✅ Notities tonen
 function displayNotes(): void {
     const savedNotesRaw = localStorage.getItem(`notes-${karakterID}`);
     let savedNotes: string[];
@@ -105,7 +103,7 @@ function displayNotes(): void {
     });
 }
 
-// ✅ Notitie verwijderen
+
 function deleteNote(event: Event): void {
     const target = event.target as HTMLElement;
     const noteIndex = parseInt(target.getAttribute('data-index') || '0');
@@ -117,7 +115,7 @@ function deleteNote(event: Event): void {
     displayNotes();
 }
 
-// ✅ Wins en losses bijhouden
+
 addWin.addEventListener('click', () => {
     const winCount = parseInt(wins.innerText) + 1;
     wins.innerText = winCount.toString();
@@ -130,36 +128,36 @@ addLoss.addEventListener('click', () => {
     localStorage.setItem(`losses-${karakterID}`, lossCount.toString());
 });
 
-// ✅ Notitie opslaan
+
 saveNotes.addEventListener('click', saveAndDisplayNote);
 
-// ✅ Item selecteren
+
 function selectItem(slot: string): void {
     localStorage.setItem('selectedItemSlot', slot);
     window.location.href = 'items.html';
 }
 
-// ✅ Laad item-afbeeldingen meteen
+
 document.addEventListener("DOMContentLoaded", () => {
     item1Img.src = localStorage.getItem(`item1-img-${karakterID}`) || './assets/placeholder.png';
     item2Img.src = localStorage.getItem(`item2-img-${karakterID}`) || './assets/placeholder.png';
 });
 
-// ✅ Favoriet verwijderen
+
 removeFavorite.addEventListener('click', () => {
     favorites = favorites.filter(id => id !== karakterID);
     localStorage.setItem('favorites', JSON.stringify(favorites));
     window.location.href = 'personages.html';
 });
 
-// ✅ Info-popup
+
 infoBtn.addEventListener('click', () => {
     popupMessage.textContent = "Hier kan je notities en items toevoegen en je wins en losses bijhouden!";
     popupMessage.classList.add('show');
     setTimeout(() => popupMessage.classList.remove('show'), 3000);
 });
 
-// ✅ Pagina initialisatie
+
 console.log("📌 Notes list ID:", notesList);
 console.log("📌 Notes input ID:", notesInput);
 console.log("📌 Save button ID:", saveNotes);
