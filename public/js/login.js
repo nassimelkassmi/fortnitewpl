@@ -1,3 +1,4 @@
+"use strict";
 function login() {
     login2();
 }
@@ -73,4 +74,3 @@ async function request(url, data, mode, token = "") {
     return response;
 }
 window.login = login;
-

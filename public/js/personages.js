@@ -1,3 +1,4 @@
+"use strict";
 // 🧩 DOM-elementen
 const charactersGrid = document.getElementById('characters-grid');
 const searchInput = document.getElementById('search');
@@ -132,4 +133,3 @@ function toggleMenu() {
 }
 // ✅ Start de applicatie
 fetchOutfits();
-

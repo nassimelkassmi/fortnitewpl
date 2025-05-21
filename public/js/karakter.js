@@ -1,3 +1,4 @@
+"use strict";
 // ❗️ Haal karakter ID op en controleer op null
 const karakterID = localStorage.getItem('selectedCharacter');
 if (!karakterID) {
@@ -119,4 +120,3 @@ function showPopup(message) {
 }
 // ✅ Initialiseer
 fetchKarakter();
-

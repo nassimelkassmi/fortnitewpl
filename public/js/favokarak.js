@@ -1,3 +1,4 @@
+"use strict";
 // Type voor de favorietenlijst (id's als string)
 let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
 // DOM-elementen met expliciete types
@@ -138,4 +139,3 @@ console.log("📌 Notes input ID:", notesInput);
 console.log("📌 Save button ID:", saveNotes);
 fetchKarakter();
 loadUserData();
-

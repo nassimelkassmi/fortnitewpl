@@ -1,3 +1,4 @@
+"use strict";
 //de melding tag variable houdt en kopie van de html div met melding class
 //dit zorgt ervoor dat we gewoon het zelfde html element kunnen gebruiken om op het scherm te zetten
 let melding_tag = null;
@@ -143,4 +144,3 @@ async function request(url, data, mode, token) {
     }
     return response;
 }
-
