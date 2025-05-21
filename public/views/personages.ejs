@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fortnite Personages</title>
+  <link rel="stylesheet" href="/css/personages.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="navbar">
+    <div class="left">
+      <img src="/assets/logoFN.png" class="logo" alt="Logo" />
+    </div>
+
+    <div class="center">
+      <nav>
+        <a href="/personages" class="nav-btn active">Personages</a>
+        <a href="/favorieten" class="nav-btn">Favorieten</a>
+        <a href="/blacklist" class="nav-btn">Zwarte Lijst</a>
+      </nav>
+    </div>
+
+    <div class="right">
+      <div class="user-info">
+        <img id="user-profile-img" src="/assets/question-mark.svg" alt="User" class="user-profile" />
+        <span class="username" id="username_display"><%= username || "Gebruikersnaam" %></span>
+        <button class="info-btn">ℹ️</button>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <!-- Bovenste section -->
+    <section class="top-section">
+      <div class="top-container">
+        <h1>Personages</h1>
+        <div class="search-container">
+          <input type="text" id="search" placeholder="Zoek">
+          <button class="play-btn">Play</button>
+          <select id="filter-rarity">
+            <option value="">Alle Zeldzaamheden</option>
+            <option value="common">Common</option>
+            <option value="uncommon">Uncommon</option>
+            <option value="rare">Rare</option>
+            <option value="epic">Epic</option>
+            <option value="legendary">Legendary</option>
+            <option value="other">Overige</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <!-- Grid met personages -->
+    <section class="characters-section">
+      <div class="characters-grid" id="characters-grid">
+        <% characters.forEach(character => { %>
+          <div class="character-card rarity-<%= character.rarity %>" style="background-image: url('<%= character.image %>');">
+            <span class="rarity-label"><%= character.rarity.charAt(0).toUpperCase() + character.rarity.slice(1) %></span>
+            <h3><%= character.name %></h3>
+          </div>
+        <% }) %>
+      </div>
+    </section>
+
+    <!-- Popup -->
+    <div id="popup-message" class="popup-message"><%= popupMessage || "" %></div>
+  </main>
+
+  <footer>
+    &copy; Code Ninjas | AP Hogeschool
+  </footer>
+
+  <script src="/js/personages.js"></script>
+</body>
+</html>

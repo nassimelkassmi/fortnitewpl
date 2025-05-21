@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Favoriet Karakter</title>
+  <link rel="stylesheet" href="/css/favokarak.css">
+  <script src="/js/get_username.js" defer></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bangers&display=swap">
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="left">
+      <a href="/personages" class="back-btn">←</a>
+    </div>
+    <div class="center">
+      <nav>
+        <span class="navbar-title">KARAKTER</span>
+      </nav>
+    </div>
+    <div class="right">
+      <div class="user-info">
+        <img id="user-profile-img" src="/assets/question-mark.svg" alt="User" class="user-profile" />
+        <span class="username" id="username_display"><%= username || "Gebruikersnaam" %></span>
+        <button class="info-btn">ℹ️</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="karakter-container">
+    <div class="karakter-info">
+      <span class="favorite-star">⭐</span>
+      <img id="karakter-img" src="<%= karakter.image %>" alt="Karakter Afbeelding">
+      <h1 id="karakter-naam"><%= karakter.name %></h1>
+      <p id="karakter-beschrijving"><%= karakter.description %></p>
+
+      <div class="stats">
+        <p>🏆 Wins: <span id="wins"><%= karakter.wins %></span></p>
+        <p>💀 Losses: <span id="losses"><%= karakter.losses %></span></p>
+        <button id="add-win">+</button>
+        <button id="add-loss">-</button>
+      </div>
+
+      <div class="item-shop">
+        <h2>🎁 Geselecteerde Items (max. 2)</h2>
+        <div class="selected-items">
+          <div class="item-slot">
+            <img id="item1-img" src="<%= karakter.items[0] || '/assets/placeholder.png' %>" alt="Item 1">
+            <button onclick="selectItem(1)">+</button>
+          </div>
+          <div class="item-slot">
+            <img id="item2-img" src="<%= karakter.items[1] || '/assets/placeholder.png' %>" alt="Item 2">
+            <button onclick="selectItem(2)">+</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="notes">
+        <h2>📝 Notities</h2>
+        <div id="notes-list">
+          <% if (karakter.notes && karakter.notes.length > 0) { %>
+            <% karakter.notes.forEach(note => { %>
+              <p><%= note %></p>
+            <% }) %>
+          <% } %>
+        </div>
+        <textarea id="notes" placeholder="Schrijf hier je notities..."></textarea>
+        <button id="save-notes">💾 Opslaan</button>
+      </div>
+
+      <button class="remove-favorite">💔 Verwijder uit favorieten</button>
+    </div>
+  </main>
+
+  <div id="popup-message" class="popup-message"></div>
+
+  <script src="/js/favokarak.js"></script>
+</body>
+</html>

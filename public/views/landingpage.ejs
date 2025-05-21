@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Landing Page</title>
+  <link rel="stylesheet" href="/css/landingpage.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    <img src="/assets/logoFN.png" alt="Code Ninjas Logo" class="logo">
+
+    <% if (!username) { %>
+      <div id="login_register" class="auth-buttons">
+        <button onclick="window.location.href='/login'">Inloggen</button>
+        <button class="nav-register-btn" onclick="window.location.href='/registreren'">Registreren</button>
+      </div>
+    <% } else { %>
+      <div id="profiel">
+        <span id="profiel_name"><%= username %></span>
+        <button id="log_out" type="button" onclick="logout()">Log uit</button>
+      </div>
+    <% } %>
+  </header>
+
+  <main class="grid-container">
+    <% games.forEach(game => { %>
+      <div class="game">
+        <div class="game-image-container">
+          <% if (game.link) { %>
+            <a href="<%= game.link %>"><img src="<%= game.image %>" alt="<%= game.name %>"></a>
+          <% } else { %>
+            <img src="<%= game.image %>" alt="<%= game.name %>">
+          <% } %>
+        </div>
+        <div class="game-text-container">
+          <h2><%= game.name %></h2>
+          <% if (game.link) { %>
+            <a href="<%= game.link %>"><button class="play-btn">▶ &nbsp;Start</button></a>
+          <% } else { %>
+            <button class="play-btn">▶ &nbsp;Start</button>
+          <% } %>
+        </div>
+      </div>
+    <% }) %>
+  </main>
+
+  <footer>
+    <p>© Code Ninjas | AP Hogeschool</p>
+  </footer>
+
+  <script type="module" src="/js/landingpage.js"></script>
+</body>
+</html>
