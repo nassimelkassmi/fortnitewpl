@@ -1,6 +1,6 @@
 @font-face {
-    font-family: Fortnite;
-    src: url(../fonts/Fortnite.ttf);
+  font-family: Fortnite;
+  src: url(../fonts/Fortnite.ttf);
 }
 
 /* Algemene reset */
@@ -21,198 +21,175 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-
 }
+
 /* Navigatiebalk */
 .navbar {
-    font-family: Fortnite;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    display: flex;               
-    align-items: center;         
-    background-color: #4382CE;
-    padding: 15px 100px !important;
-    z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background-color: #4382CE;
+  padding: 15px 100px !important;
+  z-index: 1000;
 }
 
 .left, .center, .right {
-    flex: 1; 
+  flex: 1;
 }
 
 .logo {
-    width: 90px !important;
-    height: auto !important;
+  width: 90px !important;
+  height: auto !important;
 }
 
 .center {
-    text-align: center;
+  text-align: center;
 }
 
 .center nav {
-    display: inline-flex;
-    gap: 15px;
-    white-space: nowrap;
-    font-size: 3rem;
+  display: inline-flex;
+  gap: 15px;
+  white-space: nowrap;
+  font-size: 3rem;
 }
 
 .right {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .back-btn {
-    font-family: Fortnite;
-    font-weight: bold;
-    color: white;
-    text-decoration: none;
-    font-size: 3rem;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  font-size: 3rem;
 }
 
-.nav-btn {
-    display: inline-block;           
-    background-color: #7d97d0ce;
-    padding: 11px 35px 10px 35px !important;
-    color: #fff;
-    cursor: pointer;
-    font-size: 1.2rem !important;
-    font-family: Fortnite;
-    text-transform: uppercase;
-    transition: all ease 0.3s;
-    text-decoration: none;           
-    border: none;                   
-    outline: none;                  
-}
-
-.nav-btn:hover {
-    background-color: #FFF457;
-    color: #292A49;
-}
-
-.nav-btn.active {
-    background-color: #FFF457;
-    color: #292A49;
-}
-
+/* Gebruiker info */
 .user-info {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .user-info img.user-profile {
-    width: 40px;
-    height: 40px;
-    object-fit: cover;
-    border-radius: 50%;
-}
-
-.info-btn {
-    background: transparent;
-    border: none;
-    font-size: 1.8rem !important;
-    cursor: pointer;
-    color: inherit;
-    text-transform: uppercase;
-    font-weight: 200;
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .username {
-    font-size: 1.8rem;
-    font-family: Fortnite;
-    text-transform: uppercase;
+  font-size: 1.8rem;
+  text-transform: uppercase;
 }
 
+.info-btn {
+  background: none;
+  border: none;
+  font-size: 3rem;
+  color: white;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+}
 
-/* Karaktercontainer – stijl aangepast zoals het voorbeeld */
+.info-btn:hover {
+  color: #f4d03f;
+}
+
+/* Karakter container */
 .karakter-container {
   background: #0b13388f;
   padding: 40px 50px;
   margin: 120px auto 20px;
   width: 75%;
-  border-radius: 15px;
   box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.2);
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.karakter-content {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+.karakter-img-wrapper {
   position: relative;
 }
 
-/* Favoriet ster */
 .favorite-star {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: -15px;
+  left: -15px;
   font-size: 3rem;
   color: gold;
 }
 
-/* Karakter afbeelding */
-.karakter-info img {
+.karakter-img-wrapper img {
   width: 250px;
-  height: auto;
-  border-radius: 12px;
   border: 4px solid white;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-  margin: 20px 0;
 }
 
-/* Karakternaam */
-.karakter-info h1 {
+.karakter-details {
+  flex: 1;
+}
+
+.karakter-details h1 {
   font-size: 4rem;
-  color: #f4d03f;
-  margin-top: 10px;
+  color: #FFF457;;
   text-transform: uppercase;
+  margin-bottom: 15px;
 }
 
-/* Karakter beschrijving */
-.karakter-info p {
+#karakter-naam {
+  margin: 0;
+}
+
+.karakter-details p {
   font-size: 1.5rem;
-  margin: 20px 0;
+  margin-bottom: 25px;
 }
 
-/* Statistieken */
 .stats {
   display: flex;
-  justify-content: center;
-  align-items: center;
   gap: 20px;
-  margin-top: 20px;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .stats p {
   font-size: 2rem;
-  background: rgba(255, 255, 255, 0.1);
-  padding: 10px 20px;
-  border-radius: 8px;
-  border: 2px solid white;
-  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+  background: rgb(22, 39, 97);
+  padding: 10px 30px;
+  margin: 0;
 }
 
 .stats button {
   font-size: 2rem;
-  padding: 10px 20px;
+  padding: 14px 24px;
   background-color: #1bace4;
   border: none;
-  border-radius: 2px;
   color: white;
   cursor: pointer;
   transition: 0.2s ease-in-out;
 }
 
 .stats button:hover {
-  background-color: #f4d03f;
+  background-color: #FFF457;
   color: black;
 }
 
 /* Item Shop */
-.item-shop {
-  margin-top: 20px;
-}
-
 .item-shop h2 {
   font-size: 2.5rem;
-  color: #f4d03f;
+  color: #FFF457;
   margin-bottom: 10px;
 }
 
@@ -221,7 +198,6 @@ body {
   justify-content: center;
   align-items: center;
   gap: 20px;
-  margin-top: 15px;
 }
 
 .item-slot {
@@ -233,8 +209,6 @@ body {
 
 .item-slot img {
   width: 150px;
-  height: auto;
-  border-radius: 8px;
   border: 2px solid white;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.5);
 }
@@ -245,30 +219,24 @@ body {
   font-size: 1rem;
   background-color: #1bace4;
   border: none;
-  border-radius: 8px;
   color: white;
   cursor: pointer;
   transition: 0.2s ease-in-out;
 }
 
 .item-slot button:hover {
-  background-color: #f4d03f;
+  background-color: #FFF457;
   color: black;
 }
 
 /* Notities */
 .notes {
-  margin-top: 20px;
-  background: rgba(255, 255, 255, 0.1);
   padding: 20px;
-  border-radius: 12px;
-  border: 2px solid white;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .notes h2 {
   font-size: 2rem;
-  color: #f4d03f;
+  color: #FFF457;
   margin-bottom: 10px;
 }
 
@@ -277,7 +245,7 @@ body {
   max-height: 200px;
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: #f4d03f rgba(255, 255, 255, 0.1);
+  scrollbar-color: #FFF457 rgba(255, 255, 255, 0.1);
 }
 
 .saved-note {
@@ -286,7 +254,6 @@ body {
   align-items: center;
   background: rgba(0, 122, 193, 0.8);
   padding: 10px;
-  border-radius: 8px;
   border: 1px solid white;
   margin-bottom: 8px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
@@ -305,7 +272,6 @@ body {
   padding: 6px 10px;
   background-color: #ff4c4c;
   border: none;
-  border-radius: 6px;
   color: white;
   cursor: pointer;
   transition: 0.2s ease-in-out;
@@ -318,12 +284,11 @@ body {
 #notes {
   width: 100%;
   height: 100px;
-  border-radius: 8px;
-  border: 2px solid white;
+  border: 4px solid rgb(30, 72, 171);
   padding: 10px;
   font-size: 1.5rem;
-  background: rgba(0, 0, 0, 0.8);
-  color: white;
+  background: rgba(0, 0, 0, 0.51);
+  color: rgb(230, 230, 230);
   outline: none;
   text-align: center;
 }
@@ -334,7 +299,6 @@ body {
   padding: 10px 20px;
   background-color: #1bace4;
   border: none;
-  border-radius: 8px;
   color: white;
   cursor: pointer;
   transition: 0.2s ease-in-out;
@@ -345,14 +309,12 @@ body {
   color: black;
 }
 
-/* Verwijder uit favorieten */
 .remove-favorite {
   font-size: 1.5rem;
   margin-top: 20px;
   padding: 10px 20px;
   background-color: #ff4c4c;
   border: none;
-  border-radius: 8px;
   color: white;
   cursor: pointer;
   transition: 0.2s ease-in-out;
@@ -370,7 +332,6 @@ body {
   transform: translateX(-50%);
   background: rgba(0, 122, 193, 0.95);
   padding: 15px 25px;
-  border-radius: 10px;
   color: white;
   font-size: 1.5rem;
   text-align: center;
@@ -383,111 +344,51 @@ body {
   display: block !important;
 }
 
-.info-btn {
-  font-size: 3rem;
-  cursor: pointer;
-  background: none;
-  border: none;
-  color: white;
-  transition: color 0.2s ease-in-out;
-}
-
-.info-btn:hover {
-  color: #f4d03f;
-}
-
-/* Responsive styling */
+/* Responsive */
 @media (max-width: 720px) {
-  .navbar {
-    padding: 10px 15px;
+  .karakter-content {
+    flex-direction: column;
+    align-items: center;
   }
-  .back-btn {
+
+  .karakter-img-wrapper img {
+    width: 200px;
+  }
+
+  .karakter-details h1 {
     font-size: 2.5rem;
   }
-  .user-profile {
-    width: 45px;
-    height: 45px;
-  }
-  .karakter-container {
-    width: 90%;
-    padding: 30px;
-  }
-  .karakter-info img {
-    width: 180px;
-  }
-  h1 {
-    font-size: 2.5rem;
-  }
+
   .stats {
     flex-direction: column;
-  }
-  .selected-items {
-    flex-direction: column;
-    gap: 10px;
-  }
-  .item-slot img {
-    width: 120px;
   }
 }
 
 @media (max-width: 480px) {
   .navbar {
     flex-direction: column;
-    text-align: center;
     padding: 10px;
+    text-align: center;
   }
-  .back-btn {
-    font-size: 2rem;
-  }
-  .user-profile {
-    width: 40px;
-    height: 40px;
-  }
-  .karakter-container {
-    width: 100%;
-    padding: 20px;
-  }
-  .karakter-info img {
+
+  .karakter-img-wrapper img {
     width: 150px;
   }
-  h1 {
+
+  .karakter-details h1 {
     font-size: 2rem;
   }
-  h2 {
+
+  .stats p, .stats button {
     font-size: 1.5rem;
   }
-  .stats {
-    flex-direction: column;
-    gap: 10px;
-  }
-  .stats p {
-    font-size: 1.5rem;
-  }
-  .stats button {
-    font-size: 1.5rem;
-    padding: 8px;
-  }
-  .selected-items {
-    flex-direction: column;
-    gap: 8px;
-  }
+
   .item-slot img {
     width: 100px;
   }
+
   .item-slot button {
     font-size: 0.9rem;
     padding: 6px;
-  }
-  #notes {
-    font-size: 1.2rem;
-    height: 80px;
-  }
-  #save-notes {
-    font-size: 1.2rem;
-    padding: 8px 15px;
-  }
-  .remove-favorite {
-    font-size: 1.2rem;
-    padding: 8px 15px;
   }
 }
