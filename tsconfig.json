@@ -1,12 +1,13 @@
 {
   "compilerOptions": {
     "target": "ES2020",
-    "module": "ES6",
+    "module": "ESNext",
     "moduleResolution": "node",
-    "outDir": "public/js",
-    "rootDir": "ts",
-    "strict": true
+    "esModuleInterop": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true
   },
-  "include": ["ts/**/*.ts"],
-  "exclude": ["public"]
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"]
 }
