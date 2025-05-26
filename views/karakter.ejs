@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Karakter Informatie</title>
-  <link rel="stylesheet" href="/css/karakter.css">
-  <link rel="stylesheet" href="/css/favoriet.css"> <!-- Verwijder als niet nodig -->
-  <script src="/js/get_username.js" defer></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/karakter.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&family=Roboto:wght@100;400;700&display=swap" rel="stylesheet" />
 </head>
 <body>
+  <!-- NAVBAR -->
   <header class="navbar">
     <div class="left">
       <a href="/personages" class="back-btn">←</a>
@@ -23,42 +22,64 @@
     </div>
     <div class="right">
       <div class="user-info">
-        <img id="user-profile-img" src="/assets/question-mark.svg" alt="User" class="user-profile" />
-        <span class="username" id="username_display"><%= username || "Gebruikersnaam" %></span>
-        <button class="info-btn">ℹ️</button>
+        <img src="<%= avatarImage || '/assets/question-mark.svg' %>" alt="User" class="user-profile" />
+        <span class="username"><%= username %></span>
+        <form method="GET" action="/logout">
+          <button class="info-btn" title="Uitloggen">⎋</button>
+        </form>
       </div>
     </div>
   </header>
 
+  <!-- BLAUWE BALK BOVEN VAK -->
+  <section class="top-section">
+    <h1>KARAKTER INFO</h1>
+  </section>
+
+  <!-- INHOUD VAN KARAKTER -->
   <main class="karakter-container">
     <div class="karakter-info">
-      <span class="favorite-star">⭐</span>
-      <img id="karakter-img" class="rarity-<%= karakter.rarity %>" src="<%= karakter.image %>" alt="Karakter Afbeelding">
-      <h1 id="karakter-naam"><%= karakter.name %></h1>
-      <p id="karakter-beschrijving"><%= karakter.description %></p>
-
-      <div class="extra-info">
-        <p><strong>Zeldzaamheid:</strong> <span id="karakter-rarity" class="rarity-<%= karakter.rarity %>"><%= karakter.rarity %></span></p>
-        <p><strong>Set:</strong> <span id="karakter-set"><%= karakter.set %></span></p>
-        <p><strong>Releasedatum:</strong> <span id="karakter-release"><%= karakter.releaseDate %></span></p>
+      <div class="karakter-img-box">
+        <% if (isFavoriet) { %>
+          <span class="favorite-star">⭐</span>
+        <% } %>
+        <img class="rarity-<%= karakter.rarity.toLowerCase() %>" src="<%= karakter.image %>" alt="Karakter Afbeelding" />
       </div>
 
-      <div class="karakter-actions">
-        <button class="blacklist-btn">❌</button>
-        <button class="favorite-btn">❤️</button>
-        <button class="set-profile"><img src="/assets/add-user.png" alt="Set profiel"></button>
+      <div class="karakter-text-box">
+        <h1><%= karakter.name %></h1>
+        <p><%= karakter.description %></p>
+
+        <div class="extra-info">
+          <p><strong>Zeldzaamheid:</strong> <span class="rarity-<%= karakter.rarity.toLowerCase() %>"><%= karakter.rarity %></span></p>
+          <p><strong>Set:</strong> <%= karakter.set %></p>
+          <p><strong>Releasedatum:</strong> <%= karakter.releaseDate %></p>
+        </div>
+
+        <div class="karakter-actions">
+          <form method="POST" action="/blacklist/<%= karakter.id %>">
+            <input type="hidden" name="name" value="<%= karakter.name %>">
+            <input type="hidden" name="image" value="<%= karakter.image %>">
+            <input type="text" name="reason" placeholder="Reden voor blacklist" required>
+            <button type="submit" class="blacklist-btn">❌</button>
+          </form>
+
+          <form method="POST" action="/favorieten/<%= karakter.id %>">
+            <button type="submit" class="favorite-btn">❤️</button>
+          </form>
+
+          <form method="POST" action="/avatar/<%= karakter.id %>">
+            <button class="set-profile" type="submit">
+              <img src="/assets/add-user.png" alt="Set profiel" />
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   </main>
 
-  <div id="popup-message" class="popup-message"></div>
-
-  <div id="blacklist-reason" class="blacklist-reason">
-    <p>Reden voor de zwarte lijst:</p>
-    <input type="text" id="blacklist-input" placeholder="Geef een reden...">
-    <button id="submit-blacklist">Verstuur</button>
-  </div>
-
-  <script src="/js/karakter.js"></script>
+  <% if (popupMessage) { %>
+    <div id="popup-message" class="popup-message"><%= popupMessage %></div>
+  <% } %>
 </body>
 </html>

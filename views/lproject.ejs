@@ -5,7 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fortnite Landing Page</title>
   <link rel="stylesheet" href="/css/lproject.css">
-  <script src="/js/get_username.js" defer></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&family=Roboto&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -15,12 +17,14 @@
 
   <div class="landing-container">
     <h1 class="username">
-      <img src="/assets/characters/Berserk2.jpg" alt="Profielfoto" class="profile-pic">
-      <span id="username_display"><%= username || "USERNAME" %></span>
+      <img src="<%= avatarImage || '/assets/characters/Berserk2.jpg' %>" alt="Profielfoto" class="profile-pic">
+      <span><%= username || "USERNAME" %></span>
     </h1>
 
     <div class="buttons">
-      <button class="logout-btn" onclick="window.location.href='/'">LOG UIT</button>
+      <form action="/logout" method="GET" style="display:inline;">
+        <button class="logout-btn" type="submit">LOG UIT</button>
+      </form>
       <button class="play-btn"><a href="/personages">PLAY</a></button>
     </div>
 

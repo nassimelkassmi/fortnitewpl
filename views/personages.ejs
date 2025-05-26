@@ -9,13 +9,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
-
 <body>
+
   <div class="navbar">
     <div class="left">
       <img src="/assets/logoFN.png" class="logo" alt="Logo" />
     </div>
-
     <div class="center">
       <nav>
         <a href="/personages" class="nav-btn active">Personages</a>
@@ -23,58 +22,68 @@
         <a href="/blacklist" class="nav-btn">Zwarte Lijst</a>
       </nav>
     </div>
-
     <div class="right">
       <div class="user-info">
-        <img id="user-profile-img" src="/assets/question-mark.svg" alt="User" class="user-profile" />
-        <span class="username" id="username_display"><%= username || "Gebruikersnaam" %></span>
-        <button class="info-btn">ℹ️</button>
+        <img src="<%= avatarImage %>" alt="User" class="user-profile" />
+        <span class="username"><%= username %></span>
+        <form method="POST" action="/logout" style="display: inline;">
+          <button class="info-btn" title="Uitloggen">⎋</button>
+        </form>
       </div>
     </div>
   </div>
 
   <main>
-    <!-- Bovenste section -->
+    <!-- Topbar -->
     <section class="top-section">
       <div class="top-container">
         <h1>Personages</h1>
-        <div class="search-container">
-          <input type="text" id="search" placeholder="Zoek">
-          <button class="play-btn">Play</button>
-          <select id="filter-rarity">
+        <form method="GET" action="/personages" class="search-container" id="searchForm" autocomplete="off">
+          <input type="text" id="search" name="zoek" placeholder="Zoek" value="<%= zoek %>" autocomplete="off">
+          <button class="play-btn" type="submit">Play</button>
+          <select id="filter-rarity" name="rarity" onchange="this.form.submit()">
             <option value="">Alle Zeldzaamheden</option>
-            <option value="common">Common</option>
-            <option value="uncommon">Uncommon</option>
-            <option value="rare">Rare</option>
-            <option value="epic">Epic</option>
-            <option value="legendary">Legendary</option>
-            <option value="other">Overige</option>
+            <option value="common" <%=rarity==='common' ? 'selected' : '' %>>Common</option>
+            <option value="uncommon" <%=rarity==='uncommon' ? 'selected' : '' %>>Uncommon</option>
+            <option value="rare" <%=rarity==='rare' ? 'selected' : '' %>>Rare</option>
+            <option value="epic" <%=rarity==='epic' ? 'selected' : '' %>>Epic</option>
+            <option value="legendary" <%=rarity==='legendary' ? 'selected' : '' %>>Legendary</option>
+            <option value="other" <%=rarity==='other' ? 'selected' : '' %>>Overige</option>
           </select>
-        </div>
+        </form>
       </div>
     </section>
 
-    <!-- Grid met personages -->
+    <!-- Grid -->
     <section class="characters-section">
       <div class="characters-grid" id="characters-grid">
         <% characters.forEach(character => { %>
-          <div class="character-card rarity-<%= character.rarity %>" style="background-image: url('<%= character.image %>');">
-            <span class="rarity-label"><%= character.rarity.charAt(0).toUpperCase() + character.rarity.slice(1) %></span>
-            <h3><%= character.name %></h3>
-          </div>
-        <% }) %>
+          <a href="/personages/<%= character.id %>" class="character-link">
+            <div class="character-card rarity-<%= character.rarity.toLowerCase() %>" style="background-image: url('<%= character.image %>');">
+              <span class="rarity-label"><%= character.rarity %></span>
+              <% if (favorieteIds.includes(character.id)) { %>
+                <span class="favorite-star">⭐</span>
+              <% } %>
+              <h3><%= character.name %></h3>
+            </div>
+          </a>
+        <% }); %>
       </div>
     </section>
 
-    <!-- Popup -->
-    <div id="popup-message" class="popup-message"><%= popupMessage || "" %></div>
+    <% if (popupMessage) { %>
+      <div id="popup-message" class="popup-message">
+        <%= popupMessage %>
+      </div>
+    <% } %>
   </main>
 
   <footer>
     &copy; Code Ninjas | AP Hogeschool
   </footer>
 
-  <script src="/js/personages.js"></script>
-  <script src="/js/get_username.js"></script>
+
+ 
+
 </body>
 </html>

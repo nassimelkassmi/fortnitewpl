@@ -7,9 +7,7 @@
   <link rel="stylesheet" href="/css/blacklist.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="navbar">
@@ -19,21 +17,20 @@
     <div class="center">
       <nav>
         <a href="/personages" class="nav-btn">Personages</a>
-        <a href="/favoriet" class="nav-btn">Favorieten</a>
-        <a href="/blacklist" class="nav-btn active">Zwarte Lijst</a>
+        <a href="/favorieten" class="nav-btn">Favorieten</a>
+        <a href="#" class="nav-btn active">Zwarte Lijst</a>
       </nav>
     </div>
     <div class="right">
       <div class="user-info">
-        <img id="user-profile-img" src="/assets/question-mark.svg" alt="User" class="user-profile" />
-        <span class="username" id="username_display"><%= username || "Gebruikersnaam" %></span>
+        <img id="user-profile-img" src="<%= avatarImage || '/assets/question-mark.svg' %>" alt="User" class="user-profile" />
+        <span class="username" id="username_display"><%= username %></span>
         <button class="info-btn">ℹ️</button>
       </div>
     </div>
   </div>
 
   <main>
-
     <section class="top-section">
       <div class="top-container">
         <h1>Zwarte Lijst</h1>
@@ -55,20 +52,15 @@
 
     <section class="characters-section">
       <div class="characters-grid" id="blacklist-grid">
-        <% blacklist.forEach(character => { %>
-          <div class="character-card rarity-<%= character.rarity %>">
-            <img src="<%= character.image %>" alt="<%= character.name %>">
+        <% blacklist.forEach(char => { %>
+          <div class="character-card">
+            <img src="<%= char.image %>" alt="<%= char.name %>">
             <div class="character-info">
-              <h3><%= character.name %></h3>
-              <p class="blacklist-reason">Reden: <%= character.reason %></p>
-              <div class="edit-reason-container">
-                <input type="text" class="edit-reason" placeholder="Bewerk reden">
-                <button class="save-reason">Opslaan</button>
-              </div>
-              <div class="card-buttons">
-                <button class="edit-reason-btn">Bewerk reden</button>
+              <h3><%= char.name %></h3>
+              <p class="blacklist-reason">Reden: <%= char.reason %></p>
+              <form method="POST" action="/blacklist/<%= char.id %>/verwijder">
                 <button class="remove-blacklist">Verwijder</button>
-              </div>
+              </form>
             </div>
           </div>
         <% }) %>
@@ -83,7 +75,5 @@
   </footer>
 
   <script src="/js/blacklist.js"></script>
-  <script src="/js/get_username.js" defer></script>
-
 </body>
 </html>

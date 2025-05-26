@@ -2,39 +2,35 @@
   "name": "fortnitewpl",
   "version": "1.0.0",
   "type": "module",
-  "main": "src/main.ts",
+  "main": "src/index.ts",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only src/main.ts"
+    "dev": "node --loader ts-node/esm src/index.ts",
+    "test-mongo": "node --loader ts-node/esm src/test-mongo.ts"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/nassimelkassmi/fortnitewpl.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/nassimelkassmi/fortnitewpl/issues"
-  },
-  "homepage": "https://github.com/nassimelkassmi/fortnitewpl#readme",
   "dependencies": {
     "bcryptjs": "^3.0.2",
+    "connect-mongo": "^5.1.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
+    "ejs": "^3.1.10",
     "express": "^4.21.2",
+    "express-session": "^1.18.1",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.16.0",
+    "node-fetch": "^3.3.2",
     "uuid": "^11.1.0"
   },
   "devDependencies": {
     "@types/cookie-parser": "^1.4.8",
     "@types/cors": "^2.8.18",
-    "@types/express": "^5.0.0",
+    "@types/express": "^5.0.2",
+    "@types/express-session": "^1.18.1",
     "@types/jsonwebtoken": "^9.0.9",
     "@types/mongodb": "^4.0.6",
-    "@types/node": "^22.13.5",
+    "@types/node": "^22.15.21",
+    "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
-    "typescript": "^5.7.3"
+    "typescript": "^5.8.3"
   }
 }

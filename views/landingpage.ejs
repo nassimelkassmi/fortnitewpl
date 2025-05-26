@@ -6,8 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Landing Page</title>
   <link rel="stylesheet" href="/css/landingpage.css">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
-        rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -22,31 +21,65 @@
     <% } else { %>
       <div id="profiel">
         <span id="profiel_name"><%= username %></span>
-        <button id="log_out" type="button" onclick="logout()">Log uit</button>
+        <form method="GET" action="/logout">
+          <button id="log_out" type="submit">Log uit</button>
+        </form>
       </div>
     <% } %>
   </header>
 
   <main class="grid-container">
-    <% games.forEach(game => { %>
-      <div class="game">
-        <div class="game-image-container">
-          <% if (game.link) { %>
-            <a href="<%= game.link %>"><img src="<%= game.image %>" alt="<%= game.name %>"></a>
-          <% } else { %>
-            <img src="<%= game.image %>" alt="<%= game.name %>">
-          <% } %>
-        </div>
-        <div class="game-text-container">
-          <h2><%= game.name %></h2>
-          <% if (game.link) { %>
-            <a href="<%= game.link %>"><button class="play-btn">▶ &nbsp;Start</button></a>
-          <% } else { %>
-            <button class="play-btn">▶ &nbsp;Start</button>
-          <% } %>
-        </div>
+    <div class="game">
+      <div class="game-image-container">
+        <a href="/lproject"><img src="/assets/fortoepic.jpg" alt="Fortnite"></a>
       </div>
-    <% }) %>
+      <div class="game-text-container">
+        <a href="/lproject">
+          <h2>Fortnite</h2>
+        </a>
+        <a href="/lproject"><button class="play-btn">▶ &nbsp;Start</button></a>
+      </div>
+    </div>
+
+    <div class="game">
+      <img src="/assets/eafc25pic.jpg" alt="FIFA">
+      <div class="game-text-container">
+        <h2>FIFA</h2>
+        <button class="play-btn">▶ &nbsp;Start</button>
+      </div>
+    </div>
+
+    <div class="game">
+      <img src="/assets/lord-of-the-rings.jpg" alt="Lord of the Rings">
+      <div class="game-text-container">
+        <h2>Lord of The Rings</h2>
+        <button class="play-btn">▶ &nbsp;Start</button>
+      </div>
+    </div>
+
+    <div class="game">
+      <img src="/assets/pokemon.jpg" alt="Pokemon">
+      <div class="game-text-container">
+        <h2>Pokemon</h2>
+        <button class="play-btn">▶ &nbsp;Start</button>
+      </div>
+    </div>
+
+    <div class="game">
+      <img src="/assets/lego-masters.jpg" alt="Lego Masters">
+      <div class="game-text-container">
+        <h2>Lego Masters</h2>
+        <button class="play-btn">▶ &nbsp;Start</button>
+      </div>
+    </div>
+
+    <div class="game">
+      <img src="/assets/magic the gathering.jpg" alt="Magic The Gathering">
+      <div class="game-text-container">
+        <h2>Magic The Gathering</h2>
+        <button class="play-btn">▶ &nbsp;Start</button>
+      </div>
+    </div>
   </main>
 
   <footer>
