@@ -1,5 +1,3 @@
-// src/database.ts
-
 import { MongoClient, Db } from "mongodb";
 
 const uri = "mongodb+srv://amer:Etc5Oc2yczpYEhmr@cluster0.thionxf.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
@@ -11,8 +9,8 @@ export async function connect(): Promise<Db> {
 
   const client = new MongoClient(uri);
   await client.connect();
-  db = client.db("fortnitewpl"); // je mag deze naam aanpassen indien nodig
+  db = client.db("fortnitewpl"); 
 
-  console.log("✅ Verbonden met MongoDB");
+  console.log("Verbonden met MongoDB");
   return db;
 }

@@ -1,4 +1,3 @@
-// src/index.ts
 import express, { Request, Response, NextFunction } from 'express';
 import session from 'express-session';
 import MongoStore from 'connect-mongo';
@@ -82,24 +81,20 @@ app.get('/personages/:id/favorietdetail', requireLogin, async (req, res) => {
   const favData = user?.favorites.find(f => f.id === id);
   if (!favData) return res.redirect(`/personages/${id}`);
 
-  // 1. Haal de karakterdata uit de Fortnite API
   const apiRes = await fetch(`https://fortnite-api.com/v2/cosmetics/br/${id}`);
   const json = await apiRes.json();
   if (!json.data) return res.redirect(`/personages/${id}`); // bestaat niet
 
-  // 2. Items ophalen uit de API
   const apiResAll = await fetch('https://fortnite-api.com/v2/cosmetics/br');
   const jsonAll = await apiResAll.json();
   const allItems = jsonAll.data;
 
-  // 3. Item-icoontjes ophalen voor de favoriet
   const itemImages = (favData.items || []).map(itemID => {
     const item = allItems.find((itm: any) => itm.id === itemID);
     return item?.images?.icon || '/assets/placeholder.png';
   });
   while (itemImages.length < 2) itemImages.push('/assets/placeholder.png');
 
-  // 4. Render de detailpagina met correcte data uit API
   res.render('favokarak', {
     karakter: {
       id,
@@ -117,7 +112,6 @@ app.get('/personages/:id/favorietdetail', requireLogin, async (req, res) => {
 });
 
 
-  // LOGIN
   app.get('/login', (req, res) => {
     if (req.session.user) {
       res.redirect('/');
@@ -665,7 +659,6 @@ if (
 }
 
 
-  // Anders gewoon scores updaten
   await users.updateOne(
     { username: req.session.user, "favorites.id": id },
     { $set: { "favorites.$.wins": winsNum, "favorites.$.losses": lossesNum } }
