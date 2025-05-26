@@ -23,8 +23,8 @@
     </div>
     <div class="right">
       <div class="user-info">
-        <img id="user-profile-img" src="/assets/question-mark.svg" alt="User" class="user-profile" />
-        <span class="username" id="username_display"><%= username || "Gebruikersnaam" %></span>
+        <img src="<%= avatarImage || '/assets/question-mark.svg' %>" alt="User" class="user-profile" />
+        <span class="username"><%= username || "Gebruikersnaam" %></span>
         <button class="info-btn">ℹ️</button>
       </div>
     </div>
@@ -35,27 +35,35 @@
     <section class="top-section">
       <div class="top-container">
         <h1>Favorieten</h1>
-        <div class="search-container">
-          <input type="text" id="search" placeholder="Zoek">
-          <button class="play-btn">Play</button>
-          <select id="filter-rarity">
-            <option value="">Alle Zeldzaamheden</option>
-            <option value="common">Common</option>
-            <option value="uncommon">Uncommon</option>
-            <option value="rare">Rare</option>
-            <option value="epic">Epic</option>
-            <option value="legendary">Legendary</option>
-            <option value="other">Overige</option>
-          </select>
-        </div>
+      <form method="GET" action="/favorieten" class="search-container">
+  <input 
+    type="text" 
+    id="search" 
+    name="zoek" 
+    placeholder="Zoek" 
+    value="<%= zoek || '' %>">
+  <button class="play-btn" type="submit">Play</button>
+  <select name="rarity" id="filter-rarity" onchange="this.form.submit()">
+
+    <option value="">Alle Zeldzaamheden</option>
+    <option value="common" <%= rarity==='common'?'selected':'' %>>Common</option>
+    <option value="uncommon" <%= rarity==='uncommon'?'selected':'' %>>Uncommon</option>
+    <option value="rare" <%= rarity==='rare'?'selected':'' %>>Rare</option>
+    <option value="epic" <%= rarity==='epic'?'selected':'' %>>Epic</option>
+    <option value="legendary" <%= rarity==='legendary'?'selected':'' %>>Legendary</option>
+    <option value="other" <%= rarity==='other'?'selected':'' %>>Overige</option>
+  </select>
+</form>
+
       </div>
     </section>
 
     <!-- Onderste section: grid met favoriete personages -->
     <section class="characters-section">
-      <div class="characters-grid" id="favorites-grid">
+      <div class="characters-grid">
         <% favorites.forEach(character => { %>
           <a href="/personages/<%= character.id %>" class="character-card rarity-<%= character.rarity %>">
+            <span class="favorite-star">⭐</span>
             <img src="<%= character.image %>" alt="<%= character.name %>">
             <div class="character-info">
               <h3><%= character.name %></h3>
@@ -65,8 +73,10 @@
       </div>
     </section>
 
-    <!-- Popup voor meldingen -->
-    <div id="popup-message" class="popup-message"></div>
+    <!-- Popup voor meldingen (optioneel, via server) -->
+    <% if (popupMessage) { %>
+      <div id="popup-message" class="popup-message show"><%= popupMessage %></div>
+    <% } %>
   </main>
 
   <footer>

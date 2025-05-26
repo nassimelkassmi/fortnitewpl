@@ -21,7 +21,7 @@
       <div class="user-info">
         <img id="user-profile-img" src="<%= avatarImage || '/assets/question-mark.svg' %>" alt="User" class="user-profile" />
         <span class="username"><%= username %></span>
-        <button class="info-btn">ℹ️</button>
+        <button class="info-btn" onclick="showInfo()">ℹ️</button>
       </div>
     </div>
   </header>
@@ -35,53 +35,101 @@
       <div class="karakter-details">
         <h1><%= karakter.name %></h1>
         <p><%= karakter.description %></p>
+     <form class="stats" method="POST" action="/score/<%= karakter.id %>">
+  <input type="hidden" name="name" value="<%= karakter.name %>">
+  <input type="hidden" name="image" value="<%= karakter.image %>">
 
-        <form class="stats" method="POST" action="/score/<%= karakter.id %>">
-          <input type="hidden" name="name" value="<%= karakter.name %>">
-          <input type="hidden" name="image" value="<%= karakter.image %>">
+  <div style="display: flex; gap: 40px;">
+    <!-- Wins -->
+    <div style="display: flex; align-items: center; background: rgb(22, 39, 97); padding: 10px 30px;">
+      🏆 <b style="margin: 0 6px 0 10px;">Wins:</b>
+      <form method="POST" action="/score/<%= karakter.id %>" style="display: inline;">
+        <input type="hidden" name="name" value="<%= karakter.name %>">
+        <input type="hidden" name="image" value="<%= karakter.image %>">
+        <input type="hidden" name="wins" value="<%= karakter.wins - 1 %>">
+        <input type="hidden" name="losses" value="<%= karakter.losses %>">
+        <button type="submit" style="padding: 0 8px; font-size: 1.3rem;">-</button>
+      </form>
+      <span style="font-size: 1.7rem; margin: 0 10px;"><%= karakter.wins %></span>
+      <form method="POST" action="/score/<%= karakter.id %>" style="display: inline;">
+        <input type="hidden" name="name" value="<%= karakter.name %>">
+        <input type="hidden" name="image" value="<%= karakter.image %>">
+        <input type="hidden" name="wins" value="<%= karakter.wins + 1 %>">
+        <input type="hidden" name="losses" value="<%= karakter.losses %>">
+        <button type="submit" style="padding: 0 8px; font-size: 1.3rem;">+</button>
+      </form>
+    </div>
+    <!-- Losses -->
+    <div style="display: flex; align-items: center; background: rgb(22, 39, 97); padding: 10px 30px;">
+      💀 <b style="margin: 0 6px 0 10px;">Losses:</b>
+      <form method="POST" action="/score/<%= karakter.id %>" style="display: inline;">
+        <input type="hidden" name="name" value="<%= karakter.name %>">
+        <input type="hidden" name="image" value="<%= karakter.image %>">
+        <input type="hidden" name="wins" value="<%= karakter.wins %>">
+        <input type="hidden" name="losses" value="<%= karakter.losses - 1 %>">
+        <button type="submit" style="padding: 0 8px; font-size: 1.3rem;">-</button>
+      </form>
+      <span style="font-size: 1.7rem; margin: 0 10px;"><%= karakter.losses %></span>
+      <form method="POST" action="/score/<%= karakter.id %>" style="display: inline;">
+        <input type="hidden" name="name" value="<%= karakter.name %>">
+        <input type="hidden" name="image" value="<%= karakter.image %>">
+        <input type="hidden" name="wins" value="<%= karakter.wins %>">
+        <input type="hidden" name="losses" value="<%= karakter.losses + 1 %>">
+        <button type="submit" style="padding: 0 8px; font-size: 1.3rem;">+</button>
+      </form>
+    </div>
+  </div>
+</form>
 
-          <p>🏆 Wins: <input type="number" name="wins" value="<%= karakter.wins %>" required></p>
-          <p>💀 Losses: <input type="number" name="losses" value="<%= karakter.losses %>" required></p>
-          <button type="submit">📈 Update score</button>
-        </form>
       </div>
     </div>
 
     <div class="item-shop">
       <h2>🎁 Geselecteerde Items (max. 2)</h2>
-      <form method="POST" action="/items/<%= karakter.id %>">
-        <div class="selected-items">
-          <% for (let i = 0; i < 2; i++) { %>
-            <div class="item-slot">
-              <% const item = karakter.items?.[i]; %>
-              <img src="<%= item ? item : '/assets/placeholder.png' %>" alt="Item <%= i + 1 %>">
-            </div>
-          <% } %>
-        </div>
-        <label>Items (icon-URLs of namen):</label>
-        <input type="text" name="items" value="<%= karakter.items?.join(', ') || '' %>" placeholder="item1.png, item2.png">
-        <button type="submit">💾 Opslaan</button>
-      </form>
-    </div>
-
-    <div class="notes">
-      <h2>📝 Notities</h2>
-      <form method="POST" action="/notities/<%= karakter.id %>">
-        <% if (karakter.notes && karakter.notes.length > 0) { %>
-          <div id="notes-list">
-            <p><%= karakter.notes[0] %></p>
+      <div class="selected-items">
+        <% for (let i = 0; i < 2; i++) { %>
+          <div class="item-slot">
+            <img src="<%= karakter.items?.[i] ? karakter.items[i] : '/assets/placeholder.png' %>" alt="Item <%= i + 1 %>">
+            <form method="GET" action="/items/<%= karakter.id %>">
+              <input type="hidden" name="slot" value="<%= i + 1 %>">
+              <button type="submit">+</button>
+            </form>
           </div>
         <% } %>
-        <textarea name="note" placeholder="Schrijf hier je notitie..."><%= karakter.notes?.[0] || '' %></textarea>
-        <button type="submit">💾 Opslaan</button>
-      </form>
-
-      <form method="POST" action="/favorieten/<%= karakter.id %>/verwijder">
-        <button class="remove-favorite">💔 Verwijder uit favorieten</button>
-      </form>
+      </div>
     </div>
+
+<div class="notes">
+  <h2>📝 Notities</h2>
+  <div id="notes-list">
+    <% if (karakter.notes && karakter.notes.length > 0) { %>
+      <% karakter.notes.forEach(function(note, idx) { %>
+        <form method="POST" action="/notities/<%= karakter.id %>/verwijder/<%= idx %>" style="display:flex;align-items:center;">
+          <p style="flex:1;margin:0;"><%= note %></p>
+          <button type="submit" class="delete-note" style="margin-left:8px;">🗑️</button>
+        </form>
+      <% }) %>
+    <% } %>
+  </div>
+  <form method="POST" action="/notities/<%= karakter.id %>">
+    <textarea name="note" placeholder="Schrijf hier je notitie..."></textarea>
+    <button type="submit">💾 Opslaan</button>
+  </form>
+  <form method="POST" action="/favorieten/<%= karakter.id %>/verwijder">
+    <button class="remove-favorite">💔 Verwijder uit favorieten</button>
+  </form>
+</div>
+
   </main>
 
   <div id="popup-message" class="popup-message"></div>
+  <script>
+    function showInfo() {
+      const popup = document.getElementById('popup-message');
+      popup.textContent = "Hier kan je notities en items toevoegen en je wins en losses bijhouden!";
+      popup.classList.add('show');
+      setTimeout(() => popup.classList.remove('show'), 3000);
+    }
+  </script>
 </body>
 </html>
