@@ -4,7 +4,6 @@ import random
 import time
 body = requests.get("https://fortnite-api.com/v2/cosmetics").json()["data"]
 
-#print(body)
 for key, value in body.items() :
     print (key)
 
