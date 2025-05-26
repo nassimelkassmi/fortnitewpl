@@ -58,17 +58,20 @@
     <!-- Grid -->
     <section class="characters-section">
       <div class="characters-grid" id="characters-grid">
-        <% characters.forEach(character => { %>
-          <a href="/personages/<%= character.id %>" class="character-link">
-            <div class="character-card rarity-<%= character.rarity.toLowerCase() %>" style="background-image: url('<%= character.image %>');">
-              <span class="rarity-label"><%= character.rarity %></span>
-              <% if (favorieteIds.includes(character.id)) { %>
-                <span class="favorite-star">⭐</span>
-              <% } %>
-              <h3><%= character.name %></h3>
-            </div>
-          </a>
-        <% }); %>
+   <% characters.forEach(character => { 
+     if (character.image && character.image.trim() !== '') { %>
+  <a href="/personages/<%= character.id %>" class="character-link">
+    <div class="character-card rarity-<%= character.rarity.toLowerCase() %>" style="background-image: url('<%= character.image %>');">
+      <span class="rarity-label"><%= character.rarity %></span>
+      <% if (favorieteIds.includes(character.id)) { %>
+        <span class="favorite-star">⭐</span>
+      <% } %>
+      <h3><%= character.name %></h3>
+    </div>
+  </a>
+<%  } 
+}); %>
+
       </div>
     </section>
 
