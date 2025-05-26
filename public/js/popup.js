@@ -1,4 +1,3 @@
-// /public/js/popup.js
 
 document.addEventListener('DOMContentLoaded', () => {
   const popupMessage = document.getElementById('popup-message');
@@ -11,7 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const blacklistInput = document.getElementById('blacklist-input');
   const submitBlacklist = document.getElementById('submit-blacklist');
 
-  // FAVORIET (❤️/💔)
   if (favoriteBtn) {
   favoriteBtn.addEventListener('click', async (e) => {
     e.preventDefault();
@@ -23,9 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (res.ok) {
       const data = await res.json();
 
-      // Zoek de knop-container
       const actiesDiv = favoriteBtn.closest('.karakter-actions');
-      // Zoek of de detailknop al bestaat
       let detailForm = actiesDiv.querySelector('form.fav-detail-form');
 
       if (data.favoriet) {
@@ -33,7 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (favoriteStar) favoriteStar.style.display = '';
         showPopup('Toegevoegd aan favorieten!');
 
-        // Voeg "Bekijk Favoriet-details" knop toe indien nog niet aanwezig
         if (!detailForm) {
           detailForm = document.createElement('form');
           detailForm.className = 'fav-detail-form';
@@ -55,7 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (favoriteStar) favoriteStar.style.display = 'none';
         showPopup('Verwijderd uit favorieten!');
 
-        // Verwijder detailknop als hij bestaat
         if (detailForm) detailForm.remove();
       }
     }
@@ -63,7 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 
 
-  // AVATAR instellen/wissen
   if (setProfileBtn) {
     setProfileBtn.addEventListener('click', async (e) => {
       e.preventDefault();
@@ -89,7 +82,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // BLACKLIST popup tonen
   if (blacklistBtn && blacklistPopup && blacklistInput) {
     blacklistBtn.addEventListener('click', (e) => {
       e.preventDefault();
@@ -99,7 +91,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // BLACKLIST versturen
   if (submitBlacklist && blacklistPopup && blacklistBtn && blacklistInput) {
     submitBlacklist.addEventListener('click', async (e) => {
       e.preventDefault();
@@ -124,7 +115,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Helper voor feedback popup
   function showPopup(message) {
     if (!popupMessage) return;
     popupMessage.textContent = message;
@@ -132,7 +122,6 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => popupMessage.classList.remove('show'), 2500);
   }
 
-  // Sluit blacklist-popup als je buiten popup klikt
   window.addEventListener('mousedown', function(e){
     if (
       blacklistPopup &&
@@ -145,13 +134,10 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// LANDINGPAGE INTERACTIE
 document.addEventListener('DOMContentLoaded', () => {
-  // Check of we wel op de landingpage zitten
   if (document.body.classList.contains('landingpage-body')) {
     const popup = document.getElementById('popup-message');
 
-    // Helper functie voor popup
     function showPopup(msg) {
       if (!popup) return;
       popup.textContent = msg;
@@ -163,7 +149,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 2000);
     }
 
-    // Fortnite project
     document.querySelectorAll('a[href="/lproject"], .game-text-container a[href="/lproject"], .game-image-container a[href="/lproject"]').forEach(link => {
       link.addEventListener('click', function(e) {
         if (!window.username) {
@@ -173,12 +158,10 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    // Andere projecten
     document.querySelectorAll('.game').forEach(gameDiv => {
       const h2 = gameDiv.querySelector('h2');
       if (!h2) return;
       if (h2.textContent.trim() !== 'Fortnite') {
-        // Alle knoppen binnen dit div blokkeren met een popup
         gameDiv.addEventListener('click', function(e) {
           e.preventDefault();
           showPopup("Je hebt geen toegang tot dit project!");
