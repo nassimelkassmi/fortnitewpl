@@ -40,15 +40,12 @@
   <main class="karakter-container">
     <div class="karakter-info">
       <div class="karakter-img-box">
-        <% if (isFavoriet) { %>
-          <span class="favorite-star">⭐</span>
-        <% } %>
+        <span class="favorite-star" data-id="<%= karakter.id %>">⭐</span>
         <img class="rarity-<%= karakter.rarity.toLowerCase() %>" src="<%= karakter.image %>" alt="Karakter Afbeelding" />
       </div>
-
       <div class="karakter-text-box">
-        <h1><%= karakter.name %></h1>
-        <p><%= karakter.description %></p>
+        <h1 id="karakter-naam"><%= karakter.name %></h1>
+        <p id="karakter-beschrijving"><%= karakter.description %></p>
 
         <div class="extra-info">
           <p><strong>Zeldzaamheid:</strong> <span class="rarity-<%= karakter.rarity.toLowerCase() %>"><%= karakter.rarity %></span></p>
@@ -57,29 +54,37 @@
         </div>
 
         <div class="karakter-actions">
-          <form method="POST" action="/blacklist/<%= karakter.id %>">
-            <input type="hidden" name="name" value="<%= karakter.name %>">
-            <input type="hidden" name="image" value="<%= karakter.image %>">
-            <input type="text" name="reason" placeholder="Reden voor blacklist" required>
-            <button type="submit" class="blacklist-btn">❌</button>
-          </form>
+          <button type="button"
+            class="blacklist-btn"
+            data-id="<%= karakter.id %>"
+            data-name="<%= karakter.name %>"
+            data-img="<%= karakter.image %>">❌</button>
 
-          <form method="POST" action="/favorieten/<%= karakter.id %>">
-            <button type="submit" class="favorite-btn">❤️</button>
-          </form>
+          <button type="button"
+            class="favorite-btn"
+            data-id="<%= karakter.id %>"><%= isFavoriet ? '💔' : '❤️' %></button>
 
-          <form method="POST" action="/avatar/<%= karakter.id %>">
-            <button class="set-profile" type="submit">
-              <img src="/assets/add-user.png" alt="Set profiel" />
-            </button>
-          </form>
+          <button type="button"
+            class="set-profile"
+            data-id="<%= karakter.id %>"
+            data-img="<%= karakter.image %>">
+            <img src="<%= (avatarImage === karakter.image) ? '/assets/delete.png' : '/assets/add-user.png' %>" alt="Set profiel" />
+          </button>
         </div>
       </div>
     </div>
   </main>
 
-  <% if (popupMessage) { %>
-    <div id="popup-message" class="popup-message"><%= popupMessage %></div>
-  <% } %>
+  <!-- Popup voor feedback -->
+  <div id="popup-message" class="popup-message"></div>
+
+  <!-- Blacklist reden popup (initieel verborgen) -->
+  <div id="blacklist-reason" class="blacklist-reason">
+    <p>Reden voor de zwarte lijst:</p>
+    <input type="text" id="blacklist-input" placeholder="Geef een reden..." />
+    <button id="submit-blacklist">Verstuur</button>
+  </div>
+
+  <script src="/js/popup.js"></script>
 </body>
 </html>

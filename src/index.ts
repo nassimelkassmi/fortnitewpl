@@ -209,49 +209,80 @@ async function main() {
   });
 
   // FAVORIET TOEVOEGEN
-  app.post('/favorieten/:id', requireLogin, async (req, res) => {
-    const { id } = req.params;
-    const user = await users.findOne({ username: req.session.user });
-    if (!user) {
-      res.redirect('/personages');
-      return;
-    }
-    const bestaat = user.favorites.find((f) => f.id === id);
-    if (!bestaat) {
-      await users.updateOne(
-        { username: user.username },
-        { $push: { favorites: { id, wins: 0, losses: 0, items: [], note: '' } } }
-      );
-    }
-    res.redirect(`/personages/${id}`);
-  });
+// FAVORIET TOEVOEGEN/VERWIJDEREN via AJAX
+app.post('/favorieten/:id', requireLogin, async (req, res) => {
+  const { id } = req.params;
+  const user = await users.findOne({ username: req.session.user });
+  if (!user) {
+    res.status(401).json({ success: false, message: "Not logged in" });
+    return;
+  }
 
-  // FAVORIET VERWIJDEREN
-  app.post('/favorieten/:id/verwijder', requireLogin, async (req, res) => {
-    const { id } = req.params;
+  const bestaat = user.favorites.find((f) => f.id === id);
+
+  if (bestaat) {
+    // Verwijder uit favorieten
     await users.updateOne(
-      { username: req.session.user },
+      { username: user.username },
       { $pull: { favorites: { id } } }
     );
-    res.redirect(`/personages/${id}`);
-  });
+    res.json({ success: true, favoriet: false });
+    return;
+  } else {
+    // Voeg toe aan favorieten
+    await users.updateOne(
+      { username: user.username },
+      { $push: { favorites: { id, wins: 0, losses: 0, items: [], note: '' } } }
+    );
+    res.json({ success: true, favoriet: true });
+    return;
+  }
+});
 
-  // AVATAR INSTELLEN
-  app.post('/avatar/:id', requireLogin, async (req, res) => {
-    const { id } = req.params;
-    const apiRes = await fetch(`https://fortnite-api.com/v2/cosmetics/br/${id}`);
-    const json = await apiRes.json();
-    const image = json.data?.images?.icon || '';
+// AVATAR INSTELLEN via AJAX
+app.post('/avatar/:id', requireLogin, async (req, res) => {
+  const { id } = req.params;
+  const apiRes = await fetch(`https://fortnite-api.com/v2/cosmetics/br/${id}`);
+  const json = await apiRes.json();
+  const image = json.data?.images?.icon || '';
+
+  const user = await users.findOne({ username: req.session.user });
+  // Toggle: als het dezelfde is, verwijder avatar; anders stel nieuw in
+  if (user?.avatar?.id === id) {
+    await users.updateOne(
+      { username: req.session.user },
+      { $set: { avatar: undefined } }
+    );
+    res.json({ success: true, avatarSet: false });
+    return;
+  } else {
     await users.updateOne(
       { username: req.session.user },
       { $set: { avatar: { id, image } } }
     );
-    res.redirect(`/personages/${id}`);
-  });
+    res.json({ success: true, avatarSet: true });
+    return;
+  }
+});
 
-  // BLACKLIST TOEVOEGEN
-  app.post('/blacklist/:id', requireLogin, async (req, res) => {
-    const { id } = req.params;
+// BLACKLIST TOEVOEGEN via AJAX
+app.post('/blacklist/:id', requireLogin, async (req, res) => {
+  const { id } = req.params;
+  // Check of het een AJAX JSON request is
+  if (req.is('application/json')) {
+    const { reason, name, image } = req.body;
+    if (!reason || !name || !image) {
+      res.status(400).json({ success: false, message: "Ongeldige data" });
+      return;
+    }
+    await users.updateOne(
+      { username: req.session.user },
+      { $addToSet: { blacklist: { id, name, image, reason } } }
+    );
+    res.json({ success: true });
+    return;
+  } else {
+    // Fallback voor form-submit (optioneel)
     const { reason, name, image } = req.body;
     if (!reason || !name || !image) {
       res.redirect(`/personages/${id}`);
@@ -262,7 +293,11 @@ async function main() {
       { $addToSet: { blacklist: { id, name, image, reason } } }
     );
     res.redirect('/blacklist');
-  });
+    return;
+  }
+});
+
+
 
 
   app.get('/lproject', requireLogin, async (req, res) => {
