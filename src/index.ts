@@ -140,7 +140,6 @@ app.get('/personages/:id/favorietdetail', requireLogin, async (req, res) => {
     req.session.destroy(() => res.redirect('/login'));
   });
 
-  // REGISTER
   app.get('/registreren', (req, res) => {
     res.render('register', { melding: null });
   });
@@ -169,7 +168,6 @@ app.get('/personages/:id/favorietdetail', requireLogin, async (req, res) => {
   });
 
 
-  // PERSONAGES OVERZICHT
   app.get('/personages', requireLogin, async (req, res) => {
   const zoek = req.query.zoek?.toString().toLowerCase() || '';
   const rarity = req.query.rarity?.toString().toLowerCase() || '';
@@ -182,7 +180,6 @@ app.get('/personages/:id/favorietdetail', requireLogin, async (req, res) => {
   const favorieteIds = user?.favorites.map((f) => f.id) || [];
   const blacklistIds = user?.blacklist.map((b) => b.id) || [];
 
-  // 🔥 Verwijder karakters uit de blacklist
   characters = characters.filter((c: any) => !blacklistIds.includes(c.id));
 
   if (zoek) {
@@ -209,7 +206,6 @@ app.get('/personages/:id/favorietdetail', requireLogin, async (req, res) => {
   });
 });
 
-  // DETAILPAGINA
   app.get('/personages/:id', requireLogin, async (req, res) => {
     const { id } = req.params;
     const apiRes = await fetch(`https://fortnite-api.com/v2/cosmetics/br/${id}`);
@@ -224,18 +220,15 @@ app.get('/personages/:id/favorietdetail', requireLogin, async (req, res) => {
 if (isFavoriet) {
   const favData = user!.favorites.find((f) => f.id === id);
 
-  // Haal alle item-data op uit de Fortnite API
   const apiResAll = await fetch('https://fortnite-api.com/v2/cosmetics/br');
   const jsonAll = await apiResAll.json();
   const allItems = jsonAll.data;
 
-  // Zoek voor elke opgeslagen item-ID de juiste image-URL (max 2 slots)
   const itemImages = (favData?.items || []).map(itemID => {
     const item = allItems.find((itm: any) => itm.id === itemID);
     return item?.images?.icon || '/assets/placeholder.png';
   });
 
-  // Vul aan tot je er 2 hebt (voor lege slots)
   while (itemImages.length < 2) itemImages.push('/assets/placeholder.png');
 
   res.render('favokarak', {
@@ -246,7 +239,7 @@ if (isFavoriet) {
       description: json.data.description || 'Geen beschrijving.',
       wins: favData?.wins || 0,
       losses: favData?.losses || 0,
-      items: itemImages, // <-- nu lijst van plaatje-urls
+      items: itemImages, 
       notes: favData?.notes || [],
     },
     username: req.session.user,
@@ -277,14 +270,12 @@ app.post('/logout', (req, res) => {
 });
 // src/index.ts
 app.get('/', (req, res) => {
-  // Toon altijd de landingpage, ongeacht loginstatus
   res.render('landingpage', {
     username: req.session.user || null,
-    avatarImage: null // kan je aanvullen als je wilt
+    avatarImage: null 
   });
 });
 app.get('/lproject', requireLogin, async (req, res) => {
-  // Toon de hoofdpagina van het project na login én keuze
   const user = await users.findOne({ username: req.session.user });
   res.render('lproject', {
     username: req.session.user,
@@ -302,11 +293,9 @@ app.post('/login', async (req, res) => {
     return res.render('login', { melding: 'Wachtwoord fout.' });
   }
   req.session.user = user.username;
-  // <--- BELANGRIJK
-  res.redirect('/');  // <-- ALTIJD NAAR LANDINGPAGE!
+  res.redirect('/');  
 });
 
-  // FAVORIET TOEVOEGEN
 app.post('/favorieten/:id', requireLogin, async (req, res) => {
   const { id } = req.params;
   const user = await users.findOne({ username: req.session.user });
@@ -340,7 +329,6 @@ app.post('/favorieten/:id', requireLogin, async (req, res) => {
 
 
 
-// AVATAR INSTELLEN via AJAX
 app.post('/avatar/:id', requireLogin, async (req, res) => {
   const { id } = req.params;
   const apiRes = await fetch(`https://fortnite-api.com/v2/cosmetics/br/${id}`);
@@ -348,7 +336,6 @@ app.post('/avatar/:id', requireLogin, async (req, res) => {
   const image = json.data?.images?.icon || '';
 
   const user = await users.findOne({ username: req.session.user });
-  // Toggle: als het dezelfde is, verwijder avatar; anders stel nieuw in
   if (user?.avatar?.id === id) {
     await users.updateOne(
       { username: req.session.user },
@@ -366,10 +353,8 @@ app.post('/avatar/:id', requireLogin, async (req, res) => {
   }
 });
 
-// BLACKLIST TOEVOEGEN via AJAX
 app.post('/blacklist/:id', requireLogin, async (req, res) => {
   const { id } = req.params;
-  // Check of het een AJAX JSON request is
   if (req.is('application/json')) {
     const { reason, name, image } = req.body;
     if (!reason || !name || !image) {
@@ -383,7 +368,6 @@ app.post('/blacklist/:id', requireLogin, async (req, res) => {
     res.json({ success: true });
     return;
   } else {
-    // Fallback voor form-submit (optioneel)
     const { reason, name, image } = req.body;
     if (!reason || !name || !image) {
       res.redirect(`/personages/${id}`);
@@ -416,7 +400,6 @@ app.get('/landing', (req, res) => {
   });
 });
 
-   // BLACKLIST OVERZICHT
 app.get('/blacklist', requireLogin, async (req, res) => {
   const zoek = req.query.zoek?.toString().toLowerCase() || '';
   const rarity = req.query.rarity?.toString().toLowerCase() || '';
@@ -430,10 +413,8 @@ app.get('/blacklist', requireLogin, async (req, res) => {
     blacklist = blacklist.filter(char => char.name.toLowerCase().includes(zoek));
   }
 
-  // Als je ooit de rarity wilt filteren: sla rarity van de character op in blacklist.
   if (rarity) {
-    // Je hebt geen rarity in je blacklist, maar als je het toevoegt:
-    // blacklist = blacklist.filter(char => (char.rarity || '').toLowerCase() === rarity);
+
   }
 
   res.render('blacklist', {
@@ -450,7 +431,6 @@ app.post('/blacklist/:id/reden', requireLogin, async (req, res) => {
   if (!reason || reason.trim() === '') {
     return res.redirect(`/blacklist?edit=${id}`);
   }
-  // Update alleen de reden van deze entry:
   await users.updateOne(
     { username: req.session.user, "blacklist.id": id },
     { $set: { "blacklist.$.reason": reason.trim() } }
@@ -459,15 +439,12 @@ app.post('/blacklist/:id/reden', requireLogin, async (req, res) => {
 });
 
 
-  // 🔥 NIEUWE ROUTES VOOR ITEMS
 
-  // ITEMWINKEL ZIEN VOOR 1 KARAKTER
 app.get('/items/:id', requireLogin, async (req, res) => {
   const karakterID = req.params.id;
   const user = await users.findOne({ username: req.session.user });
   const avatarImage = user?.avatar?.image || '';
 
-  // Query params voor elk filter
   const weaponsRarity = req.query.weaponsRarity?.toString().toLowerCase() || '';
   const emotesRarity = req.query.emotesRarity?.toString().toLowerCase() || '';
   const backblingsRarity = req.query.backblingsRarity?.toString().toLowerCase() || '';
@@ -478,7 +455,6 @@ const slot = parseInt(req.query.slot as string) || 1;
   const json = await apiRes.json();
   const allItems = json.data || [];
 
-  // Helper om kleur en label te bepalen (net als je oude js)
   function getRarity(r: string) {
     switch (r?.toLowerCase()) {
       case "common": return { bgColor: "#B9B9B9", rarityLabel: "COMMON" };
@@ -541,7 +517,6 @@ backblings = backblings.filter((b: any) => b.images && b.images.icon && b.images
 });
 
 
-  // FAVORIET VERWIJDEREN (buiten andere routes!)
 app.post('/favorieten/:id/verwijder', requireLogin, async (req, res) => {
   const { id } = req.params;
   await users.updateOne(
@@ -561,10 +536,8 @@ app.get('/favorieten', requireLogin, async (req: Request, res: Response) => {
   const json = await apiRes.json();
   const allCharacters = json.data;
 
-  // Blacklist ID's ophalen
   const blacklistIds = user.blacklist.map((b) => b.id) || [];
 
-  // Filter je favorieten rechtstreeks in de map/filter!
   let favorites = user.favorites
     .filter((fav) => !blacklistIds.includes(fav.id))
     .map((fav) => {
@@ -577,7 +550,6 @@ app.get('/favorieten', requireLogin, async (req: Request, res: Response) => {
       };
     });
 
-  // Zoekfilter en rarity-filter toepassen
   if (zoek) {
     favorites = favorites.filter((fav) => fav.name.toLowerCase().includes(zoek));
   }
@@ -597,8 +569,6 @@ app.get('/favorieten', requireLogin, async (req: Request, res: Response) => {
 
 
 
-// NOTITIE TOEVOEGEN
-// NOTITIE TOEVOEGEN (voegt een nieuwe notitie toe aan de array)
 app.post('/notities/:id', requireLogin, async (req, res) => {
   const { id } = req.params;
   const { note } = req.body;
@@ -613,7 +583,6 @@ app.post('/notities/:id', requireLogin, async (req, res) => {
   );
   res.redirect(`/personages/${id}`);
 });
-// NOTITIE VERWIJDEREN op index
 app.post('/notities/:id/verwijder/:noteIdx', requireLogin, async (req, res) => {
   const { id, noteIdx } = req.params;
   const user = await users.findOne({ username: req.session.user });
@@ -631,7 +600,6 @@ fav.notes.splice(Number(noteIdx), 1);
   res.redirect(`/personages/${id}`);
 });
 
-// SCORE BIJWERKEN
 app.post('/score/:id', requireLogin, async (req, res) => {
   const { id } = req.params;
   const { wins, losses, name, image } = req.body;
@@ -640,10 +608,6 @@ app.post('/score/:id', requireLogin, async (req, res) => {
 
   const user = await users.findOne({ username: req.session.user });
 
-  // Verplaats naar blacklist indien losses ≥ 3 × wins
-// Alleen naar blacklist als:
-// - 0 wins én minstens 3 losses, of
-// - 1+ wins én losses ≥ 3 × wins
 if (
   (winsNum === 0 && lossesNum >= 3) ||
   (winsNum > 0 && lossesNum >= winsNum * 3)
@@ -667,7 +631,6 @@ if (
   res.redirect(`/personages/${id}`);
 });
 
-// BLACKLIST VERWIJDEREN
 app.post('/blacklist/:id/verwijder', requireLogin, async (req, res) => {
   const { id } = req.params;
   await users.updateOne(
@@ -688,7 +651,7 @@ app.post('/items/:id', requireLogin, async (req, res) => {
   if (!fav) return res.redirect('/personages/' + karakterID);
 
   let newItems = fav.items || [];
-  newItems[slot - 1] = itemID; // Zorg dat er altijd max. 2 slots zijn
+  newItems[slot - 1] = itemID; 
 
   await users.updateOne(
     { username: req.session.user, "favorites.id": karakterID },
@@ -699,7 +662,7 @@ app.post('/items/:id', requireLogin, async (req, res) => {
 
 
   const port = process.env.PORT || 3000;
-  app.listen(port, () => console.log(`✅ Server draait op http://localhost:${port}`));
+  app.listen(port, () => console.log(`Server draait op http://localhost:${port}`));
 }
 
 main().catch((err) => {
