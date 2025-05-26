@@ -13,27 +13,55 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // FAVORIET (❤️/💔)
   if (favoriteBtn) {
-    favoriteBtn.addEventListener('click', async (e) => {
-      e.preventDefault();
-      const id = favoriteBtn.dataset.id;
-      const res = await fetch(`/favorieten/${id}`, {
-        method: 'POST',
-        headers: { 'Accept': 'application/json' }
-      });
-      if (res.ok) {
-        const data = await res.json();
-        if (data.favoriet) {
-          favoriteBtn.textContent = '💔';
-          if (favoriteStar) favoriteStar.style.display = '';
-          showPopup('Toegevoegd aan favorieten!');
-        } else {
-          favoriteBtn.textContent = '❤️';
-          if (favoriteStar) favoriteStar.style.display = 'none';
-          showPopup('Verwijderd uit favorieten!');
-        }
-      }
+  favoriteBtn.addEventListener('click', async (e) => {
+    e.preventDefault();
+    const id = favoriteBtn.dataset.id;
+    const res = await fetch(`/favorieten/${id}`, {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' }
     });
-  }
+    if (res.ok) {
+      const data = await res.json();
+
+      // Zoek de knop-container
+      const actiesDiv = favoriteBtn.closest('.karakter-actions');
+      // Zoek of de detailknop al bestaat
+      let detailForm = actiesDiv.querySelector('form.fav-detail-form');
+
+      if (data.favoriet) {
+        favoriteBtn.textContent = '💔';
+        if (favoriteStar) favoriteStar.style.display = '';
+        showPopup('Toegevoegd aan favorieten!');
+
+        // Voeg "Bekijk Favoriet-details" knop toe indien nog niet aanwezig
+        if (!detailForm) {
+          detailForm = document.createElement('form');
+          detailForm.className = 'fav-detail-form';
+          detailForm.action = `/personages/${id}/favorietdetail`;
+          detailForm.method = 'get';
+          detailForm.style.display = 'inline';
+
+          const btn = document.createElement('button');
+          btn.type = 'submit';
+          btn.className = 'fav-detail-btn';
+          btn.textContent = 'Klik voor meer opties';
+          detailForm.appendChild(btn);
+
+          actiesDiv.appendChild(detailForm);
+        }
+
+      } else {
+        favoriteBtn.textContent = '❤️';
+        if (favoriteStar) favoriteStar.style.display = 'none';
+        showPopup('Verwijderd uit favorieten!');
+
+        // Verwijder detailknop als hij bestaat
+        if (detailForm) detailForm.remove();
+      }
+    }
+  });
+}
+
 
   // AVATAR instellen/wissen
   if (setProfileBtn) {

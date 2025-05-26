@@ -52,18 +52,33 @@
 
     <section class="characters-section">
       <div class="characters-grid" id="blacklist-grid">
-        <% blacklist.forEach(char => { %>
+        <% blacklist.forEach(function(char) { %>
           <div class="character-card">
             <img src="<%= char.image %>" alt="<%= char.name %>">
             <div class="character-info">
               <h3><%= char.name %></h3>
-              <p class="blacklist-reason">Reden: <%= char.reason %></p>
+              <p class="blacklist-reason">
+                Reden:
+                <% if ((editId || '').trim() === (char.id || '').trim()) { %>
+                  <form method="POST" action="/blacklist/<%= char.id %>/reden" style="display:inline;">
+                    <input type="text" name="reason" value="<%= char.reason %>" maxlength="80" style="width:180px;" required>
+                    <button type="submit" class="save-btn">💾</button>
+                    <a href="/blacklist" class="cancel-btn">Annuleer</a>
+                  </form>
+                <% } else { %>
+                  <%= char.reason %>
+                  <form method="GET" action="/blacklist" style="display:inline;">
+                    <input type="hidden" name="edit" value="<%= char.id %>">
+                    <button type="submit" class="edit-btn" title="Bewerk reden">✏️</button>
+                  </form>
+                <% } %>
+              </p>
               <form method="POST" action="/blacklist/<%= char.id %>/verwijder">
                 <button class="remove-blacklist">Verwijder</button>
               </form>
             </div>
           </div>
-        <% }) %>
+        <% }); %>
       </div>
     </section>
 

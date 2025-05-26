@@ -76,6 +76,46 @@ async function main() {
       cookie: { maxAge: 1000 * 60 * 60 * 24 },
     })
   );
+app.get('/personages/:id/favorietdetail', requireLogin, async (req, res) => {
+  const { id } = req.params;
+  const user = await users.findOne({ username: req.session.user });
+  const favData = user?.favorites.find(f => f.id === id);
+  if (!favData) return res.redirect(`/personages/${id}`);
+
+  // 1. Haal de karakterdata uit de Fortnite API
+  const apiRes = await fetch(`https://fortnite-api.com/v2/cosmetics/br/${id}`);
+  const json = await apiRes.json();
+  if (!json.data) return res.redirect(`/personages/${id}`); // bestaat niet
+
+  // 2. Items ophalen uit de API
+  const apiResAll = await fetch('https://fortnite-api.com/v2/cosmetics/br');
+  const jsonAll = await apiResAll.json();
+  const allItems = jsonAll.data;
+
+  // 3. Item-icoontjes ophalen voor de favoriet
+  const itemImages = (favData.items || []).map(itemID => {
+    const item = allItems.find((itm: any) => itm.id === itemID);
+    return item?.images?.icon || '/assets/placeholder.png';
+  });
+  while (itemImages.length < 2) itemImages.push('/assets/placeholder.png');
+
+  // 4. Render de detailpagina met correcte data uit API
+  res.render('favokarak', {
+    karakter: {
+      id,
+      name: json.data.name,
+      image: json.data.images.icon,
+      description: json.data.description || 'Geen beschrijving.',
+      wins: favData?.wins || 0,
+      losses: favData?.losses || 0,
+      items: itemImages,
+      notes: favData?.notes || [],
+    },
+    username: req.session.user,
+    avatarImage: user?.avatar?.image || '',
+  });
+});
+
 
   // LOGIN
   app.get('/login', (req, res) => {
@@ -137,36 +177,43 @@ async function main() {
 
   // PERSONAGES OVERZICHT
   app.get('/personages', requireLogin, async (req, res) => {
-    const zoek = req.query.zoek?.toString().toLowerCase() || '';
-    const rarity = req.query.rarity?.toString().toLowerCase() || '';
-    const apiRes = await fetch('https://fortnite-api.com/v2/cosmetics/br');
-    const json = await apiRes.json();
-    let characters = json.data.filter((c: any) => c.type.value === 'outfit');
-    if (zoek) {
-      characters = characters.filter((c: any) => c.name.toLowerCase().includes(zoek));
-    }
-    if (rarity) {
-      characters = characters.filter((c: any) => c.rarity.value.toLowerCase() === rarity);
-    }
-    characters = characters.map((c: any) => ({
-      id: c.id,
-      name: c.name,
-      image: c.images.icon,
-      rarity: c.rarity.value,
-    }));
-    const user = await users.findOne({ username: req.session.user });
-    const avatarImage = user?.avatar?.image || '';
-    const favorieteIds = user?.favorites.map((f) => f.id) || [];
-    res.render('personages', {
-      characters,
-      username: req.session.user,
-      avatarImage,
-      zoek,
-      rarity,
-      favorieteIds,
-      popupMessage: '',
-    });
+  const zoek = req.query.zoek?.toString().toLowerCase() || '';
+  const rarity = req.query.rarity?.toString().toLowerCase() || '';
+  const apiRes = await fetch('https://fortnite-api.com/v2/cosmetics/br');
+  const json = await apiRes.json();
+  let characters = json.data.filter((c: any) => c.type.value === 'outfit');
+
+  const user = await users.findOne({ username: req.session.user });
+  const avatarImage = user?.avatar?.image || '';
+  const favorieteIds = user?.favorites.map((f) => f.id) || [];
+  const blacklistIds = user?.blacklist.map((b) => b.id) || [];
+
+  // 🔥 Verwijder karakters uit de blacklist
+  characters = characters.filter((c: any) => !blacklistIds.includes(c.id));
+
+  if (zoek) {
+    characters = characters.filter((c: any) => c.name.toLowerCase().includes(zoek));
+  }
+  if (rarity) {
+    characters = characters.filter((c: any) => c.rarity.value.toLowerCase() === rarity);
+  }
+  characters = characters.map((c: any) => ({
+    id: c.id,
+    name: c.name,
+    image: c.images.icon,
+    rarity: c.rarity.value,
+  }));
+
+  res.render('personages', {
+    characters,
+    username: req.session.user,
+    avatarImage,
+    zoek,
+    rarity,
+    favorieteIds,
+    popupMessage: '',
   });
+});
 
   // DETAILPAGINA
   app.get('/personages/:id', requireLogin, async (req, res) => {
@@ -266,35 +313,38 @@ app.post('/login', async (req, res) => {
 });
 
   // FAVORIET TOEVOEGEN
-// FAVORIET TOEVOEGEN/VERWIJDEREN via AJAX
 app.post('/favorieten/:id', requireLogin, async (req, res) => {
   const { id } = req.params;
   const user = await users.findOne({ username: req.session.user });
   if (!user) {
-    res.status(401).json({ success: false, message: "Not logged in" });
+    res.redirect(`/personages/${id}`);
     return;
   }
 
   const bestaat = user.favorites.find((f) => f.id === id);
-
+  let favoriet: boolean;
   if (bestaat) {
-    // Verwijder uit favorieten
     await users.updateOne(
       { username: user.username },
       { $pull: { favorites: { id } } }
     );
-    res.json({ success: true, favoriet: false });
-    return;
+    favoriet = false;
   } else {
-    // Voeg toe aan favorieten
     await users.updateOne(
       { username: user.username },
-      { $push: { favorites: { id, wins: 0, losses: 0, items: [], notes:[]} } }
+      { $push: { favorites: { id, wins: 0, losses: 0, items: [], notes: [] } } }
     );
-    res.json({ success: true, favoriet: true });
+    favoriet = true;
+  }
+
+  if (req.headers.accept?.includes('application/json')) {
+    res.json({ favoriet });
     return;
   }
+  res.redirect(`/personages/${id}`);
 });
+
+
 
 // AVATAR INSTELLEN via AJAX
 app.post('/avatar/:id', requireLogin, async (req, res) => {
@@ -373,14 +423,47 @@ app.get('/landing', (req, res) => {
 });
 
    // BLACKLIST OVERZICHT
-  app.get('/blacklist', requireLogin, async (req, res) => {
-    const user = await users.findOne({ username: req.session.user });
-    res.render('blacklist', {
-      blacklist: user?.blacklist || [],
-      username: req.session.user,
-      avatarImage: user?.avatar?.image || '',
-    });
+app.get('/blacklist', requireLogin, async (req, res) => {
+  const zoek = req.query.zoek?.toString().toLowerCase() || '';
+  const rarity = req.query.rarity?.toString().toLowerCase() || '';
+  const editId = req.query.edit?.toString() || null;
+
+  const user = await users.findOne({ username: req.session.user });
+
+  // Rarity filter
+  let blacklist = (user?.blacklist || []);
+  if (zoek) {
+    blacklist = blacklist.filter(char => char.name.toLowerCase().includes(zoek));
+  }
+
+  // Als je ooit de rarity wilt filteren: sla rarity van de character op in blacklist.
+  if (rarity) {
+    // Je hebt geen rarity in je blacklist, maar als je het toevoegt:
+    // blacklist = blacklist.filter(char => (char.rarity || '').toLowerCase() === rarity);
+  }
+
+  res.render('blacklist', {
+    blacklist,
+    username: req.session.user,
+    avatarImage: user?.avatar?.image || '',
+    editId
   });
+});
+
+app.post('/blacklist/:id/reden', requireLogin, async (req, res) => {
+  const { id } = req.params;
+  const { reason } = req.body;
+  if (!reason || reason.trim() === '') {
+    return res.redirect(`/blacklist?edit=${id}`);
+  }
+  // Update alleen de reden van deze entry:
+  await users.updateOne(
+    { username: req.session.user, "blacklist.id": id },
+    { $set: { "blacklist.$.reason": reason.trim() } }
+  );
+  res.redirect('/blacklist');
+});
+
 
   // 🔥 NIEUWE ROUTES VOOR ITEMS
 
@@ -474,7 +557,7 @@ app.post('/favorieten/:id/verwijder', requireLogin, async (req, res) => {
   res.redirect('/favorieten');
 });
 
-app.get('/favorieten', requireLogin, async (req, res) => {
+app.get('/favorieten', requireLogin, async (req: Request, res: Response) => {
   const zoek = req.query.zoek?.toString().toLowerCase() || '';
   const rarity = req.query.rarity?.toString().toLowerCase() || '';
   const user = await users.findOne({ username: req.session.user });
@@ -484,24 +567,28 @@ app.get('/favorieten', requireLogin, async (req, res) => {
   const json = await apiRes.json();
   const allCharacters = json.data;
 
-  // Filter je favorieten rechtstreeks in de map/filter!
-  let favorites = user.favorites.map((fav) => {
-    const match = allCharacters.find((char: any) => char.id === fav.id);
-    return {
-      id: fav.id,
-      name: match?.name || 'Onbekend',
-      image: match?.images?.icon || '/assets/question-mark.svg',
-      rarity: (match?.rarity?.value || 'unknown').toLowerCase(),
-    };
-  });
+  // Blacklist ID's ophalen
+  const blacklistIds = user.blacklist.map((b) => b.id) || [];
 
+  // Filter je favorieten rechtstreeks in de map/filter!
+  let favorites = user.favorites
+    .filter((fav) => !blacklistIds.includes(fav.id))
+    .map((fav) => {
+      const match = allCharacters.find((char: any) => char.id === fav.id);
+      return {
+        id: fav.id,
+        name: match?.name || 'Onbekend',
+        image: match?.images?.icon || '/assets/question-mark.svg',
+        rarity: (match?.rarity?.value || 'unknown').toLowerCase(),
+      };
+    });
 
   // Zoekfilter en rarity-filter toepassen
   if (zoek) {
-    favorites = favorites.filter(fav => fav.name.toLowerCase().includes(zoek));
+    favorites = favorites.filter((fav) => fav.name.toLowerCase().includes(zoek));
   }
   if (rarity) {
-    favorites = favorites.filter(fav => fav.rarity === rarity);
+    favorites = favorites.filter((fav) => fav.rarity === rarity);
   }
 
   res.render('favoriet', {
@@ -513,6 +600,7 @@ app.get('/favorieten', requireLogin, async (req, res) => {
     popupMessage: '',
   });
 });
+
 
 
 // NOTITIE TOEVOEGEN

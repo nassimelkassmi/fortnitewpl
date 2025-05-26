@@ -22,8 +22,7 @@
     </div>
     <div class="right">
       <div class="user-info">
-       <img src="<%= avatarImage && avatarImage.trim() !== '' ? avatarImage : '/assets/question-mark.svg' %>" alt="User" class="user-profile" />
-
+        <img src="<%= avatarImage && avatarImage.trim() !== '' ? avatarImage : '/assets/question-mark.svg' %>" alt="User" class="user-profile" />
         <span class="username"><%= username %></span>
         <form method="GET" action="/logout">
           <button class="info-btn" title="Uitloggen">⎋</button>
@@ -41,7 +40,9 @@
   <main class="karakter-container">
     <div class="karakter-info">
       <div class="karakter-img-box">
-        <span class="favorite-star" data-id="<%= karakter.id %>">⭐</span>
+        <% if (isFavoriet) { %>
+          <span class="favorite-star" data-id="<%= karakter.id %>">⭐</span>
+        <% } %>
         <img class="rarity-<%= karakter.rarity.toLowerCase() %>" src="<%= karakter.image %>" alt="Karakter Afbeelding" />
       </div>
       <div class="karakter-text-box">
@@ -55,22 +56,33 @@
         </div>
 
         <div class="karakter-actions">
+          <!-- Blacklist knop -->
           <button type="button"
             class="blacklist-btn"
             data-id="<%= karakter.id %>"
             data-name="<%= karakter.name %>"
             data-img="<%= karakter.image %>">❌</button>
 
-          <button type="button"
-            class="favorite-btn"
-            data-id="<%= karakter.id %>"><%= isFavoriet ? '💔' : '❤️' %></button>
+          <!-- Favoriet knop als form zodat je gewoon op karakter blijft -->
+          <form method="POST" action="/favorieten/<%= karakter.id %>" style="display:inline;">
+            <button type="submit" class="favorite-btn" data-id="<%= karakter.id %>"><%= isFavoriet ? '💔' : '❤️' %></button>
+          </form>
 
+          <!-- Avatar knop -->
           <button type="button"
             class="set-profile"
             data-id="<%= karakter.id %>"
             data-img="<%= karakter.image %>">
             <img src="<%= (avatarImage === karakter.image) ? '/assets/delete.png' : '/assets/add-user.png' %>" alt="Set profiel" />
           </button>
+
+          <!-- Extra knop naar favoriet-detail -->
+         <% if (isFavoriet) { %>
+  <form action="/personages/<%= karakter.id %>/favorietdetail" method="get" style="display:inline;">
+    <button type="submit" class="fav-detail-btn">Klik voor extra opties</button>
+  </form>
+<% } %>
+
         </div>
       </div>
     </div>
