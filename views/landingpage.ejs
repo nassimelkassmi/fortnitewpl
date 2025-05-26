@@ -9,10 +9,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 </head>
 
-<body>
+<body class="landingpage-body">
+
   <header>
     <img src="/assets/logoFN.png" alt="Code Ninjas Logo" class="logo">
-
+<div id="popup-message" class="popup-message" style="display:none"></div>
     <% if (!username) { %>
       <div id="login_register" class="auth-buttons">
         <button onclick="window.location.href='/login'">Inloggen</button>
@@ -86,6 +87,11 @@
     <p>© Code Ninjas | AP Hogeschool</p>
   </footer>
 
-  <script type="module" src="/js/landingpage.js"></script>
+
+<script>
+  window.username = "<%= username ? username : '' %>";
+</script>
+<script type="module" src="/js/popup.js"></script>
 </body>
+
 </html>

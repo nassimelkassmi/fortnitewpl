@@ -17,7 +17,8 @@
 
   <div class="landing-container">
     <h1 class="username">
-      <img src="<%= avatarImage || '/assets/characters/Berserk2.jpg' %>" alt="Profielfoto" class="profile-pic">
+    <img src="<%= avatarImage && avatarImage.trim() !== '' ? avatarImage : '/assets/question-mark.svg' %>" alt="Profielfoto" class="profile-pic">
+
       <span><%= username || "USERNAME" %></span>
     </h1>
 

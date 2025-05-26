@@ -134,10 +134,6 @@ async function main() {
     res.redirect('/login');
   });
 
-  // LANDING
-  app.get('/', requireLogin, (req, res) => {
-    res.redirect('/personages');
-  });
 
   // PERSONAGES OVERZICHT
   app.get('/personages', requireLogin, async (req, res) => {
@@ -184,8 +180,23 @@ async function main() {
     const user = await users.findOne({ username: req.session.user });
     const isFavoriet = user?.favorites.some((fav) => fav.id === id);
     const avatarImage = user?.avatar?.image || '';
-  if (isFavoriet) {
+if (isFavoriet) {
   const favData = user!.favorites.find((f) => f.id === id);
+
+  // Haal alle item-data op uit de Fortnite API
+  const apiResAll = await fetch('https://fortnite-api.com/v2/cosmetics/br');
+  const jsonAll = await apiResAll.json();
+  const allItems = jsonAll.data;
+
+  // Zoek voor elke opgeslagen item-ID de juiste image-URL (max 2 slots)
+  const itemImages = (favData?.items || []).map(itemID => {
+    const item = allItems.find((itm: any) => itm.id === itemID);
+    return item?.images?.icon || '/assets/placeholder.png';
+  });
+
+  // Vul aan tot je er 2 hebt (voor lege slots)
+  while (itemImages.length < 2) itemImages.push('/assets/placeholder.png');
+
   res.render('favokarak', {
     karakter: {
       id,
@@ -194,14 +205,15 @@ async function main() {
       description: json.data.description || 'Geen beschrijving.',
       wins: favData?.wins || 0,
       losses: favData?.losses || 0,
-      items: favData?.items || [],
-      notes: favData?.notes || [],     // <-- deze regel!
+      items: itemImages, // <-- nu lijst van plaatje-urls
+      notes: favData?.notes || [],
     },
     username: req.session.user,
     avatarImage,
   });
   return;
 }
+
 
     res.render('karakter', {
       karakter: {
@@ -219,6 +231,39 @@ async function main() {
       popupMessage: '',
     });
   });
+app.post('/logout', (req, res) => {
+  req.session.destroy(() => res.redirect('/login'));
+});
+// src/index.ts
+app.get('/', (req, res) => {
+  // Toon altijd de landingpage, ongeacht loginstatus
+  res.render('landingpage', {
+    username: req.session.user || null,
+    avatarImage: null // kan je aanvullen als je wilt
+  });
+});
+app.get('/lproject', requireLogin, async (req, res) => {
+  // Toon de hoofdpagina van het project na login én keuze
+  const user = await users.findOne({ username: req.session.user });
+  res.render('lproject', {
+    username: req.session.user,
+    avatarImage: user?.avatar?.image || '',
+  });
+});
+app.post('/login', async (req, res) => {
+  const { username, password } = req.body;
+  const user = await users.findOne({ username });
+  if (!user) {
+    return res.render('login', { melding: 'Gebruiker niet gevonden.' });
+  }
+  const valid = await bcrypt.compare(password, user.password);
+  if (!valid) {
+    return res.render('login', { melding: 'Wachtwoord fout.' });
+  }
+  req.session.user = user.username;
+  // <--- BELANGRIJK
+  res.redirect('/');  // <-- ALTIJD NAAR LANDINGPAGE!
+});
 
   // FAVORIET TOEVOEGEN
 // FAVORIET TOEVOEGEN/VERWIJDEREN via AJAX
@@ -344,40 +389,80 @@ app.get('/items/:id', requireLogin, async (req, res) => {
   const karakterID = req.params.id;
   const user = await users.findOne({ username: req.session.user });
   const avatarImage = user?.avatar?.image || '';
-  const rarities = ['common','uncommon','rare','epic','legendary','other'];
 
-  // Filterwaarden uit de query halen
-  const weaponsRarity = req.query.weaponsRarity?.toString() || '';
-  const emotesRarity = req.query.emotesRarity?.toString() || '';
-  const backblingsRarity = req.query.backblingsRarity?.toString() || '';
+  // Query params voor elk filter
+  const weaponsRarity = req.query.weaponsRarity?.toString().toLowerCase() || '';
+  const emotesRarity = req.query.emotesRarity?.toString().toLowerCase() || '';
+  const backblingsRarity = req.query.backblingsRarity?.toString().toLowerCase() || '';
+const slot = parseInt(req.query.slot as string) || 1;
+
 
   const apiRes = await fetch('https://fortnite-api.com/v2/cosmetics/br');
   const json = await apiRes.json();
   const allItems = json.data || [];
 
-  let weapons = allItems.filter((i: any) => i.type.value === 'pickaxe');
-  let emotes = allItems.filter((i: any) => i.type.value === 'emote');
-  let backblings = allItems.filter((i: any) => i.type.value === 'backpack');
+  // Helper om kleur en label te bepalen (net als je oude js)
+  function getRarity(r: string) {
+    switch (r?.toLowerCase()) {
+      case "common": return { bgColor: "#B9B9B9", rarityLabel: "COMMON" };
+      case "uncommon": return { bgColor: "#4AAE4F", rarityLabel: "UNCOMMON" };
+      case "rare": return { bgColor: "#3399FF", rarityLabel: "RARE" };
+      case "epic": return { bgColor: "#A24EC2", rarityLabel: "EPIC" };
+      case "legendary": return { bgColor: "#D98A29", rarityLabel: "LEGENDARY" };
+      default: return { bgColor: "#6D6D6D", rarityLabel: "OTHER" };
+    }
+  }
 
-  // Filter per rarity als nodig
-  if (weaponsRarity) weapons = weapons.filter((i: any) => (i.rarity.value || 'other').toLowerCase() === weaponsRarity);
-  if (emotesRarity) emotes = emotes.filter((i: any) => (i.rarity.value || 'other').toLowerCase() === emotesRarity);
-  if (backblingsRarity) backblings = backblings.filter((i: any) => (i.rarity.value || 'other').toLowerCase() === backblingsRarity);
+let weapons = allItems
+  .filter((i: any) => 
+    i.type?.value === 'pickaxe' &&
+    i.images && 
+    typeof i.images.icon === 'string' && 
+    i.images.icon.endsWith('.png')
+  )
+  .map((w: any) => Object.assign(w, getRarity(w.rarity?.value)));
+
+let emotes = allItems
+  .filter((i: any) => 
+    i.type?.value === 'emote' &&
+    i.images && 
+    typeof i.images.icon === 'string' && 
+    i.images.icon.endsWith('.png')
+  )
+  .map((e: any) => Object.assign(e, getRarity(e.rarity?.value)));
+
+let backblings = allItems
+  .filter((i: any) => 
+    i.type?.value === 'backpack' &&
+    i.images && 
+    typeof i.images.icon === 'string' && 
+    i.images.icon.endsWith('.png')
+  )
+  .map((b: any) => Object.assign(b, getRarity(b.rarity?.value)));
+
+weapons = weapons.filter((w: any) => w.images && w.images.icon && w.images.icon.endsWith('.png'));
+emotes = emotes.filter((e: any) => e.images && e.images.icon && e.images.icon.endsWith('.png'));
+backblings = backblings.filter((b: any) => b.images && b.images.icon && b.images.icon.endsWith('.png'));
+
+  if (weaponsRarity) weapons = weapons.filter((w: any) => w.rarityLabel.toLowerCase() === weaponsRarity);
+  if (emotesRarity) emotes = emotes.filter((e: any) => e.rarityLabel.toLowerCase() === emotesRarity);
+  if (backblingsRarity) backblings = backblings.filter((b: any) => b.rarityLabel.toLowerCase() === backblingsRarity);
 
   res.render('items', {
     username: req.session.user,
     avatarImage,
     karakterID,
+    slot,
     weapons,
     emotes,
     backblings,
-    rarities,
     weaponsRarity,
     emotesRarity,
     backblingsRarity,
-    getRarityColor
+    
   });
 });
+
 
   // FAVORIET VERWIJDEREN (buiten andere routes!)
 app.post('/favorieten/:id/verwijder', requireLogin, async (req, res) => {
@@ -514,7 +599,8 @@ app.post('/blacklist/:id/verwijder', requireLogin, async (req, res) => {
 app.post('/items/:id', requireLogin, async (req, res) => {
   const karakterID = req.params.id;
   const itemID = req.body.items;
-  const slot = parseInt(req.query.slot as string) || 1;
+  const slot = parseInt(req.body.slot) || 1;
+
 
   const user = await users.findOne({ username: req.session.user });
   const fav = user?.favorites.find(f => f.id === karakterID);

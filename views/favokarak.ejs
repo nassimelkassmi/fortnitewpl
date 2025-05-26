@@ -19,7 +19,8 @@
     </div>
     <div class="right">
       <div class="user-info">
-        <img id="user-profile-img" src="<%= avatarImage || '/assets/question-mark.svg' %>" alt="User" class="user-profile" />
+       <img src="<%= avatarImage && avatarImage.trim() !== '' ? avatarImage : '/assets/question-mark.svg' %>" alt="User" class="user-profile" />
+
         <span class="username"><%= username %></span>
         <button class="info-btn" onclick="showInfo()">ℹ️</button>
       </div>

@@ -116,3 +116,47 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+
+// LANDINGPAGE INTERACTIE
+document.addEventListener('DOMContentLoaded', () => {
+  // Check of we wel op de landingpage zitten
+  if (document.body.classList.contains('landingpage-body')) {
+    const popup = document.getElementById('popup-message');
+
+    // Helper functie voor popup
+    function showPopup(msg) {
+      if (!popup) return;
+      popup.textContent = msg;
+      popup.style.display = "block";
+      popup.classList.add("show");
+      setTimeout(() => {
+        popup.style.display = "none";
+        popup.classList.remove("show");
+      }, 2000);
+    }
+
+    // Fortnite project
+    document.querySelectorAll('a[href="/lproject"], .game-text-container a[href="/lproject"], .game-image-container a[href="/lproject"]').forEach(link => {
+      link.addEventListener('click', function(e) {
+        if (!window.username) {
+          e.preventDefault();
+          showPopup("Je moet eerst inloggen om verder te gaan!");
+        }
+      });
+    });
+
+    // Andere projecten
+    document.querySelectorAll('.game').forEach(gameDiv => {
+      const h2 = gameDiv.querySelector('h2');
+      if (!h2) return;
+      if (h2.textContent.trim() !== 'Fortnite') {
+        // Alle knoppen binnen dit div blokkeren met een popup
+        gameDiv.addEventListener('click', function(e) {
+          e.preventDefault();
+          showPopup("Je hebt geen toegang tot dit project!");
+        });
+      }
+    });
+  }
+});
+

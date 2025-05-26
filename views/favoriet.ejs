@@ -23,7 +23,8 @@
     </div>
     <div class="right">
       <div class="user-info">
-        <img src="<%= avatarImage || '/assets/question-mark.svg' %>" alt="User" class="user-profile" />
+      <img src="<%= avatarImage && avatarImage.trim() !== '' ? avatarImage : '/assets/question-mark.svg' %>" alt="User" class="user-profile" />
+
         <span class="username"><%= username || "Gebruikersnaam" %></span>
         <button class="info-btn">ℹ️</button>
       </div>
