@@ -365,3 +365,44 @@ body {
     right: 5px;
   }
 }
+.carousel-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 16px 0 0 0;
+  gap: 5px;
+}
+.carousel-pagination button {
+  font-size: 1.2rem;
+  background: #222;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 5px 13px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  outline: none;
+  font-family: Fortnite, Arial, sans-serif;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+.carousel-pagination button.active,
+.carousel-pagination button:focus {
+  background: #f4d03f;
+  color: #222;
+  font-weight: bold;
+}
+.carousel-pagination button:disabled {
+  background: #888;
+  color: #333;
+  cursor: not-allowed;
+}
+.carousel-pagination .carousel-ellipsis {
+  background: transparent;
+  color: #fff;
+  border: none;
+  pointer-events: none;
+  font-size: 1.2rem;
+  padding: 5px 0;
+  font-weight: bold;
+}
