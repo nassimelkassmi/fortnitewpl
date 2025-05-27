@@ -317,12 +317,12 @@ body {
   
   
   /* Zeldzaamheidskleuren */
-  .rarity-common    { background-color: #B9B9B9 !important; }
+  .rarity-common    { background-color: #6D6D6D !important; }
   .rarity-uncommon  { background-color: #4AAE4F !important; }
   .rarity-rare      { background-color: #3399FF !important; }
   .rarity-epic      { background-color: #A24EC2 !important; }
   .rarity-legendary { background-color: #D98A29 !important; }
-  .rarity-other     { background-color: #6D6D6D !important; }
+  .rarity-other     { background-color: #c44040 !important; }
   
  /* Zeldzaamheid linksboven in de kaart */
  .rarity-label {

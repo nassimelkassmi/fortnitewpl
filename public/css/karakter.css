@@ -260,31 +260,19 @@ body {
 }
 
 .fav-detail-btn {
-  background: linear-gradient(90deg, #3ba9fc 0%, #3e72ce 100%);
-  color: #fff;
-  font-family: 'Roboto Mono', 'Roboto', Arial, sans-serif;
-  font-size: 1.08rem;
-  font-weight: bold;
-  padding: 0.62em 1.2em;
-  border: none;
-  border-radius: 18px;
-  box-shadow: 0 4px 20px rgba(51, 153, 255, 0.17), 0 1.5px 4px rgba(0,0,0,0.09);
-  cursor: pointer;
-  letter-spacing: 0.03em;
-  transition: 
-    background 0.2s, 
-    transform 0.11s, 
-    box-shadow 0.17s;
-  outline: none;
-  position: relative;
-  top: 2px;
+  background-color: #B3C9FA;
+    border: 5px solid #CEDBF9;
+    color: #292A49;
+    margin: 0 100px;
+    padding: 6px 5px 5px 5px;
+    font-size: 30px;
+    font-family: Fortnite;
+    transition: 0.08s ease-in-out;
 }
 
 .fav-detail-btn:hover, .fav-detail-btn:focus {
-  background: linear-gradient(90deg, #49cfff 0%, #165cb4 100%);
-  color: #fff;
-  transform: translateY(-2px) scale(1.045);
-  box-shadow: 0 6px 25px 0 rgba(51,153,255,0.30), 0 2px 6px rgba(0,0,0,0.12);
+  background-color: #FFF457;
+    border: 5px solid #EDE56A;
 }
 
 .fav-detail-btn:active {
@@ -293,14 +281,4 @@ body {
 }
 .fav-detail-form {
   animation: fadeInFavBtn 0.34s cubic-bezier(.8,-0.1,.3,1.25);
-}
-@keyframes fadeInFavBtn {
-  from {
-    opacity: 0;
-    transform: scale(0.89) translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
 }

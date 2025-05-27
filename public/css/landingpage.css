@@ -75,32 +75,43 @@ nav {
     display: none;
 }
 
+#profiel {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    
+    font-family: Roboto;
+    margin: 0;
+    padding: 0;
+}
+
 #profiel_name{
     z-index: 10;
-    font-size: 2rem;
-    font-style: italic;
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-transform: capitalize;
+    font-size: 1.2rem;
+    margin-right: 25px;
+    text-transform: uppercase;
     cursor: default;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-weight: 100;
+    font-family: Roboto;
+    font-weight: bold;
 }
 
 #log_out{
-    margin: 10px;
-    padding: 5px;
-    margin-left: 30px;
-    font-size: 1.5rem;
-    color: white;
-    background-color: #cecece00;
-    border: 2px solid white;
-    border-radius: 5px;
+  background-color: white;
+    border-radius: 8px;
+    border: solid 1px rgb(202, 202, 202);
+    color: black;
+    padding: 8px 20px;
     cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    font-family: Roboto;
+    font-weight: bold;
+    transition: all 0.2s;
 }
 
-#log_out:hover{
-    background-color: gray;
+#log_out:hover {
+    color: rgb(175, 175, 175) !important;
+    background-color: rgb(22, 22, 22);
 }
 
 
