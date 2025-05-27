@@ -61,14 +61,16 @@
    <% characters.forEach(character => { 
      if (character.image && character.image.trim() !== '') { %>
   <a href="/personages/<%= character.id %>" class="character-link">
-    <div class="character-card rarity-<%= character.rarity.toLowerCase() %>" style="background-image: url('<%= character.image %>');">
-      <span class="rarity-label"><%= character.rarity %></span>
-      <% if (favorieteIds.includes(character.id)) { %>
-        <span class="favorite-star">⭐</span>
-      <% } %>
-      <h3><%= character.name %></h3>
-    </div>
-  </a>
+  <div class="character-card rarity-<%= character.rarity.toLowerCase() %>">
+    <span class="rarity-label"><%= character.rarity %></span>
+    <% if (favorieteIds.includes(character.id)) { %>
+      <span class="favorite-star">⭐</span>
+    <% } %>
+    <img src="<%= character.image %>" alt="<%= character.name %>" class="character-img" />
+    <h3><%= character.name %></h3>
+  </div>
+</a>
+
 <%  } 
 }); %>
 

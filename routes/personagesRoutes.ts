@@ -5,6 +5,13 @@ import { Collection } from 'mongodb';
 import { UserData } from "../interfaces.ts";
 import { requireLogin } from "../middlewares/secureMiddlewares.ts";
 
+// Toevoegen: mapRarity functie
+function mapRarity(rarity: string): string {
+  const allowed = ['common', 'uncommon', 'rare', 'epic', 'legendary', 'other'];
+  const lower = rarity?.toLowerCase() || 'other';
+  return allowed.includes(lower) ? lower : 'other';
+}
+
 export function getPersonagesRoutes(users: Collection<UserData>) {
   const router = express.Router();
 
@@ -28,11 +35,13 @@ export function getPersonagesRoutes(users: Collection<UserData>) {
     if (rarity) {
       characters = characters.filter((c: any) => c.rarity.value.toLowerCase() === rarity);
     }
+
+    // Let op: mapRarity wordt nu gebruikt!
     characters = characters.map((c: any) => ({
       id: c.id,
       name: c.name,
       image: c.images.icon,
-      rarity: c.rarity.value,
+      rarity: mapRarity(c.rarity.value),
     }));
 
     res.render('personages', {

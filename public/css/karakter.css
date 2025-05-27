@@ -10,8 +10,8 @@
 }
 
 body {
-  font-family: Fortnite;
-  font-weight: 200;
+  font-family: Fortnite !important;
+  font-weight: 300 !important;
   background-image: url('/assets/background/background.png');
   background-size: cover;
   background-position: center;
@@ -21,23 +21,6 @@ body {
   background-repeat: no-repeat;
 }
 
-/* Navbar hersteld */
-.navbar {
-  font-family: Fortnite;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  background-color: #4382CE;
-  padding: 15px 100px !important;
-  z-index: 1000;
-}
-
-.left, .center, .right {
-  flex: 1;
-}
 
 .logo {
   width: 90px !important;
@@ -98,20 +81,25 @@ body {
   background: #4360aa8a;
   padding: 32px 60px;
   margin: 80px auto 0px;
-  width: 70%;
+  width: 60%;
   text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .top-section h1 {
+  margin: 0 auto;
   font-size: 4rem;
   font-family: Fortnite;
   text-transform: uppercase;
   color: white;
+  font-weight: 400 !important;
 }
 
 /* Container */
 .karakter-container {
-  width: 70%;
+  width: 60%;
   background: #0b13388f;
   padding: 60px;
   margin: auto;
@@ -128,16 +116,33 @@ body {
 }
 
 .karakter-img-box {
-  flex: 1;
-  max-width: 450px;
   position: relative;
+  width: 260px;
+  height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  /* GEEN hover of box-shadow hier! */
 }
 
-#karakter-img {
-  width: 100%;
-  border: 7px solid rgba(255, 255, 255, 0.123);
-  background-color: #3399FF;
+.character-img {
+  width: 260px !important;
+  height: 260px !important;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  background-color: inherit;
+  box-shadow: inset 0 0 0 6px rgba(255, 255, 255, 0.448);
+  object-fit: cover;
 }
+
+
+  .rarity-common    { background-color: #6D6D6D !important; }
+  .rarity-uncommon  { background-color: #4AAE4F !important; }
+  .rarity-rare      { background-color: #3399FF !important; }
+  .rarity-epic      { background-color: #A24EC2 !important; }
+  .rarity-legendary { background-color: #D98A29 !important; }
+  .rarity-other     { background-color: #c44040 !important; }
+
 
 .favorite-star {
   position: absolute;
@@ -157,6 +162,7 @@ body {
 
 #karakter-naam {
   font-size: 3.5rem;
+  font-family: Fortnite;
 }
 
 #karakter-beschrijving {
@@ -254,31 +260,19 @@ body {
 }
 
 .fav-detail-btn {
-  background: linear-gradient(90deg, #3ba9fc 0%, #3e72ce 100%);
-  color: #fff;
-  font-family: 'Roboto Mono', 'Roboto', Arial, sans-serif;
-  font-size: 1.08rem;
-  font-weight: bold;
-  padding: 0.62em 1.2em;
-  border: none;
-  border-radius: 18px;
-  box-shadow: 0 4px 20px rgba(51, 153, 255, 0.17), 0 1.5px 4px rgba(0,0,0,0.09);
-  cursor: pointer;
-  letter-spacing: 0.03em;
-  transition: 
-    background 0.2s, 
-    transform 0.11s, 
-    box-shadow 0.17s;
-  outline: none;
-  position: relative;
-  top: 2px;
+  background-color: #B3C9FA;
+    border: 5px solid #CEDBF9;
+    color: #292A49;
+    margin: 0 100px;
+    padding: 6px 5px 5px 5px;
+    font-size: 30px;
+    font-family: Fortnite;
+    transition: 0.08s ease-in-out;
 }
 
 .fav-detail-btn:hover, .fav-detail-btn:focus {
-  background: linear-gradient(90deg, #49cfff 0%, #165cb4 100%);
-  color: #fff;
-  transform: translateY(-2px) scale(1.045);
-  box-shadow: 0 6px 25px 0 rgba(51,153,255,0.30), 0 2px 6px rgba(0,0,0,0.12);
+  background-color: #FFF457;
+    border: 5px solid #EDE56A;
 }
 
 .fav-detail-btn:active {
@@ -287,14 +281,4 @@ body {
 }
 .fav-detail-form {
   animation: fadeInFavBtn 0.34s cubic-bezier(.8,-0.1,.3,1.25);
-}
-@keyframes fadeInFavBtn {
-  from {
-    opacity: 0;
-    transform: scale(0.89) translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
 }
