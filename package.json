@@ -2,10 +2,9 @@
   "name": "fortnitewpl",
   "version": "1.0.0",
   "type": "module",
-  "main": "src/index.ts",
+  "main": "index.ts",
   "scripts": {
-    "dev": "node --loader ts-node/esm src/index.ts",
-    "test-mongo": "node --loader ts-node/esm src/test-mongo.ts"
+    "dev": "node --loader ts-node/esm index.ts"
   },
   "dependencies": {
     "bcryptjs": "^3.0.2",

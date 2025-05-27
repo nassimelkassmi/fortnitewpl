@@ -19,36 +19,39 @@
     </div>
     <div class="right">
       <div class="user-info">
-       <img src="<%= avatarImage && avatarImage.trim() !== '' ? avatarImage : '/assets/question-mark.svg' %>" alt="User" class="user-profile" />
-
+        <img src="<%= avatarImage && avatarImage.trim() !== '' ? avatarImage : '/assets/question-mark.svg' %>" alt="User" class="user-profile" />
         <span class="username"><%= username %></span>
         <button class="info-btn" onclick="showInfo()">ℹ️</button>
       </div>
     </div>
   </header>
 
- <main class="items-section">
-  <h1>Kies een item</h1>
-
+  <main class="items-section">
+    <h1>Kies een item</h1>
     <div class="items-grid">
       <!-- WAPENS -->
       <div class="item-category">
         <h2>Wapens</h2>
-        <select name="weaponsRarity" onchange="this.form.submit()">
-          <option value="">ALLE RARITIES</option>
-          <option value="common" <%= weaponsRarity === 'common' ? 'selected' : '' %>>COMMON</option>
-          <option value="uncommon" <%= weaponsRarity === 'uncommon' ? 'selected' : '' %>>UNCOMMON</option>
-          <option value="rare" <%= weaponsRarity === 'rare' ? 'selected' : '' %>>RARE</option>
-          <option value="epic" <%= weaponsRarity === 'epic' ? 'selected' : '' %>>EPIC</option>
-          <option value="legendary" <%= weaponsRarity === 'legendary' ? 'selected' : '' %>>LEGENDARY</option>
-          <option value="other" <%= weaponsRarity === 'other' ? 'selected' : '' %>>OTHER</option>
-        </select>
+        <form method="GET" action="/items/<%= karakterID %>">
+          <select name="weaponsRarity" onchange="this.form.submit()">
+            <option value="">ALLE RARITIES</option>
+            <option value="common" <%= weaponsRarity === 'common' ? 'selected' : '' %>>COMMON</option>
+            <option value="uncommon" <%= weaponsRarity === 'uncommon' ? 'selected' : '' %>>UNCOMMON</option>
+            <option value="rare" <%= weaponsRarity === 'rare' ? 'selected' : '' %>>RARE</option>
+            <option value="epic" <%= weaponsRarity === 'epic' ? 'selected' : '' %>>EPIC</option>
+            <option value="legendary" <%= weaponsRarity === 'legendary' ? 'selected' : '' %>>LEGENDARY</option>
+            <option value="other" <%= weaponsRarity === 'other' ? 'selected' : '' %>>OTHER</option>
+          </select>
+          <!-- Stuur andere filterwaarden altijd mee! -->
+          <input type="hidden" name="emotesRarity" value="<%= emotesRarity %>">
+          <input type="hidden" name="backblingsRarity" value="<%= backblingsRarity %>">
+        </form>
         <div class="grid-column">
           <% weapons.forEach(w => { %>
             <% if (w.images && w.images.icon && w.images.icon.endsWith('.png')) { %>
               <form method="POST" action="/items/<%= karakterID %>" class="item-card" style="background-color: <%= w.bgColor %>">
                 <input type="hidden" name="items" value="<%= w.id %>">
-                <input type="hidden" name="slot" value="<%= slot %>"> 
+                <input type="hidden" name="slot" value="<%= slot %>">
                 <span class="rarity-label"><%= w.rarityLabel %></span>
                 <img src="<%= w.images.icon %>" alt="<%= w.name %>">
                 <h3><%= w.name %></h3>
@@ -61,21 +64,25 @@
       <!-- EMOTES -->
       <div class="item-category">
         <h2>Emotes</h2>
-        <select name="emotesRarity" onchange="this.form.submit()">
-          <option value="">ALLE RARITIES</option>
-          <option value="common" <%= emotesRarity === 'common' ? 'selected' : '' %>>COMMON</option>
-          <option value="uncommon" <%= emotesRarity === 'uncommon' ? 'selected' : '' %>>UNCOMMON</option>
-          <option value="rare" <%= emotesRarity === 'rare' ? 'selected' : '' %>>RARE</option>
-          <option value="epic" <%= emotesRarity === 'epic' ? 'selected' : '' %>>EPIC</option>
-          <option value="legendary" <%= emotesRarity === 'legendary' ? 'selected' : '' %>>LEGENDARY</option>
-          <option value="other" <%= emotesRarity === 'other' ? 'selected' : '' %>>OTHER</option>
-        </select>
+        <form method="GET" action="/items/<%= karakterID %>">
+          <select name="emotesRarity" onchange="this.form.submit()">
+            <option value="">ALLE RARITIES</option>
+            <option value="common" <%= emotesRarity === 'common' ? 'selected' : '' %>>COMMON</option>
+            <option value="uncommon" <%= emotesRarity === 'uncommon' ? 'selected' : '' %>>UNCOMMON</option>
+            <option value="rare" <%= emotesRarity === 'rare' ? 'selected' : '' %>>RARE</option>
+            <option value="epic" <%= emotesRarity === 'epic' ? 'selected' : '' %>>EPIC</option>
+            <option value="legendary" <%= emotesRarity === 'legendary' ? 'selected' : '' %>>LEGENDARY</option>
+            <option value="other" <%= emotesRarity === 'other' ? 'selected' : '' %>>OTHER</option>
+          </select>
+          <input type="hidden" name="weaponsRarity" value="<%= weaponsRarity %>">
+          <input type="hidden" name="backblingsRarity" value="<%= backblingsRarity %>">
+        </form>
         <div class="grid-column">
           <% emotes.forEach(e => { %>
             <% if (e.images && e.images.icon && e.images.icon.endsWith('.png')) { %>
               <form method="POST" action="/items/<%= karakterID %>" class="item-card" style="background-color: <%= e.bgColor %>">
                 <input type="hidden" name="items" value="<%= e.id %>">
-                <input type="hidden" name="slot" value="<%= slot %>"> 
+                <input type="hidden" name="slot" value="<%= slot %>">
                 <span class="rarity-label"><%= e.rarityLabel %></span>
                 <img src="<%= e.images.icon %>" alt="<%= e.name %>">
                 <h3><%= e.name %></h3>
@@ -88,21 +95,25 @@
       <!-- BACK BLINGS -->
       <div class="item-category">
         <h2>Back Blings</h2>
-        <select name="backblingsRarity" onchange="this.form.submit()">
-          <option value="">ALLE RARITIES</option>
-          <option value="common" <%= backblingsRarity === 'common' ? 'selected' : '' %>>COMMON</option>
-          <option value="uncommon" <%= backblingsRarity === 'uncommon' ? 'selected' : '' %>>UNCOMMON</option>
-          <option value="rare" <%= backblingsRarity === 'rare' ? 'selected' : '' %>>RARE</option>
-          <option value="epic" <%= backblingsRarity === 'epic' ? 'selected' : '' %>>EPIC</option>
-          <option value="legendary" <%= backblingsRarity === 'legendary' ? 'selected' : '' %>>LEGENDARY</option>
-          <option value="other" <%= backblingsRarity === 'other' ? 'selected' : '' %>>OTHER</option>
-        </select>
+        <form method="GET" action="/items/<%= karakterID %>">
+          <select name="backblingsRarity" onchange="this.form.submit()">
+            <option value="">ALLE RARITIES</option>
+            <option value="common" <%= backblingsRarity === 'common' ? 'selected' : '' %>>COMMON</option>
+            <option value="uncommon" <%= backblingsRarity === 'uncommon' ? 'selected' : '' %>>UNCOMMON</option>
+            <option value="rare" <%= backblingsRarity === 'rare' ? 'selected' : '' %>>RARE</option>
+            <option value="epic" <%= backblingsRarity === 'epic' ? 'selected' : '' %>>EPIC</option>
+            <option value="legendary" <%= backblingsRarity === 'legendary' ? 'selected' : '' %>>LEGENDARY</option>
+            <option value="other" <%= backblingsRarity === 'other' ? 'selected' : '' %>>OTHER</option>
+          </select>
+          <input type="hidden" name="weaponsRarity" value="<%= weaponsRarity %>">
+          <input type="hidden" name="emotesRarity" value="<%= emotesRarity %>">
+        </form>
         <div class="grid-column">
           <% backblings.forEach(b => { %>
             <% if (b.images && b.images.icon && b.images.icon.endsWith('.png')) { %>
               <form method="POST" action="/items/<%= karakterID %>" class="item-card" style="background-color: <%= b.bgColor %>">
                 <input type="hidden" name="items" value="<%= b.id %>">
-                <input type="hidden" name="slot" value="<%= slot %>"> 
+                <input type="hidden" name="slot" value="<%= slot %>">
                 <span class="rarity-label"><%= b.rarityLabel %></span>
                 <img src="<%= b.images.icon %>" alt="<%= b.name %>">
                 <h3><%= b.name %></h3>
@@ -113,9 +124,8 @@
         </div>
       </div>
     </div>
-  </form>
-  <div id="popup-message" class="popup-message"></div>
-</main>
+    <div id="popup-message" class="popup-message"></div>
+  </main>
 
   <script>
     function showInfo() {
