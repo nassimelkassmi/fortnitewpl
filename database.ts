@@ -2,8 +2,7 @@ import { MongoClient, Db } from "mongodb";
 import dotenv from "dotenv";
 dotenv.config();
 
-const uri = process.env.MONGO_URI as string; // Zelfde naam als in jouw .env!
-
+const uri = process.env.MONGO_URI as string;
 let db: Db;
 
 export async function connect(): Promise<Db> {
@@ -11,8 +10,9 @@ export async function connect(): Promise<Db> {
 
   const client = new MongoClient(uri);
   await client.connect();
-  db = client.db("fortnitewpl"); // Je mag hier een vaste naam houden OF uit .env halen
+  const dbName = process.env.MONGO_DBNAME || "fortnitewpldb";
+  db = client.db(dbName);
 
-  console.log("Verbonden met MongoDB");
+  console.log("Verbonden met MongoDB:", dbName);
   return db;
 }
