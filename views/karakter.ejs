@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="nl">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,32 +8,17 @@
   <link rel="stylesheet" href="/css/karakter.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&family=Roboto:wght@100;400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&family=Roboto:wght@100;400;700&display=swap"
+    rel="stylesheet" />
 </head>
+
 <body>
-  <!-- NAVBAR -->
-  <header class="navbar">
-    <div class="left">
-      <a href="/personages" class="back-btn">←</a>
-    </div>
-    <div class="center">
-      <nav>
-        <img src="/assets/logoFN.png" class="logo" alt="Logo" />
-      </nav>
-    </div>
-    <div class="right">
-      <div class="user-info">
-        <img src="<%= avatarImage && avatarImage.trim() !== '' ? avatarImage : '/assets/question-mark.svg' %>" alt="User" class="user-profile" />
-        <span class="username"><%= username %></span>
-        <form method="GET" action="/logout">
-          <button class="info-btn" title="Uitloggen">⎋</button>
-        </form>
-      </div>
-    </div>
-  </header>
 
   <!-- BLAUWE BALK BOVEN VAK -->
   <section class="top-section">
+    <div class="left">
+      <a href="/personages" class="back-btn">←</a>
+    </div>
     <h1>KARAKTER INFO</h1>
   </section>
 
@@ -41,47 +27,46 @@
     <div class="karakter-info">
       <div class="karakter-img-box">
         <% if (isFavoriet) { %>
-          <span class="favorite-star" data-id="<%= karakter.id %>">⭐</span>
+        <span class="favorite-star" data-id="<%= karakter.id %>">⭐</span>
         <% } %>
-        <img class="rarity-<%= karakter.rarity.toLowerCase() %>" src="<%= karakter.image %>" alt="Karakter Afbeelding" />
+        <img class="character-img rarity-<%= karakter.rarity %>" src="<%= karakter.image %>"
+          alt="<%= karakter.name %>" />
       </div>
+
       <div class="karakter-text-box">
         <h1 id="karakter-naam"><%= karakter.name %></h1>
         <p id="karakter-beschrijving"><%= karakter.description %></p>
 
         <div class="extra-info">
-          <p><strong>Zeldzaamheid:</strong> <span class="rarity-<%= karakter.rarity.toLowerCase() %>"><%= karakter.rarity %></span></p>
+          <p><strong>Zeldzaamheid:</strong> <span
+              class="rarity-<%= karakter.rarity.toLowerCase() %>"><%= karakter.rarity %></span></p>
           <p><strong>Set:</strong> <%= karakter.set %></p>
           <p><strong>Releasedatum:</strong> <%= karakter.releaseDate %></p>
         </div>
 
         <div class="karakter-actions">
           <!-- Blacklist knop -->
-          <button type="button"
-            class="blacklist-btn"
-            data-id="<%= karakter.id %>"
-            data-name="<%= karakter.name %>"
+          <button type="button" class="blacklist-btn" data-id="<%= karakter.id %>" data-name="<%= karakter.name %>"
             data-img="<%= karakter.image %>">❌</button>
 
           <!-- Favoriet knop als form zodat je gewoon op karakter blijft -->
           <form method="POST" action="/favorieten/<%= karakter.id %>" style="display:inline;">
-            <button type="submit" class="favorite-btn" data-id="<%= karakter.id %>"><%= isFavoriet ? '💔' : '❤️' %></button>
+            <button type="submit" class="favorite-btn"
+              data-id="<%= karakter.id %>"><%= isFavoriet ? '💔' : '❤️' %></button>
           </form>
 
           <!-- Avatar knop -->
-          <button type="button"
-            class="set-profile"
-            data-id="<%= karakter.id %>"
-            data-img="<%= karakter.image %>">
-            <img src="<%= (avatarImage === karakter.image) ? '/assets/delete.png' : '/assets/add-user.png' %>" alt="Set profiel" />
+          <button type="button" class="set-profile" data-id="<%= karakter.id %>" data-img="<%= karakter.image %>">
+            <img src="<%= (avatarImage === karakter.image) ? '/assets/delete.png' : '/assets/add-user.png' %>"
+              alt="Set profiel" />
           </button>
 
           <!-- Extra knop naar favoriet-detail -->
-         <% if (isFavoriet) { %>
-  <form action="/personages/<%= karakter.id %>/favorietdetail" method="get" style="display:inline;">
-    <button type="submit" class="fav-detail-btn">Klik voor extra opties</button>
-  </form>
-<% } %>
+          <% if (isFavoriet) { %>
+          <form action="/personages/<%= karakter.id %>/favorietdetail" method="get" style="display:inline;">
+            <button type="submit" class="fav-detail-btn">Klik voor extra opties</button>
+          </form>
+          <% } %>
 
         </div>
       </div>
@@ -100,4 +85,5 @@
 
   <script src="/js/popup.js"></script>
 </body>
+
 </html>

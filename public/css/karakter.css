@@ -10,8 +10,8 @@
 }
 
 body {
-  font-family: Fortnite;
-  font-weight: 200;
+  font-family: Fortnite !important;
+  font-weight: 300 !important;
   background-image: url('/assets/background/background.png');
   background-size: cover;
   background-position: center;
@@ -21,23 +21,6 @@ body {
   background-repeat: no-repeat;
 }
 
-/* Navbar hersteld */
-.navbar {
-  font-family: Fortnite;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  background-color: #4382CE;
-  padding: 15px 100px !important;
-  z-index: 1000;
-}
-
-.left, .center, .right {
-  flex: 1;
-}
 
 .logo {
   width: 90px !important;
@@ -98,20 +81,25 @@ body {
   background: #4360aa8a;
   padding: 32px 60px;
   margin: 80px auto 0px;
-  width: 70%;
+  width: 60%;
   text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .top-section h1 {
+  margin: 0 auto;
   font-size: 4rem;
   font-family: Fortnite;
   text-transform: uppercase;
   color: white;
+  font-weight: 400 !important;
 }
 
 /* Container */
 .karakter-container {
-  width: 70%;
+  width: 60%;
   background: #0b13388f;
   padding: 60px;
   margin: auto;
@@ -128,16 +116,33 @@ body {
 }
 
 .karakter-img-box {
-  flex: 1;
-  max-width: 450px;
   position: relative;
+  width: 260px;
+  height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  /* GEEN hover of box-shadow hier! */
 }
 
-#karakter-img {
-  width: 100%;
-  border: 7px solid rgba(255, 255, 255, 0.123);
-  background-color: #3399FF;
+.character-img {
+  width: 260px !important;
+  height: 260px !important;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  background-color: inherit;
+  box-shadow: inset 0 0 0 6px rgba(255, 255, 255, 0.448);
+  object-fit: cover;
 }
+
+
+.rarity-common    { background-color: #B9B9B9 !important; }
+.rarity-uncommon  { background-color: #4AAE4F !important; }
+.rarity-rare      { background-color: #3399FF !important; }
+.rarity-epic      { background-color: #A24EC2 !important; }
+.rarity-legendary { background-color: #D98A29 !important; }
+.rarity-other     { background-color: #6D6D6D !important; }
+
 
 .favorite-star {
   position: absolute;
@@ -157,6 +162,7 @@ body {
 
 #karakter-naam {
   font-size: 3.5rem;
+  font-family: Fortnite;
 }
 
 #karakter-beschrijving {
