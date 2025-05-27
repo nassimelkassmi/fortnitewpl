@@ -6,6 +6,7 @@
   <title>Item Winkel</title>
   <link rel="stylesheet" href="/css/items.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bangers&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>
   <header class="navbar">
@@ -29,6 +30,7 @@
   <main class="items-section">
     <h1>Kies een item</h1>
     <div class="items-grid">
+
       <!-- WAPENS -->
       <div class="item-category">
         <h2>Wapens</h2>
@@ -45,21 +47,31 @@
           <input type="hidden" name="emotesRarity" value="<%= emotesRarity %>">
           <input type="hidden" name="backblingsRarity" value="<%= backblingsRarity %>">
         </form>
-        <div class="grid-column weapons">
-          <% weapons.forEach(w => { %>
-            <% if (w.images && w.images.icon && w.images.icon.endsWith('.png')) { %>
-              <form method="POST" action="/items/<%= karakterID %>" class="item-card" style="background-color: <%= w.bgColor %>">
-                <input type="hidden" name="items" value="<%= w.id %>">
-                <input type="hidden" name="slot" value="<%= slot %>">
-                <span class="rarity-label"><%= w.rarityLabel %></span>
-                <img src="<%= w.images.icon %>" alt="<%= w.name %>">
-                <h3><%= w.name %></h3>
-                <button type="submit" class="select-item">+</button>
-              </form>
-            <% } %>
-          <% }) %>
+        <div class="carousel-pagination-numbers weapons"></div>
+        <div class="carousel-row">
+          <button class="carousel-arrow left carousel-prev weapons" aria-label="Vorige">
+            <span class="arrow"><i class="fa-solid fa-angle-left"></i></span>
+          </button>
+          <div class="grid-column weapons">
+            <% weapons.forEach(w => { %>
+              <% if (w.images && w.images.icon && w.images.icon.endsWith('.png')) { %>
+                <form method="POST" action="/items/<%= karakterID %>" class="item-card" style="background-color: <%= w.bgColor %>">
+                  <input type="hidden" name="items" value="<%= w.id %>">
+                  <input type="hidden" name="slot" value="<%= slot %>">
+                  <span class="rarity-label"><%= w.rarityLabel %></span>
+                  <img src="<%= w.images.icon %>" alt="<%= w.name %>">
+                  <h3><%= w.name %></h3>
+                  <button type="submit" class="select-item">+</button>
+                </form>
+              <% } %>
+            <% }) %>
+          </div>
+          <button class="carousel-arrow right carousel-next weapons" aria-label="Volgende">
+            <span class="arrow"><i class="fa-solid fa-angle-right"></i></span>
+          </button>
         </div>
       </div>
+
       <!-- EMOTES -->
       <div class="item-category">
         <h2>Emotes</h2>
@@ -76,21 +88,31 @@
           <input type="hidden" name="weaponsRarity" value="<%= weaponsRarity %>">
           <input type="hidden" name="backblingsRarity" value="<%= backblingsRarity %>">
         </form>
-        <div class="grid-column emotes">
-          <% emotes.forEach(e => { %>
-            <% if (e.images && e.images.icon && e.images.icon.endsWith('.png')) { %>
-              <form method="POST" action="/items/<%= karakterID %>" class="item-card" style="background-color: <%= e.bgColor %>">
-                <input type="hidden" name="items" value="<%= e.id %>">
-                <input type="hidden" name="slot" value="<%= slot %>">
-                <span class="rarity-label"><%= e.rarityLabel %></span>
-                <img src="<%= e.images.icon %>" alt="<%= e.name %>">
-                <h3><%= e.name %></h3>
-                <button type="submit" class="select-item">+</button>
-              </form>
-            <% } %>
-          <% }) %>
+        <div class="carousel-pagination-numbers emotes"></div>
+        <div class="carousel-row">
+          <button class="carousel-arrow left carousel-prev emotes" aria-label="Vorige">
+            <span class="arrow"><i class="fa-solid fa-angle-left"></i></span>
+          </button>
+          <div class="grid-column emotes">
+            <% emotes.forEach(e => { %>
+              <% if (e.images && e.images.icon && e.images.icon.endsWith('.png')) { %>
+                <form method="POST" action="/items/<%= karakterID %>" class="item-card" style="background-color: <%= e.bgColor %>">
+                  <input type="hidden" name="items" value="<%= e.id %>">
+                  <input type="hidden" name="slot" value="<%= slot %>">
+                  <span class="rarity-label"><%= e.rarityLabel %></span>
+                  <img src="<%= e.images.icon %>" alt="<%= e.name %>">
+                  <h3><%= e.name %></h3>
+                  <button type="submit" class="select-item">+</button>
+                </form>
+              <% } %>
+            <% }) %>
+          </div>
+          <button class="carousel-arrow right carousel-next emotes" aria-label="Volgende">
+            <span class="arrow"><i class="fa-solid fa-angle-right"></i></span>
+          </button>
         </div>
       </div>
+
       <!-- BACK BLINGS -->
       <div class="item-category">
         <h2>Back Blings</h2>
@@ -107,19 +129,28 @@
           <input type="hidden" name="weaponsRarity" value="<%= weaponsRarity %>">
           <input type="hidden" name="emotesRarity" value="<%= emotesRarity %>">
         </form>
-        <div class="grid-column backblings">
-          <% backblings.forEach(b => { %>
-            <% if (b.images && b.images.icon && b.images.icon.endsWith('.png')) { %>
-              <form method="POST" action="/items/<%= karakterID %>" class="item-card" style="background-color: <%= b.bgColor %>">
-                <input type="hidden" name="items" value="<%= b.id %>">
-                <input type="hidden" name="slot" value="<%= slot %>">
-                <span class="rarity-label"><%= b.rarityLabel %></span>
-                <img src="<%= b.images.icon %>" alt="<%= b.name %>">
-                <h3><%= b.name %></h3>
-                <button type="submit" class="select-item">+</button>
-              </form>
-            <% } %>
-          <% }) %>
+        <div class="carousel-pagination-numbers backblings"></div>
+        <div class="carousel-row">
+          <button class="carousel-arrow left carousel-prev backblings" aria-label="Vorige">
+            <span class="arrow"><i class="fa-solid fa-angle-left"></i></span>
+          </button>
+          <div class="grid-column backblings">
+            <% backblings.forEach(b => { %>
+              <% if (b.images && b.images.icon && b.images.icon.endsWith('.png')) { %>
+                <form method="POST" action="/items/<%= karakterID %>" class="item-card" style="background-color: <%= b.bgColor %>">
+                  <input type="hidden" name="items" value="<%= b.id %>">
+                  <input type="hidden" name="slot" value="<%= slot %>">
+                  <span class="rarity-label"><%= b.rarityLabel %></span>
+                  <img src="<%= b.images.icon %>" alt="<%= b.name %>">
+                  <h3><%= b.name %></h3>
+                  <button type="submit" class="select-item">+</button>
+                </form>
+              <% } %>
+            <% }) %>
+          </div>
+          <button class="carousel-arrow right carousel-next backblings" aria-label="Volgende">
+            <span class="arrow"><i class="fa-solid fa-angle-right"></i></span>
+          </button>
         </div>
       </div>
     </div>
@@ -128,91 +159,49 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  const ITEMS_PER_PAGE = 5;
-  const MAX_PAGE_BUTTONS = 4; // Toon max 4 nummers (plus ... en laatste)
-  const columns = [
-    { selector: '.grid-column.weapons' },
-    { selector: '.grid-column.emotes' },
-    { selector: '.grid-column.backblings' }
-  ];
-
-  columns.forEach(({ selector }) => {
-    const grid = document.querySelector(selector);
-    if (!grid) return;
+  const ITEMS_PER_PAGE = 4;
+  const MAX_PAGE_BUTTONS = 4;
+  ['weapons', 'emotes', 'backblings'].forEach(type => {
+    const grid = document.querySelector(`.grid-column.${type}`);
+    const prevBtn = document.querySelector(`.carousel-arrow.carousel-prev.${type}`);
+    const nextBtn = document.querySelector(`.carousel-arrow.carousel-next.${type}`);
+    const numbersDiv = document.querySelector(`.carousel-pagination-numbers.${type}`);
     const allItems = Array.from(grid.querySelectorAll('.item-card'));
-    if (allItems.length <= ITEMS_PER_PAGE) return; // Geen paginatie nodig
-
     let currentPage = 1;
-    const totalPages = Math.ceil(allItems.length / ITEMS_PER_PAGE);
-
-    // Paginatie container boven de items plaatsen
-    const pagination = document.createElement('div');
-    pagination.className = 'carousel-pagination';
-
-    const prevBtn = document.createElement('button');
-    prevBtn.innerHTML = '‹';
-    prevBtn.className = 'carousel-prev';
-    prevBtn.onclick = () => { if (currentPage > 1) { currentPage--; showPage(currentPage); } };
-    pagination.appendChild(prevBtn);
-
-    // Volgende knop wordt later toegevoegd
-    const nextBtn = document.createElement('button');
-    nextBtn.innerHTML = '›';
-    nextBtn.className = 'carousel-next';
-    nextBtn.onclick = () => { if (currentPage < totalPages) { currentPage++; showPage(currentPage); } };
-    pagination.appendChild(nextBtn);
-
-    // Plaats de paginatie direct boven de grid
-    grid.parentNode.insertBefore(pagination, grid);
+    const totalPages = Math.max(1, Math.ceil(allItems.length / ITEMS_PER_PAGE));
 
     function showPage(page) {
-      currentPage = page;
       allItems.forEach((el, i) => {
         el.style.display = (i >= (page - 1) * ITEMS_PER_PAGE && i < page * ITEMS_PER_PAGE) ? '' : 'none';
       });
-
-      // Verwijder oude page buttons en ellipsis (behalve pijltjes)
-      Array.from(pagination.querySelectorAll('.carousel-page, .carousel-ellipsis')).forEach(e => e.remove());
-
-      // Previous/next state
-      prevBtn.disabled = page === 1;
-      nextBtn.disabled = page === totalPages;
-
-      // Buttons invoegen na prevBtn, vóór nextBtn
-      let insertAfter = prevBtn;
-
+      numbersDiv.innerHTML = "";
       function addBtn(text, pageNum, active = false) {
         let btn = document.createElement('button');
         btn.textContent = text;
         btn.className = "carousel-page" + (active ? " active" : "");
-        if (!active) btn.onclick = () => { showPage(pageNum); };
-        pagination.insertBefore(btn, nextBtn);
+        if (!active) btn.onclick = () => { currentPage = pageNum; showPage(currentPage); };
+        numbersDiv.appendChild(btn);
       }
       function addEllipsis() {
         let el = document.createElement('span');
         el.textContent = "...";
         el.className = "carousel-ellipsis";
-        pagination.insertBefore(el, nextBtn);
+        numbersDiv.appendChild(el);
       }
-
       if (totalPages <= MAX_PAGE_BUTTONS) {
         for (let i = 1; i <= totalPages; i++) {
           addBtn(i, i, i === page);
         }
       } else {
-        // Max 3 nummers + ... + laatste
         if (page <= 2) {
-          // 1 2 ... N
           for (let i = 1; i <= 2; i++) addBtn(i, i, i === page);
           addEllipsis();
           addBtn(totalPages, totalPages, page === totalPages);
         } else if (page >= totalPages - 1) {
-          // 1 ... N-1 N
           addBtn(1, 1, page === 1);
           addEllipsis();
           for (let i = totalPages - 1; i <= totalPages; i++) addBtn(i, i, i === page);
         } else {
-          // 1 ... X ... N
           addBtn(1, 1, page === 1);
           addEllipsis();
           addBtn(page, page, true);
@@ -220,13 +209,15 @@ document.addEventListener('DOMContentLoaded', () => {
           addBtn(totalPages, totalPages, page === totalPages);
         }
       }
+      prevBtn.disabled = page === 1;
+      nextBtn.disabled = page === totalPages;
     }
-
+    prevBtn.onclick = () => { if (currentPage > 1) { currentPage--; showPage(currentPage); }};
+    nextBtn.onclick = () => { if (currentPage < totalPages) { currentPage++; showPage(currentPage); }};
     showPage(currentPage);
   });
 });
 </script>
-
 <script>
   function showInfo() {
     const popup = document.getElementById('popup-message');

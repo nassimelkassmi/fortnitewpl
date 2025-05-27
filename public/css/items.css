@@ -2,8 +2,6 @@
     font-family: Fortnite;
     src: url(../fonts/Fortnite.ttf);
 }
-
-/* Algemene reset */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -11,17 +9,13 @@
     font-family: Fortnite;
     font-weight: 200;
 }
-
 body {
     background-image: url('/assets/background/background.png');
     background-size: cover;
     background-position: center;
     color: #fff;
     padding: 120px 20px 20px;
-    overflow-x: hidden;
 }
-
-/* Navbar */
 .navbar {
     font-family: Fortnite;
     position: fixed;
@@ -34,22 +28,9 @@ body {
     padding: 15px 100px !important;
     z-index: 1000;
 }
-
-.left, .center, .right {
-    flex: 1;
-}
-
-.center {
-    text-align: center;
-}
-
-.center nav {
-    display: inline-flex;
-    gap: 15px;
-    white-space: nowrap;
-    font-size: 3rem;
-}
-
+.left, .center, .right { flex: 1; }
+.center { text-align: center; }
+.center nav { display: inline-flex; gap: 15px; white-space: nowrap; font-size: 3rem; }
 .back-btn {
     font-family: Fortnite;
     font-weight: bold;
@@ -58,23 +39,9 @@ body {
     font-size: 3rem;
     transition: color 0.2s ease-in-out;
 }
-.back-btn:hover {
-    color: #f4d03f;
-}
-
-.user-info {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.user-info img.user-profile {
-    width: 40px;
-    height: 40px;
-    object-fit: cover;
-    border-radius: 50%;
-}
-
+.back-btn:hover { color: #f4d03f; }
+.user-info { display: flex; align-items: center; gap: 10px; }
+.user-info img.user-profile { width: 40px; height: 40px; object-fit: cover; border-radius: 50%; }
 .info-btn {
     background: transparent;
     border: none;
@@ -84,14 +51,7 @@ body {
     text-transform: uppercase;
     font-weight: 200;
 }
-
-.username {
-    font-size: 1.8rem;
-    font-family: Fortnite;
-    text-transform: uppercase;
-}
-
-/* Main container styling */
+.username { font-size: 1.8rem; font-family: Fortnite; text-transform: uppercase; }
 .items-section {
     background: #0b13388f;
     padding: 40px 50px;
@@ -101,8 +61,6 @@ body {
     box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.2);
     text-align: center;
 }
-
-/* Titel styling */
 .items-section h1 {
     font-family: Fortnite;
     font-size: 4rem;
@@ -112,34 +70,34 @@ body {
     letter-spacing: -1px;
     margin-bottom: 20px;
 }
-
-/* Items grid layout */
 .items-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    justify-content: center;
-    align-items: start;
+    display: flex;
+    flex-direction: column;
+    gap: 45px;
+    justify-content: stretch;
+    align-items: stretch;
     padding: 20px;
 }
-
-/* Item category styling */
 .item-category {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 8px;
     gap: 15px;
 }
-
-/* Grid-column voor de items binnen een categorie */
 .grid-column {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
     gap: 20px;
+    justify-content: center;
+    align-items: stretch;
+    flex-wrap: wrap;
+    min-height: 250px;
+    width: 100%;
+    margin-bottom: 12px;
+    position: relative;
+    z-index: 1;
 }
-
-/* Filter dropdown styling */
 .item-category select {
     font-size: 1.5rem;
     font-family: 'Bangers', cursive;
@@ -154,19 +112,13 @@ body {
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
     background-color: #222;
 }
-
-/* Visuele hint filter */
-#filter-weapons { background-color: #3399FF; }
-#filter-emotes { background-color: #A24EC2; }
-#filter-backblings { background-color: #D98A29; }
-
-/* Item kaart styling */
 .item-card {
     border-radius: 15px;
     padding: 12px;
     text-align: center;
-    width: 100%;
-    max-width: 180px;
+    width: 180px;
+    min-width: 150px;
+    max-width: 200px;
     height: 250px;
     display: flex;
     flex-direction: column;
@@ -178,10 +130,9 @@ body {
     cursor: pointer;
     background: rgba(255, 255, 255, 0.1);
     position: relative;
-    overflow: hidden; /* Zorgt dat alles in de kaart blijft */
+    overflow: hidden;
+    margin-bottom: 0;
 }
-
-/* Afbeeldingen binnen de item kaart */
 .item-card img {
     width: 100%;
     max-width: 120px;
@@ -192,36 +143,18 @@ body {
     display: block;
     margin: 0 auto;
 }
-
-/* Extra: zorg dat een image nooit buiten een card komt */
-.grid-column > img {
-    width: 100%;
-    max-width: 180px;
-    height: auto;
-    max-height: 120px;
-    object-fit: contain;
-    border-radius: 8px;
-    display: block;
-    margin: 0 auto;
-}
-
-/* Rarity-label */
 .rarity-label {
     font-size: 1.2rem;
     font-weight: bold;
     text-transform: uppercase;
     margin-bottom: 5px;
 }
-
-/* Item naam */
 .item-card h3 {
     font-size: 1.4rem;
     margin-top: 10px;
     color: white;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
 }
-
-/* Plus-knop voor selectie */
 .select-item {
     font-size: 1.2rem;
     background-color: #f4d03f;
@@ -232,16 +165,11 @@ body {
     transition: 0.2s ease-in-out;
     font-weight: bold;
     position: absolute;
-    bottom: 15px;      /* VASTE positie onderaan, blijft altijd netjes! */
+    bottom: 15px;
     right: 15px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
-    /* verwijder top & transform voor verticale uitlijning! */
 }
-.select-item:hover {
-    background-color: #ffcc00;
-}
-
-/* Popup meldingen */
+.select-item:hover { background-color: #ffcc00; }
 .popup-message {
     position: fixed;
     top: 20%;
@@ -256,153 +184,153 @@ body {
     display: none;
     box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.3);
 }
-.popup-message.show {
-    display: block !important;
-}
+.popup-message.show { display: block !important; }
 
-/* Responsive styling voor schermen tot 720px */
-@media (max-width: 720px) {
-  .navbar {
-    padding: 15px 20px;
-  }
-  
-  .back-btn {
-    font-size: 2.5rem;
-  }
-  
-  .user-profile {
-    width: 45px;
-    height: 45px;
-  }
-  
-  .items-section {
-    width: 95%;
-    padding: 30px;
-  }
-  
-  h1 {
-    font-size: 3rem;
-  }
-  
-  h2 {
-    font-size: 2rem;
-  }
-  
-  .items-grid {
-    grid-template-columns: repeat(1, 1fr);
-    gap: 20px;
-    padding: 10px;
-  }
-  
-  .item-card {
-    max-width: 160px;
-    height: 220px;
-  }
-  
-  .item-card h3 {
-    font-size: 1.2rem;
-  }
-  
-  .select-item {
-    font-size: 1rem;
-    bottom: 10px;
-    right: 10px;
-  }
-}
-
-/* Responsive styling voor schermen tot 480px */
-@media (max-width: 480px) {
-  .navbar {
-    flex-direction: column;
-    text-align: center;
-    padding: 10px;
-  }
-  
-  .back-btn {
-    font-size: 2rem;
-  }
-  
-  .user-info {
-    gap: 10px;
-  }
-  
-  .user-profile {
-    width: 40px;
-    height: 40px;
-  }
-  
-  .items-section {
+/* Carousel en pijlen */
+.carousel-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
     width: 100%;
-    padding: 20px;
-  }
-  
-  h1 {
-    font-size: 2.5rem;
-  }
-  
-  h2 {
-    font-size: 1.8rem;
-  }
-  
-  .items-grid {
-    grid-template-columns: repeat(1, 1fr);
-    gap: 10px;
-    padding: 10px;
-  }
-  
-  .item-card {
-    max-width: 140px;
-    height: auto;
-  }
-  
-  .item-card h3 {
-    font-size: 1.3rem;
-  }
-  
-  .select-item {
-    font-size: 1rem;
-    bottom: 5px;
-    right: 5px;
-  }
+    margin-bottom: 16px;
+    margin-top: 0;
 }
-.carousel-pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 16px 0 0 0;
-  gap: 5px;
+.carousel-arrow {
+    font-size: 2.8rem;
+    background: linear-gradient(145deg, #49a5ff 55%, #3a63cf 100%);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 56px !important;
+    height: 56px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 14px;
+    cursor: pointer;
+    box-shadow: 0 0 18px 4px #49a5ff50;
+    transition: 
+        background 0.23s cubic-bezier(.56,1.8,.67,1),
+        box-shadow 0.23s cubic-bezier(.56,1.8,.67,1),
+        color 0.18s cubic-bezier(.56,1.8,.67,1),
+        transform 0.16s cubic-bezier(.56,1.8,.67,1);
+    position: relative;
+        /* Belangrijk: dit laat animaties IN de cirkel blijven */
+    z-index: 12;
 }
-.carousel-pagination button {
-  font-size: 1.2rem;
-  background: #222;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  padding: 5px 13px;
-  cursor: pointer;
-  transition: background 0.2s, color 0.2s;
-  outline: none;
-  font-family: Fortnite, Arial, sans-serif;
-  font-weight: bold;
-  letter-spacing: 1px;
+.carousel-arrow .arrow {
+    font-size: 2.2rem;
+    color: #ffe53b;
+    font-family: Fortnite, Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    transition: 
+        transform 0.16s cubic-bezier(.62,2,.64,.89),
+        color 0.23s cubic-bezier(.56,1.8,.67,1),
+        text-shadow 0.2s;
+    filter: drop-shadow(0 0 7px #ffe53b70);
+    font-weight: 900;
 }
-.carousel-pagination button.active,
-.carousel-pagination button:focus {
-  background: #f4d03f;
-  color: #222;
-  font-weight: bold;
+.carousel-arrow:hover:not(:disabled) {
+    background: linear-gradient(135deg, #ffe53b 60%, #ff2525 120%);
+    color: #181818;
+    box-shadow: 0 0 32px 7px #ffe53b75, 0 2px 24px #181818cc;
+    transform: scale(1.12);
 }
-.carousel-pagination button:disabled {
-  background: #888;
-  color: #333;
-  cursor: not-allowed;
+.carousel-arrow:hover:not(:disabled) .arrow {
+    color: #49a5ff;
+    text-shadow: 0 0 16px #49a5ffcc, 0 0 2px #fff;
+    filter: drop-shadow(0 0 8px #49a5ff88);
+    transform: scale(1.05) rotate(9deg);
 }
-.carousel-pagination .carousel-ellipsis {
-  background: transparent;
-  color: #fff;
-  border: none;
-  pointer-events: none;
-  font-size: 1.2rem;
-  padding: 5px 0;
-  font-weight: bold;
+.carousel-arrow.left:hover:not(:disabled) .arrow {
+    transform: scale(1.05) rotate(-9deg);
+}
+.carousel-arrow:disabled .arrow {
+    color: #aaa !important;
+    opacity: 0.42;
+    filter: grayscale(1);
+    text-shadow: none;
+}
+.carousel-arrow:disabled {
+    background: #242c44;
+    color: #aaa;
+    cursor: not-allowed;
+    box-shadow: none;
+    opacity: 0.45;
+    transform: none;
+}
+.carousel-arrow:active:not(:disabled) { transform: scale(1.08) translateY(2px); }
+.carousel-pagination-numbers {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 6px;
+    margin-top: 10px;
+}
+.carousel-page {
+    font-size: 1.2rem;
+    background: #222;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 6px 13px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    outline: none;
+    font-family: Fortnite, Arial, sans-serif;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+.carousel-page.active, .carousel-page:focus {
+    background: #f4d03f;
+    color: #222;
+    font-weight: bold;
+}
+.carousel-page:disabled {
+    background: #888;
+    color: #333;
+    cursor: not-allowed;
+}
+.carousel-ellipsis {
+    background: transparent;
+    color: #fff;
+    border: none;
+    pointer-events: none;
+    font-size: 1.2rem;
+    padding: 6px 0;
+    font-weight: bold;
+}
+
+/* Responsive (gelijk houden!) */
+@media (max-width: 900px) {
+    .items-section { width: 98%; padding: 25px; }
+    .item-card { width: 130px; min-width: 110px; max-width: 150px; height: 180px; }
+    .grid-column { gap: 12px; min-height: 180px; }
+}
+@media (max-width: 720px) {
+    .navbar { padding: 15px 20px; }
+    .back-btn { font-size: 2.5rem; }
+    .user-profile { width: 45px; height: 45px; }
+    .items-section { width: 98%; padding: 15px; }
+    h1 { font-size: 3rem; }
+    h2 { font-size: 2rem; }
+    .item-card { width: 110px; min-width: 100px; max-width: 140px; height: 150px; }
+    .grid-column { gap: 7px; min-height: 120px; }
+}
+@media (max-width: 480px) {
+    .navbar { flex-direction: column; text-align: center; padding: 10px; }
+    .back-btn { font-size: 2rem; }
+    .user-info { gap: 10px; }
+    .user-profile { width: 40px; height: 40px; }
+    .items-section { width: 100%; padding: 10px; }
+    h1 { font-size: 2.5rem; }
+    h2 { font-size: 1.8rem; }
+    .item-card { width: 90px; min-width: 80px; max-width: 100px; height: 120px; }
+    .grid-column { gap: 5px; min-height: 60px; }
 }
