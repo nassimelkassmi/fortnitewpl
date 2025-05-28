@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const btn = document.createElement('button');
           btn.type = 'submit';
           btn.className = 'fav-detail-btn';
-          btn.textContent = 'Klik voor meer opties';
+          btn.textContent = 'Opties';
           detailForm.appendChild(btn);
 
           actiesDiv.appendChild(detailForm);

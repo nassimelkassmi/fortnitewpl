@@ -8,7 +8,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: Fortnite;
+  font-family: Fortnite, Arial, sans-serif;
   font-weight: 200;
 }
 
@@ -17,49 +17,39 @@ body {
   background-size: cover;
   background-position: center;
   color: #fff;
-  padding: 80px 20px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-/* Navigatiebalk */
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
+/* ======================= */
+/* BLOK: VASTE KARAKTER INFO */
+/* ======================= */
+.karakter-blok {
+  width: 75%;
+  margin: 50px auto 20px;
+  overflow: hidden;
+  background: #0b1338cc;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+}
+
+.top-section {
+  background: #4360aa;
+  padding: 32px 60px;
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
-  background-color: #4382CE;
-  padding: 15px 100px !important;
-  z-index: 1000;
 }
 
-.left, .center, .right {
-  flex: 1;
-}
-
-.logo {
-  width: 90px !important;
-  height: auto !important;
-}
-
-.center {
-  text-align: center;
-}
-
-.center nav {
-  display: inline-flex;
-  gap: 15px;
-  white-space: nowrap;
-  font-size: 3rem;
-}
-
-.right {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
+.top-section h1 {
+  margin: 0 auto;
+  font-size: 4rem;
+  font-family: Fortnite, Arial, sans-serif;
+  text-transform: uppercase;
+  color: white;
+  font-weight: 400 !important;
+  letter-spacing: 2px;
 }
 
 .back-btn {
@@ -69,50 +59,21 @@ body {
   font-size: 3rem;
 }
 
-/* Gebruiker info */
-.user-info {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.user-info img.user-profile {
-  width: 40px;
-  height: 40px;
-  object-fit: cover;
-  border-radius: 50%;
-}
-
-.username {
-  font-size: 1.8rem;
-  text-transform: uppercase;
-}
-
-.info-btn {
-  background: none;
-  border: none;
-  font-size: 3rem;
-  color: white;
-  cursor: pointer;
-  transition: color 0.2s ease-in-out;
-}
-
-.info-btn:hover {
-  color: #f4d03f;
-}
-
-/* Karakter container */
+/* ======================= */
+/* KARAKTER CONTAINER      */
+/* ======================= */
 .karakter-container {
-  background: #0b13388f;
+  background: transparent;
   padding: 40px 50px;
-  margin: 120px auto 20px;
-  width: 75%;
-
+  margin: 0;
+  border-radius: 0 0 30px 30px;
+  box-shadow: none;
   display: flex;
   flex-direction: column;
   gap: 30px;
 }
 
+/* Inhoud van het karakterblok */
 .karakter-content {
   display: flex;
   gap: 40px;
@@ -134,7 +95,7 @@ body {
 .karakter-img-wrapper img {
   width: 250px;
   border: 4px solid white;
-
+  border-radius: 16px;
 }
 
 .karakter-details {
@@ -143,13 +104,9 @@ body {
 
 .karakter-details h1 {
   font-size: 4rem;
-  color: #FFF457;;
+  color: #FFF457;
   text-transform: uppercase;
   margin-bottom: 15px;
-}
-
-#karakter-naam {
-  margin: 0;
 }
 
 .karakter-details p {
@@ -157,6 +114,9 @@ body {
   margin-bottom: 25px;
 }
 
+/* ======================= */
+/* STATS                   */
+/* ======================= */
 .stats {
   display: flex;
   gap: 20px;
@@ -186,7 +146,13 @@ body {
   color: black;
 }
 
-/* Item Shop */
+/* ======================= */
+/* ITEM SHOP               */
+/* ======================= */
+.item-shop {
+  margin-top: 10px;
+}
+
 .item-shop h2 {
   font-size: 2.5rem;
   color: #FFF457;
@@ -210,7 +176,7 @@ body {
 .item-slot img {
   width: 150px;
   border: 2px solid white;
-
+  border-radius: 10px;
 }
 
 .item-slot button {
@@ -222,6 +188,7 @@ body {
   color: white;
   cursor: pointer;
   transition: 0.2s ease-in-out;
+  border-radius: 5px;
 }
 
 .item-slot button:hover {
@@ -229,9 +196,11 @@ body {
   color: black;
 }
 
-/* Notities */
+/* ======================= */
+/* NOTITIES                */
+/* ======================= */
 .notes {
-  padding: 20px;
+  padding: 20px 0 0 0;
 }
 
 .notes h2 {
@@ -248,7 +217,8 @@ body {
   scrollbar-color: #FFF457 rgba(255, 255, 255, 0.1);
 }
 
-.saved-note {
+.saved-note,
+#notes-list form {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -256,10 +226,11 @@ body {
   padding: 10px;
   border: 1px solid white;
   margin-bottom: 8px;
-
+  border-radius: 8px;
 }
 
-.saved-note p {
+.saved-note p,
+#notes-list p {
   font-size: 1.5rem;
   color: white;
   margin: 0;
@@ -275,57 +246,64 @@ body {
   color: white;
   cursor: pointer;
   transition: 0.2s ease-in-out;
+  border-radius: 5px;
 }
 
 .delete-note:hover {
   background-color: #b30000;
 }
 
-#notes {
+.notes textarea {
   width: 100%;
-  height: 100px;
-  border: 4px solid rgb(30, 72, 171);
+  height: 80px;
+  border: 2px solid rgb(30, 72, 171);
   padding: 10px;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   background: rgba(0, 0, 0, 0.51);
   color: rgb(230, 230, 230);
   outline: none;
-  text-align: center;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  resize: vertical;
 }
 
-#save-notes {
-  font-size: 1.5rem;
-  margin-top: 10px;
-  padding: 10px 20px;
+.notes button[type="submit"] {
+  font-size: 1.1rem;
+  margin-top: 5px;
+  padding: 8px 18px;
   background-color: #1bace4;
   border: none;
   color: white;
   cursor: pointer;
   transition: 0.2s ease-in-out;
+  border-radius: 6px;
 }
 
-#save-notes:hover {
+.notes button[type="submit"]:hover {
   background-color: #f4d03f;
   color: black;
 }
 
 .remove-favorite {
-  font-size: 1.5rem;
-  margin-top: 20px;
-  padding: 10px 20px;
+  font-size: 1.1rem;
+  margin-top: 15px;
+  padding: 8px 18px;
   background-color: #ff4c4c;
   border: none;
   color: white;
   cursor: pointer;
   transition: 0.2s ease-in-out;
-  margin-left: 10px;
+  margin-left: 0;
+  border-radius: 6px;
 }
 
 .remove-favorite:hover {
   background-color: #b30000;
 }
 
-/* Popup */
+/* ======================= */
+/* POPUP MESSAGE           */
+/* ======================= */
 .popup-message {
   position: fixed;
   top: 20%;
@@ -337,59 +315,111 @@ body {
   font-size: 1.5rem;
   text-align: center;
   display: none;
- 
   z-index: 1000;
+  border-radius: 12px;
 }
 
 .popup-message.show {
   display: block !important;
 }
 
-/* Responsive */
-@media (max-width: 720px) {
+/* ======================= */
+/* RESPONSIVE DESIGN       */
+/* ======================= */
+@media (max-width: 1300px) {
+  .karakter-blok {
+    width: 96%;
+  }
+}
+
+@media (max-width: 900px) {
+  .karakter-blok {
+    width: 99%;
+    padding: 0;
+  }
+  .top-section {
+    padding: 18px 10px;
+    font-size: 2rem;
+    flex-direction: column;
+    gap: 15px;
+  }
+  .karakter-container {
+    padding: 18px 4px;
+  }
   .karakter-content {
     flex-direction: column;
     align-items: center;
+    gap: 20px;
   }
-
   .karakter-img-wrapper img {
-    width: 200px;
+    width: 170px;
   }
-
   .karakter-details h1 {
     font-size: 2.5rem;
   }
+}
 
-  .stats {
-    flex-direction: column;
+@media (max-width: 720px) {
+  .karakter-blok {
+    width: 100%;
+    border-radius: 0;
+    margin: 0;
+  }
+  .top-section,
+  .karakter-container {
+    border-radius: 0;
+  }
+  .top-section h1 {
+    font-size: 2rem;
+  }
+  .karakter-content {
+    gap: 10px;
+  }
+  .karakter-img-wrapper img {
+    width: 120px;
+  }
+  .karakter-details h1 {
+    font-size: 1.3rem;
+  }
+  .item-slot img {
+    width: 70px;
+  }
+  .notes textarea {
+    font-size: 1rem;
+    height: 50px;
   }
 }
 
 @media (max-width: 480px) {
-  .navbar {
+  .top-section {
     flex-direction: column;
-    padding: 10px;
-    text-align: center;
+    padding: 10px 2px;
+    font-size: 1.2rem;
   }
-
+  .karakter-content {
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
   .karakter-img-wrapper img {
-    width: 150px;
+    width: 70px;
   }
-
   .karakter-details h1 {
-    font-size: 2rem;
+    font-size: 1rem;
   }
+  .karakter-details p,
+  .notes h2,
+  .item-shop h2 {
+    font-size: 1rem;
+  }
+}
 
-  .stats p, .stats button {
-    font-size: 1.5rem;
-  }
+::-webkit-scrollbar {
+  width: 6px;
+  background: rgba(255, 255, 255, 0.07);
+}
 
-  .item-slot img {
-    width: 100px;
-  }
-
-  .item-slot button {
-    font-size: 0.9rem;
-    padding: 6px;
-  }
+::-webkit-scrollbar-thumb {
+  background: #FFF457;
+  border-radius: 6px;
 }
