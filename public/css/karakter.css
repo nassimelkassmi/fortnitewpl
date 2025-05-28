@@ -21,6 +21,17 @@ body {
   background-repeat: no-repeat;
 }
 
+#blacklist-reason {
+  background-color: #4360aa;
+  font-family: Roboto;
+
+}
+
+#blacklist-reason button {
+  background-color: #282b45;
+  color: white;
+}
+
 
 .logo {
   width: 90px !important;

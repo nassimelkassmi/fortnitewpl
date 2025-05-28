@@ -12,32 +12,32 @@
 }
 
 body {
-  background-image: url('/assets/background/background.png');
-  background-size: cover;
-  background-position: center;
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  background-image: url(/assets/background/background.png);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: #fff;
+    padding: 110px 20px 20px;
+    overflow: hidden;
+    font-family: Fortnite;
 }
 
+
+
 .karakter-blok {
-  width: 80vw;
-  margin: 50px auto 20px;
-  overflow: hidden;
-  background: #0b1338cc;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
-  border-radius: 18px;
+  height: 700px;
+  width: 1000px;
+  margin: 0 auto;
+  background-color: #0b13388f;
 }
 
 .top-section {
-  background: #4360aa;
+  background: #4382CE;
   padding: 32px 60px;
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 25px;
-  border-radius: 18px 18px 0 0;
 }
 
 .top-section h1 {
@@ -69,8 +69,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 390px;
-  min-width: 250px;
+  width: 290px;
 }
 
 .karakter-img-wrapper {
@@ -88,12 +87,15 @@ body {
   color: gold;
 }
 .karakter-img-wrapper img {
-  width: 230px;
-  height: 230px;
-  object-fit: cover;
-  border: 6px solid #FFF457;
-  border-radius: 26px;
-  box-shadow: 0 0 32px #000a;
+  width: 190px;
+  height: 190px;
+  border: 4px solid #FFF457;
+}
+
+.item-shop {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .itemshop-label {
@@ -113,10 +115,10 @@ body {
   gap: 42px;
 }
 .big-item-card {
-  width: 180px;
-  height: 180px;
+  width: 150px;
+  height: 150px;
   border: 4px solid #FFF457;
-  border-radius: 20px;
+
   background: #292a49d6;
   display: flex;
   flex-direction: column;
@@ -140,7 +142,7 @@ body {
   background: linear-gradient(90deg, #0cf2fb 20%, #57e7fc 100%);
   border: none;
   color: #282b45;
-  border-radius: 10px;
+
   cursor: pointer;
   box-shadow: 0 2px 10px #2225;
   transition: 0.2s;
@@ -196,7 +198,7 @@ body {
   align-items: center;
   background: #181c3a;
   padding: 13px 35px;
-  border-radius: 24px;
+
   box-shadow: 0 4px 18px #0005;
   min-width: 210px;
   justify-content: center;
@@ -208,7 +210,7 @@ body {
   border: none;
   color: white;
   cursor: pointer;
-  border-radius: 9px;
+
   transition: 0.2s;
   margin: 0 7px;
   font-weight: 400;
@@ -245,7 +247,7 @@ body {
 }
 .notes {
   background: #181c3a;
-  border-radius: 18px;
+
   padding: 22px 22px 18px 22px;
   box-shadow: 0 2px 12px #0003;
   width: 430px;
@@ -274,7 +276,7 @@ body {
   padding: 8px;
   border: 1px solid white;
   margin-bottom: 6px;
-  border-radius: 8px;
+
 }
 #notes-list p {
   font-size: 1.09rem;
@@ -296,7 +298,7 @@ body {
   border: none;
   color: white;
   cursor: pointer;
-  border-radius: 5px;
+
   margin-left: 10px;
   transition: 0.15s;
 }
