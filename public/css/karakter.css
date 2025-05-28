@@ -22,13 +22,14 @@ body {
 }
 
 #blacklist-reason {
-  background-color: #4360aa;
+  background-color: #141c30;
   font-family: Roboto;
 
 }
 
 #blacklist-reason button {
   background-color: #282b45;
+  border: 1px solid rgb(91, 86, 86);
   color: white;
 }
 
