@@ -10,23 +10,13 @@
 
 </head>
 <body>
-  <header class="navbar">
-    <div class="left">
+  <section class="top-section">
+      <div class="left">
       <a href="/personages/<%= karakterID %>" class="back-btn">←</a>
     </div>
-    <div class="center">
-      <nav>
-        <span class="navbar-title">ITEM WINKEL</span>
-      </nav>
-    </div>
-    <div class="right">
-      <div class="user-info">
-        <img src="<%= avatarImage && avatarImage.trim() !== '' ? avatarImage : '/assets/question-mark.svg' %>" alt="User" class="user-profile" />
-        <span class="username"><%= username %></span>
-        <button class="info-btn" onclick="showInfo()">ℹ️</button>
-      </div>
-    </div>
-  </header>
+      <h1>Item Winkel</h1>
+    </section>
+  
 
   <main class="items-section">
     <h1>Kies een item</h1>
