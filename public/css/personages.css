@@ -17,8 +17,9 @@ body {
     background-attachment: fixed;
     color: #fff;
     padding: 120px 20px 20px;
-    overflow-x: hidden;
+    overflow: hidden;
     font-family: Fortnite;
+    
 }
 
 /* Navigatiebalk */
@@ -106,9 +107,9 @@ body {
 /* ====== Bovenste section ====== */
 .top-section {
     background: #4360aa8a;
-    padding: 32px 60px;
+    padding: 22px 60px 5px 60px;
     margin: auto;
-    width: 75%;
+    width: 60%;
 }
 .top-container {
     display: flex;
@@ -118,7 +119,7 @@ body {
 }
 .top-container h1 {
     font-family: Fortnite;
-    font-size: 4rem;
+    font-size: 3rem;
     color: #ffffff;
     text-transform: uppercase;
     font-weight: 100;
@@ -183,14 +184,14 @@ body {
 /* ====== Onderste section (grid) ====== */
 .characters-section {
     background: #0b13388f;
-    padding: 40px 50px;
+    padding: 10px 50px 14px 50px;
     margin: auto;
-    width: 75%;
+    width: 60%;
 }
 /* Grid voor personages */
 .characters-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 per rij */
+    grid-template-columns: repeat(3, 1fr); /* 4 per rij */
     gap: 20px;
     justify-content: center;
     padding: 15px 40px;
@@ -198,13 +199,16 @@ body {
     max-height: none;
     overflow: visible;
 }
+
+
+
 /* Kaarten */
 .character-card {
     position: relative;
     width: 180px;
     height: 260px;
     cursor: pointer;
-    box-shadow: inset 0 0 0 6px rgba(255, 255, 255, 0.448);
+    box-shadow: inset 0 0 0 4px rgba(255, 255, 255, 0.448);
     overflow: hidden;
     background-size: cover;
     background-position: center;
@@ -213,11 +217,11 @@ body {
     transition: all 0.3s ease;
 }
 .character-card:hover {
-    box-shadow: inset 0 0 0 6px rgba(255, 255, 255, 0.623);
+    box-shadow: inset 0 0 0 5px rgba(255, 255, 255, 0.412);
 }
 .character-card img {
-    width: 230px !important;
-    height: 230px !important;
+    width: 160px !important;
+    height: 160px !important;
     transition: all 0.3s ease-in-out;
 }
 .character-card img:hover {
@@ -314,13 +318,16 @@ body {
     transform: scale(1.1);
 }
 footer {
-    display: flex;
+    margin-bottom: 10px;
     justify-content: center;
     text-align: center;
     font-family: "Roboto", serif;
     font-size: 12px;
     opacity: 0.4;
-    margin: 2rem 0;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 /* Nummering boven de grid */
@@ -328,24 +335,28 @@ footer {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  margin-bottom: 12px;
+  margin-top: 5px;
+  padding-top: 10px;
+  margin-bottom: 5px;
   font-family: Fortnite;
-  font-size: 1.1rem;
+  font-size: 1rem;
   padding-right: 4vw;
 }
 .paging-info {
-  color: #FFF457;
-  text-shadow: 2px 2px 8px #000;
-  letter-spacing: 1px;
-  font-size: 1.2rem;
+  display: flex;
+  text-align: center;
+  justify-content: right;
+  color: #e4e4e4;
+  font-size: 1rem;
+  margin-right: 20px;
 }
 
 /* Flexbox voor grid en verticale pijlen */
 .grid-row-flex {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 16px;
   width: 100%;
 }
 
@@ -405,25 +416,25 @@ footer {
   justify-content: center;
   align-items: center;
   gap: 8px;
-  margin: 32px 0 0 0;
   font-family: Fortnite;
   font-size: 1.3rem;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 .pagination-arrow,
 .pagination-page {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 36px;
-  min-height: 36px;
+  min-width: 30px;
+  min-height: 30px;
   padding: 0 12px;
-  border-radius: 9px;
-  border: 2px solid #FFF457;
-  background: #292a4980;
-  color: #FFF457;
+  border-radius: 3px;
+  background: #7d97d0ce;
+  color: #ffffff;
   text-decoration: none;
   font-weight: 700;
-  font-size: 1.18em;
+  font-size: 1rem;
   cursor: pointer;
   transition: background 0.15s, color 0.15s, transform 0.13s;
   box-shadow: 0 1px 10px #0003;
@@ -432,7 +443,7 @@ footer {
 .pagination-page:not(.current):hover {
   background: #FFF457;
   color: #292A49;
-  transform: scale(1.13);
+  transform: scale(1.05);
 }
 .pagination-arrow.disabled,
 .pagination-page.current {
@@ -447,7 +458,7 @@ footer {
   opacity: 0.35;
 }
 .pagination-ellipsis {
-  color: #FFF457;
+  color: rgba(255, 255, 255, 0.57);
   font-size: 1.5em;
   margin: 0 3px;
   pointer-events: none;
@@ -496,7 +507,7 @@ footer {
     .navbar { padding: 25px 50px; }
     .logo { width: 180px; height: 60px; }
     h1 { font-size: 4.5rem; }
-    .characters-grid { grid-template-columns: repeat(4, 1fr); }
-    .character-card { width: 230px; height: 230px; }
+    .characters-grid { grid-template-columns: repeat(5, 1fr); }
+    .character-card { width: 160px; height: 160px; }
     .nav-btn { font-size: 2rem; padding: 14px 28px; }
 }

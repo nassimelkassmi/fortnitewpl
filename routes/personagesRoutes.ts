@@ -10,7 +10,7 @@ function mapRarity(rarity: string): string {
   return allowed.includes(lower) ? lower : 'other';
 }
 
-const PAGE_SIZE = 12; // 3 rijen van 4 per pagina
+const PAGE_SIZE = 15; // 3 rijen van 4 per pagina
 
 // PAGINATIENUMMERING LOGICA
 function getPagination(current: number, total: number, maxLength = 7): number[] {

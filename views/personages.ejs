@@ -54,21 +54,16 @@
       </div>
       <!-- Nummering boven de grid -->
   <div class="paging-bar">
-  <span class="paging-info">Totaal: <%= totalCharacters %> personages</span>
+  
 </div>
 
     </section>
 
     <!-- Grid met verticale pijlen -->
     <section class="characters-section">
+      <span class="paging-info">Totaal: <%= totalCharacters %> personages</span>
       <div class="grid-row-flex">
-        <!-- Linkerpijl -->
-        <% if (page > 1) { %>
-          <a href="/personages?page=<%= page-1 %>&zoek=<%= zoek %>&rarity=<%= rarity %>" class="paging-arrow paging-arrow-left" title="Vorige pagina">&#8592;</a>
-        <% } else { %>
-          <span class="paging-arrow paging-arrow-left disabled">&#8592;</span>
-        <% } %>
-
+     
         <!-- Personages Grid -->
         <div class="characters-grid" id="characters-grid">
           <% if (characters.length === 0) { %>
@@ -93,23 +88,16 @@
           <% } %>
         </div>
 
-        <!-- Rechterpijl -->
-        <% if (page < totalPages) { %>
-          <a href="/personages?page=<%= page+1 %>&zoek=<%= zoek %>&rarity=<%= rarity %>" class="paging-arrow paging-arrow-right" title="Volgende pagina">&#8594;</a>
-        <% } else { %>
-          <span class="paging-arrow paging-arrow-right disabled">&#8594;</span>
-        <% } %>
-      </div>
-    </section>
+        
 
-    <!-- PAGINATIEBALK onder de grid -->
+       <!-- PAGINATIEBALK onder de grid -->
     <% if (totalPages > 1) { %>
       <nav class="pagination-bar">
         <!-- Vorige pagina -->
         <% if (page > 1) { %>
-          <a href="/personages?page=<%= page-1 %>&zoek=<%= zoek %>&rarity=<%= rarity %>" class="pagination-arrow" title="Vorige">&#171;</a>
+          <a href="/personages?page=<%= page-1 %>&zoek=<%= zoek %>&rarity=<%= rarity %>" class="pagination-arrow" title="Vorige">◄</a>
         <% } else { %>
-          <span class="pagination-arrow disabled">&#171;</span>
+          <span class="pagination-arrow disabled">◄</span>
         <% } %>
 
         <!-- Eerste pagina altijd zichtbaar -->
@@ -139,9 +127,9 @@
 
         <!-- Volgende pagina -->
         <% if (page < totalPages) { %>
-          <a href="/personages?page=<%= page+1 %>&zoek=<%= zoek %>&rarity=<%= rarity %>" class="pagination-arrow" title="Volgende">&#187;</a>
+          <a href="/personages?page=<%= page+1 %>&zoek=<%= zoek %>&rarity=<%= rarity %>" class="pagination-arrow" title="Volgende">►</a>
         <% } else { %>
-          <span class="pagination-arrow disabled">&#187;</span>
+          <span class="pagination-arrow disabled">►</span>
         <% } %>
       </nav>
     <% } %>
@@ -152,6 +140,9 @@
       </div>
     <% } %>
   </main>
+    </section>
+
+   
 
   <footer>
     &copy; Code Ninjas | AP Hogeschool
