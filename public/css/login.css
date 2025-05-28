@@ -109,6 +109,7 @@ button {
     font-family: Fortnite;
     transition: 0.08s ease-in-out;
     margin-bottom: 0px;
+    margin-top: 15px;
 }
 
 .login_button:hover {
