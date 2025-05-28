@@ -1,42 +1,67 @@
-// src/routes/personagesRoutes.ts
-
 import express, { Request, Response } from 'express';
 import { Collection } from 'mongodb';
 import { UserData } from "../interfaces.ts";
 import { requireLogin } from "../middlewares/secureMiddlewares.ts";
 
-// Toevoegen: mapRarity functie
+// Functie om rarity te normaliseren
 function mapRarity(rarity: string): string {
   const allowed = ['common', 'uncommon', 'rare', 'epic', 'legendary', 'other'];
   const lower = rarity?.toLowerCase() || 'other';
   return allowed.includes(lower) ? lower : 'other';
 }
 
+const PAGE_SIZE = 12; // 3 rijen van 4 per pagina
+
+// PAGINATIENUMMERING LOGICA
+function getPagination(current: number, total: number, maxLength = 7): number[] {
+  const range = [];
+  let start = Math.max(1, current - Math.floor(maxLength / 2));
+  let end = Math.min(total, start + maxLength - 1);
+
+  if (end - start < maxLength - 1) {
+    start = Math.max(1, end - maxLength + 1);
+  }
+
+  for (let i = start; i <= end; i++) {
+    range.push(i);
+  }
+  return range;
+}
+
 export function getPersonagesRoutes(users: Collection<UserData>) {
   const router = express.Router();
 
-  // Personages overzicht
+  // Personages overzicht met paginatie
   router.get('/personages', requireLogin, async (req: Request, res: Response) => {
     const zoek = req.query.zoek?.toString().toLowerCase() || '';
     const rarity = req.query.rarity?.toString().toLowerCase() || '';
+    const page = parseInt(req.query.page as string) || 1;
+
+    // API-call outfits
     const apiRes = await fetch('https://fortnite-api.com/v2/cosmetics/br');
     const json = await apiRes.json();
     let characters = json.data.filter((c: any) => c.type.value === 'outfit');
 
+    // User-data ophalen
     const user = await users.findOne({ username: req.session.user });
     const avatarImage = user?.avatar?.image || '';
     const favorieteIds = user?.favorites.map((f) => f.id) || [];
     const blacklistIds = user?.blacklist.map((b) => b.id) || [];
 
+    // Blacklist filter
     characters = characters.filter((c: any) => !blacklistIds.includes(c.id));
+
+    // Zoek-filter
     if (zoek) {
       characters = characters.filter((c: any) => c.name.toLowerCase().includes(zoek));
     }
+
+    // Rarity-filter
     if (rarity) {
       characters = characters.filter((c: any) => c.rarity.value.toLowerCase() === rarity);
     }
 
-    // Let op: mapRarity wordt nu gebruikt!
+    // Map de nodige velden + normalize rarity
     characters = characters.map((c: any) => ({
       id: c.id,
       name: c.name,
@@ -44,14 +69,30 @@ export function getPersonagesRoutes(users: Collection<UserData>) {
       rarity: mapRarity(c.rarity.value),
     }));
 
+    // PAGINATIE
+    const totalCharacters = characters.length;
+    const totalPages = Math.max(1, Math.ceil(totalCharacters / PAGE_SIZE));
+    const startIndex = (page - 1) * PAGE_SIZE;
+    const endIndex = startIndex + PAGE_SIZE;
+    const pagedCharacters = characters.slice(startIndex, endIndex);
+
+    // PAGINATIENUMMERS voor EJS
+    const pagination = getPagination(page, totalPages, 7);
+
     res.render('personages', {
-      characters,
+      characters: pagedCharacters,
       username: req.session.user,
       avatarImage,
       zoek,
       rarity,
       favorieteIds,
       popupMessage: '',
+      page,
+      totalPages,
+      totalCharacters,
+      from: totalCharacters === 0 ? 0 : startIndex + 1,
+      to: Math.min(endIndex, totalCharacters),
+      pagination
     });
   });
 
