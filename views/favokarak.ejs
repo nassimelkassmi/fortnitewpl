@@ -12,7 +12,7 @@
     <!-- TOP SECTION -->
     <section class="top-section">
       <a href="/personages" class="back-btn">←</a>
-      <h1>KARAKTER INFO</h1>
+      <h1>Favoriet Profiel</h1>
     </section>
 
     <!-- KARAKTER INFO GRID -->
@@ -27,8 +27,10 @@
           <div class="itemshop-label">Loadout</div>
           <div class="selected-items">
             <% for (let i = 0; i < 2; i++) { %>
-              <div class="big-item-card">
-                <img src="<%= karakter.items?.[i] ? karakter.items[i] : '/assets/placeholder.png' %>" alt="Item <%= i + 1 %>">
+              <div class="item-slot-container">
+                <div class="big-item-card">
+                  <img src="<%= karakter.items?.[i] ? karakter.items[i] : '/assets/placeholder.png' %>" alt="Item <%= i + 1 %>">
+                </div>
                 <form method="GET" action="/items/<%= karakter.id %>">
                   <input type="hidden" name="slot" value="<%= i + 1 %>">
                   <button type="submit" class="loadout-plus-btn" aria-label="Kies item">+</button>
