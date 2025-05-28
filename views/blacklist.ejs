@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="nl">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,8 +8,11 @@
   <link rel="stylesheet" href="/css/blacklist.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
 </head>
+
 <body>
   <div class="navbar">
     <div class="left">
@@ -23,7 +27,8 @@
     </div>
     <div class="right">
       <div class="user-info">
-        <img id="user-profile-img" src="<%= avatarImage || '/assets/question-mark.svg' %>" alt="User" class="user-profile" />
+        <img id="user-profile-img" src="<%= avatarImage || '/assets/question-mark.svg' %>" alt="User"
+          class="user-profile" />
         <span class="username" id="username_display"><%= username %></span>
         <button class="info-btn">ℹ️</button>
       </div>
@@ -53,31 +58,36 @@
     <section class="characters-section">
       <div class="characters-grid" id="blacklist-grid">
         <% blacklist.forEach(function(char) { %>
-          <div class="character-card">
-            <img src="<%= char.image %>" alt="<%= char.name %>">
-            <div class="character-info">
-              <h3><%= char.name %></h3>
-              <p class="blacklist-reason">
-                Reden:
-                <% if ((editId || '').trim() === (char.id || '').trim()) { %>
-                  <form method="POST" action="/blacklist/<%= char.id %>/reden" style="display:inline;">
-                    <input type="text" name="reason" value="<%= char.reason %>" maxlength="80" style="width:180px;" required>
+        <div class="character-card ">
+          <img src="<%= char.image %>" alt="<%= char.name %>">
+          <div class="character-info">
+            <h3><%= char.name %></h3>
+            <p class="blacklist-reason">
+              Reden:
+              <% if ((editId || '').trim() === (char.id || '').trim()) { %>
+                <form method="POST" action="/blacklist/<%= char.id %>/reden" style="display:inline;">
+                  <input type="text" name="reason" value="<%= char.reason %>" maxlength="80" style="width:450px; height: 38px; font-size: 1.1rem;" required>
+
+                  <div class="character-card-buttons1">
                     <button type="submit" class="save-btn">💾</button>
-                    <a href="/blacklist" class="cancel-btn">Annuleer</a>
-                  </form>
-                <% } else { %>
-                  <%= char.reason %>
+                    <a href="/blacklist" class="cancel-btn">❌</a>
+                  </div>
+                </form>
+              <% } else { %>
+                <%= char.reason %>
+                <div class="character-card-buttons">
                   <form method="GET" action="/blacklist" style="display:inline;">
                     <input type="hidden" name="edit" value="<%= char.id %>">
                     <button type="submit" class="edit-btn" title="Bewerk reden">✏️</button>
                   </form>
-                <% } %>
-              </p>
-              <form method="POST" action="/blacklist/<%= char.id %>/verwijder">
-                <button class="remove-blacklist">Verwijder</button>
-              </form>
-            </div>
+                  <form method="POST" action="/blacklist/<%= char.id %>/verwijder" style="display:inline;">
+                    <button class="remove-blacklist">🗑️</button>
+                  </form>
+                </div>
+              <% } %>
+            </p>
           </div>
+        </div>
         <% }); %>
       </div>
     </section>
@@ -91,4 +101,5 @@
 
   <script src="/js/blacklist.js"></script>
 </body>
+
 </html>

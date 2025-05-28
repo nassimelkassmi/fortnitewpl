@@ -76,6 +76,33 @@ body {
   color: white;
 }
 
+.popup-message {
+    position: fixed;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(204, 24, 37, 0.97); /* dieprood/transparant */
+    color: #fff;
+    padding: 22px 38px;
+    border-radius: 18px;
+    font-size: 1.7rem;
+    font-family: Fortnite, Arial, sans-serif;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    box-shadow: 0 4px 28px #000b;
+    z-index: 2000;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.35s;
+}
+
+.popup-message.show {
+    display: block !important;
+    opacity: 1;
+}
+
+
 /* Top blauwe balk boven container */
 .top-section {
   background: #4360aa8a;

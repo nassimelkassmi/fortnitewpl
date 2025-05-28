@@ -122,7 +122,7 @@ body {
     background: #4360aa8a; 
     padding: 32px 60px;
     margin: auto;
-    width: 75%;
+    width: 60%;
 }
   
 .top-container {
@@ -205,7 +205,7 @@ body {
     background: #0b13388f;
     padding: 40px 50px;
     margin: auto;
-    width: 75%;
+    width: 60%;
 }
   
 .characters-grid {
@@ -215,7 +215,6 @@ body {
     justify-content: center;
     padding: 15px 40px;
     max-height: 700px;
-    overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: #FFF457 rgba(255, 255, 255, 0.1);
 }
@@ -226,7 +225,7 @@ body {
     width: 180px;
     height: 260px;
     cursor: pointer;
-    box-shadow: inset 0 0 0 6px rgba(255, 255, 255, 0.448);
+    box-shadow: inset 0 0 0 4px rgba(255, 255, 255, 0.448);
     overflow: hidden;
     background-size: cover;
     background-position: center;
@@ -236,12 +235,12 @@ body {
 }
 
 .character-card:hover {
-    box-shadow: inset 0 0 0 6px rgba(255, 255, 255, 0.608);
+    box-shadow: inset 0 0 0 5px rgba(255, 255, 255, 0.608);
 }
   
 .character-card img {
-    width: 230px !important;
-    height: 230px !important;
+    width: 160px !important;
+    height: 160px !important;
     transition: all 0.3s ease-in-out;
   }
   
@@ -312,8 +311,8 @@ body {
 .favorite-star {
     position: absolute;
     top: 9px;
-    right: 12px;
-    font-size: 1.4rem;
+    right: 9px;
+    font-size: 1.2rem;
     color: gold;
 }
   
@@ -338,14 +337,17 @@ body {
     margin-left: 10px;
 }
   
-footer { 
-    display: flex;
+footer {
+    margin-bottom: 10px;
     justify-content: center;
     text-align: center;
     font-family: "Roboto", serif;
     font-size: 12px;
     opacity: 0.4;
-    margin: 2rem 0;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 /* Responsive styling */
@@ -369,7 +371,7 @@ footer {
     }
 
     .characters-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
     }
 
     .character-card {
@@ -403,12 +405,12 @@ footer {
     }
 
     .characters-grid {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(5, 1fr);
     }
 
     .character-card {
-        width: 230px;
-        height: 230px;
+        width: 160px;
+        height: 160px;
     }
 
     .nav-btn {
