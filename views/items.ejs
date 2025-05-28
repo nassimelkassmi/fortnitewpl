@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="/css/items.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bangers&display=swap">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
 </head>
 <body>
   <header class="navbar">
@@ -35,6 +36,7 @@
       <div class="item-category">
         <h2>Wapens</h2>
         <form method="GET" action="/items/<%= karakterID %>">
+          <input type="hidden" name="slot" value="<%= slot %>">
           <select name="weaponsRarity" onchange="this.form.submit()">
             <option value="">ALLE RARITIES</option>
             <option value="common" <%= weaponsRarity === 'common' ? 'selected' : '' %>>COMMON</option>
@@ -50,7 +52,7 @@
         <div class="carousel-pagination-numbers weapons"></div>
         <div class="carousel-row">
           <button class="carousel-arrow left carousel-prev weapons" aria-label="Vorige">
-            <span class="arrow"><i class="fa-solid fa-angle-left"></i></span>
+            <span class="arrow">&#x25C0;</span>
           </button>
           <div class="grid-column weapons">
             <% weapons.forEach(w => { %>
@@ -67,7 +69,7 @@
             <% }) %>
           </div>
           <button class="carousel-arrow right carousel-next weapons" aria-label="Volgende">
-            <span class="arrow"><i class="fa-solid fa-angle-right"></i></span>
+            <span class="arrow">&#x25B6;</span>
           </button>
         </div>
       </div>
@@ -76,6 +78,7 @@
       <div class="item-category">
         <h2>Emotes</h2>
         <form method="GET" action="/items/<%= karakterID %>">
+          <input type="hidden" name="slot" value="<%= slot %>">
           <select name="emotesRarity" onchange="this.form.submit()">
             <option value="">ALLE RARITIES</option>
             <option value="common" <%= emotesRarity === 'common' ? 'selected' : '' %>>COMMON</option>
@@ -91,7 +94,7 @@
         <div class="carousel-pagination-numbers emotes"></div>
         <div class="carousel-row">
           <button class="carousel-arrow left carousel-prev emotes" aria-label="Vorige">
-            <span class="arrow"><i class="fa-solid fa-angle-left"></i></span>
+            <span class="arrow">&#x25C0;</span>
           </button>
           <div class="grid-column emotes">
             <% emotes.forEach(e => { %>
@@ -108,7 +111,7 @@
             <% }) %>
           </div>
           <button class="carousel-arrow right carousel-next emotes" aria-label="Volgende">
-            <span class="arrow"><i class="fa-solid fa-angle-right"></i></span>
+            <span class="arrow">&#x25B6;</span>
           </button>
         </div>
       </div>
@@ -117,6 +120,7 @@
       <div class="item-category">
         <h2>Back Blings</h2>
         <form method="GET" action="/items/<%= karakterID %>">
+          <input type="hidden" name="slot" value="<%= slot %>">
           <select name="backblingsRarity" onchange="this.form.submit()">
             <option value="">ALLE RARITIES</option>
             <option value="common" <%= backblingsRarity === 'common' ? 'selected' : '' %>>COMMON</option>
@@ -132,7 +136,7 @@
         <div class="carousel-pagination-numbers backblings"></div>
         <div class="carousel-row">
           <button class="carousel-arrow left carousel-prev backblings" aria-label="Vorige">
-            <span class="arrow"><i class="fa-solid fa-angle-left"></i></span>
+            <span class="arrow">&#x25C0;</span>
           </button>
           <div class="grid-column backblings">
             <% backblings.forEach(b => { %>
@@ -149,7 +153,7 @@
             <% }) %>
           </div>
           <button class="carousel-arrow right carousel-next backblings" aria-label="Volgende">
-            <span class="arrow"><i class="fa-solid fa-angle-right"></i></span>
+            <span class="arrow">&#x25B6;</span>
           </button>
         </div>
       </div>
