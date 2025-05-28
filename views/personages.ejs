@@ -24,8 +24,7 @@
     </div>
     <div class="right">
       <div class="user-info">
-       <img src="<%= avatarImage && avatarImage.trim() !== '' ? avatarImage : '/assets/question-mark.svg' %>" alt="User" class="user-profile" />
-
+        <img src="<%= avatarImage && avatarImage.trim() !== '' ? avatarImage : '/assets/question-mark.svg' %>" alt="User" class="user-profile" />
         <span class="username"><%= username %></span>
         <form method="POST" action="/logout" style="display: inline;">
           <button class="info-btn" title="Uitloggen">⎋</button>
@@ -53,32 +52,102 @@
           </select>
         </form>
       </div>
+      <!-- Nummering boven de grid -->
+  <div class="paging-bar">
+  <span class="paging-info">Totaal: <%= totalCharacters %> personages</span>
+</div>
+
     </section>
 
-    <!-- Grid -->
+    <!-- Grid met verticale pijlen -->
     <section class="characters-section">
-      <div class="characters-grid" id="characters-grid">
-   <% characters.forEach(character => { 
-     if (character.image && character.image.trim() !== '') { %>
-  <a href="/personages/<%= character.id %>" class="character-link">
-  <div class="character-card rarity-<%= character.rarity.toLowerCase() %>">
-    <span class="rarity-label"><%= character.rarity %></span>
-    <% if (favorieteIds.includes(character.id)) { %>
-      <span class="favorite-star">⭐</span>
-    <% } %>
-    <img src="<%= character.image %>" alt="<%= character.name %>" class="character-img" />
-    <h3><%= character.name %></h3>
-  </div>
-</a>
+      <div class="grid-row-flex">
+        <!-- Linkerpijl -->
+        <% if (page > 1) { %>
+          <a href="/personages?page=<%= page-1 %>&zoek=<%= zoek %>&rarity=<%= rarity %>" class="paging-arrow paging-arrow-left" title="Vorige pagina">&#8592;</a>
+        <% } else { %>
+          <span class="paging-arrow paging-arrow-left disabled">&#8592;</span>
+        <% } %>
 
-<%  } 
-}); %>
+        <!-- Personages Grid -->
+        <div class="characters-grid" id="characters-grid">
+          <% if (characters.length === 0) { %>
+            <div class="no-results">
+              <p>Geen personages gevonden.</p>
+            </div>
+          <% } else { %>
+            <% characters.forEach(character => { 
+              if (character.image && character.image.trim() !== '') { %>
+                <a href="/personages/<%= character.id %>" class="character-link">
+                  <div class="character-card rarity-<%= character.rarity.toLowerCase() %>">
+                    <span class="rarity-label"><%= character.rarity %></span>
+                    <% if (favorieteIds.includes(character.id)) { %>
+                      <span class="favorite-star">⭐</span>
+                    <% } %>
+                    <img src="<%= character.image %>" alt="<%= character.name %>" class="character-img" />
+                    <h3><%= character.name %></h3>
+                  </div>
+                </a>
+            <%  } 
+            }); %>
+          <% } %>
+        </div>
 
+        <!-- Rechterpijl -->
+        <% if (page < totalPages) { %>
+          <a href="/personages?page=<%= page+1 %>&zoek=<%= zoek %>&rarity=<%= rarity %>" class="paging-arrow paging-arrow-right" title="Volgende pagina">&#8594;</a>
+        <% } else { %>
+          <span class="paging-arrow paging-arrow-right disabled">&#8594;</span>
+        <% } %>
       </div>
     </section>
 
+    <!-- PAGINATIEBALK onder de grid -->
+    <% if (totalPages > 1) { %>
+      <nav class="pagination-bar">
+        <!-- Vorige pagina -->
+        <% if (page > 1) { %>
+          <a href="/personages?page=<%= page-1 %>&zoek=<%= zoek %>&rarity=<%= rarity %>" class="pagination-arrow" title="Vorige">&#171;</a>
+        <% } else { %>
+          <span class="pagination-arrow disabled">&#171;</span>
+        <% } %>
+
+        <!-- Eerste pagina altijd zichtbaar -->
+        <% if (!pagination.includes(1)) { %>
+          <a href="/personages?page=1&zoek=<%= zoek %>&rarity=<%= rarity %>" class="pagination-page">1</a>
+          <% if (pagination[0] > 2) { %>
+            <span class="pagination-ellipsis">...</span>
+          <% } %>
+        <% } %>
+
+        <!-- Middenpagina's -->
+        <% pagination.forEach(p => { %>
+          <% if (p === page) { %>
+            <span class="pagination-page current"><%= p %></span>
+          <% } else { %>
+            <a href="/personages?page=<%= p %>&zoek=<%= zoek %>&rarity=<%= rarity %>" class="pagination-page"><%= p %></a>
+          <% } %>
+        <% }); %>
+
+        <!-- Laatste pagina altijd zichtbaar -->
+        <% if (!pagination.includes(totalPages)) { %>
+          <% if (pagination[pagination.length-1] < totalPages - 1) { %>
+            <span class="pagination-ellipsis">...</span>
+          <% } %>
+          <a href="/personages?page=<%= totalPages %>&zoek=<%= zoek %>&rarity=<%= rarity %>" class="pagination-page"><%= totalPages %></a>
+        <% } %>
+
+        <!-- Volgende pagina -->
+        <% if (page < totalPages) { %>
+          <a href="/personages?page=<%= page+1 %>&zoek=<%= zoek %>&rarity=<%= rarity %>" class="pagination-arrow" title="Volgende">&#187;</a>
+        <% } else { %>
+          <span class="pagination-arrow disabled">&#187;</span>
+        <% } %>
+      </nav>
+    <% } %>
+
     <% if (popupMessage) { %>
-      <div id="popup-message" class="popup-message">
+      <div id="popup-message" class="popup-message show">
         <%= popupMessage %>
       </div>
     <% } %>
@@ -87,9 +156,6 @@
   <footer>
     &copy; Code Ninjas | AP Hogeschool
   </footer>
-
-
- 
 
 </body>
 </html>

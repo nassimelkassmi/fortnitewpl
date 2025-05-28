@@ -21,29 +21,6 @@ body {
     font-family: Fortnite;
 }
 
-@font-face {
-    font-family: Fortnite;
-    src: url(../fonts/Fortnite.ttf);
-}
-
-/* Algemene reset */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    background-image: url('/assets/background/background.png');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    color: #fff;
-    padding: 120px 20px 20px;
-    overflow-x: hidden;
-    font-family: Fortnite;
-}
-
 /* Navigatiebalk */
 .navbar {
     font-family: Fortnite;
@@ -51,47 +28,34 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    display: flex;               
-    align-items: center;         
+    display: flex;
+    align-items: center;
     background-color: #4382CE;
     padding: 15px 100px !important;
     z-index: 1000;
 }
 
-
 .left, .center, .right {
-  flex: 1; 
+  flex: 1;
 }
-
-
 .logo {
     width: 90px !important;
     height: auto !important;
 }
-
-
-.center {
-  text-align: center;
-}
-
-
+.center { text-align: center; }
 .center nav {
   display: inline-flex;
   gap: 15px;
   white-space: nowrap;
   background-color: transparent;
 }
-
-
 .right {
   display: flex;
   justify-content: flex-end;
   align-items: center;
 }
-
-
 .nav-btn {
-    display: inline-block;           
+    display: inline-block;
     background-color: #7d97d0ce;
     padding: 11px 35px 10px 35px !important;
     color: #fff;
@@ -100,37 +64,29 @@ body {
     font-family: Fortnite;
     text-transform: uppercase;
     transition: all ease 0.3s;
-    text-decoration: none;           
-    border: none;                   
-    outline: none;                  
+    text-decoration: none;
+    border: none;
+    outline: none;
 }
-
 .nav-btn:hover {
     background-color: #FFF457;
     color: #292A49;
 }
-
 .nav-btn.active {
     background-color: #FFF457;
     color: #292A49;
 }
-
-
 .user-info {
     display: flex;
     align-items: center;
     gap: 10px;
 }
-
-
 .user-info img.user-profile {
     width: 40px;
     height: 40px;
     object-fit: cover;
     border-radius: 50%;
 }
-
-
 .info-btn {
     background: transparent;
     border: none;
@@ -140,7 +96,6 @@ body {
     text-transform: uppercase;
     font-weight: 200;
 }
-
 /* Gebruikersnaam */
 .username {
     font-size: 1.8rem;
@@ -148,40 +103,34 @@ body {
     text-transform: uppercase;
 }
 
-
 /* ====== Bovenste section ====== */
 .top-section {
-    background: #4360aa8a; 
+    background: #4360aa8a;
     padding: 32px 60px;
     margin: auto;
     width: 75%;
-  }
-  
-  .top-container {
+}
+.top-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap; 
-  }
-  
-
-  .top-container h1 {
+    flex-wrap: wrap;
+}
+.top-container h1 {
     font-family: Fortnite;
     font-size: 4rem;
     color: #ffffff;
     text-transform: uppercase;
     font-weight: 100;
     letter-spacing: -1px;
-  }
-  
-  /* Zoekveld + knoppen */
-  .search-container {
+}
+/* Zoekveld + knoppen */
+.search-container {
     display: flex;
     align-items: center;
-    flex-wrap: wrap; 
-  }
-  
-  #search {
+    flex-wrap: wrap;
+}
+#search {
     padding: 10px;
     width: 200px;
     border: none;
@@ -194,16 +143,14 @@ body {
     outline: none;
     text-transform: uppercase;
     font-weight: 200;
-  }
-  
-  #search::placeholder {
+}
+#search::placeholder {
     text-align: left;
     color: #9f9ea3;
     opacity: 0.8;
-  }
-  
-  /* Filter dropdown */
-  #filter-rarity {
+}
+/* Filter dropdown */
+#filter-rarity {
     padding: 10px;
     border: none;
     font-family: Fortnite;
@@ -213,11 +160,9 @@ body {
     outline: none;
     text-transform: uppercase;
     font-weight: 200;
-  }
-  
-  
-  /* Play-knop */
-  .play-btn {
+}
+/* Play-knop */
+.play-btn {
     padding: 10px 35px;
     border: none;
     font-family: Fortnite;
@@ -230,76 +175,56 @@ body {
     margin-right: 20px;
     text-transform: uppercase;
     font-weight: 200;
-  }
-  
-  .play-btn:hover {
+}
+.play-btn:hover {
     background-color: #ffe16b;
-  }
-  
-  /* ====== Onderste section (grid) ====== */
-  .characters-section {
-    background: #0b13388f; /* Iets lichtere overlay */
+}
+
+/* ====== Onderste section (grid) ====== */
+.characters-section {
+    background: #0b13388f;
     padding: 40px 50px;
     margin: auto;
     width: 75%;
-    
-  }
-  
-  /* Grid voor personages */
-  .characters-grid {
+}
+/* Grid voor personages */
+.characters-grid {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(4, 1fr); /* 4 per rij */
     gap: 20px;
     justify-content: center;
     padding: 15px 40px;
-    max-height: 700px;
-    overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: #FFF457 rgba(255, 255, 255, 0.1);
-  }
-  
-  /* Kaarten */
-  /* --- Character Card nieuwe stijl --- */
+    /* GEEN SCROLLBALK MEER */
+    max-height: none;
+    overflow: visible;
+}
+/* Kaarten */
 .character-card {
     position: relative;
     width: 180px;
     height: 260px;
     cursor: pointer;
-  
-    /* Border (outline) binnen de kaart */
     box-shadow: inset 0 0 0 6px rgba(255, 255, 255, 0.448);
     overflow: hidden;
-  
-    /* De afbeelding als achtergrond van de kaart */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-  
-    /* Eventueel bestaande padding/centering verwijderen */
-    display: block; /* of flex, maar hier niet meer nodig */
+    display: block;
     transition: all 0.3s ease;
-  }
-
+}
 .character-card:hover {
     box-shadow: inset 0 0 0 6px rgba(255, 255, 255, 0.623);
 }
-  
-  /* Verberg de img-tag als je die nog in je HTML hebt staan */
-  .character-card img {
+.character-card img {
     width: 230px !important;
     height: 230px !important;
     transition: all 0.3s ease-in-out;
-  }
-  
-  /* Hover-effect voor de borderkleur */
-  .character-card img:hover {
+}
+.character-card img:hover {
     border-color: #FFF457;
     transform: scale(1.1);
-  }
-
-  
-  /* Naam van het personage onderaan de kaart */
-  .character-card h3 {
+}
+.character-card h3 {
     position: absolute;
     bottom: 8px;
     width: 100%;
@@ -313,36 +238,31 @@ body {
     font-family: Fortnite, Arial, sans-serif;
     text-transform: uppercase;
     font-weight: 200;
-  }
-  
-  
-  /* Zeldzaamheidskleuren */
-  .rarity-common    { background-color: #6D6D6D !important; }
-  .rarity-uncommon  { background-color: #4AAE4F !important; }
-  .rarity-rare      { background-color: #3399FF !important; }
-  .rarity-epic      { background-color: #A24EC2 !important; }
-  .rarity-legendary { background-color: #D98A29 !important; }
-  .rarity-other     { background-color: #c44040 !important; }
-  
- /* Zeldzaamheid linksboven in de kaart */
- .rarity-label {
+}
+/* Zeldzaamheidskleuren */
+.rarity-common    { background-color: #6D6D6D !important; }
+.rarity-uncommon  { background-color: #4AAE4F !important; }
+.rarity-rare      { background-color: #3399FF !important; }
+.rarity-epic      { background-color: #A24EC2 !important; }
+.rarity-legendary { background-color: #D98A29 !important; }
+.rarity-other     { background-color: #c44040 !important; }
+/* Zeldzaamheid linksboven in de kaart */
+.rarity-label {
     position: absolute;
     top: 12px;
     left: 12px;
-    background-color: rgba(0,0,0,0.6); /* Donker transparant */
+    background-color: rgba(0,0,0,0.6);
     padding: 4px 8px;
     border-radius: 6px;
     font-size: 1rem;
     text-transform: uppercase;
     color: white;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
-    text-transform: uppercase;
     font-weight: 200;
     z-index: 10;
-  }
-  
-  /* Popup */
-  .popup-message {
+}
+/* Popup */
+.popup-message {
     position: fixed;
     top: 20%;
     left: 50%;
@@ -356,53 +276,44 @@ body {
     display: none;
     text-transform: uppercase;
     font-weight: 200;
-  }
-  
-  .show {
+}
+.show {
     display: block !important;
-  }
-  
-  /* Voor icons, favorieten etc. */
-  .favorite-star {
+}
+/* Voor icons, favorieten etc. */
+.favorite-star {
     position: absolute;
     top: 9px;
     right: 12px;
     font-size: 1.4rem;
     color: gold;
-  }
-  
-  .info-btn {
+}
+.info-btn {
     font-size: 3rem;
     cursor: pointer;
     background: none;
     border: none;
     color: white;
     transition: color 0.2s ease-in-out;
-  }
-  
-  .info-btn:hover {
+}
+.info-btn:hover {
     color: #f4d03f;
-  }
-  
-  /* Profiel-icoon */
-  .user-profile {
+}
+.user-profile {
     width: 50px;
     height: 50px;
     border-radius: 50%;
     border: 2px solid white;
     margin-left: 10px;
-  }
-  
-  .set-profile img {
+}
+.set-profile img {
     width: 40px;
     height: 40px;
-  }
-  
-  .set-profile img:hover {
+}
+.set-profile img:hover {
     transform: scale(1.1);
-  }
-
-  footer { 
+}
+footer {
     display: flex;
     justify-content: center;
     text-align: center;
@@ -412,72 +323,180 @@ body {
     margin: 2rem 0;
 }
 
-  
+/* Nummering boven de grid */
+.paging-bar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 12px;
+  font-family: Fortnite;
+  font-size: 1.1rem;
+  padding-right: 4vw;
+}
+.paging-info {
+  color: #FFF457;
+  text-shadow: 2px 2px 8px #000;
+  letter-spacing: 1px;
+  font-size: 1.2rem;
+}
 
+/* Flexbox voor grid en verticale pijlen */
+.grid-row-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  width: 100%;
+}
+
+/* Verticale navigatiepijlen links/rechts naast de grid */
+.paging-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.2rem;
+  min-width: 55px;
+  min-height: 160px;
+  color: #FFF457;
+  background: #292a4980;
+  border-radius: 18px;
+  text-decoration: none;
+  transition: background 0.15s, transform 0.2s;
+  border: 3px solid #FFF457;
+  box-shadow: 2px 2px 14px #0006;
+  cursor: pointer;
+  user-select: none;
+  margin: 0 8px;
+  z-index: 10;
+}
+.paging-arrow.disabled {
+  opacity: 0.28;
+  pointer-events: none;
+  border-style: dashed;
+  background: transparent;
+}
+.paging-arrow-left {
+  animation: arrowMoveLeft 0.7s infinite alternate;
+}
+.paging-arrow-right {
+  animation: arrowMoveRight 0.7s infinite alternate;
+}
+@keyframes arrowMoveLeft {
+  to { transform: scale(1.08) translateX(-8px);}
+}
+@keyframes arrowMoveRight {
+  to { transform: scale(1.08) translateX(8px);}
+}
+
+/* Geen resultaten melding */
+.no-results {
+  grid-column: 1/-1;
+  text-align: center;
+  color: #FFF457;
+  font-size: 1.5rem;
+  padding: 64px 0 32px;
+  font-family: Fortnite;
+  text-shadow: 1px 1px 8px #0008;
+}
+
+/* PAGINATIEBALK STYLING */
+.pagination-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin: 32px 0 0 0;
+  font-family: Fortnite;
+  font-size: 1.3rem;
+}
+.pagination-arrow,
+.pagination-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  min-height: 36px;
+  padding: 0 12px;
+  border-radius: 9px;
+  border: 2px solid #FFF457;
+  background: #292a4980;
+  color: #FFF457;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.18em;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, transform 0.13s;
+  box-shadow: 0 1px 10px #0003;
+}
+.pagination-arrow:hover,
+.pagination-page:not(.current):hover {
+  background: #FFF457;
+  color: #292A49;
+  transform: scale(1.13);
+}
+.pagination-arrow.disabled,
+.pagination-page.current {
+  background: #FFF457;
+  color: #292A49;
+  border-style: solid;
+  cursor: default;
+  pointer-events: none;
+  font-weight: 900;
+}
+.pagination-arrow.disabled {
+  opacity: 0.35;
+}
+.pagination-ellipsis {
+  color: #FFF457;
+  font-size: 1.5em;
+  margin: 0 3px;
+  pointer-events: none;
+}
+@media (max-width: 1000px) {
+  .paging-arrow {
+    font-size: 2rem;
+    min-width: 40px;
+    min-height: 100px;
+  }
+  .characters-grid {
+    padding: 6px 2px;
+    gap: 8px;
+  }
+  .paging-bar {
+    font-size: 1rem;
+    padding-right: 0;
+  }
+  .pagination-bar {
+    font-size: 1rem;
+    gap: 4px;
+    margin-top: 12px;
+  }
+  .pagination-arrow, .pagination-page {
+    min-width: 28px;
+    min-height: 28px;
+    padding: 0 7px;
+    font-size: 1em;
+  }
+}
+
+/* Mobiel grid: 2 kolommen, geen scrollbars */
 @media (max-width: 768px) {
     body {
         padding: 100px 10px 10px;
     }
-
-    .navbar {
-        padding: 15px 20px;
-    }
-
-    .logo {
-        width: 120px;
-        height: 40px;
-    }
-
-    h1 {
-        font-size: 3rem;
-        text-align: center;
-    }
-
-    .characters-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .character-card {
-        width: 140px;
-        height: 220px;
-    }
-
-    .nav-btn {
-        font-size: 1.5rem;
-        padding: 8px 16px;
-    }
-
-    #search, #filter-rarity {
-        width: 100%;
-        font-size: 0.9rem;
-    }
+    .navbar { padding: 15px 20px; }
+    .logo { width: 120px; height: 40px; }
+    h1 { font-size: 3rem; text-align: center; }
+    .characters-grid { grid-template-columns: repeat(2, 1fr); }
+    .character-card { width: 140px; height: 220px; }
+    .nav-btn { font-size: 1.5rem; padding: 8px 16px; }
+    #search, #filter-rarity { width: 100%; font-size: 0.9rem; }
 }
-
 @media (min-width: 1200px) {
-    .navbar {
-        padding: 25px 50px;
-    }
-
-    .logo {
-        width: 180px;
-        height: 60px;
-    }
-
-    h1 {
-        font-size: 4.5rem;
-    }
-
-    .characters-grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
-
-    .character-card {
-        width: 230px;
-        height: 230px;
-    }
-
-    .nav-btn {
-        font-size: 2rem;
-        padding: 14px 28px;
-    }
+    .navbar { padding: 25px 50px; }
+    .logo { width: 180px; height: 60px; }
+    h1 { font-size: 4.5rem; }
+    .characters-grid { grid-template-columns: repeat(4, 1fr); }
+    .character-card { width: 230px; height: 230px; }
+    .nav-btn { font-size: 2rem; padding: 14px 28px; }
 }
