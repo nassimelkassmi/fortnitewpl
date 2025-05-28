@@ -20,7 +20,7 @@
       <!-- LINKERKANT: FOTO + ITEMS -->
       <div class="karakter-left">
         <div class="karakter-img-wrapper">
-          <span class="favorite-star">⭐</span>
+          
           <img src="<%= karakter.image %>" alt="<%= karakter.name %>">
         </div>
         <div class="itemshop-label">Loadout</div>
@@ -54,7 +54,7 @@
           <!-- Wins -->
           <form method="POST" action="/score/<%= karakter.id %>" class="stat-card">
             <button name="wins" value="<%= karakter.wins - 1 %>" class="stat-btn">-</button>
-            <span class="stat-value"><span>🏆</span> <b>Wins:</b> <%= karakter.wins %></span>
+            <span class="stat-value"><span>🏆</span> <%= karakter.wins %></span>
             <button name="wins" value="<%= karakter.wins + 1 %>" class="stat-btn">+</button>
             <input type="hidden" name="name" value="<%= karakter.name %>">
             <input type="hidden" name="image" value="<%= karakter.image %>">
@@ -63,7 +63,7 @@
           <!-- Losses -->
           <form method="POST" action="/score/<%= karakter.id %>" class="stat-card">
             <button name="losses" value="<%= karakter.losses - 1 %>" class="stat-btn">-</button>
-            <span class="stat-value"><span>💀</span> <b>Losses:</b> <%= karakter.losses %></span>
+            <span class="stat-value"><span>💀</span> <%= karakter.losses %></span>
             <button name="losses" value="<%= karakter.losses + 1 %>" class="stat-btn">+</button>
             <input type="hidden" name="name" value="<%= karakter.name %>">
             <input type="hidden" name="image" value="<%= karakter.image %>">

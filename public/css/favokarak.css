@@ -89,7 +89,8 @@ body {
 .karakter-img-wrapper img {
   width: 190px;
   height: 190px;
-  border: 4px solid #FFF457;
+  box-shadow: inset 0 0 0 6px rgba(255, 255, 255, 0.448);
+  background: linear-gradient(45deg, #0074d93e 0%, #b0b0b085 100%);
 }
 
 .item-shop {
@@ -99,55 +100,51 @@ body {
 }
 
 .itemshop-label {
-  font-size: 2rem;
-  color: #FFF457;
-  margin-bottom: 18px;
+  font-size: 1.6rem;
+  color: #ffffff;
+  margin-bottom: 10px;
   text-align: center;
-  font-weight: 700;
-  text-shadow: 2px 2px 6px #2228;
-  letter-spacing: 1.5px;
+  font-weight: 500;
+  text-transform: uppercase;
 }
 
 .selected-items {
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  gap: 42px;
+  gap: 10px;
 }
 .big-item-card {
-  width: 150px;
-  height: 150px;
-  border: 4px solid #FFF457;
-
-  background: #292a49d6;
+  width: 120px;
+  height: 120px;
+  box-shadow: inset 0 0 0 5px rgba(255, 255, 255, 0.448);
+  background: linear-gradient(45deg, #d5d9003e 0%, #c7cab485 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
-  box-shadow: 0 0 18px #0007;
   margin-bottom: 0;
   justify-content: flex-end;
 }
 .big-item-card img {
-  width: 90%;
-  height: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 90px;
+  width: 90px;
   object-fit: contain;
-  margin-top: 12px;
-  margin-bottom: 0;
+  margin-bottom: 10px;
 }
 .loadout-plus-btn {
   margin: 16px 0 10px 0;
   padding: 2px 18px 2px 18px;
   font-size: 2.5rem;
-  background: linear-gradient(90deg, #0cf2fb 20%, #57e7fc 100%);
+  background: #4382CE;
   border: none;
-  color: #282b45;
-
+  color: white;
   cursor: pointer;
-  box-shadow: 0 2px 10px #2225;
   transition: 0.2s;
   font-weight: 700;
-  border: 2px solid #FFF457;
   display: block;
 }
 .loadout-plus-btn:hover {
@@ -166,53 +163,43 @@ body {
 
 .karakter-details h1 {
   font-size: 3.4rem;
-  color: #FFF457;
+  color: white;
   text-transform: uppercase;
   margin-bottom: 5px;
-  line-height: 1.05;
   font-weight: 400;
 }
 .karakter-details .karakter-set {
   font-size: 1.13rem;
   color: #aac8ff;
   margin-bottom: 5px;
-  text-shadow: 1px 1px 5px #0006;
   font-weight: 400;
 }
 .karakter-details p {
-  font-size: 1.28rem;
+  font-size: 1.1rem;
   margin-bottom: 18px;
-  opacity: 0.90;
-  line-height: 1.45;
   font-weight: 400;
 }
 
 .stats-row {
   display: flex;
-  gap: 50px;
+  gap: 40px;
   align-items: center;
   margin-bottom: 20px;
 }
 .stat-card {
   display: inline-flex;
   align-items: center;
-  background: #181c3a;
-  padding: 13px 35px;
-
-  box-shadow: 0 4px 18px #0005;
-  min-width: 210px;
+  background: #181c3a7b;
   justify-content: center;
 }
 .stat-btn {
   font-size: 2.4rem;
-  padding: 6px 16px;
-  background-color: #1bace4;
+  padding: 6px 20px;
+  background-color: #4382CE;
   border: none;
   color: white;
   cursor: pointer;
-
   transition: 0.2s;
-  margin: 0 7px;
   font-weight: 400;
 }
 .stat-btn:hover {
@@ -225,7 +212,7 @@ body {
   font-weight: 700;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 5px;
   background: none;
   padding: 0;
   margin: 0 13px;
@@ -246,20 +233,17 @@ body {
   margin-top: 18px;
 }
 .notes {
-  background: #181c3a;
-
+  background: #181c3a7b;
   padding: 22px 22px 18px 22px;
-  box-shadow: 0 2px 12px #0003;
   width: 430px;
   max-width: 95vw;
 }
 .notes h2 {
   font-size: 1.28rem;
-  color: #FFF457;
+  color: #ffffff;
   margin-bottom: 10px;
-  font-weight: 600;
-  opacity: 0.92;
-  letter-spacing: 1px;
+  font-weight: 400;
+  text-transform: uppercase;
 }
 #notes-list {
   margin-top: 8px;
@@ -359,7 +343,6 @@ body {
   margin-left: 0;
   transition: 0.18s;
   font-weight: 700;
-  box-shadow: 0 4px 18px #0002;
 }
 .remove-favorite-heart:hover {
   background-color: #b30000;
