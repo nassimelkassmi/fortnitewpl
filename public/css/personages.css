@@ -463,45 +463,119 @@ footer {
   pointer-events: none;
 }
 @media (max-width: 1000px) {
-  .paging-arrow {
-    font-size: 2rem;
-    min-width: 40px;
-    min-height: 100px;
+  html, body {
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    height: auto !important;
+    max-height: none !important;
+  }
+  body {
+    /* Belangrijk: genoeg ruimte voor de gestapelde navbar! */
+    padding-top: 265px !important;
+    padding-left: 2vw !important;
+    padding-right: 2vw !important;
+    padding-bottom: 20px !important;
+  }
+  .navbar {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    padding: 14px 2vw !important;
+    gap: 10px !important;
+    height: auto !important;
+    min-height: unset !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    z-index: 9999;
+    background-color: #4382CE !important;
+  }
+  .left, .center, .right {
+    flex: none !important;
+    width: 100% !important;
+    justify-content: center !important;
+    text-align: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .logo {
+    width: 70px !important;
+    margin: 0 auto !important;
+    display: block;
+  }
+  .center nav {
+    flex-direction: column !important;
+    display: flex !important;
+    gap: 10px !important;
+    width: 100% !important;
+    margin: 0 !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+  .nav-btn {
+    width: 100% !important;
+    max-width: 350px !important;
+    font-size: 1.1rem !important;
+    margin: 0 auto !important;
+    padding: 8px 0 !important;
+    border-radius: 9px;
+  }
+  .user-info {
+    justify-content: center !important;
+    gap: 8px !important;
+    margin-top: 4px !important;
+  }
+  .username {
+    font-size: 1.1rem !important;
   }
   .characters-grid {
-    padding: 6px 2px;
-    gap: 8px;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 24px !important;
+    padding: 10px 0 !important;
+    justify-items: center !important;
   }
-  .paging-bar {
-    font-size: 1rem;
-    padding-right: 0;
+  .character-card {
+    width: 180px !important;
+    height: 260px !important;
+    min-width: 180px !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
   }
-  .pagination-bar {
-    font-size: 1rem;
-    gap: 4px;
-    margin-top: 12px;
+  .character-card img {
+    width: 160px !important;
+    height: 160px !important;
+    display: block !important;
+    margin: 0 auto !important;
   }
-  .pagination-arrow, .pagination-page {
-    min-width: 28px;
-    min-height: 28px;
-    padding: 0 7px;
-    font-size: 1em;
+  .characters-section, .top-section {
+    width: 100% !important;
+    padding: 14px 2vw !important;
+    min-width: 0 !important;
+    box-sizing: border-box;
   }
 }
 
-/* Mobiel grid: 2 kolommen, geen scrollbars */
-@media (max-width: 768px) {
-    body {
-        padding: 100px 10px 10px;
-    }
-    .navbar { padding: 15px 20px; }
-    .logo { width: 120px; height: 40px; }
-    h1 { font-size: 3rem; text-align: center; }
-    .characters-grid { grid-template-columns: repeat(2, 1fr); }
-    .character-card { width: 140px; height: 220px; }
-    .nav-btn { font-size: 1.5rem; padding: 8px 16px; }
-    #search, #filter-rarity { width: 100%; font-size: 0.9rem; }
+/* GSM (max 600px): 1 kolom en meer body padding voor hoge navbar */
+@media (max-width: 600px) {
+  body {
+    padding-top: 265px !important; /* Iets meer ruimte voor een gestapelde navbar */
+  }
+  .characters-grid {
+    grid-template-columns: repeat(1, 1fr) !important;
+  }
+  .navbar {
+    padding: 11px 2vw !important;
+    gap: 8px !important;
+  }
+  .logo {
+    width: 56px !important;
+  }
+  .nav-btn {
+    font-size: 1rem !important;
+    max-width: 99vw !important;
+  }
 }
+
 @media (min-width: 1200px) {
     .navbar { padding: 25px 50px; }
     .logo { width: 180px; height: 60px; }
@@ -510,3 +584,5 @@ footer {
     .character-card { width: 160px; height: 160px; }
     .nav-btn { font-size: 2rem; padding: 14px 28px; }
 }
+
+
