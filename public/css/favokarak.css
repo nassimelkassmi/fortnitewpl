@@ -230,7 +230,7 @@ body {
   display: flex;
   align-items: flex-start;
   gap: 32px;
-  margin-top: 18px;
+  margin-top: 45px;
 }
 .notes {
   background: #181c3a7b;
@@ -312,11 +312,10 @@ body {
 .note-save-btn {
   font-size: 1.18rem;
   padding: 8px 16px;
-  background-color: #1bace4;
+  background-color: #4382CE;
   border: none;
   color: white;
   cursor: pointer;
-  border-radius: 5px;
   transition: 0.15s;
   font-weight: 700;
 }
@@ -333,19 +332,19 @@ body {
   margin-left: 0;
 }
 .remove-favorite-heart {
-  font-size: 3rem;
-  padding: 15px 26px;
-  background-color: #ff4c4c;
+  font-size: 1.8rem;
+  padding: 8px 8px;
+  background-color: #ff8888;
   border: none;
   color: white;
   cursor: pointer;
-  border-radius: 14px;
-  margin-left: 0;
+  margin-top: 35px;
   transition: 0.18s;
   font-weight: 700;
+
 }
 .remove-favorite-heart:hover {
-  background-color: #b30000;
+  background-color: #ff5454;
 }
 
 /* RESPONSIVE */
