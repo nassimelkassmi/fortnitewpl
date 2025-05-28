@@ -282,7 +282,13 @@ body {
   margin: 0;
   flex: 1;
   text-align: left;
+  /* Nieuw: */
+  overflow-wrap: break-word;
+  word-break: break-word;
+  white-space: pre-wrap;      /* Hierdoor breekt de tekst af en behoudt het enters */
+  max-width: 95%;             /* Optioneel, zodat het niet uitrekt door de delete-knop */
 }
+
 .delete-note {
   font-size: 1.2rem;
   padding: 4px 10px;
@@ -382,3 +388,10 @@ body {
 /* Scrollbar */
 ::-webkit-scrollbar { width: 6px; background: rgba(255,255,255,0.07);}
 ::-webkit-scrollbar-thumb { background: #FFF457; border-radius: 6px;}
+
+.item-slot-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* zorgt dat de plusknop onder het vakje staat */
+}
